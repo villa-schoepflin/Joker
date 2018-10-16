@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:res="clr-namespace:Joker.Resources;assembly=Joker"
+			 x:Class="Joker.UserInterface.Impressum"
+			 Title="Impressum"
+			 BackgroundColor="{StaticResource Bgr1}">
+	<ScrollView>
+		<StackLayout Padding="{StaticResource PagePadding}"
+					 Spacing="10">
+			<Label Text="{Binding VersionText}"
+				   TextColor="{StaticResource Text1}"
+				   HorizontalTextAlignment="Center"
+				   FontSize="Medium" />
+			<Image Source="{res:ImageResource Joker.Resources.Icons.ui_impressum.png}"
+				   HorizontalOptions="FillAndExpand"
+				   VerticalOptions="FillAndExpand" />
+			<Label TextColor="{StaticResource Text2}"
+				   FontSize="Small">
+				<Label.FormattedText>
+					<FormattedString>
+						<Span>Villa Schöpflin gGmbH – Zentrum für Suchtprävention
+
+Franz-Ehret-Straße 7
+79541 Lörrach
+
+Telefon: +49 7621 / 914909-0
+Telefax: +49 7621 / 914909-9
+E-Mail:</Span>
+						<Span Text=" " />
+						<Span Text="info@villa-schoepflin.de"
+							  TextColor="{StaticResource Link}">
+							<Span.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding OpenEmail}"
+													  CommandParameter="info@villa-schoepflin.de" />
+							</Span.GestureRecognizers>
+						</Span>
+						<Span Text="&#10;Web: " />
+						<Span Text="www.villa-schoepflin.de"
+							  TextColor="{StaticResource Link}">
+							<Span.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding OpenWebsite}"
+													  CommandParameter="https://www.villa-schoepflin.de" />
+							</Span.GestureRecognizers>
+						</Span>
+						<Span Text="&#10;&#10;" />
+						<Span>Alleinvertretungsberechtigter Geschäftsführer:
+Peter Eichin
+							
+Gesellschafter:
+Schöpflin-Stiftung
+Industriestraße 2
+79541 Lörrach
+							
+Registergericht: Amtsgericht Freiburg
+Registernummer: HRB 702798
+Umsatzsteuer-ID gemäß §27a UStG: 1109041512
+
+Inhaltlich Verantwortlicher gemäß § 55 Abs.2 RStV:
+Peter Eichin
+Franz-Ehret-Str. 7
+79541 Lörrach
+
+Haftungshinweis:
+Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.
+
+Technische Umsetzung:
+Hannes Harnisch (unterstützt durch Staatliche Toto-Lotto GmbH Baden-Württemberg)
+
+Icons entworfen von:
+Flaticon (</Span>
+						<Span Text="flaticon.com"
+							  TextColor="{StaticResource Link}">
+							<Span.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding OpenWebsite}"
+													  CommandParameter="https://www.flaticon.com" />
+							</Span.GestureRecognizers>
+						</Span>
+						<Span>)
+Freepik (</Span>
+						<Span Text="freepik.com"
+							  TextColor="{StaticResource Link}">
+							<Span.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding OpenWebsite}"
+													  CommandParameter="https://www.freepik.com" />
+							</Span.GestureRecognizers>
+						</Span>
+						<Span>)
+Smashicons (</Span>
+						<Span Text="flaticon.com/authors/smashicons"
+							  TextColor="{StaticResource Link}">
+							<Span.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding OpenWebsite}"
+													  CommandParameter="https://www.flaticon.com/authors/smashicons" />
+							</Span.GestureRecognizers>
+						</Span>
+						<Span>)
+Google (</Span>
+						<Span Text="flaticon.com/authors/google"
+							  TextColor="{StaticResource Link}">
+							<Span.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding OpenWebsite}"
+													  CommandParameter="https://www.flaticon.com/authors/google" />
+							</Span.GestureRecognizers>
+						</Span>
+						<Span>)
+Gregor Cresnar (</Span>
+						<Span Text="flaticon.com/authors/gregor-cresnar"
+							  TextColor="{StaticResource Link}">
+							<Span.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding OpenWebsite}"
+													  CommandParameter="https://www.flaticon.com/authors/gregor-cresnar" />
+							</Span.GestureRecognizers>
+						</Span>
+						<Span>)
+lizenziert über Creative Commons BY 3.0
+
+App-Logo und Prototypentwicklung:
+Simon Hürst
+Philipp Speck
+Anne Theiner</Span>
+					</FormattedString>
+				</Label.FormattedText>
+			</Label>
+		</StackLayout>
+	</ScrollView>
+</ContentPage>

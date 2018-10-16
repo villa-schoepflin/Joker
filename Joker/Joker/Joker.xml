@@ -1,0 +1,1348 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Joker</name>
+    </assembly>
+    <members>
+        <member name="T:Joker.App">
+            <summary>
+            Main class for the shared code application.
+            </summary>
+        </member>
+        <member name="M:Joker.App.#ctor(System.String)">
+            <summary>
+            Entry point for the shared code application.
+            </summary>
+            <param name="baseDirectory">The directory for files concerning the app directly.</param>
+        </member>
+        <member name="M:Joker.App.OnStart">
+            <summary>
+            Called every time the app starts.
+            </summary>
+        </member>
+        <member name="M:Joker.App.SetMainPageToDefault">
+            <summary>
+            Directs the user to the main view of the app, clearing the navigation stack.
+            </summary>
+        </member>
+        <member name="P:Joker.App.CurrentMainPage">
+            <summary>
+            References the current main page as an instance of the app-specific MainPage class.
+            </summary>
+        </member>
+        <member name="P:Joker.App.CurrentTimelineFeed">
+            <summary>
+            References the current main page's timeline feed page.
+            </summary>
+        </member>
+        <member name="P:Joker.App.CurrentSupportPage">
+            <summary>
+            References the current main page's support page.
+            </summary>
+        </member>
+        <member name="F:Joker.App.Locale">
+            <summary>
+            The locale or culture setting to use for this app.
+            </summary>
+        </member>
+        <member name="M:Joker.App.Color(System.String)">
+            <summary>
+            Wrapper function to return a color from the application resource dictionary.
+            </summary>
+            <param name="key">The key for the dictionary resource.</param>
+            <returns>A Xamarin.Forms color from the dictionary.</returns>
+        </member>
+        <member name="T:Joker.ApplicationLayer.IPlatformContactPicker">
+            <summary>
+            A custom API for the shared code that abstracts away the platform-specific
+            contact and address book services of the target systems.
+            </summary>
+        </member>
+        <member name="M:Joker.ApplicationLayer.IPlatformContactPicker.PickContact">
+            <summary>
+            Picks a single contact from the contact list through a platform-supplied view.
+            </summary>
+            <returns>A contact with first and last name and phone number. Returns null if
+            the picking process was cancelled or the contact has no phone number recorded.</returns>
+        </member>
+        <member name="T:Joker.ApplicationLayer.IPlatformFileSaver">
+            <summary>
+            A custom API for the shared code that abstracts away the platform-specific
+            file IO services of the target systems.
+            </summary>
+        </member>
+        <member name="M:Joker.ApplicationLayer.IPlatformFileSaver.SaveToGallery(System.String)">
+            <summary>
+            Saves a picture's file to the user's personal storage and indicates whether
+            the process was successful.
+            </summary>
+            <param name="filePath">File path to the image resource.</param>
+            <returns>True if the file could be saved, otherwise false.</returns>
+        </member>
+        <member name="T:Joker.ApplicationLayer.IPlatformNotifier">
+            <summary>
+            A custom API for the shared code that abstracts away the platform-specific
+            push notification services of the target systems specifically for use in this app.
+            </summary>
+        </member>
+        <member name="M:Joker.ApplicationLayer.IPlatformNotifier.ScheduleLimitExpired(System.DateTime)">
+            <summary>
+            Schedules a notification indicating the current limit has expired and
+            a new one should be set.
+            </summary>
+            <param name="timeSetting">The time at which the notification should appear.</param>
+        </member>
+        <member name="M:Joker.ApplicationLayer.IPlatformNotifier.CancelLimitExpired">
+            <summary>
+            Removes the notification that indicates that the current limit has expired.
+            </summary>
+        </member>
+        <member name="M:Joker.ApplicationLayer.IPlatformNotifier.ScheduleNewPicture(System.DateTime)">
+            <summary>
+            Schedules a notification indicating that a new picture is available to see.
+            </summary>
+            <param name="timeSetting">The time at which the notification should appear.</param>
+        </member>
+        <member name="M:Joker.ApplicationLayer.IPlatformNotifier.ScheduleGambleReminder(System.TimeSpan)">
+            <summary>
+            Schedules a notification reminding the user to always record acts of gambling within the app.
+            </summary>
+            <param name="interval">The interval for the times the notification should appear.</param>
+        </member>
+        <member name="M:Joker.ApplicationLayer.IPlatformNotifier.ScheduleLimitReminder(System.TimeSpan)">
+            <summary>
+            Schedules a notification reminding the user about the current state of their limit.
+            </summary>
+            <param name="interval">The interval for the times the notification should appear.</param>
+        </member>
+        <member name="T:Joker.ApplicationLayer.PNType">
+            <summary>
+            The different kinds of push notifications (PN) sent by the application.
+            Also used to supply IDs to each notification and related properties.
+            </summary>
+        </member>
+        <member name="F:Joker.ApplicationLayer.PNType.LimitExpired">
+            <summary>
+            Notifies the user that his limit has expired and a new one must be set.
+            </summary>
+        </member>
+        <member name="F:Joker.ApplicationLayer.PNType.NewPicture">
+            <summary>
+            Notifies the user that a new motivating picture has been added to the database.
+            </summary>
+        </member>
+        <member name="F:Joker.ApplicationLayer.PNType.GambleReminder">
+            <summary>
+            Notifies the user to always record his spendings for gambling.
+            </summary>
+        </member>
+        <member name="F:Joker.ApplicationLayer.PNType.LimitReminder">
+            <summary>
+            Notifies the user about the current state of their limit.
+            </summary>
+        </member>
+        <member name="T:Joker.ApplicationLayer.PNContent">
+            <summary>
+            Container class for constructing the text shown in the different kinds of push notifications (PN).
+            </summary>
+        </member>
+        <member name="T:Joker.ApplicationLayer.PNContent.Title">
+            <summary>
+            Struct holding the titles of each kind of notification.
+            </summary>
+        </member>
+        <member name="P:Joker.ApplicationLayer.PNContent.Title.LimitExpired">
+            <summary>
+            Title of the notification indicating that the current has limit has expired.
+            </summary>
+        </member>
+        <member name="P:Joker.ApplicationLayer.PNContent.Title.NewPicture">
+            <summary>
+            Title of the notification indicating that a new picture is available to see.
+            </summary>
+        </member>
+        <member name="P:Joker.ApplicationLayer.PNContent.Title.GambleReminder">
+            <summary>
+            Title of the notification reminding the user to always record his acts of gambling.
+            </summary>
+        </member>
+        <member name="P:Joker.ApplicationLayer.PNContent.Title.LimitReminder">
+            <summary>
+            Title of the notification reminding the user about their limit's current state.
+            </summary>
+        </member>
+        <member name="T:Joker.ApplicationLayer.PNContent.Body">
+            <summary>
+            Struct holding the main texts of each kind of notification.
+            </summary>
+        </member>
+        <member name="P:Joker.ApplicationLayer.PNContent.Body.LimitExpired">
+            <summary>
+            Main text of the notification indicating that the current has limit has expired.
+            </summary>
+        </member>
+        <member name="P:Joker.ApplicationLayer.PNContent.Body.NewPicture">
+            <summary>
+            Main text of the notification indicating that a new picture is available to see.
+            </summary>
+        </member>
+        <member name="P:Joker.ApplicationLayer.PNContent.Body.GambleReminder">
+            <summary>
+            Main text of the notification reminding the user to always record his acts of gambling.
+            </summary>
+        </member>
+        <member name="P:Joker.ApplicationLayer.PNContent.Body.LimitReminder">
+            <summary>
+            Main text of the notification reminding the user about their limit's current state.
+            </summary>
+        </member>
+        <member name="T:Joker.BusinessLogic.Contact">
+            <summary>
+            Represents a simplified phone contact with a name and one phone number.
+            </summary>
+        </member>
+        <member name="F:Joker.BusinessLogic.Contact.Bzga">
+            <summary>
+            Contact information for the Bundeszentrale für gesundheitliche Aufklärung.
+            </summary>
+        </member>
+        <member name="F:Joker.BusinessLogic.Contact.VillaSchoepflin">
+            <summary>
+            Contact information for the publisher of this app.
+            </summary>
+        </member>
+        <member name="P:Joker.BusinessLogic.Contact.Name">
+            <summary>
+            The name associated with this contact.
+            </summary>
+        </member>
+        <member name="P:Joker.BusinessLogic.Contact.PhoneNumber">
+            <summary>
+            The phone number associated with this contact.
+            </summary>
+        </member>
+        <member name="M:Joker.BusinessLogic.Contact.ToString">
+            <summary>
+            Contains the properties of a contact.
+            </summary>
+            <returns>A one-line string that represents this contact.</returns>
+        </member>
+        <member name="T:Joker.BusinessLogic.Gamble">
+            <summary>
+            A gamble is an act of spending for gambling purposes, used
+            to calculate how much of each limit has been depleted.
+            </summary>
+        </member>
+        <member name="F:Joker.BusinessLogic.Gamble.MaxDescriptionLength">
+            <summary>
+            Maximum length of a gamble's description.
+            </summary>
+        </member>
+        <member name="P:Joker.BusinessLogic.Gamble.Type">
+            <summary>
+            The type this gamble is classified as.
+            </summary>
+        </member>
+        <member name="P:Joker.BusinessLogic.Gamble.Description">
+            <summary>
+            Optional description given verbatim by the user.
+            </summary>
+        </member>
+        <member name="M:Joker.BusinessLogic.Gamble.#ctor(System.String,Joker.BusinessLogic.GambleType,System.String)">
+            <summary>
+            Constructor used when the user doesn't specify a time.
+            </summary>
+            <param name="amount">The amount as put in by the user.</param>
+            <param name="type">The type as selected by the user.</param>
+            <param name="description">The description as given by the user.</param>
+        </member>
+        <member name="M:Joker.BusinessLogic.Gamble.#ctor(System.DateTime,System.String,Joker.BusinessLogic.GambleType,System.String)">
+            <summary>
+            Constructor used when the user specifies a time.
+            </summary>
+            <param name="time">The time as selected by the user.</param>
+            <param name="amount">The amount as given by the user.</param>
+            <param name="type">The type as selected by the user.</param>
+            <param name="description">The description as given by the user.</param>
+        </member>
+        <member name="M:Joker.BusinessLogic.Gamble.#ctor">
+            <summary>
+            This constructor only exists for SQLite to be able to return collections of Gambles from the database.
+            It should never be used to instantiate a Gamble directly within the app.
+            </summary>
+        </member>
+        <member name="M:Joker.BusinessLogic.Gamble.ToString">
+            <summary>
+            Contains the database-relevant properties of this gamble.
+            </summary>
+            <returns>A one-line string that represents this gamble.</returns>
+        </member>
+        <member name="T:Joker.BusinessLogic.GambleType">
+            <summary>
+            Contains the different types a gamble can be classified as, usually the kind of
+            institution where the money was spent.
+            </summary>
+        </member>
+        <member name="F:Joker.BusinessLogic.GambleType.Other">
+            <summary>
+            The default type.
+            </summary>
+        </member>
+        <member name="F:Joker.BusinessLogic.GambleType.Lottery">
+            <summary>
+            Indicates a lottery, such as LOTTO 6aus49 or Eurojackpot.
+            </summary>
+        </member>
+        <member name="F:Joker.BusinessLogic.GambleType.SportsBet">
+            <summary>
+            Indicates a sports betting institution, such as ODDSET or Tipico.
+            </summary>
+        </member>
+        <member name="F:Joker.BusinessLogic.GambleType.Casino">
+            <summary>
+            Indicates a casino or "gambling house" of any kind.
+            </summary>
+        </member>
+        <member name="T:Joker.BusinessLogic.GambleTypes">
+            <summary>
+            Encapsulates logic concerning the GambleType enumeration.
+            </summary>
+        </member>
+        <member name="F:Joker.BusinessLogic.GambleTypes.names">
+            <summary>
+            Holds the translated German terms for each type of gamble.
+            </summary>
+        </member>
+        <member name="M:Joker.BusinessLogic.GambleTypes.Names">
+            <summary>
+            Returns the translated German terms of the gamble types in order.
+            </summary>
+            <returns>An array of strings based on the values of a dictionary.</returns>
+        </member>
+        <member name="M:Joker.BusinessLogic.GambleTypes.GetName(Joker.BusinessLogic.GambleType)">
+            <summary>
+            Gets the translated German term for the supplied gamble type.
+            </summary>
+            <param name="type">The gamble type constant whose translation should be given.</param>
+            <returns>The translated term as a string.</returns>
+        </member>
+        <member name="M:Joker.BusinessLogic.GambleTypes.GetGambleType(System.String)">
+            <summary>
+            Finds the first key in the dictionary whose name equals the parameter.
+            </summary>
+            <param name="name">Translated name of the gamble type for which the type should be returned.</param>
+            <returns>The gamble type belonging to the supplied translated name.</returns>
+        </member>
+        <member name="T:Joker.BusinessLogic.Limit">
+            <summary>
+            Determines how much the user is allowed to spend for gambling in the given duration.
+            </summary>
+        </member>
+        <member name="F:Joker.BusinessLogic.Limit.MinLimitDuration">
+            <summary>
+            The minimum allowed duration of a limit.
+            </summary>
+        </member>
+        <member name="F:Joker.BusinessLogic.Limit.MaxLimitDuration">
+            <summary>
+            The maximum allowed duration of a limit.
+            </summary>
+        </member>
+        <member name="P:Joker.BusinessLogic.Limit.Duration">
+            <summary>
+            The time span after which this limit should have been replaced with a new one.
+            </summary>
+        </member>
+        <member name="M:Joker.BusinessLogic.Limit.#ctor(System.String,System.String)">
+            <summary>
+            The standard constructor that should be used every time a new limit must be set.
+            </summary>
+            <param name="amount">The amount as put in by the user.</param>
+            <param name="durationInDays">The duration in days as put in by the user.</param>
+            <exception cref="T:System.ArgumentException">Thrown if the duration parameter couldn't be parsed
+            or the parsed duration isn't within the allowed bounds.</exception>
+        </member>
+        <member name="M:Joker.BusinessLogic.Limit.#ctor">
+            <summary>
+            This constructor only exists for SQLite to be able to return collections of
+            Limits from the database. It should never be used to instantiate a Limit directly within the app.
+            </summary>
+        </member>
+        <member name="M:Joker.BusinessLogic.Limit.ToString">
+            <summary>
+            Contains the database-relevant properties of this limit.
+            </summary>
+            <returns>A one-line string that represents this limit.</returns>
+        </member>
+        <member name="T:Joker.BusinessLogic.Picture">
+            <summary>
+            Represents a motivating or informing picture in the database and in the app view.
+            </summary>
+        </member>
+        <member name="P:Joker.BusinessLogic.Picture.FilePath">
+            <summary>
+            The file path of the image resource associated with the picture, used as a primary key.
+            </summary>
+        </member>
+        <member name="P:Joker.BusinessLogic.Picture.TimeAdded">
+            <summary>
+            The time this picture was added to the database.
+            </summary>
+        </member>
+        <member name="P:Joker.BusinessLogic.Picture.Liked">
+            <summary>
+            The status indicating whether this picture is preferred by the user, which makes the picture
+            appear more often by the randomized refresh in the picture feed.
+            </summary>
+        </member>
+        <member name="M:Joker.BusinessLogic.Picture.#ctor(System.String)">
+            <summary>
+            The standard constructor for this class. Creates a picture based on the given file path and sets its
+            properties to their default value.
+            </summary>
+            <param name="filePath">The file path of the embedded image resource.</param>
+        </member>
+        <member name="M:Joker.BusinessLogic.Picture.#ctor">
+            <summary>
+            This constructor only exists for SQLite to be able to return collections of Pictures from the database.
+            It should never be used to instantiate a Picture directly within the app.
+            </summary>
+        </member>
+        <member name="M:Joker.BusinessLogic.Picture.ToString">
+            <summary>
+            Contains the database-relevant properties of this picture.
+            </summary>
+            <returns>A one-line string that represents this picture.</returns>
+        </member>
+        <member name="T:Joker.BusinessLogic.TimelineRecord">
+            <summary>
+            Base class for gambles and limits, as they are recordings of gambling or self-imposed
+            limits by the user that can be ordered chronologically.
+            </summary>
+        </member>
+        <member name="F:Joker.BusinessLogic.TimelineRecord.MinAmount">
+            <summary>
+            The minimum amount for a gamble or a limit.
+            </summary>
+        </member>
+        <member name="F:Joker.BusinessLogic.TimelineRecord.MaxAmount">
+            <summary>
+            The maximum amount for a gamble or a limit.
+            </summary>
+        </member>
+        <member name="P:Joker.BusinessLogic.TimelineRecord.Time">
+            <summary>
+            The time at which the gamble occurred or the limit has been set.
+            </summary>
+        </member>
+        <member name="P:Joker.BusinessLogic.TimelineRecord.Amount">
+            <summary>
+            The amount relevant to this gamble or limit.
+            </summary>
+        </member>
+        <member name="M:Joker.BusinessLogic.TimelineRecord.#ctor(System.String)">
+            <summary>
+            Constructor called for limits as well as gambles that don't have a user-specified time.
+            </summary>
+            <param name="amount">The amount as put in by the user.</param>
+        </member>
+        <member name="M:Joker.BusinessLogic.TimelineRecord.#ctor(System.DateTime,System.String)">
+            <summary>
+            Constructor called only for gambles with a user-specified time.
+            </summary>
+            <param name="time">The time as specified by the user.</param>
+            <param name="amount">The amount as put in by the user.</param>
+            <exception cref="T:System.ArgumentException">Thrown if the time parameter specifies a future time.</exception>
+        </member>
+        <member name="M:Joker.BusinessLogic.TimelineRecord.#ctor">
+            <summary>
+            This constructor is necessary for the subclasses to be instantiated by SQLite in database queries.
+            </summary>
+        </member>
+        <member name="M:Joker.BusinessLogic.TimelineRecord.Parse(System.String)">
+            <summary>
+            A parsing function to get a decimal monetary value from user input.
+            </summary>
+            <param name="amount">The amount to be parsed as put in by the user.</param>
+            <returns>A monetary value in decimal form.</returns>
+            <exception cref="T:System.ArgumentException">Thrown if the amount parameter couldn't be parsed or isn't
+            within the allowed bounds.</exception>
+        </member>
+        <member name="T:Joker.DataAccess.AppSettings">
+            <summary>
+            A wrapper class that simplifies access to persistent preferences concerning app operations.
+            </summary>
+        </member>
+        <member name="P:Joker.DataAccess.AppSettings.DBFilePath">
+            <summary>
+            Gets or sets the path of the database file.
+            </summary>
+        </member>
+        <member name="P:Joker.DataAccess.AppSettings.WelcomeTourCompleted">
+            <summary>
+            Gets or sets whether the user welcome tour was completed.
+            </summary>
+        </member>
+        <member name="P:Joker.DataAccess.AppSettings.LimitExpiredTime">
+            <summary>
+            Gets or sets the time when the current active limit expires and a new one must be set.
+            </summary>
+        </member>
+        <member name="P:Joker.DataAccess.AppSettings.NewPictureTime">
+            <summary>
+            Gets or sets the time when the availability of a new picture should be notified to the user.
+            </summary>
+        </member>
+        <member name="T:Joker.DataAccess.Database">
+            <summary>
+            A utility class containing all methods that interact with the app's local database.
+            </summary>
+        </member>
+        <member name="M:Joker.DataAccess.Database.Init">
+            <summary>
+            Ensures all necessary tables for database operations exist before they are performed.
+            </summary>
+        </member>
+        <member name="M:Joker.DataAccess.Database.Insert(Joker.BusinessLogic.Limit)">
+            <summary>
+            Inserts the specified Limit object into the database.
+            </summary>
+            <param name="limit">The limit to be inserted.</param>
+            <exception cref="T:SQLite.SQLiteException">Thrown if a limit with the parameter's time property already
+            exists in the database.</exception>
+        </member>
+        <member name="M:Joker.DataAccess.Database.Insert(Joker.BusinessLogic.Gamble)">
+            <summary>
+            Safely inserts a Gamble object into the database. Contains input validation.
+            </summary>
+            <param name="gamble">The gamble to be inserted.</param>
+            <exception cref="T:System.ArgumentException">Thrown if the parameter's time property is earlier than the
+            first limit's time.</exception>
+        </member>
+        <member name="M:Joker.DataAccess.Database.InsertPictureFromRandomResource">
+            <summary>
+            Selects a random image resource from the PictureFeed folder and inserts it as a Picture object
+            into the database.
+            </summary>
+            <returns>Returns whether a random picture could be inserted, "true" indicating success.</returns>
+        </member>
+        <member name="M:Joker.DataAccess.Database.CountLimits">
+            <summary>
+            Counts the number of limits stored in the database.
+            </summary>
+            <returns>Number of rows of the Limit table.</returns>
+        </member>
+        <member name="M:Joker.DataAccess.Database.AllGamblesAndLimits">
+            <summary>
+            Joins the Gamble and Limit tables, copying them as an array of timeline records
+            sorted by their Time property from newest to oldest.
+            </summary>
+            <returns>An array of all gambles and limits, unbound to the database.</returns>
+        </member>
+        <member name="M:Joker.DataAccess.Database.AllPictures">
+            <summary>
+            Gets a copy of all picture objects in the database.
+            </summary>
+            <returns>A list of pictures, unbound to the database.</returns>
+        </member>
+        <member name="M:Joker.DataAccess.Database.LikedPictures">
+            <summary>
+            Gets a copy of all picture objects in the database marked as liked.
+            </summary>
+            <returns>An array of pictures marked as liked, unbound to the database.</returns>
+        </member>
+        <member name="M:Joker.DataAccess.Database.MostRecentLimit">
+            <summary>
+            Gets a copy of the most recent limit added to the database.
+            </summary>
+            <returns>A single Limit instance, unbound to the database.</returns>
+        </member>
+        <member name="M:Joker.DataAccess.Database.MostRecentPicture">
+            <summary>
+            Returns a copy of the most recent picture added to the database.
+            </summary>
+            <returns>A single Picture instance, unbound to the database.</returns>
+        </member>
+        <member name="M:Joker.DataAccess.Database.GetPictureByFileName(System.String)">
+            <summary>
+            Returns a copy of the picture from the database whose file name matches the argument.
+            </summary>
+            <param name="filePath">File path by which the picture should be found.</param>
+            <returns>A single Picture instance, unbound to the database.</returns>
+        </member>
+        <member name="M:Joker.DataAccess.Database.NoGambleAfterMostRecentLimit">
+            <summary>
+            Indicates whether the user has entered a gamble after the most recent limit has been set.
+            </summary>
+            <returns>True when there are no gambles after the most recent limit, false otherwise.</returns>
+        </member>
+        <member name="M:Joker.DataAccess.Database.CalcBalance(Joker.BusinessLogic.Limit)">
+            <summary>
+            Returns how much of a limit's amount has been consumed by the gambles within its duration.
+            </summary>
+            <param name="limit">The limit whose balance should be calculated.</param>
+            <returns>How much of the limit remains as a decimal number.</returns>
+        </member>
+        <member name="M:Joker.DataAccess.Database.CalcPreviousLimitBalance">
+            <summary>
+            Returns how much of the second most recent limit's amount has been depleted by the user's gambling records.
+            </summary>
+            <returns>The current balance of the limit as a decimal.</returns>
+        </member>
+        <member name="M:Joker.DataAccess.Database.CalcRemainingLimit(Joker.BusinessLogic.Gamble)">
+            <summary>
+            Calculates the remaining limit amount chronologically after a particular gamble.
+            </summary>
+            <param name="gamble">The gamble whose remaining limit should be calculated.</param>
+            <returns>The decimal amount of the limit minus all relevant gambles' amounts.</returns>
+        </member>
+        <member name="M:Joker.DataAccess.Database.ToggleLikedStatus(Joker.BusinessLogic.Picture)">
+            <summary>
+            Switches the Liked status of the supplied picture in the database if it exists.
+            </summary>
+            <param name="pic">The picture whose Liked status should be toggled.</param>
+        </member>
+        <member name="T:Joker.DataAccess.UserSettings">
+            <summary>
+            A wrapper class that simplifies access to persistent preferences concerning the user directly.
+            </summary>
+        </member>
+        <member name="F:Joker.DataAccess.UserSettings.MaxNameLength">
+            <summary>
+            The maximum string length of the user name.
+            </summary>
+        </member>
+        <member name="P:Joker.DataAccess.UserSettings.UserName">
+            <summary>
+            The name used to address the user in personalized texts or push notifications.
+            </summary>
+            <exception cref="T:System.ArgumentException">Thrown if the user tries to set this to an empty string or exceeds
+            the maximum allowed length.</exception>
+        </member>
+        <member name="P:Joker.DataAccess.UserSettings.PersonalContact">
+            <summary>
+            The user's personally selected contact that can be called directly from within the app.
+            </summary>
+        </member>
+        <member name="F:Joker.DataAccess.UserSettings.MinNewPictureInterval">
+            <summary>
+            The minimum allowed time span between two new pictures, which is 2 days.
+            </summary>
+        </member>
+        <member name="F:Joker.DataAccess.UserSettings.MaxNewPictureInterval">
+            <summary>
+            The maximum allowed time span between two new pictures, which is 28 days.
+            </summary>
+        </member>
+        <member name="P:Joker.DataAccess.UserSettings.NewPictureInterval">
+            <summary>
+            The time span between two new pictures. The default value is 2 days.
+            </summary>
+        </member>
+        <member name="M:Joker.DataAccess.UserSettings.SetNewPictureInterval(System.String)">
+            <summary>
+            Sets the time span between two new pictures from a user-supplied text string.
+            </summary>
+            <param name="str">User input from an entry to be parsed.</param>
+            <exception cref="T:System.ArgumentException">Thrown if the argument couldn't be parsed or isn't within the
+            allowed TimeSpan bounds.</exception>
+        </member>
+        <member name="F:Joker.DataAccess.UserSettings.MinReminderInterval">
+            <summary>
+            The minimum allowed time span between two reminders, which is 2 hours.
+            </summary>
+        </member>
+        <member name="F:Joker.DataAccess.UserSettings.MaxReminderInterval">
+            <summary>
+            The maximum allowed time span between two reminders, which is 200 hours.
+            </summary>
+        </member>
+        <member name="P:Joker.DataAccess.UserSettings.GambleReminderInterval">
+            <summary>
+            The time span between two push notifications, that remind the user that he should always
+            record his acts of gambling in the app.
+            </summary>
+        </member>
+        <member name="M:Joker.DataAccess.UserSettings.SetGambleReminderInterval(System.String)">
+            <summary>
+            Sets the time span between two gambling reminders from a user-supplied text string.
+            </summary>
+            <param name="str">User input from an entry to be parsed.</param>
+        </member>
+        <member name="P:Joker.DataAccess.UserSettings.LimitReminderInterval">
+            <summary>
+            The time span between two push notifications, that remind the user about the current state of their limit.
+            </summary>
+        </member>
+        <member name="M:Joker.DataAccess.UserSettings.SetLimitReminderInterval(System.String)">
+            <summary>
+            Sets the time span between two limit reminders from a user-supplied text string.
+            </summary>
+            <param name="str">User input from an entry to be parsed.</param>
+        </member>
+        <member name="M:Joker.DataAccess.UserSettings.ParseReminderInterval(System.String)">
+            <summary>
+            Parses a user input string from the settings page according the bounds of reminder notifications.
+            </summary>
+            <param name="str">String to be parsed.</param>
+            <returns>The parsed time span.</returns>
+            <exception cref="T:System.ArgumentException">Thrown if the argument couldn't be parsed or isn't within the
+            allowed TimeSpan bounds.</exception>
+        </member>
+        <member name="T:Joker.Resources.ImageResourceExtension">
+            <summary>
+            Copied with changes from https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/images
+            </summary>
+        </member>
+        <member name="P:Joker.Resources.ImageResourceExtension.Source">
+            <summary>
+            The source path for the embedded resource image.
+            </summary>
+        </member>
+        <member name="M:Joker.Resources.ImageResourceExtension.ProvideValue(System.IServiceProvider)">
+            <summary>
+            Converts the source path to a Xamarin.Forms image source.
+            </summary>
+            <param name="serviceProvider">Provides a service object for this extension.</param>
+            <returns>A Xamarin.Forms image source as a generic object.</returns>
+        </member>
+        <member name="T:Joker.UserInterface.Impressum">
+            <summary>
+            View containing information about the creator and publisher of the app.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.Impressum.VersionText">
+            <summary>
+            Contains the information of the app version.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.Impressum.#ctor">
+            <summary>
+            Initializes XAML elements.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.Impressum.OpenEmail">
+            <summary>
+            Event command that opens the platform-specific email app.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.Impressum.OpenWebsite">
+            <summary>
+            Event command that opens the platform-specific browser.
+            </summary>
+        </member>
+        <member name="T:Joker.UserInterface.MainPage">
+            <summary>
+            Main view of the app, usually presented after launching is finished.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.MainPage.#ctor">
+            <summary>
+            Initializes XAML elements.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.MainPage.OnTabChanged(System.Object,System.EventArgs)">
+            <summary>
+            Changes the navigation page's title based on which tab is currently displayed.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.MainPage.OnInfoButton(System.Object,System.EventArgs)">
+            <summary>
+            Toolbar item event handler that shows the user a message concerning the current tab's functionality.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.MainPage.OnSettingsButton(System.Object,System.EventArgs)">
+            <summary>
+            Toolbar item event handler that navigates the user to the settings page.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="T:Joker.UserInterface.PictureFeed">
+            <summary>
+            The main page's left tab. A view where the user can shuffle through the different
+            motivating or informing pictures in the database.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.PictureFeed.Headline">
+            <summary>
+            The title of this page, provided here to be accessible from anywhere.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.PictureFeed.Info">
+            <summary>
+            Info text for the user concerning the functionality of this page.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.PictureFeed.#ctor">
+            <summary>
+            Initializes XAML elements sets binding context.
+            </summary>
+        </member>
+        <member name="T:Joker.UserInterface.SettingsPage">
+            <summary>
+            View where the user can change user-specific settings.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.SettingsPage.#ctor">
+            <summary>
+            Initializes XAML elements.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.SettingsPage.SaveUserName(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that relays input validation for the user name setting and saves it if applicable.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.SettingsPage.PickContact(System.Object,System.EventArgs)">
+            <summary>
+            Entry event handler that opens the contact-picking dialog to the user, relays data to this view
+            and saves the selected contact.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.SettingsPage.RemoveContact(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that clears the optional personal contact from the settings.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.SettingsPage.SaveNewPictureInterval(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that relays input validation for saving the interval between the insertion
+            of new pictures into the database and saves the setting if applicable.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.SettingsPage.SaveGambleReminderInterval(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that relays input validation for saving the interval between gambling 
+            reminders and saves the setting if applicable.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.SettingsPage.SaveLimitReminderInterval(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that relays input validation for saving the interval between limit
+            reminders and saves the setting if applicable.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.SettingsPage.OnImpressumButton(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that navigates the user to the impressum.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="T:Joker.UserInterface.SupportPage">
+            <summary>
+            The main page's right tab. A view that lists several useful contacts as well as giving
+            feedback on whether the user was successful in keeping his last limits.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.SupportPage.Headline">
+            <summary>
+            The title of this page, provided here to be accessible from anywhere.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.SupportPage.Info">
+            <summary>
+            Info text for the user concerning the functionality of this page.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.SupportPage.MoreThanOneLimit">
+            <summary>
+            Checks if there is more than one limit in the database, otherwise you couldn't give
+            the user feedback on a previous limit.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.SupportPage.CurrentLimitFeedback">
+            <summary>
+            Generates the feedback concerning the user's current limit.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.SupportPage.PreviousLimitFeedback">
+            <summary>
+            Generates the feedback concerning the user's previous limit.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.SupportPage.Contacts">
+            <summary>
+            A list of contacts the user can call immediately.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.SupportPage.#ctor">
+            <summary>
+            Initializes XAML elements and binds the view data.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.SupportPage.FlashLimitFeedback">
+            <summary>
+            Performs a flashing animation on the frame containing the limit feedback.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.SupportPage.RefreshInfo">
+            <summary>
+            Refreshes the info text in this page.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.SupportPage.RefreshContacts">
+            <summary>
+            Refreshes the contacts data binding in this view.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.SupportPage.OnPhoneButton(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that opens the platform's telephone app with the corresponding item's phone number.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="T:Joker.UserInterface.AddGamblePage">
+            <summary>
+            View where the user defines the data for a new gamble and can insert it into the database.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.AddGamblePage.#ctor">
+            <summary>
+            Initializes XAML element and sets the necessary view elements to their default values.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.AddGamblePage.UpdateLengthCounter(System.Object,Xamarin.Forms.TextChangedEventArgs)">
+            <summary>
+            Editor event handler that indicates how many characters can still be inserted into the editor.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.AddGamblePage.DateSelected(System.Object,Xamarin.Forms.DateChangedEventArgs)">
+            <summary>
+            DatePicker event handler that indicates that the user set the date of the gamble.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.AddGamblePage.TimeSelected(System.Object,System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            TimePicker event handler that indicates that the user set the time of the gamble.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.AddGamblePage.OnTimeResetButton(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that resets the date and time of the gamble to the present date and time.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.AddGamblePage.OnSubmitButton(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that relays input validation, inserts the gamble into the database,
+            performs necessary refresh actions and navigates the user back to the main page.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="T:Joker.UserInterface.AddLimitPage">
+            <summary>
+            Inescapable view presented only when opening up the app after a limit has expired,
+            forcing the user to set a new one.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.AddLimitPage.LimitInfo">
+            <summary>
+            Provides a feedback text concerning whether the previous limit was exceeded.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.AddLimitPage.#ctor">
+            <summary>
+            Initializes XAML elements.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.AddLimitPage.OnContinueButton(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that relays input validation, inserts the new limit into the database,
+            schedules the corresponding notifications and directs the user to the main page.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="T:Joker.UserInterface.GambleInspector">
+            <summary>
+            A view containing the database-supplied details and properties of a selected gamble.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.GambleInspector.#ctor(Joker.BusinessLogic.Gamble)">
+            <summary>
+            Initializes XAML elements and provides the data to be bound in the view.
+            </summary>
+            <param name="gamble">Gamble whose details should be displayed.</param>
+        </member>
+        <member name="T:Joker.UserInterface.LimitInspector">
+            <summary>
+            A view containing the database-supplied details and properties of a selected limit.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.LimitInspector.#ctor(Joker.BusinessLogic.Limit)">
+            <summary>
+            Initializes XAML elements and provides the data to be bound in the view.
+            </summary>
+            <param name="limit">Limit whose details should be displayed.</param>
+        </member>
+        <member name="T:Joker.UserInterface.TimelineFeed">
+            <summary>
+            The main page's middle tab. A listing of all gambling-related spendings and
+            the limits that the user sets for themself.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.TimelineFeed.Headline">
+            <summary>
+            The title of this page, provided here to be accessible from anywhere.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.TimelineFeed.Info">
+            <summary>
+            Info text for the user concerning the functionality of this page.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.TimelineFeed.Records">
+            <summary>
+            The data to be displayed, wrapped in view models based on the Limit and Gamble tables of the database.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.TimelineFeed.#ctor">
+            <summary>
+            Initializes XAML elements.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.TimelineFeed.Refresh">
+            <summary>
+            Refreshes the list view's data bindings from a database-supplied collection.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.TimelineFeed.OnSubmitButton(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that navigates the user to a view where they can add a new gamble to the database.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="T:Joker.UserInterface.GambleViewModel">
+            <summary>
+            View model for a gamble in the gamble inspector. Uses many properties of the timeline record view model.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.GambleViewModel.GambleType">
+            <summary>
+            The type of this gamble localized.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.GambleViewModel.DescriptionText">
+            <summary>
+            The description of this gamble as supplied from a model object.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.GambleViewModel.DescriptionColor">
+            <summary>
+            The color of the description text.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.GambleViewModel.#ctor(Xamarin.Forms.Page,Joker.BusinessLogic.Gamble)">
+            <summary>
+            Constructs the view model for a gamble.
+            </summary>
+            <param name="view">The page for this view model.</param>
+            <param name="model">The gamble around which to construct the view model.</param>
+        </member>
+        <member name="T:Joker.UserInterface.LimitViewModel">
+            <summary>
+            View model for a limit in the limit inspector. Uses many properties of the timeline record view model.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.LimitViewModel.Balance">
+            <summary>
+            The currently remaining balance of the limit.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.LimitViewModel.DurationInDays">
+            <summary>
+            The duration in days.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.LimitViewModel.LimitState">
+            <summary>
+            A text indicating the state of the limit.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.LimitViewModel.LimitStateBackground">
+            <summary>
+            The color marking the state of the limit.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.LimitViewModel.LimitStateTextColor">
+            <summary>
+            The color for the text that indicates the limit state.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.LimitViewModel.#ctor(Xamarin.Forms.Page,Joker.BusinessLogic.Limit)">
+            <summary>
+            Constructs the view model for a limit.
+            </summary>
+            <param name="view">The page for this view model.</param>
+            <param name="model">The limit around which to construct the view model.</param>
+        </member>
+        <member name="T:Joker.UserInterface.PictureFeedViewModel">
+            <summary>
+            View model containing properties derived from a picture for the purpose of presentation.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.PictureFeedViewModel.Model">
+            <summary>
+            The picture from which the values of bindable properties are derived.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.PictureFeedViewModel.PresentedImage">
+            <summary>
+            Creates a Xamarin.Forms image from the embedded resource file path.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.PictureFeedViewModel.LikeButtonImage">
+            <summary>
+            Determines the image to display on the Like button based on the current Liked status.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.PictureFeedViewModel.LikeButtonBackgroundColor">
+            <summary>
+            Determines the background color of the Like button based on the current Liked status.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.PictureFeedViewModel.LikeButtonText">
+            <summary>
+            Determines the text of the Like button based on the current Liked status.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.PictureFeedViewModel.SetNextPicture">
+            <summary>
+            Re-binds the view to a randomly selected picture from the database, preferring the liked
+            pictures with a ratio of 3:1.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.PictureFeedViewModel.ToggleLikedStatus">
+            <summary>
+            Updates the picture with the changed Liked status in the database and notifies the change of property.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.PictureFeedViewModel.SavePictureToGallery">
+            <summary>
+            Copies the current picture's image file to the user's personal phone storage.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.PictureFeedViewModel.#ctor(Xamarin.Forms.Page,Joker.BusinessLogic.Picture)">
+            <summary>
+            Constructs a view model for the given view.
+            </summary>
+            <param name="view">The view for this view model.</param>
+            <param name="model">The model for this view model.</param>
+        </member>
+        <member name="T:Joker.UserInterface.TimelineRecordViewModel">
+            <summary>
+            Represents a single timeline record for display in timeline-related pages.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.TimelineRecordViewModel.LocalizedTime">
+            <summary>
+            Converts the record's time property to the system's time zone in the German 24-hour format.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.TimelineRecordViewModel.AmountInEuro">
+            <summary>
+            Converts the amount to a Euro monetary value.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.TimelineRecordViewModel.RemainingLimit">
+            <summary>
+            The text to be displayed in the remaining limit column in the timeline.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.TimelineRecordViewModel.TypeImage">
+            <summary>
+            The icon to be displayed in the timeline based on what type of record it is.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.TimelineRecordViewModel.CellColor1">
+            <summary>
+            The primary tinting color used in the timeline.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.TimelineRecordViewModel.CellColor2">
+            <summary>
+            The secondary tinting color used in the timeline.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.TimelineRecordViewModel.CellText">
+            <summary>
+            The primary text color used in the timeline.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.TimelineRecordViewModel.OpenDetailPage">
+            <summary>
+            Navigates the user to a detailed view of the selected limit or gamble item.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.TimelineRecordViewModel.#ctor(Xamarin.Forms.Page,Joker.BusinessLogic.TimelineRecord)">
+            <summary>
+            Constructs a row view model based on whether the corresponding timeline record is a Gamble or a Limit.
+            </summary>
+            <param name="view">The view for this view model.</param>
+            <param name="model">The model for this view model.</param>
+        </member>
+        <member name="T:Joker.UserInterface.ViewModel`2">
+            <summary>
+            An abstract base class for all view models with required interfaces and constraints.
+            </summary>
+            <typeparam name="TView">Type of the view where the model's properties are presented.</typeparam>
+            <typeparam name="TModel">Type of the model object whose properties are accessed for presentation.</typeparam>
+        </member>
+        <member name="P:Joker.UserInterface.ViewModel`2.View">
+            <summary>
+            The object to which changes in the view model are communicated.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.ViewModel`2.Model">
+            <summary>
+            The object from which view model properties are derived.
+            </summary>
+        </member>
+        <member name="E:Joker.UserInterface.ViewModel`2.PropertyChanged">
+            <summary>
+            Event for when a property has changed in the view model.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.ViewModel`2.#ctor(`0,`1)">
+            <summary>
+            Constructs a view model with the given view and model references.
+            </summary>
+            <param name="view">The view for this view model.</param>
+            <param name="model">The model for this view model.</param>
+        </member>
+        <member name="M:Joker.UserInterface.ViewModel`2.OnPropertyChanged(System.String)">
+            <summary>
+            Invokes subscribers of the PropertyChanged event.
+            </summary>
+            <param name="propertyName">Name of the property that has changed.</param>
+        </member>
+        <member name="T:Joker.UserInterface.Finish">
+            <summary>
+            Final view of the welcome tour that also contains essential setup logic.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.Finish.firstLimit">
+            <summary>
+            Provides an instance-bound reference to the first limit set in the preceding tour page.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.Finish.#ctor(Joker.BusinessLogic.Limit)">
+            <summary>
+            Initializes XAML elements and receives the first limit for further processing.
+            </summary>
+            <param name="firstLimit">The first limit supplied from the preceding tour page.</param>
+        </member>
+        <member name="M:Joker.UserInterface.Finish.OnContinueButton(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that finalizes the setup for the app and navigates the user to the main page.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="T:Joker.UserInterface.TourPage1">
+            <summary>
+            View where the user should enter their name.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.TourPage1.#ctor">
+            <summary>
+            Initializes XAML elements.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.TourPage1.OnContinueButton(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that relays user input validation and navigates the user to
+            the next tour page.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="T:Joker.UserInterface.TourPage2">
+            <summary>
+            View where the user can select their personal contact.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.TourPage2.#ctor">
+            <summary>
+            Initializes XAML elements.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.TourPage2.PickContact(System.Object,System.EventArgs)">
+            <summary>
+            Entry event handler that opens the contact-picking dialog to the user,
+            relays data to this view and saves the selected contact.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.TourPage2.OnContinueButton(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that navigates the user to the next tour page.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="T:Joker.UserInterface.TourPage3">
+            <summary>
+            View where the user must set their first limit.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.TourPage3.#ctor">
+            <summary>
+            Initializes XAML elements.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.TourPage3.OnContinueButton(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that navigates the user to the final tour page.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="T:Joker.UserInterface.Welcome">
+            <summary>
+            View presented after opening the app for the first time.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.Welcome.#ctor">
+            <summary>
+            Initializes XAML elements.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.Welcome.OnContinueButton(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that navigates the user to the next tour page.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,187 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Joker.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>Joker.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Icons\bar.png" />
+    <None Remove="Resources\Icons\bar_completed.png" />
+    <None Remove="Resources\Icons\circle.png" />
+    <None Remove="Resources\Icons\circle_completed.png" />
+    <None Remove="Resources\Icons\contacts.png" />
+    <None Remove="Resources\Icons\image.png" />
+    <None Remove="Resources\Icons\money.png" />
+    <None Remove="Resources\Icons\motivation.png" />
+    <None Remove="Resources\Icons\search.png" />
+    <None Remove="Resources\Icons\settings.png" />
+    <None Remove="Resources\Icons\ui_contact.png" />
+    <None Remove="Resources\Icons\ui_impressum.png" />
+    <None Remove="Resources\PictureFeed\k_M_G_Gasse1.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_G_Gasse2.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_G_Haende_Tastatur2.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_K_Abendrot.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_K_Fernsehturm.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_K_Sonnenstrahl_Stadt.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_P_10.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_P_10III.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_P_Abfluss.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_P_Andreaskreuz.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_P_Asphalt_Himmel.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_P_Brunnen.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_P_Fliege.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_P_Geroell.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_P_Jungs_gehen.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_P_Jungs_gehenII.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_P_Laecheln.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_P_Mineralwasser.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_P_Muell_Pflanzen.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_P_P3b.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_P_Pflanze_Trockenheit.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_P_Sackgasse.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_P_Schienen.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_P_Shithappens.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_P_Sonnenuntergang.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_P_Stacheldraht.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_P_Stromkasten.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_P_up.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_S_Truemmerxcf.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_V_Grillfleisch.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_V_Jungs.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_V_Kirmes.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_V_MenschamMeer.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_V_rettungswesten.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_V_Skyline.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_V_Skyline2.jpg" />
+    <None Remove="Resources\PictureFeed\k_M_V_Strasse.jpg" />
+    <None Remove="Resources\PictureFeed\k_P_Container_Schloss.jpg" />
+    <None Remove="Resources\Icons\wt_bar.png" />
+    <None Remove="Resources\Icons\wt_circle.png" />
+    <None Remove="Resources\Icons\wt_filledbar.png" />
+    <None Remove="Resources\Icons\wt_filledcircle.png" />
+    <None Remove="Resources\Icons\wt_welcome.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Icons\ui_contact.png" />
+    <EmbeddedResource Include="Resources\Icons\wt_bar.png" />
+    <EmbeddedResource Include="Resources\Icons\wt_filledbar.png" />
+    <EmbeddedResource Include="Resources\Icons\wt_circle.png" />
+    <EmbeddedResource Include="Resources\Icons\wt_filledcircle.png" />
+    <EmbeddedResource Include="Resources\Icons\ui_impressum.png" />
+    <EmbeddedResource Include="Resources\Icons\wt_welcome.png" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_G_Gasse1.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_G_Gasse2.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_G_Haende_Tastatur2.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_K_Abendrot.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_K_Fernsehturm.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_K_Sonnenstrahl_Stadt.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_P_10.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_P_10III.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_P_Abfluss.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_P_Andreaskreuz.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_P_Asphalt_Himmel.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_P_Brunnen.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_P_Fliege.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_P_Geroell.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_P_Jungs_gehen.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_P_Jungs_gehenII.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_P_Laecheln.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_P_Mineralwasser.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_P_Muell_Pflanzen.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_P_P3b.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_P_Pflanze_Trockenheit.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_P_Sackgasse.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_P_Schienen.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_P_Shithappens.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_P_Sonnenuntergang.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_P_Stacheldraht.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_P_Stromkasten.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_P_up.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_S_Truemmerxcf.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_V_Jungs.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_V_Kirmes.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_V_MenschamMeer.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_V_Skyline.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_M_V_Skyline2.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\k_P_Container_Schloss.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
+    <PackageReference Include="Xamarin.Essentials" Version="0.11.0-preview" />
+    <PackageReference Include="Xamarin.Forms" Version="3.3.0.893527-pre3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="UserInterface\Timeline\GambleInspector.xaml.cs">
+      <DependentUpon>GambleInspector.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="UserInterface\Timeline\LimitInspector.xaml.cs">
+      <DependentUpon>LimitInspector.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="UserInterface\Timeline\AddGamblePage.xaml.cs">
+      <DependentUpon>AddGamblePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="UserInterface\SupportPage.xaml.cs">
+      <DependentUpon>SupportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="UserInterface\PictureFeed.xaml.cs">
+      <DependentUpon>PictureFeed.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="UserInterface\Timeline\AddLimitPage.xaml.cs">
+      <DependentUpon>AddLimitPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="UserInterface\Timeline\TimelineFeed.xaml.cs">
+      <DependentUpon>TimelineFeed.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="UserInterface\Impressum.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserInterface\Timeline\AddLimitPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserInterface\Timeline\GambleInspector.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserInterface\Timeline\LimitInspector.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserInterface\Timeline\AddGamblePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserInterface\SupportPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserInterface\MainPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserInterface\SettingsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserInterface\Timeline\TimelineFeed.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserInterface\WelcomeTour\TourPage1.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserInterface\WelcomeTour\TourPage2.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserInterface\WelcomeTour\TourPage3.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

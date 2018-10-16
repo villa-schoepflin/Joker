@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:res="clr-namespace:Joker.Resources;assembly=Joker"
+			 x:Class="Joker.UserInterface.TourPage1"
+			 BackgroundColor="{StaticResource Primary1}">
+	<ContentPage.Title>
+		<OnPlatform x:TypeArguments="x:String">
+			<On Platform="iOS"
+				Value="Name" />
+		</OnPlatform>
+	</ContentPage.Title>
+	<ScrollView>
+		<StackLayout Padding="30"
+					 Spacing="20">
+			<StackLayout Orientation="Horizontal"
+						 Padding="50,10,50,70"
+						 Spacing="0"
+						 HorizontalOptions="CenterAndExpand">
+				<Image Source="{res:ImageResource Joker.Resources.Icons.wt_filledcircle.png}" />
+				<Image Source="{res:ImageResource Joker.Resources.Icons.wt_bar.png}" />
+				<Image Source="{res:ImageResource Joker.Resources.Icons.wt_circle.png}" />
+				<Image Source="{res:ImageResource Joker.Resources.Icons.wt_bar.png}" />
+				<Image Source="{res:ImageResource Joker.Resources.Icons.wt_circle.png}" />
+			</StackLayout>
+			<Label HorizontalOptions="Center"
+				   VerticalOptions="Center"
+				   FontSize="25"
+				   TextColor="{StaticResource TextContrast}"
+				   HorizontalTextAlignment="Center">Wie heißt Du?</Label>
+			<Label HorizontalOptions="Center"
+				   VerticalOptions="CenterAndExpand"
+				   FontSize="16"
+				   TextColor="{StaticResource TextContrast}"
+				   HorizontalTextAlignment="Center">Gib deinen Namen ein, damit Dich die App persönlich ansprechen kann.</Label>
+			<Entry x:Name="NameEntry"
+				   Placeholder="Dein Name"
+				   Text="">
+				<Entry.TextColor>
+					<OnPlatform x:TypeArguments="Color">
+						<On Platform="Android"
+							Value="{StaticResource TextContrast}" />
+					</OnPlatform>
+				</Entry.TextColor>
+			</Entry>
+			<Button Clicked="OnContinueButton"
+					VerticalOptions="CenterAndExpand"
+					BackgroundColor="{StaticResource Bgr1}"
+					TextColor="{StaticResource Text1}"
+					Text="Weiter" />
+		</StackLayout>
+	</ScrollView>
+</ContentPage>

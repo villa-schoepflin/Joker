@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:res="clr-namespace:Joker.Resources;assembly=Joker"
+			 x:Class="Joker.UserInterface.TourPage3"
+			 BackgroundColor="{StaticResource Primary1}">
+	<ContentPage.Title>
+		<OnPlatform x:TypeArguments="x:String">
+			<On Platform="iOS"
+				Value="Erstes Limit" />
+		</OnPlatform>
+	</ContentPage.Title>
+	<ScrollView>
+		<StackLayout Padding="30"
+					 Spacing="20">
+			<StackLayout Orientation="Horizontal"
+						 Padding="50,10,50,70"
+						 Spacing="0"
+						 HorizontalOptions="CenterAndExpand">
+				<Image Source="{res:ImageResource Joker.Resources.Icons.wt_filledcircle.png}" />
+				<Image Source="{res:ImageResource Joker.Resources.Icons.wt_filledbar.png}" />
+				<Image Source="{res:ImageResource Joker.Resources.Icons.wt_filledcircle.png}" />
+				<Image Source="{res:ImageResource Joker.Resources.Icons.wt_filledbar.png}" />
+				<Image Source="{res:ImageResource Joker.Resources.Icons.wt_filledcircle.png}" />
+			</StackLayout>
+			<Label HorizontalOptions="Center"
+				   VerticalOptions="Center"
+				   FontSize="25"
+				   TextColor="{StaticResource TextContrast}"
+				   HorizontalTextAlignment="Center">Lege Dein Limit fest</Label>
+			<Label HorizontalOptions="Center"
+				   VerticalOptions="CenterAndExpand"
+				   FontSize="16"
+				   TextColor="{StaticResource TextContrast}"
+				   HorizontalTextAlignment="Center">Gib an, wieviel Du in der ersten Woche maximal für Glücksspiel ausgeben möchtest.</Label>
+			<Entry x:Name="LimitEntry"
+				   Placeholder="Dein Limit"
+				   Text="">
+				<Entry.TextColor>
+					<OnPlatform x:TypeArguments="Color">
+						<On Platform="Android"
+							Value="{StaticResource TextContrast}" />
+					</OnPlatform>
+				</Entry.TextColor>
+				<Entry.Keyboard>
+					<OnPlatform x:TypeArguments="Keyboard">
+						<On Platform="Android"
+							Value="Telephone" />
+						<On Platform="iOS"
+							Value="Numeric" />
+					</OnPlatform>
+				</Entry.Keyboard>
+			</Entry>
+			<Button Clicked="OnContinueButton"
+					VerticalOptions="CenterAndExpand"
+					BackgroundColor="{StaticResource Bgr1}"
+					TextColor="{StaticResource Text1}"
+					Text="Weiter" />
+		</StackLayout>
+	</ScrollView>
+</ContentPage>

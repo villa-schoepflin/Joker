@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:joker="clr-namespace:Joker.UserInterface"
+			 x:Class="Joker.UserInterface.PictureFeed"
+			 Icon="ui_pictures.png">
+	<ContentPage.Title>
+		<OnPlatform x:TypeArguments="x:String">
+			<On Platform="iOS"
+				Value="{Static joker:PictureFeed.Headline}" />
+		</OnPlatform>
+	</ContentPage.Title>
+	<Grid RowSpacing="0"
+		  ColumnSpacing="0"
+		  HorizontalOptions="FillAndExpand"
+		  VerticalOptions="FillAndExpand">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="Auto" />
+		</Grid.ColumnDefinitions>
+		<Frame Grid.Row="0"
+			   Grid.Column="0"
+			   Grid.ColumnSpan="2"
+			   BackgroundColor="{StaticResource Text2}"
+			   HorizontalOptions="FillAndExpand"
+			   VerticalOptions="FillAndExpand"
+			   CornerRadius="0"
+			   Padding="0">
+			<Image Source="{Binding PresentedImage}">
+				<Image.Aspect>
+					<OnPlatform x:TypeArguments="Aspect">
+						<On Platform="Android"
+							Value="AspectFill" />
+						<!-- Note: MS Visual Studio might falsely throw a syntax error somewhere around here.
+						This error doesn't actually exist and is a bug in the Visual Studio editor! Try
+						building the project. It should go away then. -->
+						<On Platform="iOS"
+							Value="Fill" />
+					</OnPlatform>
+				</Image.Aspect>
+				<Image.GestureRecognizers>
+					<TapGestureRecognizer Command="{Binding SetNextPicture}"
+										  NumberOfTapsRequired="2" />
+				</Image.GestureRecognizers>
+			</Image>
+		</Frame>
+		<Button Command="{Binding ToggleLikedStatus}"
+				Grid.Row="1"
+				Grid.Column="0"
+				Image="{Binding LikeButtonImage}"
+				Text="{Binding LikeButtonText}"
+				BackgroundColor="{Binding LikeButtonBackgroundColor}"
+				TextColor="{StaticResource Text1}"
+				ContentLayout="Left,30"
+				CornerRadius="0" />
+		<Button Command="{Binding SavePictureToGallery}"
+				Grid.Row="1"
+				Grid.Column="1"
+				Image="ui_save.png"
+				BackgroundColor="{StaticResource Bgr4}"
+				CornerRadius="0">
+			<Button.Padding>
+				<OnPlatform x:TypeArguments="Thickness">
+					<On Platform="Android"
+						Value="{StaticResource PagePadding}" />
+					<!-- Note: MS Visual Studio might falsely throw a syntax error somewhere around here.
+					This error doesn't actually exist and is a bug in the Visual Studio editor! Try
+					building the project. It should go away then. -->
+					<On Platform="iOS"
+						Value="25" />
+				</OnPlatform>
+			</Button.Padding>
+		</Button>
+	</Grid>
+</ContentPage>

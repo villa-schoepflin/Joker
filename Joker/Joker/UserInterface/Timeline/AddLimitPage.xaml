@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 x:Class="Joker.UserInterface.AddLimitPage"
+			 BackgroundColor="{StaticResource Primary1}">
+	<ScrollView>
+		<StackLayout Padding="30"
+					 Spacing="20">
+			<Label HorizontalOptions="CenterAndExpand"
+				   VerticalOptions="CenterAndExpand"
+				   FontSize="30"
+				   TextColor="{StaticResource TextContrast}"
+				   Margin="0,15,0,0"
+				   HorizontalTextAlignment="Center">Zeit für das nächste Limit</Label>
+			<Label Text="{Binding LimitInfo}"
+				   HorizontalOptions="Center"
+				   VerticalOptions="FillAndExpand"
+				   FontSize="{StaticResource CustomMedium}"
+				   TextColor="{StaticResource TextContrast}"
+				   HorizontalTextAlignment="Start" />
+			<Grid>
+				<Grid.RowSpacing>
+					<OnPlatform x:TypeArguments="x:Double">
+						<On Platform="Android"
+							Value="10" />
+						<!-- Note: MS Visual Studio might falsely throw a syntax error somewhere around here.
+							This error doesn't actually exist and is a bug in the Visual Studio editor! Try building the
+							project. It should go away then. -->
+						<On Platform="iOS"
+							Value="30" />
+					</OnPlatform>
+				</Grid.RowSpacing>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="2*" />
+					<ColumnDefinition Width="3*" />
+				</Grid.ColumnDefinitions>
+				<Label Grid.Row="0"
+					   Grid.Column="0"
+					   TextColor="{StaticResource TextContrast}"
+					   VerticalTextAlignment="Center">Geldbetrag:</Label>
+				<Entry x:Name="AmountEntry"
+					   Grid.Row="0"
+					   Grid.Column="1"
+					   FontSize="Large"
+					   Placeholder="0,00 €"
+					   Text="">
+					<Entry.Keyboard>
+						<OnPlatform x:TypeArguments="Keyboard">
+							<On Platform="Android"
+								Value="Telephone" />
+							<!-- Note: MS Visual Studio might falsely throw a syntax error somewhere around here.
+							This error doesn't actually exist and is a bug in the Visual Studio editor! Try building the
+							project. It should go away then. -->
+							<On Platform="iOS"
+								Value="Numeric" />
+						</OnPlatform>
+					</Entry.Keyboard>
+					<Entry.TextColor>
+						<OnPlatform x:TypeArguments="Color">
+							<On Platform="Android"
+								Value="{StaticResource TextContrast}" />
+						</OnPlatform>
+					</Entry.TextColor>
+				</Entry>
+				<Label Grid.Row="1"
+					   Grid.Column="0"
+					   TextColor="{StaticResource TextContrast}"
+					   VerticalTextAlignment="Center">Dauer in Tagen:</Label>
+				<Entry x:Name="DurationEntry"
+					   Grid.Row="1"
+					   Grid.Column="1"
+					   Keyboard="Numeric"
+					   FontSize="Large"
+					   Text="7 Tage">
+					<Entry.TextColor>
+						<OnPlatform x:TypeArguments="Color">
+							<On Platform="Android"
+								Value="{StaticResource TextContrast}" />
+						</OnPlatform>
+					</Entry.TextColor>
+				</Entry>
+			</Grid>
+			<Button Clicked="OnContinueButton"
+					HorizontalOptions="CenterAndExpand"
+					VerticalOptions="CenterAndExpand"
+					Padding="{StaticResource PagePadding}"
+					BackgroundColor="{StaticResource Bgr1}"
+					TextColor="{StaticResource Text1}"
+					Text="Bestätigen" />
+		</StackLayout>
+	</ScrollView>
+</ContentPage>

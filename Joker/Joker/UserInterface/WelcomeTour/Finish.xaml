@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 x:Class="Joker.UserInterface.Finish"
+			 BackgroundColor="{StaticResource Primary1}">
+	<ScrollView>
+		<StackLayout Padding="30"
+					 Spacing="20">
+			<Label HorizontalOptions="Center"
+				   VerticalOptions="CenterAndExpand"
+				   FontSize="55"
+				   TextColor="{StaticResource TextContrast}"
+				   HorizontalTextAlignment="Center">Fertig!</Label>
+			<Label HorizontalOptions="Center"
+				   VerticalOptions="CenterAndExpand"
+				   FontSize="20"
+				   TextColor="{StaticResource TextContrast}"
+				   HorizontalTextAlignment="Center">Du kannst Deine Angaben jederzeit in den Einstellungen ändern.&#10;&#10;Dein erstes Limit gilt ab jetzt für 7 Tage.</Label>
+			<Button Clicked="OnContinueButton"
+					VerticalOptions="CenterAndExpand"
+					BackgroundColor="{StaticResource Bgr1}"
+					TextColor="{StaticResource Text1}"
+					Text="Los geht's!" />
+		</StackLayout>
+	</ScrollView>
+</ContentPage>

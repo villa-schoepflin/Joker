@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:joker="clr-namespace:Joker.DataAccess"
+			 x:Class="Joker.UserInterface.SettingsPage"
+			 Title="Einstellungen"
+			 BackgroundColor="{StaticResource Bgr1}">
+	<ScrollView>
+		<StackLayout>
+			<Frame Margin="{StaticResource StripMargin}"
+				   Padding="{StaticResource PagePadding}"
+				   BackgroundColor="{StaticResource Bgr2}"
+				   HasShadow="False"
+				   CornerRadius="0">
+				<StackLayout>
+					<StackLayout Orientation="Horizontal"
+								 Spacing="5">
+						<Label VerticalTextAlignment="Center"
+							   TextColor="{StaticResource Text2}"
+							   FontSize="Small">Name:</Label>
+						<BoxView HeightRequest="1"
+								 HorizontalOptions="FillAndExpand"
+								 VerticalOptions="Center"
+								 Color="{StaticResource Text2}" />
+					</StackLayout>
+					<StackLayout Orientation="Horizontal"
+								 Spacing="5">
+						<Entry x:Name="UserNameEntry"
+							   MaxLength="{Static joker:UserSettings.MaxNameLength}"
+							   HorizontalOptions="FillAndExpand" />
+						<Button Clicked="SaveUserName"
+								BackgroundColor="{StaticResource Bgr3}"
+								WidthRequest="40"
+								HeightRequest="40"
+								Image="ui_save.png" />
+					</StackLayout>
+				</StackLayout>
+			</Frame>
+			<Frame Margin="{StaticResource StripMargin}"
+				   Padding="{StaticResource PagePadding}"
+				   BackgroundColor="{StaticResource Bgr2}"
+				   HasShadow="False"
+				   CornerRadius="0">
+				<StackLayout>
+					<StackLayout Orientation="Horizontal"
+								 Spacing="5">
+						<Label VerticalTextAlignment="Center"
+							   TextColor="{StaticResource Text2}"
+							   FontSize="Small">Kontaktperson:</Label>
+						<BoxView HeightRequest="1"
+								 HorizontalOptions="FillAndExpand"
+								 VerticalOptions="Center"
+								 Color="{StaticResource Text2}" />
+					</StackLayout>
+					<StackLayout Orientation="Horizontal"
+								 Spacing="5">
+						<Entry x:Name="ContactEntry"
+							   Focused="PickContact"
+							   HorizontalOptions="FillAndExpand" />
+						<Button Clicked="RemoveContact"
+								BackgroundColor="{StaticResource Bgr3}"
+								WidthRequest="40"
+								HeightRequest="40"
+								Image="ui_remove.png" />
+					</StackLayout>
+				</StackLayout>
+			</Frame>
+			<Frame Margin="{StaticResource StripMargin}"
+				   Padding="{StaticResource PagePadding}"
+				   BackgroundColor="{StaticResource Bgr2}"
+				   HasShadow="False"
+				   CornerRadius="0">
+				<StackLayout>
+					<StackLayout Orientation="Horizontal"
+								 Spacing="5">
+						<Label VerticalTextAlignment="Center"
+							   TextColor="{StaticResource Text2}"
+							   FontSize="Small">Zeitspanne zwischen neuen Bildern:</Label>
+						<BoxView HeightRequest="1"
+								 HorizontalOptions="FillAndExpand"
+								 VerticalOptions="Center"
+								 Color="{StaticResource Text2}" />
+					</StackLayout>
+					<StackLayout Orientation="Horizontal"
+								 Spacing="5">
+						<Entry x:Name="NewPictureEntry"
+							   HorizontalOptions="FillAndExpand"
+							   Keyboard="Numeric" />
+						<Button Clicked="SaveNewPictureInterval"
+								BackgroundColor="{StaticResource Bgr3}"
+								WidthRequest="40"
+								HeightRequest="40"
+								Image="ui_save.png" />
+					</StackLayout>
+				</StackLayout>
+			</Frame>
+			<Frame Margin="{StaticResource StripMargin}"
+				   Padding="{StaticResource PagePadding}"
+				   BackgroundColor="{StaticResource Bgr2}"
+				   HasShadow="False"
+				   CornerRadius="0">
+				<StackLayout>
+					<StackLayout Orientation="Horizontal"
+								 Spacing="5">
+						<Label VerticalTextAlignment="Center"
+							   TextColor="{StaticResource Text2}"
+							   FontSize="Small">Zeitspanne zwischen Ausgabeerinnerungen:</Label>
+						<BoxView HeightRequest="1"
+								 HorizontalOptions="FillAndExpand"
+								 VerticalOptions="Center"
+								 Color="{StaticResource Text2}" />
+					</StackLayout>
+					<StackLayout Orientation="Horizontal"
+								 Spacing="5">
+						<Entry x:Name="GambleReminderEntry"
+							   HorizontalOptions="FillAndExpand"
+							   Keyboard="Numeric" />
+						<Button Clicked="SaveGambleReminderInterval"
+								BackgroundColor="{StaticResource Bgr3}"
+								WidthRequest="40"
+								HeightRequest="40"
+								Image="ui_save.png" />
+					</StackLayout>
+				</StackLayout>
+			</Frame>
+			<Frame Margin="{StaticResource StripMargin}"
+				   Padding="{StaticResource PagePadding}"
+				   BackgroundColor="{StaticResource Bgr2}"
+				   HasShadow="False"
+				   CornerRadius="0">
+				<StackLayout>
+					<StackLayout Orientation="Horizontal"
+								 Spacing="5">
+						<Label VerticalTextAlignment="Center"
+							   TextColor="{StaticResource Text2}"
+							   FontSize="Small">Zeitspanne zwischen Limit-Erinnerungen:</Label>
+						<BoxView HeightRequest="1"
+								 HorizontalOptions="FillAndExpand"
+								 VerticalOptions="Center"
+								 Color="{StaticResource Text2}" />
+					</StackLayout>
+					<StackLayout Orientation="Horizontal"
+								 Spacing="5">
+						<Entry x:Name="LimitReminderEntry"
+							   HorizontalOptions="FillAndExpand"
+							   Keyboard="Numeric" />
+						<Button Clicked="SaveLimitReminderInterval"
+								BackgroundColor="{StaticResource Bgr3}"
+								WidthRequest="40"
+								HeightRequest="40"
+								Image="ui_save.png" />
+					</StackLayout>
+				</StackLayout>
+			</Frame>
+			<Button Clicked="OnImpressumButton"
+					HorizontalOptions="End"
+					VerticalOptions="EndAndExpand"
+					Margin="0,15,15,15"
+					BackgroundColor="{StaticResource Bgr3}"
+					TextColor="{StaticResource Text1}"
+					Padding="{StaticResource PagePadding}"
+					Text="Impressum" />
+		</StackLayout>
+	</ScrollView>
+</ContentPage>
