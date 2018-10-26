@@ -119,7 +119,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
     <PackageReference Include="Xamarin.Essentials" Version="0.11.0-preview" />
-    <PackageReference Include="Xamarin.Forms" Version="3.3.0.893527-pre3" />
+    <PackageReference Include="Xamarin.Forms" Version="3.4.0.925479-pre1" />
   </ItemGroup>
 
   <ItemGroup>
