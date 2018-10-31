@@ -52,7 +52,7 @@ namespace Joker.UserInterface
 						+ "Vergiss nicht Deine Ausgaben für Glücksspiel in die Chronik einzutragen, damit Du "
 						+ "immer weißt, was der aktuelle Stand Deines Limits ist.")
 				: "diesmal konntest Du Dein Limit leider nicht einhalten. Am besten Du rufst einen Experten "
-					+ "oder deinen persönlichen Kontakt an. Du kannst Dir auch ein paar motivierende Bilder "
+					+ "oder deinen persönlichen Kontakt an. Du kannst Dir aber auch einige motivierende Bilder "
 					+ "anschauen.\n\n"
 					+ "Wichtig ist aber auch, dass Du Dein Limit weiter im Blick behältst, auch wenn Du es "
 					+ "diesmal überschritten hast. Vergiss also nicht, jede Ausgabe in Deine Chronik einzutragen.");
