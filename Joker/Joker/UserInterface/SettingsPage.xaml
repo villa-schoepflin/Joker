@@ -1,10 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:joker="clr-namespace:Joker.DataAccess"
+			 xmlns:da="clr-namespace:Joker.DataAccess"
+			 xmlns:ui="clr-namespace:Joker.UserInterface"
 			 x:Class="Joker.UserInterface.SettingsPage"
-			 Title="Einstellungen"
+			 Title="{Static ui:SettingsPage.Headline}"
 			 BackgroundColor="{StaticResource Bgr1}">
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Clicked="OnInfoButton"
+					 Icon="ui_info.png" />
+	</ContentPage.ToolbarItems>
 	<ScrollView>
 		<StackLayout>
 			<Frame Margin="{StaticResource StripMargin}"
@@ -26,7 +31,7 @@
 					<StackLayout Orientation="Horizontal"
 								 Spacing="5">
 						<Entry x:Name="UserNameEntry"
-							   MaxLength="{Static joker:UserSettings.MaxNameLength}"
+							   MaxLength="{Static da:UserSettings.MaxNameLength}"
 							   HorizontalOptions="FillAndExpand" />
 						<Button Clicked="SaveUserName"
 								BackgroundColor="{StaticResource Bgr3}"

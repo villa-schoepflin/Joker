@@ -65,7 +65,7 @@ namespace Joker.DataAccess
 
 		/// <summary>
 		/// Selects a random image resource from the PictureFeed folder and inserts it as a Picture object
-		/// into the database.
+		/// into the database. Prevents duplicate images.
 		/// </summary>
 		/// <returns>Returns whether a random picture could be inserted, "true" indicating success.</returns>
 		internal static bool InsertPictureFromRandomResource()

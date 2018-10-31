@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:res="clr-namespace:Joker.Resources;assembly=Joker"
+			 xmlns:r="clr-namespace:Joker.Resources;assembly=Joker"
 			 x:Class="Joker.UserInterface.TourPage1"
 			 BackgroundColor="{StaticResource Primary1}">
 	<ContentPage.Title>
@@ -17,11 +17,11 @@
 						 Padding="50,10,50,70"
 						 Spacing="0"
 						 HorizontalOptions="CenterAndExpand">
-				<Image Source="{res:ImageResource Joker.Resources.Icons.wt_filledcircle.png}" />
-				<Image Source="{res:ImageResource Joker.Resources.Icons.wt_bar.png}" />
-				<Image Source="{res:ImageResource Joker.Resources.Icons.wt_circle.png}" />
-				<Image Source="{res:ImageResource Joker.Resources.Icons.wt_bar.png}" />
-				<Image Source="{res:ImageResource Joker.Resources.Icons.wt_circle.png}" />
+				<Image Source="{r:ImageResource Joker.Resources.Icons.wt_filledcircle.png}" />
+				<Image Source="{r:ImageResource Joker.Resources.Icons.wt_bar.png}" />
+				<Image Source="{r:ImageResource Joker.Resources.Icons.wt_circle.png}" />
+				<Image Source="{r:ImageResource Joker.Resources.Icons.wt_bar.png}" />
+				<Image Source="{r:ImageResource Joker.Resources.Icons.wt_circle.png}" />
 			</StackLayout>
 			<Label HorizontalOptions="Center"
 				   VerticalOptions="Center"

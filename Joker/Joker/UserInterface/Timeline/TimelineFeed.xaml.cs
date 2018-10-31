@@ -2,6 +2,7 @@
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+
 using Joker.DataAccess;
 
 namespace Joker.UserInterface
@@ -23,7 +24,7 @@ namespace Joker.UserInterface
 		/// </summary>
 		public const string Info = "Auf dieser Seite findest Du einen Überblick über Deine Limits (blau markiert) "
 			+ "und Glücksspielausgaben (grau markiert), die Du in der App festgehalten hast.\n\n"
-			+ "Wenn Du eine neue Ausgabe hinzufügen möchtest, tippe auf den Knopf in der unteren rechten Ecke. Das "
+			+ "Wenn Du eine neue Ausgabe hinzufügen möchtest, tippe auf das \"+\" in der unteren rechten Ecke. Das "
 			+ "Hinzufügen eines neuen Limits ist erst möglich, wenn das aktuell bestehende Limit abgelaufen ist.\n\n"
 			+ "Details zu jedem Limit und jeder Ausgabe findest Du, wenn Du den dazugehörigen Eintrag antippst.";
 

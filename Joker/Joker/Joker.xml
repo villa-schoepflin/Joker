@@ -17,7 +17,7 @@
         </member>
         <member name="M:Joker.App.OnStart">
             <summary>
-            Called every time the app starts.
+            Entry point from the user's perspective.
             </summary>
         </member>
         <member name="M:Joker.App.SetMainPageToDefault">
@@ -204,11 +204,6 @@
         <member name="F:Joker.BusinessLogic.Contact.Bzga">
             <summary>
             Contact information for the Bundeszentrale für gesundheitliche Aufklärung.
-            </summary>
-        </member>
-        <member name="F:Joker.BusinessLogic.Contact.VillaSchoepflin">
-            <summary>
-            Contact information for the publisher of this app.
             </summary>
         </member>
         <member name="P:Joker.BusinessLogic.Contact.Name">
@@ -522,7 +517,7 @@
         <member name="M:Joker.DataAccess.Database.InsertPictureFromRandomResource">
             <summary>
             Selects a random image resource from the PictureFeed folder and inserts it as a Picture object
-            into the database.
+            into the database. Prevents duplicate images.
             </summary>
             <returns>Returns whether a random picture could be inserted, "true" indicating success.</returns>
         </member>
@@ -788,10 +783,27 @@
             View where the user can change user-specific settings.
             </summary>
         </member>
+        <member name="F:Joker.UserInterface.SettingsPage.Headline">
+            <summary>
+            The title of this page, provided here to be accessible from anywhere.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.SettingsPage.Info">
+            <summary>
+            Info text for the user concerning the functionality of this page.
+            </summary>
+        </member>
         <member name="M:Joker.UserInterface.SettingsPage.#ctor">
             <summary>
             Initializes XAML elements.
             </summary>
+        </member>
+        <member name="M:Joker.UserInterface.SettingsPage.OnInfoButton(System.Object,System.EventArgs)">
+            <summary>
+            Toolbar item event handler that shows the user a message concerning this page.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
         </member>
         <member name="M:Joker.UserInterface.SettingsPage.SaveUserName(System.Object,System.EventArgs)">
             <summary>

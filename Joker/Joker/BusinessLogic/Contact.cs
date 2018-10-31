@@ -10,17 +10,8 @@
 		/// </summary>
 		internal static readonly Contact Bzga = new Contact
 		{
-			Name = "Hotline der BZgA",
+			Name = "BZgA-Hotline (Bundeszentrale für gesundheitliche Aufklärung)",
 			PhoneNumber = "+49 800 1372700"
-		};
-
-		/// <summary>
-		/// Contact information for the publisher of this app.
-		/// </summary>
-		internal static readonly Contact VillaSchoepflin = new Contact
-		{
-			Name = "Villa Schöpflin gGmbH",
-			PhoneNumber = "+49 7621 9149090"
 		};
 
 		/// <summary>

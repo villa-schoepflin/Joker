@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:joker="clr-namespace:Joker.UserInterface"
+			 xmlns:ui="clr-namespace:Joker.UserInterface"
 			 x:Class="Joker.UserInterface.PictureFeed"
 			 Icon="ui_pictures.png">
 	<ContentPage.Title>
 		<OnPlatform x:TypeArguments="x:String">
 			<On Platform="iOS"
-				Value="{Static joker:PictureFeed.Headline}" />
+				Value="{Static ui:PictureFeed.Headline}" />
 		</OnPlatform>
 	</ContentPage.Title>
 	<Grid RowSpacing="0"

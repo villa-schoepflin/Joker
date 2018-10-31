@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:joker="clr-namespace:Joker.BusinessLogic"
+			 xmlns:bl="clr-namespace:Joker.BusinessLogic"
 			 x:Class="Joker.UserInterface.AddGamblePage"
 			 Title="Neue Ausgabe hinzufügen"
 			 BackgroundColor="{StaticResource Bgr1}">
@@ -74,7 +74,7 @@
 					<Editor x:Name="Description"
 							TextChanged="UpdateLengthCounter"
 							HeightRequest="100"
-							MaxLength="{Static joker:Gamble.MaxDescriptionLength}"
+							MaxLength="{Static bl:Gamble.MaxDescriptionLength}"
 							Placeholder="Beschreibung (optional)"
 							FontSize="{StaticResource CustomMedium}" />
 				</StackLayout>

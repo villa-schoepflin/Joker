@@ -78,7 +78,7 @@ namespace Joker.UserInterface
 		{
 			get
 			{
-				var list = new ObservableCollection<Contact> { Contact.Bzga, Contact.VillaSchoepflin };
+				var list = new ObservableCollection<Contact> { Contact.Bzga };
 				if(UserSettings.PersonalContact != null)
 					list.Add(UserSettings.PersonalContact);
 				return list;

@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:joker="clr-namespace:Joker.UserInterface"
+			 xmlns:ui="clr-namespace:Joker.UserInterface"
 			 x:Class="Joker.UserInterface.TimelineFeed"
 			 Icon="ui_timeline.png"
 			 BackgroundColor="{StaticResource Bgr1}">
 	<ContentPage.Title>
 		<OnPlatform x:TypeArguments="x:String">
 			<On Platform="iOS"
-				Value="{Static joker:TimelineFeed.Headline}" />
+				Value="{Static ui:TimelineFeed.Headline}" />
 		</OnPlatform>
 	</ContentPage.Title>
 	<Grid>

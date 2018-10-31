@@ -15,6 +15,19 @@ namespace Joker.UserInterface
 	public partial class SettingsPage : ContentPage
 	{
 		/// <summary>
+		/// The title of this page, provided here to be accessible from anywhere.
+		/// </summary>
+		public const string Headline = "Einstellungen";
+
+		/// <summary>
+		/// Info text for the user concerning the functionality of this page.
+		/// </summary>
+		public const string Info = "Hier kannst Du einige Einstellungen der App ändern.\n\n"
+			+ "Neben Deinem Namen in der App und Deinem persönlichen Kontakt kannst Du hier auch einstellen, in "
+			+ "welchen Zeitabständen Dir die App Push-Benachrichtigungen mit motivierenden Texten schicken soll oder "
+			+ "wie oft Du neue Motivationsbilder erhalten möchtest.";
+
+		/// <summary>
 		/// Initializes XAML elements.
 		/// </summary>
 		public SettingsPage()
@@ -25,6 +38,16 @@ namespace Joker.UserInterface
 			NewPictureEntry.Text = $"{UserSettings.NewPictureInterval.TotalDays} Tage";
 			GambleReminderEntry.Text = $"{UserSettings.GambleReminderInterval.TotalHours} Stunden";
 			LimitReminderEntry.Text = $"{UserSettings.LimitReminderInterval.TotalHours} Stunden";
+		}
+
+		/// <summary>
+		/// Toolbar item event handler that shows the user a message concerning this page.
+		/// </summary>
+		/// <param name="sender">Reference to the event's source object.</param>
+		/// <param name="e">Contains event data.</param>
+		private async void OnInfoButton(object sender, EventArgs e)
+		{
+			await DisplayAlert(Headline, Info, "Ok");
 		}
 
 		/// <summary>

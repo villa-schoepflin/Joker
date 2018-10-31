@@ -28,7 +28,7 @@ namespace Joker
 		}
 
 		/// <summary>
-		/// Called every time the app starts.
+		/// Entry point from the user's perspective.
 		/// </summary>
 		protected override void OnStart()
 		{

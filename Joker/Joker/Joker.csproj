@@ -41,7 +41,6 @@
     <None Remove="Resources\PictureFeed\k_M_P_Geroell.jpg" />
     <None Remove="Resources\PictureFeed\k_M_P_Jungs_gehen.jpg" />
     <None Remove="Resources\PictureFeed\k_M_P_Jungs_gehenII.jpg" />
-    <None Remove="Resources\PictureFeed\k_M_P_Laecheln.jpg" />
     <None Remove="Resources\PictureFeed\k_M_P_Mineralwasser.jpg" />
     <None Remove="Resources\PictureFeed\k_M_P_Muell_Pflanzen.jpg" />
     <None Remove="Resources\PictureFeed\k_M_P_P3b.jpg" />
@@ -94,7 +93,6 @@
     <EmbeddedResource Include="Resources\PictureFeed\k_M_P_Geroell.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\k_M_P_Jungs_gehen.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\k_M_P_Jungs_gehenII.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\k_M_P_Laecheln.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\k_M_P_Mineralwasser.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\k_M_P_Muell_Pflanzen.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\k_M_P_P3b.jpg" />
@@ -116,7 +114,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1-beta1" />
     <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
     <PackageReference Include="Xamarin.Essentials" Version="0.11.0-preview" />
     <PackageReference Include="Xamarin.Forms" Version="3.4.0.925479-pre1" />

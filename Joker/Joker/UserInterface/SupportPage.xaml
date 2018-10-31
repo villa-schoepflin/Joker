@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:res="clr-namespace:Joker.Resources;assembly=Joker"
-			 xmlns:joker="clr-namespace:Joker.UserInterface"
+			 xmlns:r="clr-namespace:Joker.Resources;assembly=Joker"
+			 xmlns:ui="clr-namespace:Joker.UserInterface"
 			 x:Class="Joker.UserInterface.SupportPage"
 			 Icon="ui_support.png"
 			 BackgroundColor="{StaticResource Bgr1}">
 	<ContentPage.Title>
 		<OnPlatform x:TypeArguments="x:String">
 			<On Platform="iOS"
-				Value="{Static joker:SupportPage.Headline}" />
+				Value="{Static ui:SupportPage.Headline}" />
 		</OnPlatform>
 	</ContentPage.Title>
 	<ScrollView>
@@ -85,7 +85,7 @@
 														Value="40" />
 												</OnPlatform>
 											</Frame.HeightRequest>
-											<Image Source="{res:ImageResource Joker.Resources.Icons.ui_contact.png}" />
+											<Image Source="{r:ImageResource Joker.Resources.Icons.ui_contact.png}" />
 										</Frame>
 										<Label Grid.Row="0"
 											   Grid.Column="1"
