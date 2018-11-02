@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 x:Class="Joker.UserInterface.AddContactPage"
+			 Title="Neuen Kontakt hinzufügen">
+	<ScrollView>
+		<StackLayout>
+			<Frame Margin="{StaticResource StripMargin}"
+				   Padding="{StaticResource PagePadding}"
+				   BackgroundColor="{StaticResource Bgr2}"
+				   HasShadow="False"
+				   CornerRadius="0">
+				<StackLayout>
+					<StackLayout Orientation="Horizontal"
+								 Spacing="5">
+						<Label VerticalTextAlignment="Center"
+							   TextColor="{StaticResource Text2}"
+							   FontSize="Small">Name/Bezeichnung:</Label>
+						<BoxView HeightRequest="1"
+								 HorizontalOptions="FillAndExpand"
+								 VerticalOptions="Center"
+								 Color="{StaticResource Text2}" />
+					</StackLayout>
+					<Entry x:Name="NameEntry"
+						   VerticalOptions="Center"
+						   TextColor="{StaticResource Text1}"
+						   FontSize="{StaticResource CustomMedium}"
+						   Text="" />
+				</StackLayout>
+			</Frame>
+			<Frame Margin="{StaticResource StripMargin}"
+				   Padding="{StaticResource PagePadding}"
+				   BackgroundColor="{StaticResource Bgr2}"
+				   HasShadow="False"
+				   CornerRadius="0">
+				<StackLayout>
+					<StackLayout Orientation="Horizontal"
+								 Spacing="5">
+						<Label VerticalTextAlignment="Center"
+							   TextColor="{StaticResource Text2}"
+							   FontSize="Small">Telefonnummer:</Label>
+						<BoxView HeightRequest="1"
+								 HorizontalOptions="FillAndExpand"
+								 VerticalOptions="Center"
+								 Color="{StaticResource Text2}" />
+					</StackLayout>
+					<Entry x:Name="PhoneNumberEntry"
+						   VerticalOptions="Center"
+						   TextColor="{StaticResource Text1}"
+						   FontSize="{StaticResource CustomMedium}"
+						   Text="" />
+				</StackLayout>
+			</Frame>
+			<Button Clicked="OnSearchDeviceContactsButton"
+					Text="Kontakt auf dem Gerät suchen" />
+			<Frame Margin="{StaticResource StripMargin}"
+				   Padding="{StaticResource PagePadding}"
+				   BackgroundColor="{StaticResource Bgr2}"
+				   HasShadow="False"
+				   CornerRadius="0">
+				<StackLayout Orientation="Horizontal">
+					<Label HorizontalOptions="StartAndExpand"
+						   TextColor="{StaticResource Text1}"
+						   FontSize="Small">Als Beratungsstelle oder professionellen Kontakt eintragen</Label>
+					<Switch x:Name="ExpertMarker" />
+				</StackLayout>
+			</Frame>
+			<Button Clicked="OnSubmitButton"
+					HorizontalOptions="End"
+					Text="Hinzufügen" />
+		</StackLayout>
+	</ScrollView>
+</ContentPage>

@@ -30,8 +30,8 @@ namespace Joker.UserInterface
 				Title = PictureFeed.Headline;
 			else if(CurrentPage is TimelineFeed)
 				Title = TimelineFeed.Headline;
-			else if(CurrentPage is SupportPage)
-				Title = SupportPage.Headline;
+			else if(CurrentPage is ContactPage)
+				Title = ContactPage.Headline;
 		}
 
 		/// <summary>
@@ -45,8 +45,8 @@ namespace Joker.UserInterface
 				await DisplayAlert(PictureFeed.Headline, PictureFeed.Info, "Ok");
 			else if(CurrentPage is TimelineFeed)
 				await DisplayAlert(TimelineFeed.Headline, TimelineFeed.Info, "Ok");
-			else if(CurrentPage is SupportPage)
-				await DisplayAlert(SupportPage.Headline, SupportPage.Info, "Ok");
+			else if(CurrentPage is ContactPage)
+				await DisplayAlert(ContactPage.Headline, ContactPage.Info, "Ok");
 		}
 
 		/// <summary>

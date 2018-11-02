@@ -76,9 +76,9 @@ namespace Joker
 		internal static TimelineFeed CurrentTimelineFeed => (TimelineFeed)CurrentMainPage.Children[1];
 
 		/// <summary>
-		/// References the current main page's support page.
+		/// References the current main page's contact page.
 		/// </summary>
-		internal static SupportPage CurrentSupportPage => (SupportPage)CurrentMainPage.Children[2];
+		internal static ContactPage CurrentContactPage => (ContactPage)CurrentMainPage.Children[2];
 
 		/// <summary>
 		/// The locale or culture setting to use for this app.

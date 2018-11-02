@@ -4,7 +4,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using Joker.ApplicationLayer;
-using Joker.DataAccess;
+using Joker.BusinessLogic;
 
 namespace Joker.UserInterface
 {
@@ -14,6 +14,11 @@ namespace Joker.UserInterface
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class TourPage2 : ContentPage
 	{
+		/// <summary>
+		/// The contact that can be selected here and will be inserted upon completing the welcome tour.
+		/// </summary>
+		public static Contact FirstContact;
+
 		/// <summary>
 		/// Initializes XAML elements.
 		/// </summary>
@@ -31,8 +36,8 @@ namespace Joker.UserInterface
 		private async void PickContact(object sender, EventArgs e)
 		{
 			ContactEntry.Unfocus();
-			UserSettings.PersonalContact = await DependencyService.Get<IPlatformContactPicker>().PickContact();
-			ContactEntry.Text = UserSettings.PersonalContact.Name;
+			FirstContact = await DependencyService.Get<IPlatformContactPicker>().PickContact();
+			ContactEntry.Text = FirstContact.Name;
 		}
 
 		/// <summary>
@@ -42,7 +47,10 @@ namespace Joker.UserInterface
 		/// <param name="e">Contains event data.</param>
 		private async void OnContinueButton(object sender, EventArgs e)
 		{
-			await Navigation.PushAsync(new TourPage3());
+			if(FirstContact?.SamePhoneNumber(Contact.Bzga) ?? false)
+				await DisplayAlert(null, "Diese Nummer ist bereits in der App verzeichnet.", "Ok");
+			else
+				await Navigation.PushAsync(new TourPage3());
 		}
 	}
 }

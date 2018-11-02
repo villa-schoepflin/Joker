@@ -24,7 +24,11 @@ namespace Joker.BusinessLogic
 		/// <summary>
 		/// Indicates a casino or "gambling house" of any kind.
 		/// </summary>
-		Casino = 3
+		Casino = 3,
+		/// <summary>
+		/// Indicates a gamble on a slot machine of some kind.
+		/// </summary>
+		SlotMachine = 4
 	}
 
 	/// <summary>
@@ -40,7 +44,8 @@ namespace Joker.BusinessLogic
 			[GambleType.Other] = "Sonstige",
 			[GambleType.Lottery] = "Lotterie",
 			[GambleType.SportsBet] = "Sportwette",
-			[GambleType.Casino] = "Casino"
+			[GambleType.Casino] = "Casino",
+			[GambleType.SlotMachine] = "Geldspielautomat"
 		};
 
 		/// <summary>

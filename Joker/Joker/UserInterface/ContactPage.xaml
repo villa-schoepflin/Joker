@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:r="clr-namespace:Joker.Resources;assembly=Joker"
+			 xmlns:ui="clr-namespace:Joker.UserInterface"
+			 x:Class="Joker.UserInterface.ContactPage"
+			 Icon="ui_support.png"
+			 BackgroundColor="{StaticResource Bgr1}">
+	<ContentPage.Title>
+		<OnPlatform x:TypeArguments="x:String">
+			<On Platform="iOS"
+				Value="{Static ui:ContactPage.Headline}" />
+		</OnPlatform>
+	</ContentPage.Title>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="Auto" />
+		</Grid.ColumnDefinitions>
+		<ListView ItemsSource="{Binding Contacts}"
+				  Grid.Row="0"
+				  Grid.Column="0"
+				  Grid.RowSpan="2"
+				  Grid.ColumnSpan="2"
+				  SelectionMode="None"
+				  HasUnevenRows="True"
+				  SeparatorColor="Transparent">
+			<ListView.Header>
+				<StackLayout>
+					<Frame BackgroundColor="{StaticResource Bgr3}"
+						   Margin="10,10,10,5"
+						   Padding="15"
+						   CornerRadius="5">
+						<Frame.GestureRecognizers>
+							<TapGestureRecognizer Tapped="OnOnlineSearchLink" />
+						</Frame.GestureRecognizers>
+						<Label HorizontalTextAlignment="Center"
+							   FontAttributes="Bold"
+							   FontSize="Large">Beratungsstelle online suchen</Label>
+					</Frame>
+				</StackLayout>
+			</ListView.Header>
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<StackLayout Padding="10,5,10,5">
+							<StackLayout.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding OpenDetailPage}" />
+							</StackLayout.GestureRecognizers>
+							<Frame BackgroundColor="{StaticResource Bgr3}"
+								   Padding="5"
+								   CornerRadius="5">
+								<Grid RowSpacing="5">
+									<Grid.RowDefinitions>
+										<RowDefinition Height="Auto" />
+										<RowDefinition Height="Auto" />
+									</Grid.RowDefinitions>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="Auto" />
+									</Grid.ColumnDefinitions>
+									<Frame Grid.Row="0"
+										   Grid.Column="0"
+										   Grid.RowSpan="2"
+										   BackgroundColor="{StaticResource Primary2}"
+										   Margin="0,0,10,0"
+										   Padding="3"
+										   CornerRadius="5">
+										<Frame.WidthRequest>
+											<OnPlatform x:TypeArguments="x:Double">
+												<On Platform="Android"
+													Value="36" />
+												<!-- Note: MS Visual Studio might falsely throw a syntax error
+													somewhere around here. This error doesn't actually exist and is
+													a bug in the Visual Studio editor! Try building	the project.
+													It should go away then. -->
+												<On Platform="iOS"
+													Value="40" />
+											</OnPlatform>
+										</Frame.WidthRequest>
+										<Frame.HeightRequest>
+											<OnPlatform x:TypeArguments="x:Double">
+												<On Platform="Android"
+													Value="36" />
+												<!-- Note: MS Visual Studio might falsely throw a syntax error
+													somewhere around here. This error doesn't actually exist and is
+													a bug in the Visual Studio editor! Try building	the project.
+													It should go away then. -->
+												<On Platform="iOS"
+													Value="40" />
+											</OnPlatform>
+										</Frame.HeightRequest>
+										<Image Source="{r:ImageResource Joker.Resources.Icons.ui_contact.png}" />
+									</Frame>
+									<Label Grid.Row="0"
+										   Grid.Column="1"
+										   Text="{Binding ContactName}"
+										   TextColor="{StaticResource Text1}"
+										   VerticalTextAlignment="Center" />
+									<Label Grid.Row="1"
+										   Grid.Column="1"
+										   Text="{Binding PhoneNumber}"
+										   TextColor="{StaticResource Text2}"
+										   VerticalTextAlignment="Center" />
+									<Button Command="{Binding CallContact}"
+											Grid.Row="0"
+											Grid.Column="2"
+											Grid.RowSpan="2"
+											BackgroundColor="{StaticResource Bgr4}"
+											HeightRequest="40"
+											CornerRadius="22"
+											Image="ui_phone.png">
+										<Button.WidthRequest>
+											<OnPlatform x:TypeArguments="x:Double">
+												<On Platform="Android"
+													Value="40" />
+												<!-- Note: MS Visual Studio might falsely throw a syntax error
+													somewhere around here. This error doesn't actually exist and is
+													a bug in the Visual Studio editor! Try building	the project.
+													It should go away then. -->
+												<On Platform="iOS"
+													Value="44" />
+											</OnPlatform>
+										</Button.WidthRequest>
+									</Button>
+								</Grid>
+							</Frame>
+						</StackLayout>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+		<Frame Grid.Row="1"
+			   Grid.Column="1"
+			   Margin="0,0,15,15"
+			   Padding="0"
+			   WidthRequest="56"
+			   HeightRequest="56"
+			   CornerRadius="28">
+			<Button Clicked="OnSubmitButton"
+					BackgroundColor="{StaticResource Bgr4}"
+					Image="ui_submit.png"
+					CornerRadius="28" />
+		</Frame>
+	</Grid>
+</ContentPage>

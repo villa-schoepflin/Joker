@@ -46,6 +46,10 @@
 					<OnPlatform x:TypeArguments="Keyboard">
 						<On Platform="Android"
 							Value="Telephone" />
+						<!-- Note: MS Visual Studio might falsely throw a syntax error
+													somewhere around here. This error doesn't actually exist and is
+													a bug in the Visual Studio editor! Try building	the project.
+													It should go away then. -->
 						<On Platform="iOS"
 							Value="Numeric" />
 					</OnPlatform>

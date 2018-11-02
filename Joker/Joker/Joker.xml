@@ -35,9 +35,9 @@
             References the current main page's timeline feed page.
             </summary>
         </member>
-        <member name="P:Joker.App.CurrentSupportPage">
+        <member name="P:Joker.App.CurrentContactPage">
             <summary>
-            References the current main page's support page.
+            References the current main page's contact page.
             </summary>
         </member>
         <member name="F:Joker.App.Locale">
@@ -201,6 +201,16 @@
             Represents a simplified phone contact with a name and one phone number.
             </summary>
         </member>
+        <member name="F:Joker.BusinessLogic.Contact.MaxNameLength">
+            <summary>
+            The maximum string length for the contact's name.
+            </summary>
+        </member>
+        <member name="F:Joker.BusinessLogic.Contact.MaxPhoneNumberLength">
+            <summary>
+            The maximum string length for the contact's phone number.
+            </summary>
+        </member>
         <member name="F:Joker.BusinessLogic.Contact.Bzga">
             <summary>
             Contact information for the Bundeszentrale für gesundheitliche Aufklärung.
@@ -216,8 +226,38 @@
             The phone number associated with this contact.
             </summary>
         </member>
-        <member name="M:Joker.BusinessLogic.Contact.ToString">
+        <member name="P:Joker.BusinessLogic.Contact.MarkedAsProfessional">
             <summary>
+            Indicates whether this contact is marked by the user as a professional or expert such as the
+            number of a counseling center.
+            </summary>
+        </member>
+        <member name="M:Joker.BusinessLogic.Contact.#ctor(System.String,System.String,System.Boolean)">
+            <summary>
+            The standard constructor that should be used every time a new contact is about to be added.
+            </summary>
+            <param name="name">The name as supplied from the user.</param>
+            <param name="phoneNumber">The phone number as supplied from the user.</param>
+            <param name="markedAsProfessional">Indicates whether the user has marked this contact as a professional
+            contact.</param>
+            <exception cref="T:System.ArgumentException">Thrown if name or phone number are not within allowed length 
+            bounds.</exception>
+        </member>
+        <member name="M:Joker.BusinessLogic.Contact.#ctor">
+            <summary>
+            This constructor only exists for SQLite to be able to return collections of contacts from the database.
+            It should never be used to instantiate a contact directly within the app.
+            </summary>
+        </member>
+        <member name="M:Joker.BusinessLogic.Contact.SamePhoneNumber(Joker.BusinessLogic.Contact)">
+            <summary>
+            Compares two contacts on whether their phone numbers are the same after removing whitespace.
+            </summary>
+            <param name="other">The contact whose phone number will be compared.</param>
+            <returns>Whether the contacts have identical phone numbers.</returns>
+        </member>
+        <member name="M:Joker.BusinessLogic.Contact.ToString">
+            <summary> 
             Contains the properties of a contact.
             </summary>
             <returns>A one-line string that represents this contact.</returns>
@@ -296,6 +336,11 @@
         <member name="F:Joker.BusinessLogic.GambleType.Casino">
             <summary>
             Indicates a casino or "gambling house" of any kind.
+            </summary>
+        </member>
+        <member name="F:Joker.BusinessLogic.GambleType.SlotMachine">
+            <summary>
+            Indicates a gamble on a slot machine of some kind.
             </summary>
         </member>
         <member name="T:Joker.BusinessLogic.GambleTypes">
@@ -514,6 +559,13 @@
             <exception cref="T:System.ArgumentException">Thrown if the parameter's time property is earlier than the
             first limit's time.</exception>
         </member>
+        <member name="M:Joker.DataAccess.Database.Insert(Joker.BusinessLogic.Contact)">
+            <summary>
+            Safely inserts a contact into the database without creating duplicates.
+            </summary>
+            <param name="contact">The contact to be inserted.</param>
+            <exception cref="T:System.ArgumentException">Thrown if the contact already exists in the database.</exception>
+        </member>
         <member name="M:Joker.DataAccess.Database.InsertPictureFromRandomResource">
             <summary>
             Selects a random image resource from the PictureFeed folder and inserts it as a Picture object
@@ -534,15 +586,21 @@
             </summary>
             <returns>An array of all gambles and limits, unbound to the database.</returns>
         </member>
+        <member name="M:Joker.DataAccess.Database.AllContacts">
+            <summary>
+            Gets a copy of all contact entries in the database.
+            </summary>
+            <returns>An array of contacts, unbound to the database.</returns>
+        </member>
         <member name="M:Joker.DataAccess.Database.AllPictures">
             <summary>
-            Gets a copy of all picture objects in the database.
+            Gets a copy of all picture entries in the database.
             </summary>
             <returns>A list of pictures, unbound to the database.</returns>
         </member>
         <member name="M:Joker.DataAccess.Database.LikedPictures">
             <summary>
-            Gets a copy of all picture objects in the database marked as liked.
+            Gets a copy of all picture entries in the database marked as liked.
             </summary>
             <returns>An array of pictures marked as liked, unbound to the database.</returns>
         </member>
@@ -613,11 +671,6 @@
             </summary>
             <exception cref="T:System.ArgumentException">Thrown if the user tries to set this to an empty string or exceeds
             the maximum allowed length.</exception>
-        </member>
-        <member name="P:Joker.DataAccess.UserSettings.PersonalContact">
-            <summary>
-            The user's personally selected contact that can be called directly from within the app.
-            </summary>
         </member>
         <member name="F:Joker.DataAccess.UserSettings.MinNewPictureInterval">
             <summary>
@@ -700,6 +753,77 @@
             </summary>
             <param name="serviceProvider">Provides a service object for this extension.</param>
             <returns>A Xamarin.Forms image source as a generic object.</returns>
+        </member>
+        <member name="T:Joker.UserInterface.AddContactPage">
+            <summary>
+            View where the user defines the data for a new contact and can insert it into the database.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.AddContactPage.#ctor">
+            <summary>
+            Initializes XAML elements.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.AddContactPage.OnSearchDeviceContactsButton(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that opens the contact-picking dialog to the user and enters the
+            results into the entries in the view.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.AddContactPage.OnSubmitButton(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that relays input validation, inserts the contact into the database,
+            performs necessary refresh actions and navigates the user back to the main page.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="T:Joker.UserInterface.ContactPage">
+            <summary>
+            The main page's right tab. A view that lists all recorded contacts and allows the user
+            to edit and call them.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.ContactPage.Headline">
+            <summary>
+            The title of this page, provided here to be accessible from anywhere.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.ContactPage.Info">
+            <summary>
+            Info text for the user concerning the functionality of this page.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.ContactPage.Contacts">
+            <summary>
+            An array of contacts in a view model that can be immediately called by the user.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.ContactPage.#ctor">
+            <summary>
+            Initializes XAML elements and binds the view data.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.ContactPage.RefreshContacts">
+            <summary>
+            Refreshes the contacts data binding in this view.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.ContactPage.OnOnlineSearchLink(System.Object,System.EventArgs)">
+            <summary>
+            Label event handler that opens the link where the user can search for counseling centers.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.ContactPage.OnSubmitButton(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that navigates the user to a view where they can add a new contact to the database.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
         </member>
         <member name="T:Joker.UserInterface.Impressum">
             <summary>
@@ -812,21 +936,6 @@
             <param name="sender">Reference to the event's source object.</param>
             <param name="e">Contains event data.</param>
         </member>
-        <member name="M:Joker.UserInterface.SettingsPage.PickContact(System.Object,System.EventArgs)">
-            <summary>
-            Entry event handler that opens the contact-picking dialog to the user, relays data to this view
-            and saves the selected contact.
-            </summary>
-            <param name="sender">Reference to the event's source object.</param>
-            <param name="e">Contains event data.</param>
-        </member>
-        <member name="M:Joker.UserInterface.SettingsPage.RemoveContact(System.Object,System.EventArgs)">
-            <summary>
-            Button event handler that clears the optional personal contact from the settings.
-            </summary>
-            <param name="sender">Reference to the event's source object.</param>
-            <param name="e">Contains event data.</param>
-        </member>
         <member name="M:Joker.UserInterface.SettingsPage.SaveNewPictureInterval(System.Object,System.EventArgs)">
             <summary>
             Button event handler that relays input validation for saving the interval between the insertion
@@ -858,70 +967,6 @@
             <param name="sender">Reference to the event's source object.</param>
             <param name="e">Contains event data.</param>
         </member>
-        <member name="T:Joker.UserInterface.SupportPage">
-            <summary>
-            The main page's right tab. A view that lists several useful contacts as well as giving
-            feedback on whether the user was successful in keeping his last limits.
-            </summary>
-        </member>
-        <member name="F:Joker.UserInterface.SupportPage.Headline">
-            <summary>
-            The title of this page, provided here to be accessible from anywhere.
-            </summary>
-        </member>
-        <member name="F:Joker.UserInterface.SupportPage.Info">
-            <summary>
-            Info text for the user concerning the functionality of this page.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.SupportPage.MoreThanOneLimit">
-            <summary>
-            Checks if there is more than one limit in the database, otherwise you couldn't give
-            the user feedback on a previous limit.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.SupportPage.CurrentLimitFeedback">
-            <summary>
-            Generates the feedback concerning the user's current limit.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.SupportPage.PreviousLimitFeedback">
-            <summary>
-            Generates the feedback concerning the user's previous limit.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.SupportPage.Contacts">
-            <summary>
-            A list of contacts the user can call immediately.
-            </summary>
-        </member>
-        <member name="M:Joker.UserInterface.SupportPage.#ctor">
-            <summary>
-            Initializes XAML elements and binds the view data.
-            </summary>
-        </member>
-        <member name="M:Joker.UserInterface.SupportPage.FlashLimitFeedback">
-            <summary>
-            Performs a flashing animation on the frame containing the limit feedback.
-            </summary>
-        </member>
-        <member name="M:Joker.UserInterface.SupportPage.RefreshInfo">
-            <summary>
-            Refreshes the info text in this page.
-            </summary>
-        </member>
-        <member name="M:Joker.UserInterface.SupportPage.RefreshContacts">
-            <summary>
-            Refreshes the contacts data binding in this view.
-            </summary>
-        </member>
-        <member name="M:Joker.UserInterface.SupportPage.OnPhoneButton(System.Object,System.EventArgs)">
-            <summary>
-            Button event handler that opens the platform's telephone app with the corresponding item's phone number.
-            </summary>
-            <param name="sender">Reference to the event's source object.</param>
-            <param name="e">Contains event data.</param>
-        </member>
         <member name="T:Joker.UserInterface.AddGamblePage">
             <summary>
             View where the user defines the data for a new gamble and can insert it into the database.
@@ -929,7 +974,7 @@
         </member>
         <member name="M:Joker.UserInterface.AddGamblePage.#ctor">
             <summary>
-            Initializes XAML element and sets the necessary view elements to their default values.
+            Initializes XAML elements and sets the necessary view elements to their default values.
             </summary>
         </member>
         <member name="M:Joker.UserInterface.AddGamblePage.UpdateLengthCounter(System.Object,Xamarin.Forms.TextChangedEventArgs)">
@@ -1030,6 +1075,16 @@
             Info text for the user concerning the functionality of this page.
             </summary>
         </member>
+        <member name="P:Joker.UserInterface.TimelineFeed.CurrentLimitFeedback">
+            <summary>
+            Generates the feedback concerning the user's current limit.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.TimelineFeed.PreviousLimitFeedback">
+            <summary>
+            Generates the feedback concerning the user's previous limit.
+            </summary>
+        </member>
         <member name="P:Joker.UserInterface.TimelineFeed.Records">
             <summary>
             The data to be displayed, wrapped in view models based on the Limit and Gamble tables of the database.
@@ -1040,10 +1095,27 @@
             Initializes XAML elements.
             </summary>
         </member>
-        <member name="M:Joker.UserInterface.TimelineFeed.Refresh">
+        <member name="M:Joker.UserInterface.TimelineFeed.FlashLimitFeedback">
+            <summary>
+            Performs a flashing animation on the frame containing the limit feedback.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.TimelineFeed.RefreshInfo">
+            <summary>
+            Refreshes the info text in this page.
+            </summary> 
+        </member>
+        <member name="M:Joker.UserInterface.TimelineFeed.RefreshRecords">
             <summary>
             Refreshes the list view's data bindings from a database-supplied collection.
             </summary>
+        </member>
+        <member name="M:Joker.UserInterface.TimelineFeed.OnCloseFeedbackButton(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that removes the limit feedback frame.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
         </member>
         <member name="M:Joker.UserInterface.TimelineFeed.OnSubmitButton(System.Object,System.EventArgs)">
             <summary>
@@ -1051,6 +1123,28 @@
             </summary>
             <param name="sender">Reference to the event's source object.</param>
             <param name="e">Contains event data.</param>
+        </member>
+        <member name="T:Joker.UserInterface.ContactViewModel">
+            <summary>
+            Represents a single contact for display in contact-related pages.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.ContactViewModel.OpenDetailPage">
+            <summary>
+            Navigates the user to a detailed view of the view model's contact.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.ContactViewModel.CallContact">
+            <summary>
+            Opens the platform's telephone app with the corresponding contact's phone number.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.ContactViewModel.#ctor(Xamarin.Forms.Page,Joker.BusinessLogic.Contact)">
+            <summary>
+            Constructs a contact view model for the given view.
+            </summary>
+            <param name="view">The view for this view model.</param>
+            <param name="model">The model for this view model.</param>
         </member>
         <member name="T:Joker.UserInterface.GambleViewModel">
             <summary>
@@ -1164,7 +1258,7 @@
         </member>
         <member name="M:Joker.UserInterface.PictureFeedViewModel.#ctor(Xamarin.Forms.Page,Joker.BusinessLogic.Picture)">
             <summary>
-            Constructs a view model for the given view.
+            Constructs a picture feed view model for the given view.
             </summary>
             <param name="view">The view for this view model.</param>
             <param name="model">The model for this view model.</param>
@@ -1261,16 +1355,10 @@
             Final view of the welcome tour that also contains essential setup logic.
             </summary>
         </member>
-        <member name="F:Joker.UserInterface.Finish.firstLimit">
-            <summary>
-            Provides an instance-bound reference to the first limit set in the preceding tour page.
-            </summary>
-        </member>
-        <member name="M:Joker.UserInterface.Finish.#ctor(Joker.BusinessLogic.Limit)">
+        <member name="M:Joker.UserInterface.Finish.#ctor">
             <summary>
             Initializes XAML elements and receives the first limit for further processing.
             </summary>
-            <param name="firstLimit">The first limit supplied from the preceding tour page.</param>
         </member>
         <member name="M:Joker.UserInterface.Finish.OnContinueButton(System.Object,System.EventArgs)">
             <summary>
@@ -1302,6 +1390,11 @@
             View where the user can select their personal contact.
             </summary>
         </member>
+        <member name="F:Joker.UserInterface.TourPage2.FirstContact">
+            <summary>
+            The contact that can be selected here and will be inserted upon completing the welcome tour.
+            </summary>
+        </member>
         <member name="M:Joker.UserInterface.TourPage2.#ctor">
             <summary>
             Initializes XAML elements.
@@ -1325,6 +1418,11 @@
         <member name="T:Joker.UserInterface.TourPage3">
             <summary>
             View where the user must set their first limit.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.TourPage3.FirstLimit">
+            <summary>
+            The first limit to be inserted into the database on finishing the welcome tour.
             </summary>
         </member>
         <member name="M:Joker.UserInterface.TourPage3.#ctor">

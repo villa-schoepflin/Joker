@@ -4,7 +4,6 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using Joker.ApplicationLayer;
-using Joker.BusinessLogic;
 using Joker.DataAccess;
 
 namespace Joker.UserInterface
@@ -16,18 +15,11 @@ namespace Joker.UserInterface
 	public partial class Finish : ContentPage
 	{
 		/// <summary>
-		/// Provides an instance-bound reference to the first limit set in the preceding tour page.
-		/// </summary>
-		private readonly Limit firstLimit;
-
-		/// <summary>
 		/// Initializes XAML elements and receives the first limit for further processing.
 		/// </summary>
-		/// <param name="firstLimit">The first limit supplied from the preceding tour page.</param>
-		public Finish(Limit firstLimit)
+		public Finish()
 		{
 			InitializeComponent();
-			this.firstLimit = firstLimit;
 		}
 
 		/// <summary>
@@ -39,10 +31,14 @@ namespace Joker.UserInterface
 		{
 			Database.Init();
 
+			// Inserts the optional first contact
+			if(TourPage2.FirstContact != null)
+				Database.Insert(TourPage2.FirstContact);
+
 			/* Inserts the first limit, sets the persistent time setting for when it expires and schedules
 			 * the corresponding push notification. */
-			Database.Insert(firstLimit);
-			AppSettings.LimitExpiredTime = firstLimit.Time + firstLimit.Duration;
+			Database.Insert(TourPage3.FirstLimit);
+			AppSettings.LimitExpiredTime = TourPage3.FirstLimit.Time + TourPage3.FirstLimit.Duration;
 			DependencyService.Get<IPlatformNotifier>().ScheduleLimitExpired(AppSettings.LimitExpiredTime);
 
 			/* Inserts the first pictures into the database for the picture feed, sets the persistent time

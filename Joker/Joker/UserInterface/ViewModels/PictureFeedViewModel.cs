@@ -93,7 +93,7 @@ namespace Joker.UserInterface
 		});
 
 		/// <summary>
-		/// Constructs a view model for the given view.
+		/// Constructs a picture feed view model for the given view.
 		/// </summary>
 		/// <param name="view">The view for this view model.</param>
 		/// <param name="model">The model for this view model.</param>

@@ -22,6 +22,7 @@ namespace Joker.DataAccess
 			{
 				db.CreateTable<Limit>();
 				db.CreateTable<Gamble>();
+				db.CreateTable<Contact>();
 				db.CreateTable<Picture>();
 			}
 		}
@@ -60,6 +61,21 @@ namespace Joker.DataAccess
 					gamble.Time = gamble.Time.AddMilliseconds(1);
 
 				db.Insert(gamble);
+			}
+		}
+
+		/// <summary>
+		/// Safely inserts a contact into the database without creating duplicates.
+		/// </summary>
+		/// <param name="contact">The contact to be inserted.</param>
+		/// <exception cref="ArgumentException">Thrown if the contact already exists in the database.</exception>
+		internal static void Insert(Contact contact)
+		{
+			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
+			{
+				if(db.Table<Contact>().Any(c => c.SamePhoneNumber(contact)) || contact.SamePhoneNumber(Contact.Bzga))
+					throw new ArgumentException("Ein Kontakt mit dieser Telefonnummer ist bereits verzeichnet.");
+				db.Insert(contact);
 			}
 		}
 
@@ -118,7 +134,17 @@ namespace Joker.DataAccess
 		}
 
 		/// <summary>
-		/// Gets a copy of all picture objects in the database.
+		/// Gets a copy of all contact entries in the database.
+		/// </summary>
+		/// <returns>An array of contacts, unbound to the database.</returns>
+		internal static Contact[] AllContacts()
+		{
+			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
+				return db.Table<Contact>().ToArray();
+		}
+
+		/// <summary>
+		/// Gets a copy of all picture entries in the database.
 		/// </summary>
 		/// <returns>A list of pictures, unbound to the database.</returns>
 		internal static List<Picture> AllPictures()
@@ -128,7 +154,7 @@ namespace Joker.DataAccess
 		}
 
 		/// <summary>
-		/// Gets a copy of all picture objects in the database marked as liked.
+		/// Gets a copy of all picture entries in the database marked as liked.
 		/// </summary>
 		/// <returns>An array of pictures marked as liked, unbound to the database.</returns>
 		internal static Picture[] LikedPictures()
@@ -175,10 +201,7 @@ namespace Joker.DataAccess
 		internal static bool NoGambleAfterMostRecentLimit()
 		{
 			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
-			{
-				var mostRecentLimit = MostRecentLimit();
-				return db.Table<Gamble>().Where(g => g.Time > mostRecentLimit.Time).Count() == 0;
-			}
+				return !db.Table<Gamble>().Any(g => g.Time > MostRecentLimit().Time);
 		}
 
 		/// <summary>

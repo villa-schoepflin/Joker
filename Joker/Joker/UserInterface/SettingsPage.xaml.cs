@@ -34,7 +34,6 @@ namespace Joker.UserInterface
 		{
 			InitializeComponent();
 			UserNameEntry.Text = UserSettings.UserName;
-			ContactEntry.Text = UserSettings.PersonalContact?.Name;
 			NewPictureEntry.Text = $"{UserSettings.NewPictureInterval.TotalDays} Tage";
 			GambleReminderEntry.Text = $"{UserSettings.GambleReminderInterval.TotalHours} Stunden";
 			LimitReminderEntry.Text = $"{UserSettings.LimitReminderInterval.TotalHours} Stunden";
@@ -62,42 +61,12 @@ namespace Joker.UserInterface
 				UserSettings.UserName = UserNameEntry.Text;
 				await DisplayAlert("Name gespeichert",
 					$"Die App spricht Dich ab sofort mit {UserSettings.UserName} an.", "Ok");
-				App.CurrentSupportPage.RefreshInfo();
+				App.CurrentTimelineFeed.RefreshInfo();
 			}
 			catch(ArgumentException error)
 			{
 				await DisplayAlert(null, error.Message, "Ok");
 			}
-		}
-
-		/// <summary>
-		/// Entry event handler that opens the contact-picking dialog to the user, relays data to this view
-		/// and saves the selected contact.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private async void PickContact(object sender, EventArgs e)
-		{
-			ContactEntry.Unfocus();
-			var contact = await DependencyService.Get<IPlatformContactPicker>().PickContact();
-			if(contact != null)
-			{
-				UserSettings.PersonalContact = contact;
-				ContactEntry.Text = contact.Name;
-				App.CurrentSupportPage.RefreshContacts();
-			}
-		}
-
-		/// <summary>
-		/// Button event handler that clears the optional personal contact from the settings.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private void RemoveContact(object sender, EventArgs e)
-		{
-			UserSettings.PersonalContact = null;
-			ContactEntry.Text = null;
-			App.CurrentSupportPage.RefreshContacts();
 		}
 
 		/// <summary>

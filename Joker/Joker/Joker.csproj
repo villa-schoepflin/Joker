@@ -130,8 +130,8 @@
     <Compile Update="UserInterface\Timeline\AddGamblePage.xaml.cs">
       <DependentUpon>AddGamblePage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="UserInterface\SupportPage.xaml.cs">
-      <DependentUpon>SupportPage.xaml</DependentUpon>
+    <Compile Update="UserInterface\ContactPage.xaml.cs">
+      <DependentUpon>ContactPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="UserInterface\PictureFeed.xaml.cs">
       <DependentUpon>PictureFeed.xaml</DependentUpon>
@@ -145,6 +145,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="UserInterface\AddContactPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserInterface\ContactInspector.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="UserInterface\Impressum.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -160,7 +166,7 @@
     <EmbeddedResource Update="UserInterface\Timeline\AddGamblePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UserInterface\SupportPage.xaml">
+    <EmbeddedResource Update="UserInterface\ContactPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="UserInterface\MainPage.xaml">

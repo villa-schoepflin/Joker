@@ -14,6 +14,11 @@ namespace Joker.UserInterface
 	public partial class TourPage3 : ContentPage
 	{
 		/// <summary>
+		/// The first limit to be inserted into the database on finishing the welcome tour.
+		/// </summary>
+		public static Limit FirstLimit;
+
+		/// <summary>
 		/// Initializes XAML elements.
 		/// </summary>
 		public TourPage3()
@@ -30,7 +35,8 @@ namespace Joker.UserInterface
 		{
 			try
 			{
-				await Navigation.PushAsync(new Finish(new Limit(LimitEntry.Text, "7")));
+				FirstLimit = new Limit(LimitEntry.Text, "7");
+				await Navigation.PushAsync(new Finish());
 			}
 			catch(ArgumentException error)
 			{

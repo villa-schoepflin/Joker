@@ -288,6 +288,15 @@
     <ImageAsset Include="Assets.xcassets\tl_lottery.png.imageset\tl_lottery3.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\tl_slotmachine.png.imageset\tl_slotmachine1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\tl_slotmachine.png.imageset\tl_slotmachine2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\tl_slotmachine.png.imageset\tl_slotmachine3.png">
+      <Visible>false</Visible>
+    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\tl_other.png.imageset\tl_other1.png">
       <Visible>false</Visible>
     </ImageAsset>
@@ -306,13 +315,13 @@
     <ImageAsset Include="Assets.xcassets\tl_sportsbet.png.imageset\tl_sportsbet3.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\tl_submit.png.imageset\submit1.png">
+    <ImageAsset Include="Assets.xcassets\ui_submit.png.imageset\submit1.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\tl_submit.png.imageset\submit2.png">
+    <ImageAsset Include="Assets.xcassets\ui_submit.png.imageset\submit2.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\tl_submit.png.imageset\submit3.png">
+    <ImageAsset Include="Assets.xcassets\ui_submit.png.imageset\submit3.png">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\ui_heart.png.imageset\ui_heart1.png">
@@ -402,6 +411,9 @@
     <ImageAsset Include="Assets.xcassets\tl_sportsbet.png.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\tl_slotmachine.png.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\tl_lottery.png.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -417,7 +429,7 @@
     <ImageAsset Include="Assets.xcassets\ui_pictures.png.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\tl_submit.png.imageset\Contents.json">
+    <ImageAsset Include="Assets.xcassets\ui_submit.png.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\ui_settings.png.imageset\ui_settings1.png">

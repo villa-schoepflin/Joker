@@ -1,7 +1,6 @@
 ﻿using System;
 using Xamarin.Essentials;
 using Newtonsoft.Json;
-using Joker.BusinessLogic;
 
 namespace Joker.DataAccess
 {
@@ -32,15 +31,6 @@ namespace Joker.DataAccess
 					throw new ArgumentException("Der angegebene Name ist leer.");
 				Preferences.Set("UserName", value);
 			}
-		}
-
-		/// <summary>
-		/// The user's personally selected contact that can be called directly from within the app.
-		/// </summary>
-		internal static Contact PersonalContact
-		{
-			get => JsonConvert.DeserializeObject<Contact>(Preferences.Get("PersonalContact", ""));
-			set => Preferences.Set("PersonalContact", JsonConvert.SerializeObject(value));
 		}
 
 		/// <summary>

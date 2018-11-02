@@ -15,10 +15,10 @@ namespace Joker.UserInterface
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AddGamblePage : ContentPage
 	{
-		private bool userChangedDateTime = false;
+		private bool userDidChangeDateTime = false;
 
 		/// <summary>
-		/// Initializes XAML element and sets the necessary view elements to their default values.
+		/// Initializes XAML elements and sets the necessary view elements to their default values.
 		/// </summary>
 		public AddGamblePage()
 		{
@@ -47,7 +47,7 @@ namespace Joker.UserInterface
 		/// <param name="e">Contains event data.</param>
 		private void DateSelected(object sender, DateChangedEventArgs e)
 		{
-			userChangedDateTime = true;
+			userDidChangeDateTime = true;
 		}
 
 		/// <summary>
@@ -58,7 +58,7 @@ namespace Joker.UserInterface
 		private void TimeSelected(object sender, PropertyChangedEventArgs e)
 		{
 			if(e.PropertyName == TimePicker.TimeProperty.PropertyName)
-				userChangedDateTime = true;
+				userDidChangeDateTime = true;
 		}
 
 		/// <summary>
@@ -70,7 +70,7 @@ namespace Joker.UserInterface
 		{
 			DatePicker.Date = DateTime.Today;
 			TimePicker.Time = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
-			userChangedDateTime = false;
+			userDidChangeDateTime = false;
 		}
 
 		/// <summary>
@@ -84,20 +84,17 @@ namespace Joker.UserInterface
 			try
 			{
 				var type = GambleTypes.GetGambleType(GambleTypePicker.SelectedItem.ToString());
-				if(userChangedDateTime)
+				if(userDidChangeDateTime)
 					Database.Insert(new Gamble(DatePicker.Date + TimePicker.Time, Amount.Text, type, Description.Text));
 				else
 					Database.Insert(new Gamble(Amount.Text, type, Description.Text));
 
-				App.CurrentTimelineFeed.Refresh();
-				App.CurrentSupportPage.RefreshInfo();
+				App.CurrentTimelineFeed.RefreshRecords();
+				App.CurrentTimelineFeed.RefreshInfo();
 				await Navigation.PopAsync();
 
 				if(Database.CalcBalance(Database.MostRecentLimit()) < 0)
-				{
-					App.CurrentMainPage.CurrentPage = App.CurrentSupportPage;
-					App.CurrentSupportPage.FlashLimitFeedback();
-				}
+					App.CurrentTimelineFeed.FlashLimitFeedback();
 			}
 			catch(ArgumentException error)
 			{

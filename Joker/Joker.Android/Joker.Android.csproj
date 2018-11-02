@@ -140,16 +140,16 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\app_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\tl_submit.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_submit.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tl_submit.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ui_submit.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tl_submit.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ui_submit.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\tl_submit.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ui_submit.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\ui_pictures.png" />
@@ -336,6 +336,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Joker.Android.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\tl_slotmachine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\tl_slotmachine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\tl_slotmachine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\tl_slotmachine.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
