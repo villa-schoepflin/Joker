@@ -1,5 +1,6 @@
 ﻿using System;
 
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -24,6 +25,26 @@ namespace Joker.UserInterface
 		}
 
 		/// <summary>
+		/// Button event handler that copies clipboard content to the name entry.
+		/// </summary>
+		/// <param name="sender">Reference to the event's source object.</param>
+		/// <param name="e">Contains event data.</param>
+		private async void OnNameClipboardButton(object sender, EventArgs e)
+		{
+			NameEntry.Text = await Clipboard.GetTextAsync();
+		}
+
+		/// <summary>
+		/// Button event handler that copies clipboard content to the phone number entry.
+		/// </summary>
+		/// <param name="sender">Reference to the event's source object.</param>
+		/// <param name="e">Contains event data.</param>
+		private async void OnPhoneNumberClipboardButton(object sender, EventArgs e)
+		{
+			PhoneNumberEntry.Text = await Clipboard.GetTextAsync();
+		}
+
+		/// <summary>
 		/// Button event handler that opens the contact-picking dialog to the user and enters the
 		/// results into the entries in the view.
 		/// </summary>
@@ -32,7 +53,7 @@ namespace Joker.UserInterface
 		private async void OnSearchDeviceContactsButton(object sender, EventArgs e)
 		{
 			var contact = await DependencyService.Get<IPlatformContactPicker>().PickContact();
-			if(contact != null)
+			if((object)contact != null)
 			{
 				NameEntry.Text = contact.Name;
 				PhoneNumberEntry.Text = contact.PhoneNumber;

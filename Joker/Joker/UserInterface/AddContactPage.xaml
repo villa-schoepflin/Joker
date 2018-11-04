@@ -21,11 +21,19 @@
 								 VerticalOptions="Center"
 								 Color="{StaticResource Text2}" />
 					</StackLayout>
-					<Entry x:Name="NameEntry"
-						   VerticalOptions="Center"
-						   TextColor="{StaticResource Text1}"
-						   FontSize="{StaticResource CustomMedium}"
-						   Text="" />
+					<StackLayout Orientation="Horizontal"
+								 Spacing="5">
+						<Entry x:Name="NameEntry"
+							   HorizontalOptions="FillAndExpand"
+							   TextColor="{StaticResource Text1}"
+							   FontSize="{StaticResource CustomMedium}"
+							   Text="" />
+						<Button Clicked="OnNameClipboardButton"
+								BackgroundColor="{StaticResource Bgr3}"
+								WidthRequest="40"
+								HeightRequest="40"
+								Image="ui_clipboard.png" />
+					</StackLayout>
 				</StackLayout>
 			</Frame>
 			<Frame Margin="{StaticResource StripMargin}"
@@ -44,15 +52,26 @@
 								 VerticalOptions="Center"
 								 Color="{StaticResource Text2}" />
 					</StackLayout>
-					<Entry x:Name="PhoneNumberEntry"
-						   VerticalOptions="Center"
-						   TextColor="{StaticResource Text1}"
-						   FontSize="{StaticResource CustomMedium}"
-						   Text="" />
+					<StackLayout Orientation="Horizontal"
+								 Spacing="5">
+						<Entry x:Name="PhoneNumberEntry"
+							   HorizontalOptions="FillAndExpand"
+							   TextColor="{StaticResource Text1}"
+							   FontSize="{StaticResource CustomMedium}"
+							   Text="" />
+						<Button Clicked="OnPhoneNumberClipboardButton"
+								BackgroundColor="{StaticResource Bgr3}"
+								WidthRequest="40"
+								HeightRequest="40"
+								Image="ui_clipboard.png" />
+					</StackLayout>
 				</StackLayout>
 			</Frame>
 			<Button Clicked="OnSearchDeviceContactsButton"
-					Text="Kontakt auf dem Gerät suchen" />
+					Text="Kontakt auf dem Gerät suchen"
+					Margin="15,0,15,0"
+					BackgroundColor="{StaticResource Bgr3}"
+					TextColor="{StaticResource Text1}" />
 			<Frame Margin="{StaticResource StripMargin}"
 				   Padding="{StaticResource PagePadding}"
 				   BackgroundColor="{StaticResource Bgr2}"
@@ -61,12 +80,15 @@
 				<StackLayout Orientation="Horizontal">
 					<Label HorizontalOptions="StartAndExpand"
 						   TextColor="{StaticResource Text1}"
-						   FontSize="Small">Als Beratungsstelle oder professionellen Kontakt eintragen</Label>
+						   FontSize="Small">Als Beratungsstelle oder Expertenkontakt markieren</Label>
 					<Switch x:Name="ExpertMarker" />
 				</StackLayout>
 			</Frame>
 			<Button Clicked="OnSubmitButton"
 					HorizontalOptions="End"
+					Margin="15,0,15,0"
+					BackgroundColor="{StaticResource Bgr5}"
+					TextColor="{StaticResource Text1}"
 					Text="Hinzufügen" />
 		</StackLayout>
 	</ScrollView>

@@ -65,11 +65,18 @@ namespace Joker.ApplicationLayer
 			/// <summary>
 			/// Main text of the notification indicating that the current has limit has expired.
 			/// </summary>
-			public static string LimitExpired => $"Hey {UserSettings.UserName}, " +
-				(Database.CalcBalance(Database.MostRecentLimit()) >= 0
-					? "Du hast Dein Limit dieses Mal eingehalten. Sehr gut!"
-					: "leider hast Du Dein Limit diesmal überschritten.")
-				+ "\n\nÖffne die App und gib ein neues Limit ein.";
+			public static string LimitExpired
+			{
+				get
+				{
+					string s = $"Hey {UserSettings.UserName}, ";
+					if(Database.CalcBalance(Database.MostRecentLimit()) >= 0)
+						s += "Du hast Dein Limit dieses Mal eingehalten. Sehr gut!";
+					else
+						s += "leider hast Du Dein Limit diesmal überschritten.";
+					return s + "\n\nÖffne die App und gib ein neues Limit ein.";
+				}
+			}
 
 			/// <summary>
 			/// Main text of the notification indicating that a new picture is available to see.
@@ -86,11 +93,18 @@ namespace Joker.ApplicationLayer
 			/// <summary>
 			/// Main text of the notification reminding the user about their limit's current state.
 			/// </summary>
-			public static string LimitReminder => Database.CalcBalance(Database.MostRecentLimit()) >= 0
-				? "Im Moment sind noch " + Database.CalcBalance(Database.MostRecentLimit()).ToString("C", App.Locale)
-					+ " von deinem Limit übrig. Immer weiter so!"
-				: "Dieses Mal konntest Du es leider nicht einhalten. Aber gib nicht auf! Nächstes Mal "
-					+ "wird es besser laufen.";
+			public static string LimitReminder
+			{
+				get
+				{
+					if(Database.CalcBalance(Database.MostRecentLimit()) >= 0)
+						return "Im Moment sind noch " + Database.CalcBalance(Database.MostRecentLimit())
+							.ToString("C", App.Locale) + " von deinem Limit übrig. Immer weiter so!";
+					else
+						return "Dieses Mal konntest Du es leider nicht einhalten. Aber gib nicht auf! Nächstes Mal "
+							+ "wird es besser laufen.";
+				}
+			}
 		}
 	}
 }

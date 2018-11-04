@@ -87,7 +87,7 @@ Freepik (</Span>
 						</Span>
 						<Span>)
 Smashicons (</Span>
-						<Span Text="flaticon.com/authors/smashicons"
+						<Span Text="flaticon.com/smashicons"
 							  TextColor="{StaticResource Link}">
 							<Span.GestureRecognizers>
 								<TapGestureRecognizer Command="{Binding OpenWebsite}"
@@ -96,7 +96,7 @@ Smashicons (</Span>
 						</Span>
 						<Span>)
 Google (</Span>
-						<Span Text="flaticon.com/authors/google"
+						<Span Text="flaticon.com/google"
 							  TextColor="{StaticResource Link}">
 							<Span.GestureRecognizers>
 								<TapGestureRecognizer Command="{Binding OpenWebsite}"
@@ -105,11 +105,20 @@ Google (</Span>
 						</Span>
 						<Span>)
 Gregor Cresnar (</Span>
-						<Span Text="flaticon.com/authors/gregor-cresnar"
+						<Span Text="flaticon.com/gregor-cresnar"
 							  TextColor="{StaticResource Link}">
 							<Span.GestureRecognizers>
 								<TapGestureRecognizer Command="{Binding OpenWebsite}"
 													  CommandParameter="https://www.flaticon.com/authors/gregor-cresnar" />
+							</Span.GestureRecognizers>
+						</Span>
+						<Span>)
+Zlatko Najdenovski (</Span>
+						<Span Text="flaticon.com/zlatko-najdenovski"
+							  TextColor="{StaticResource Link}">
+							<Span.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding OpenWebsite}"
+													  CommandParameter="https://www.flaticon.com/authors/zlatko-najdenovski" />
 							</Span.GestureRecognizers>
 						</Span>
 						<Span>)

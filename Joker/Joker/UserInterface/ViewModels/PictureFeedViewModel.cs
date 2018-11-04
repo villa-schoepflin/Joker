@@ -19,17 +19,17 @@ namespace Joker.UserInterface
 		/// </summary>
 		protected override Picture Model
 		{
-			get => picture;
+			get => model;
 			set
 			{
-				picture = value;
+				model = value;
 				OnPropertyChanged(nameof(PresentedImage));
 				OnPropertyChanged(nameof(LikeButtonBackgroundColor));
 				OnPropertyChanged(nameof(LikeButtonImage));
 				OnPropertyChanged(nameof(LikeButtonText));
 			}
 		}
-		private Picture picture;
+		private Picture model;
 
 		/// <summary>
 		/// Creates a Xamarin.Forms image from the embedded resource file path.

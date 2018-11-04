@@ -23,7 +23,6 @@
     <None Remove="Resources\Icons\motivation.png" />
     <None Remove="Resources\Icons\search.png" />
     <None Remove="Resources\Icons\settings.png" />
-    <None Remove="Resources\Icons\ui_contact.png" />
     <None Remove="Resources\Icons\ui_impressum.png" />
     <None Remove="Resources\PictureFeed\k_M_G_Gasse1.jpg" />
     <None Remove="Resources\PictureFeed\k_M_G_Gasse2.jpg" />
@@ -70,7 +69,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Icons\ui_contact.png" />
     <EmbeddedResource Include="Resources\Icons\wt_bar.png" />
     <EmbeddedResource Include="Resources\Icons\wt_filledbar.png" />
     <EmbeddedResource Include="Resources\Icons\wt_circle.png" />

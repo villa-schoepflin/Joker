@@ -29,10 +29,10 @@ namespace Joker.UserInterface
 		/// <param name="e">Contains event data.</param>
 		private void OnContinueButton(object sender, EventArgs e)
 		{
-			Database.Init();
+			Database.Initialize();
 
 			// Inserts the optional first contact
-			if(TourPage2.FirstContact != null)
+			if((object)TourPage2.FirstContact != null)
 				Database.Insert(TourPage2.FirstContact);
 
 			/* Inserts the first limit, sets the persistent time setting for when it expires and schedules

@@ -14,7 +14,7 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// Initializes XAML elements and provides the data to be bound in the view.
 		/// </summary>
-		/// <param name="gamble">Gamble whose details should be displayed.</param>
+		/// <param name="gamble">Gamble whose details should be exposed.</param>
 		public GambleInspector(Gamble gamble)
 		{
 			InitializeComponent();

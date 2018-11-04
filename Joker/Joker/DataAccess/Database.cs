@@ -16,7 +16,7 @@ namespace Joker.DataAccess
 		/// <summary>
 		/// Ensures all necessary tables for database operations exist before they are performed.
 		/// </summary>
-		internal static void Init()
+		internal static void Initialize()
 		{
 			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
 			{
@@ -65,15 +65,16 @@ namespace Joker.DataAccess
 		}
 
 		/// <summary>
-		/// Safely inserts a contact into the database without creating duplicates.
+		/// Inserts a contact into the database when there is no other contact with the same phone number.
 		/// </summary>
 		/// <param name="contact">The contact to be inserted.</param>
-		/// <exception cref="ArgumentException">Thrown if the contact already exists in the database.</exception>
+		/// <exception cref="ArgumentException">Thrown if a contact with the same phone number already exists
+		/// in the database.</exception>
 		internal static void Insert(Contact contact)
 		{
 			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
 			{
-				if(db.Table<Contact>().Any(c => c.SamePhoneNumber(contact)) || contact.SamePhoneNumber(Contact.Bzga))
+				if(db.Table<Contact>().Any(c => c == contact || contact == Contact.Bzga))
 					throw new ArgumentException("Ein Kontakt mit dieser Telefonnummer ist bereits verzeichnet.");
 				db.Insert(contact);
 			}
@@ -134,13 +135,13 @@ namespace Joker.DataAccess
 		}
 
 		/// <summary>
-		/// Gets a copy of all contact entries in the database.
+		/// Gets a copy of all contact entries in the database, from newest to oldest.
 		/// </summary>
 		/// <returns>An array of contacts, unbound to the database.</returns>
 		internal static Contact[] AllContacts()
 		{
 			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
-				return db.Table<Contact>().ToArray();
+				return db.Table<Contact>().Reverse().ToArray();
 		}
 
 		/// <summary>
@@ -276,6 +277,35 @@ namespace Joker.DataAccess
 				pic.Liked ^= true;
 				db.Update(pic);
 			}
+		}
+
+		/// <summary>
+		/// Updates the specified contact in the database.
+		/// </summary>
+		/// <param name="contact">The contact to be updated.</param>
+		/// <exception cref="ArgumentException">Thrown if another contact with the parameter contact's phone number
+		/// already exists in the database.</exception>
+		internal static void Update(Contact contact)
+		{
+			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
+			{
+				if(db.Table<Contact>().Where(c => c.Id == contact.Id).Single() == contact)
+					db.Update(contact);
+				else if(db.Table<Contact>().Any(c => c == contact) || contact == Contact.Bzga)
+					throw new ArgumentException("Ein Kontakt mit dieser Telefonnummer ist bereits verzeichnet.");
+				else
+					db.Update(contact);
+			}
+		}
+
+		/// <summary>
+		/// Deletes the specified contact in the database.
+		/// </summary>
+		/// <param name="contact">The contact to be deleted.</param>
+		internal static void Delete(Contact contact)
+		{
+			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
+				db.Delete(contact);
 		}
 	}
 }

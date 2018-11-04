@@ -30,7 +30,7 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// The icon to be displayed in the timeline based on what type of record it is.
 		/// </summary>
-		public ImageSource TypeImage { get; private set; }
+		public ImageSource TypeIcon { get; private set; }
 
 		/// <summary>
 		/// The primary tinting color used in the timeline.
@@ -68,7 +68,7 @@ namespace Joker.UserInterface
 			if(Model is Gamble gamble)
 			{
 				RemainingLimit = Database.CalcRemainingLimit(gamble).ToString("C", App.Locale);
-				TypeImage = ImageSource.FromFile($"tl_{gamble.Type.ToString().ToLower()}.png");
+				TypeIcon = ImageSource.FromFile($"tl_{gamble.Type.ToString().ToLower()}.png");
 				CellColor1 = App.Color("Bgr3");
 				CellColor2 = App.Color("Bgr4");
 				CellText = App.Color("Text1");
@@ -76,7 +76,7 @@ namespace Joker.UserInterface
 			else
 			{
 				RemainingLimit = null;
-				TypeImage = ImageSource.FromFile("tl_limit.png");
+				TypeIcon = ImageSource.FromFile("tl_limit.png");
 				CellColor1 = App.Color("Primary1");
 				CellColor2 = App.Color("Primary1");
 				CellText = App.Color("TextContrast");

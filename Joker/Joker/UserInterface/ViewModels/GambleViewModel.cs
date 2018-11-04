@@ -9,7 +9,7 @@ namespace Joker.UserInterface
 	public class GambleViewModel : TimelineRecordViewModel
 	{
 		/// <summary>
-		/// The type of this gamble localized.
+		/// The type of this gamble as the proper translation.
 		/// </summary>
 		public string GambleType => GambleTypes.GetName(((Gamble)Model).Type);
 
@@ -17,15 +17,13 @@ namespace Joker.UserInterface
 		/// The description of this gamble as supplied from a model object.
 		/// </summary>
 		public string DescriptionText => string.IsNullOrEmpty(((Gamble)Model).Description)
-			? "Keine Beschreibung vorhanden."
-			: ((Gamble)Model).Description;
+			? "Keine Beschreibung vorhanden." : ((Gamble)Model).Description;
 
 		/// <summary>
 		/// The color of the description text.
 		/// </summary>
 		public Color DescriptionColor => string.IsNullOrEmpty(((Gamble)Model).Description)
-			? App.Color("Text2")
-			: CellText;
+			? App.Color("Text2") : CellText;
 
 		/// <summary>
 		/// Constructs the view model for a gamble.

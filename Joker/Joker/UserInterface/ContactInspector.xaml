@@ -1,12 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 x:Class="Joker.UserInterface.ContactInspector">
-	<ContentPage.Content>
-		<StackLayout>
-			<Label Text="Welcome to Xamarin.Forms!"
-				   VerticalOptions="CenterAndExpand"
-				   HorizontalOptions="CenterAndExpand" />
+			 xmlns:bl="clr-namespace:Joker.BusinessLogic"
+			 x:Class="Joker.UserInterface.ContactInspector"
+			 Title="Kontaktdetails">
+	<ScrollView>
+		<StackLayout Padding="{StaticResource PagePadding}"
+					 Spacing="30">
+			<StackLayout Orientation="Horizontal">
+				<Button Command="{Binding DeleteContact}"
+						BackgroundColor="Red"
+						TextColor="{StaticResource TextContrast}"
+						Text="Löschen" />
+				<Button Command="{Binding ToggleEditingStatus}"
+						HorizontalOptions="FillAndExpand"
+						BackgroundColor="{StaticResource Bgr5}"
+						TextColor="{StaticResource Text1}"
+						Text="{Binding EditButtonText}" />
+			</StackLayout>
+			<StackLayout>
+				<Label>Name:</Label>
+				<Frame BackgroundColor="{StaticResource Bgr3}"
+					   VerticalOptions="Center"
+					   Padding="15,5,5,5">
+					<Editor Text="{Binding ContactName}"
+							IsEnabled="{Binding EditingEnabled}"
+							FontSize="{StaticResource CustomMedium}"
+							TextColor="{StaticResource Text1}"
+							MaxLength="{Static bl:Contact.MaxNameLength}" />
+				</Frame>
+			</StackLayout>
+			<StackLayout>
+				<Label>Telefonnummer:</Label>
+				<Frame BackgroundColor="{StaticResource Bgr3}"
+					   VerticalOptions="Center"
+					   Padding="15,5,5,5">
+					<Entry Text="{Binding PhoneNumber}"
+						   IsEnabled="{Binding EditingEnabled}"
+						   FontSize="{StaticResource CustomMedium}"
+						   TextColor="{StaticResource Text1}"
+						   MaxLength="{Static bl:Contact.MaxPhoneNumberLength}" />
+				</Frame>
+			</StackLayout>
+			<StackLayout Orientation="Horizontal">
+				<Label HorizontalOptions="StartAndExpand"
+					   TextColor="{StaticResource Text1}"
+					   FontSize="Small">Als Beratungsstelle oder Expertenkontakt markieren</Label>
+				<Switch IsToggled="{Binding MarkedAsExpert}"
+						IsEnabled="{Binding EditingEnabled}" />
+			</StackLayout>
+			<Button Command="{Binding CallContact}"
+					HorizontalOptions="FillAndExpand"
+					BackgroundColor="{StaticResource Bgr5}"
+					TextColor="{StaticResource Text1}"
+					Text="Kontakt anrufen"
+					Image="ui_phone.png" />
 		</StackLayout>
-	</ContentPage.Content>
+	</ScrollView>
 </ContentPage>

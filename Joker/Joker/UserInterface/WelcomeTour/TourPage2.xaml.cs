@@ -47,7 +47,7 @@ namespace Joker.UserInterface
 		/// <param name="e">Contains event data.</param>
 		private async void OnContinueButton(object sender, EventArgs e)
 		{
-			if(FirstContact?.SamePhoneNumber(Contact.Bzga) ?? false)
+			if((object)FirstContact != null && FirstContact == Contact.Bzga)
 				await DisplayAlert(null, "Diese Nummer ist bereits in der App verzeichnet.", "Ok");
 			else
 				await Navigation.PushAsync(new TourPage3());

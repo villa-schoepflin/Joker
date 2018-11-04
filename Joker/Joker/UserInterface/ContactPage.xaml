@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:r="clr-namespace:Joker.Resources;assembly=Joker"
 			 xmlns:ui="clr-namespace:Joker.UserInterface"
 			 x:Class="Joker.UserInterface.ContactPage"
 			 Icon="ui_support.png"
@@ -31,7 +30,7 @@
 				  SeparatorColor="Transparent">
 			<ListView.Header>
 				<StackLayout>
-					<Frame BackgroundColor="{StaticResource Bgr3}"
+					<Frame BackgroundColor="{StaticResource Primary2}"
 						   Margin="10,10,10,5"
 						   Padding="15"
 						   CornerRadius="5">
@@ -39,6 +38,7 @@
 							<TapGestureRecognizer Tapped="OnOnlineSearchLink" />
 						</Frame.GestureRecognizers>
 						<Label HorizontalTextAlignment="Center"
+							   TextColor="{StaticResource TextContrast}"
 							   FontAttributes="Bold"
 							   FontSize="Large">Beratungsstelle online suchen</Label>
 					</Frame>
@@ -54,7 +54,33 @@
 							<Frame BackgroundColor="{StaticResource Bgr3}"
 								   Padding="5"
 								   CornerRadius="5">
-								<Grid RowSpacing="5">
+								<StackLayout Orientation="Horizontal">
+									<Frame BackgroundColor="{Binding IconBackgroundColor}"
+										   Padding="5"
+										   CornerRadius="5"
+										   VerticalOptions="Center">
+										<Image Source="{Binding TypeIcon}"
+											   HeightRequest="30" />
+									</Frame>
+									<StackLayout HorizontalOptions="FillAndExpand"
+												 Margin="15,0,0,0"
+												 Spacing="3">
+										<Label Text="{Binding ContactName}"
+											   VerticalOptions="CenterAndExpand"
+											   TextColor="{StaticResource Text1}" />
+										<Label Text="{Binding PhoneNumber}"
+											   VerticalOptions="CenterAndExpand"
+											   TextColor="{StaticResource Text2}" />
+									</StackLayout>
+									<Button Command="{Binding CallContact}"
+											VerticalOptions="Center"
+											BackgroundColor="{StaticResource Bgr4}"
+											WidthRequest="40"
+											HeightRequest="40"
+											CornerRadius="20"
+											Image="ui_phone.png" />
+								</StackLayout>
+								<!--<Grid RowSpacing="5">
 									<Grid.RowDefinitions>
 										<RowDefinition Height="Auto" />
 										<RowDefinition Height="Auto" />
@@ -75,10 +101,12 @@
 											<OnPlatform x:TypeArguments="x:Double">
 												<On Platform="Android"
 													Value="36" />
-												<!-- Note: MS Visual Studio might falsely throw a syntax error
+												-->
+								<!-- Note: MS Visual Studio might falsely throw a syntax error
 													somewhere around here. This error doesn't actually exist and is
 													a bug in the Visual Studio editor! Try building	the project.
 													It should go away then. -->
+								<!--
 												<On Platform="iOS"
 													Value="40" />
 											</OnPlatform>
@@ -87,10 +115,12 @@
 											<OnPlatform x:TypeArguments="x:Double">
 												<On Platform="Android"
 													Value="36" />
-												<!-- Note: MS Visual Studio might falsely throw a syntax error
+												-->
+								<!-- Note: MS Visual Studio might falsely throw a syntax error
 													somewhere around here. This error doesn't actually exist and is
 													a bug in the Visual Studio editor! Try building	the project.
 													It should go away then. -->
+								<!--
 												<On Platform="iOS"
 													Value="40" />
 											</OnPlatform>
@@ -119,16 +149,18 @@
 											<OnPlatform x:TypeArguments="x:Double">
 												<On Platform="Android"
 													Value="40" />
-												<!-- Note: MS Visual Studio might falsely throw a syntax error
+												-->
+								<!-- Note: MS Visual Studio might falsely throw a syntax error
 													somewhere around here. This error doesn't actually exist and is
 													a bug in the Visual Studio editor! Try building	the project.
 													It should go away then. -->
+								<!--
 												<On Platform="iOS"
 													Value="44" />
 											</OnPlatform>
 										</Button.WidthRequest>
 									</Button>
-								</Grid>
+								</Grid>-->
 							</Frame>
 						</StackLayout>
 					</ViewCell>
