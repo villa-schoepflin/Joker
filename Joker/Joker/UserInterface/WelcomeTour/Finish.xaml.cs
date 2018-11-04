@@ -44,7 +44,7 @@ namespace Joker.UserInterface
 			/* Inserts the first pictures into the database for the picture feed, sets the persistent time
 			 * setting for when a new picture should be inserted and alerted to the user and schedules the
 			 * corresponding push notification. */
-			for(int i = 0; i < 34; i++)
+			for(int i = 0; i < 10; i++)
 				Database.InsertPictureFromRandomResource();
 			AppSettings.NewPictureTime = DateTime.UtcNow + UserSettings.NewPictureInterval;
 			DependencyService.Get<IPlatformNotifier>().ScheduleNewPicture(AppSettings.NewPictureTime);
