@@ -18,7 +18,7 @@ namespace Joker.DataAccess
 		/// </summary>
 		internal static void Initialize()
 		{
-			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
+			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
 			{
 				db.CreateTable<Limit>();
 				db.CreateTable<Gamble>();
@@ -35,7 +35,7 @@ namespace Joker.DataAccess
 		/// exists in the database.</exception>
 		internal static void Insert(Limit limit)
 		{
-			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
+			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
 				db.Insert(limit);
 		}
 
@@ -47,7 +47,7 @@ namespace Joker.DataAccess
 		/// first limit's time.</exception>
 		internal static void Insert(Gamble gamble)
 		{
-			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
+			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
 			{
 				/* Prevents the insertion of Gamble objects when there is no limit set before the gamble's
 				 * time property as this wouldn't make sense for the app's use cases. */
@@ -72,7 +72,7 @@ namespace Joker.DataAccess
 		/// in the database.</exception>
 		internal static void Insert(Contact contact)
 		{
-			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
+			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
 			{
 				if(db.Table<Contact>().Any(c => c == contact || contact == Contact.Bzga))
 					throw new ArgumentException("Ein Kontakt mit dieser Telefonnummer ist bereits verzeichnet.");
@@ -87,7 +87,7 @@ namespace Joker.DataAccess
 		/// <returns>Returns whether a random picture could be inserted, "true" indicating success.</returns>
 		internal static bool InsertPictureFromRandomResource()
 		{
-			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
+			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
 			{
 				// All resource paths in the PictureFeed folder are put into an array.
 				string[] files = typeof(App).Assembly.GetManifestResourceNames()
@@ -114,7 +114,7 @@ namespace Joker.DataAccess
 		/// <returns>Number of rows of the Limit table.</returns>
 		internal static int CountLimits()
 		{
-			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
+			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
 				return db.Table<Limit>().Count();
 		}
 
@@ -125,7 +125,7 @@ namespace Joker.DataAccess
 		/// <returns>An array of all gambles and limits, unbound to the database.</returns>
 		internal static TimelineRecord[] AllGamblesAndLimits()
 		{
-			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
+			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
 			{
 				var list = new List<TimelineRecord>();
 				list.AddRange(db.Table<Gamble>());
@@ -140,7 +140,7 @@ namespace Joker.DataAccess
 		/// <returns>An array of contacts, unbound to the database.</returns>
 		internal static Contact[] AllContacts()
 		{
-			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
+			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
 				return db.Table<Contact>().Reverse().ToArray();
 		}
 
@@ -150,7 +150,7 @@ namespace Joker.DataAccess
 		/// <returns>A list of pictures, unbound to the database.</returns>
 		internal static List<Picture> AllPictures()
 		{
-			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
+			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
 				return db.Table<Picture>().ToList();
 		}
 
@@ -160,7 +160,7 @@ namespace Joker.DataAccess
 		/// <returns>An array of pictures marked as liked, unbound to the database.</returns>
 		internal static Picture[] LikedPictures()
 		{
-			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
+			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
 				return db.Table<Picture>().Where(p => p.Liked).ToArray();
 		}
 
@@ -170,7 +170,7 @@ namespace Joker.DataAccess
 		/// <returns>A single Limit instance, unbound to the database.</returns>
 		internal static Limit MostRecentLimit()
 		{
-			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
+			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
 				return db.Table<Limit>().OrderByDescending(l => l.Time).First();
 		}
 
@@ -180,7 +180,7 @@ namespace Joker.DataAccess
 		/// <returns>A single Picture instance, unbound to the database.</returns>
 		internal static Picture MostRecentPicture()
 		{
-			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
+			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
 				return db.Table<Picture>().OrderByDescending(p => p.TimeAdded).First();
 		}
 
@@ -191,7 +191,7 @@ namespace Joker.DataAccess
 		/// <returns>A single Picture instance, unbound to the database.</returns>
 		internal static Picture GetPictureByFileName(string filePath)
 		{
-			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
+			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
 				return db.Table<Picture>().Where(p => p.FilePath == filePath).First();
 		}
 
@@ -201,7 +201,7 @@ namespace Joker.DataAccess
 		/// <returns>True when there are no gambles after the most recent limit, false otherwise.</returns>
 		internal static bool NoGambleAfterMostRecentLimit()
 		{
-			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
+			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
 				return !db.Table<Gamble>().Any(g => g.Time > MostRecentLimit().Time);
 		}
 
@@ -212,7 +212,7 @@ namespace Joker.DataAccess
 		/// <returns>How much of the limit remains as a decimal number.</returns>
 		internal static decimal CalcBalance(Limit limit)
 		{
-			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
+			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
 			{
 				TableQuery<Gamble> query;
 				try
@@ -240,7 +240,7 @@ namespace Joker.DataAccess
 		/// <returns>The current balance of the limit as a decimal.</returns>
 		internal static decimal CalcPreviousLimitBalance()
 		{
-			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
+			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
 				return CalcBalance(db.Table<Limit>().OrderByDescending(l => l.Time).ElementAt(1));
 		}
 
@@ -251,7 +251,7 @@ namespace Joker.DataAccess
 		/// <returns>The decimal amount of the limit minus all relevant gambles' amounts.</returns>
 		internal static decimal CalcRemainingLimit(Gamble gamble)
 		{
-			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
+			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
 			{
 				/* First, the most recent limit before the argument is selected by querying all limits
 				 * whose times are earlier than the argument's time, then ordering them descending by time
@@ -272,7 +272,7 @@ namespace Joker.DataAccess
 		/// <param name="pic">The picture whose Liked status should be toggled.</param>
 		internal static void ToggleLikedStatus(Picture pic)
 		{
-			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
+			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
 			{
 				pic.Liked ^= true;
 				db.Update(pic);
@@ -287,7 +287,7 @@ namespace Joker.DataAccess
 		/// already exists in the database.</exception>
 		internal static void Update(Contact contact)
 		{
-			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
+			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
 			{
 				if(db.Table<Contact>().Where(c => c.Id == contact.Id).Single() == contact)
 					db.Update(contact);
@@ -304,7 +304,7 @@ namespace Joker.DataAccess
 		/// <param name="contact">The contact to be deleted.</param>
 		internal static void Delete(Contact contact)
 		{
-			using(var db = new SQLiteConnection(AppSettings.DBFilePath))
+			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
 				db.Delete(contact);
 		}
 	}

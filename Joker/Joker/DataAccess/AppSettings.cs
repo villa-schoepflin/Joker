@@ -11,10 +11,10 @@ namespace Joker.DataAccess
 		/// <summary>
 		/// Gets or sets the path of the database file.
 		/// </summary>
-		internal static string DBFilePath
+		internal static string DatabaseFilePath
 		{
-			get => Preferences.Get("DBFilePath", null);
-			set => Preferences.Set("DBFilePath", value);
+			get => Preferences.Get("DatabaseFilePath", null);
+			set => Preferences.Set("DatabaseFilePath", value);
 		}
 
 		/// <summary>

@@ -24,7 +24,7 @@ namespace Joker
 		public App(string baseDirectory)
 		{
 			InitializeComponent();
-			AppSettings.DBFilePath = Path.Combine(baseDirectory, "database.sqlite");
+			AppSettings.DatabaseFilePath = Path.Combine(baseDirectory, "database.sqlite");
 		}
 
 		/// <summary>
