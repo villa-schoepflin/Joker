@@ -274,7 +274,7 @@
             </summary>
             <returns>A one-line string that represents this contact.</returns>
         </member>
-        <member name="M:Joker.BusinessLogic.Contact.Clone">
+        <member name="M:Joker.BusinessLogic.Contact.Copy">
             <summary>
             Creates an identical clone of a contact.
             </summary>

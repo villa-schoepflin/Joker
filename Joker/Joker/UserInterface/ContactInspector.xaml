@@ -51,7 +51,7 @@
 			</StackLayout>
 			<Button Command="{Binding CallContact}"
 					HorizontalOptions="FillAndExpand"
-					BackgroundColor="{StaticResource Bgr5}"
+					BackgroundColor="{StaticResource Bgr4}"
 					TextColor="{StaticResource Text1}"
 					Text="Kontakt anrufen"
 					Image="ui_phone.png" />
