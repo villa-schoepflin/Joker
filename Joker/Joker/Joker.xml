@@ -268,17 +268,30 @@
             <param name="right">The right operand on comparing inequality.</param>
             <returns>Whether the contacts are different by their phone number.</returns>
         </member>
+        <member name="M:Joker.BusinessLogic.Contact.Copy">
+            <summary>
+            Creates an identical clone of a contact.
+            </summary>
+            <returns>A deep copy of the contact.</returns>
+        </member>
         <member name="M:Joker.BusinessLogic.Contact.ToString">
             <summary> 
             Contains the properties of a contact.
             </summary>
             <returns>A one-line string that represents this contact.</returns>
         </member>
-        <member name="M:Joker.BusinessLogic.Contact.Copy">
+        <member name="M:Joker.BusinessLogic.Contact.Equals(System.Object)">
             <summary>
-            Creates an identical clone of a contact.
+            Determines whether the specified object is equal to the current object.
             </summary>
-            <returns>A deep copy of the contact.</returns>
+            <param name="obj">The object to compare with the current object.</param>
+            <returns>True if the specified object is equal to the current object, otherwise false.</returns>
+        </member>
+        <member name="M:Joker.BusinessLogic.Contact.GetHashCode">
+            <summary>
+            Serves as the default hash function.
+            </summary>
+            <returns>A hash code for the current object.</returns>
         </member>
         <member name="T:Joker.BusinessLogic.Gamble">
             <summary>
