@@ -9,11 +9,13 @@
 					 Spacing="30">
 			<StackLayout Orientation="Horizontal">
 				<Button Command="{Binding DeleteContact}"
+						Padding="{StaticResource PagePadding}"
 						BackgroundColor="Red"
 						TextColor="{StaticResource TextContrast}"
 						Text="Löschen" />
 				<Button Command="{Binding ToggleEditingStatus}"
 						HorizontalOptions="FillAndExpand"
+						Padding="{StaticResource PagePadding}"
 						BackgroundColor="{StaticResource Bgr5}"
 						TextColor="{StaticResource Text1}"
 						Text="{Binding EditButtonText}" />
@@ -23,11 +25,32 @@
 				<Frame BackgroundColor="{StaticResource Bgr3}"
 					   VerticalOptions="Center"
 					   Padding="15,5,5,5">
-					<Editor Text="{Binding ContactName}"
-							IsEnabled="{Binding EditingEnabled}"
-							FontSize="{StaticResource CustomMedium}"
-							TextColor="{StaticResource Text1}"
-							MaxLength="{Static bl:Contact.MaxNameLength}" />
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="Auto" />
+						</Grid.ColumnDefinitions>
+						<Editor Text="{Binding ContactName}"
+								IsEnabled="{Binding EditingEnabled}"
+								Grid.Row="0"
+								Grid.Column="0"
+								BackgroundColor="{StaticResource Bgr3}"
+								FontSize="{StaticResource CustomMedium}"
+								TextColor="{StaticResource Text1}"
+								MaxLength="{Static bl:Contact.MaxNameLength}" />
+						<Button Command="{Binding InsertFromClipboard}"
+								CommandParameter="ContactName"
+								IsVisible="{Binding EditingEnabled}"
+								Grid.Row="0"
+								Grid.Column="1"
+								BackgroundColor="{StaticResource Bgr4}"
+								WidthRequest="40"
+								HeightRequest="40"
+								Image="ui_clipboard.png" />
+					</Grid>
 				</Frame>
 			</StackLayout>
 			<StackLayout>
@@ -35,11 +58,32 @@
 				<Frame BackgroundColor="{StaticResource Bgr3}"
 					   VerticalOptions="Center"
 					   Padding="15,5,5,5">
-					<Entry Text="{Binding PhoneNumber}"
-						   IsEnabled="{Binding EditingEnabled}"
-						   FontSize="{StaticResource CustomMedium}"
-						   TextColor="{StaticResource Text1}"
-						   MaxLength="{Static bl:Contact.MaxPhoneNumberLength}" />
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="Auto" />
+						</Grid.ColumnDefinitions>
+						<Editor Text="{Binding PhoneNumber}"
+								IsEnabled="{Binding EditingEnabled}"
+								Grid.Row="0"
+								Grid.Column="0"
+								BackgroundColor="{StaticResource Bgr3}"
+								FontSize="{StaticResource CustomMedium}"
+								TextColor="{StaticResource Text1}"
+								MaxLength="{Static bl:Contact.MaxPhoneNumberLength}" />
+						<Button Command="{Binding InsertFromClipboard}"
+								CommandParameter="PhoneNumber"
+								IsVisible="{Binding EditingEnabled}"
+								Grid.Row="0"
+								Grid.Column="1"
+								BackgroundColor="{StaticResource Bgr4}"
+								WidthRequest="40"
+								HeightRequest="40"
+								Image="ui_clipboard.png" />
+					</Grid>
 				</Frame>
 			</StackLayout>
 			<StackLayout Orientation="Horizontal">
@@ -51,6 +95,7 @@
 			</StackLayout>
 			<Button Command="{Binding CallContact}"
 					HorizontalOptions="FillAndExpand"
+					Padding="{StaticResource PagePadding}"
 					BackgroundColor="{StaticResource Bgr4}"
 					TextColor="{StaticResource Text1}"
 					Text="Kontakt anrufen"

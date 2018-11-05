@@ -254,7 +254,7 @@
         </member>
         <member name="M:Joker.BusinessLogic.Contact.op_Equality(Joker.BusinessLogic.Contact,Joker.BusinessLogic.Contact)">
             <summary>
-            Compares two contacts on whether their phone numbers are the same after removing whitespace.
+            Compares two contacts on whether their phone numbers are the same, eliminating whitespace for comparison.
             </summary>
             <param name="left">The left operand on comparing equality.</param>
             <param name="right">The right operand on comparing equality.</param>
@@ -262,7 +262,7 @@
         </member>
         <member name="M:Joker.BusinessLogic.Contact.op_Inequality(Joker.BusinessLogic.Contact,Joker.BusinessLogic.Contact)">
             <summary>
-            Compares two contacts on whether their phone numbers are different after removing whitespace.
+            Compares two contacts on whether their phone numbers are different, eliminating whitespace for comparison.
             </summary>
             <param name="left">The left operand on comparing inequality.</param>
             <param name="right">The right operand on comparing inequality.</param>
@@ -544,7 +544,7 @@
             A wrapper class that simplifies access to persistent preferences concerning app operations.
             </summary>
         </member>
-        <member name="P:Joker.DataAccess.AppSettings.DBFilePath">
+        <member name="P:Joker.DataAccess.AppSettings.DatabaseFilePath">
             <summary>
             Gets or sets the path of the database file.
             </summary>
@@ -1238,6 +1238,11 @@
         <member name="P:Joker.UserInterface.ContactViewModel.OpenDetailPage">
             <summary>
             Navigates the user to a detailed view of the view model's contact.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.ContactViewModel.InsertFromClipboard">
+            <summary>
+            Inserts text from the clipboard to the property specified by the parameter.
             </summary>
         </member>
         <member name="P:Joker.UserInterface.ContactViewModel.CallContact">

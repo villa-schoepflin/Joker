@@ -66,8 +66,28 @@ namespace Joker.UserInterface
 		/// </summary>
 		public ICommand OpenDetailPage => new Command(async () =>
 		{
-			if(Model != Contact.Bzga)
-				await View.Navigation.PushAsync(new ContactInspector(Model.Copy()));
+			await View.Navigation.PushAsync(new ContactInspector(Model.Copy()));
+		});
+
+		/// <summary>
+		/// Inserts text from the clipboard to the property specified by the parameter.
+		/// </summary>
+		public ICommand InsertFromClipboard => new Command<string>(async propertyName =>
+		{
+			string text = await Clipboard.GetTextAsync();
+			switch(propertyName)
+			{
+				case nameof(ContactName):
+					ContactName = text;
+					OnPropertyChanged(nameof(ContactName));
+					break;
+				case nameof(PhoneNumber):
+					PhoneNumber = text;
+					OnPropertyChanged(nameof(PhoneNumber));
+					break;
+				default:
+					throw new InvalidOperationException($"Property {propertyName} not found.");
+			}
 		});
 
 		/// <summary>
@@ -85,6 +105,11 @@ namespace Joker.UserInterface
 		{
 			try
 			{
+				if(Model == Contact.Bzga)
+				{
+					await View.DisplayAlert(null, "Dieser Kontakt kann nicht geändert werden.", "Ok");
+					return;
+				}
 				if(EditingEnabled)
 				{
 					Database.Update(Model);
@@ -105,6 +130,11 @@ namespace Joker.UserInterface
 		/// </summary>
 		public ICommand DeleteContact => new Command(async () =>
 		{
+			if(Model == Contact.Bzga)
+			{
+				await View.DisplayAlert(null, "Dieser Kontakt kann nicht geändert werden.", "Ok");
+				return;
+			}
 			if(await View.DisplayAlert(null, "Soll dieser Kontakt gelöscht werden?", "Ja", "Nein"))
 			{
 				Database.Delete(Model);

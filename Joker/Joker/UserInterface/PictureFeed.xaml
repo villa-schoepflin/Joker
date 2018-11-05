@@ -5,10 +5,8 @@
 			 x:Class="Joker.UserInterface.PictureFeed"
 			 Icon="ui_pictures.png">
 	<ContentPage.Title>
-		<OnPlatform x:TypeArguments="x:String">
-			<On Platform="iOS"
-				Value="{Static ui:PictureFeed.Headline}" />
-		</OnPlatform>
+		<OnPlatform x:TypeArguments="x:String"
+					iOS="{Static ui:PictureFeed.Headline}" />
 	</ContentPage.Title>
 	<Grid RowSpacing="0"
 		  ColumnSpacing="0"
@@ -32,15 +30,9 @@
 			   Padding="0">
 			<Image Source="{Binding PresentedImage}">
 				<Image.Aspect>
-					<OnPlatform x:TypeArguments="Aspect">
-						<On Platform="Android"
-							Value="AspectFill" />
-						<!-- Note: MS Visual Studio might falsely throw a syntax error somewhere around here.
-						This error doesn't actually exist and is a bug in the Visual Studio editor! Try
-						building the project. It should go away then. -->
-						<On Platform="iOS"
-							Value="Fill" />
-					</OnPlatform>
+					<OnPlatform x:TypeArguments="Aspect"
+								Android="AspectFill"
+								iOS="Fill" />
 				</Image.Aspect>
 				<Image.GestureRecognizers>
 					<TapGestureRecognizer Command="{Binding SetNextPicture}"
@@ -64,15 +56,9 @@
 				BackgroundColor="{StaticResource Bgr4}"
 				CornerRadius="0">
 			<Button.Padding>
-				<OnPlatform x:TypeArguments="Thickness">
-					<On Platform="Android"
-						Value="{StaticResource PagePadding}" />
-					<!-- Note: MS Visual Studio might falsely throw a syntax error somewhere around here.
-					This error doesn't actually exist and is a bug in the Visual Studio editor! Try
-					building the project. It should go away then. -->
-					<On Platform="iOS"
-						Value="25" />
-				</OnPlatform>
+				<OnPlatform x:TypeArguments="Thickness"
+							Android="{StaticResource PagePadding}"
+							iOS="25" />
 			</Button.Padding>
 		</Button>
 	</Grid>

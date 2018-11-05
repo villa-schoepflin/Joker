@@ -77,7 +77,7 @@ namespace Joker.BusinessLogic
 		public Contact() { }
 
 		/// <summary>
-		/// Compares two contacts on whether their phone numbers are the same after removing whitespace.
+		/// Compares two contacts on whether their phone numbers are the same, eliminating whitespace for comparison.
 		/// </summary>
 		/// <param name="left">The left operand on comparing equality.</param>
 		/// <param name="right">The right operand on comparing equality.</param>
@@ -88,7 +88,7 @@ namespace Joker.BusinessLogic
 		}
 
 		/// <summary>
-		/// Compares two contacts on whether their phone numbers are different after removing whitespace.
+		/// Compares two contacts on whether their phone numbers are different, eliminating whitespace for comparison.
 		/// </summary>
 		/// <param name="left">The left operand on comparing inequality.</param>
 		/// <param name="right">The right operand on comparing inequality.</param>

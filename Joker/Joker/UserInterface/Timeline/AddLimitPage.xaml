@@ -20,15 +20,9 @@
 				   HorizontalTextAlignment="Start" />
 			<Grid>
 				<Grid.RowSpacing>
-					<OnPlatform x:TypeArguments="x:Double">
-						<On Platform="Android"
-							Value="10" />
-						<!-- Note: MS Visual Studio might falsely throw a syntax error somewhere around here.
-							This error doesn't actually exist and is a bug in the Visual Studio editor! Try building the
-							project. It should go away then. -->
-						<On Platform="iOS"
-							Value="30" />
-					</OnPlatform>
+					<OnPlatform x:TypeArguments="x:Double"
+								Android="10"
+								iOS="30" />
 				</Grid.RowSpacing>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="2*" />
@@ -45,21 +39,13 @@
 					   Placeholder="0,00 €"
 					   Text="">
 					<Entry.Keyboard>
-						<OnPlatform x:TypeArguments="Keyboard">
-							<On Platform="Android"
-								Value="Telephone" />
-							<!-- Note: MS Visual Studio might falsely throw a syntax error somewhere around here.
-							This error doesn't actually exist and is a bug in the Visual Studio editor! Try building the
-							project. It should go away then. -->
-							<On Platform="iOS"
-								Value="Numeric" />
-						</OnPlatform>
+						<OnPlatform x:TypeArguments="Keyboard"
+									Android="Telephone"
+									iOS="Numeric" />
 					</Entry.Keyboard>
 					<Entry.TextColor>
-						<OnPlatform x:TypeArguments="Color">
-							<On Platform="Android"
-								Value="{StaticResource TextContrast}" />
-						</OnPlatform>
+						<OnPlatform x:TypeArguments="Color"
+									Android="{StaticResource TextContrast}" />
 					</Entry.TextColor>
 				</Entry>
 				<Label Grid.Row="1"
@@ -73,10 +59,8 @@
 					   FontSize="Large"
 					   Text="7 Tage">
 					<Entry.TextColor>
-						<OnPlatform x:TypeArguments="Color">
-							<On Platform="Android"
-								Value="{StaticResource TextContrast}" />
-						</OnPlatform>
+						<OnPlatform x:TypeArguments="Color"
+									Android="{StaticResource TextContrast}" />
 					</Entry.TextColor>
 				</Entry>
 			</Grid>

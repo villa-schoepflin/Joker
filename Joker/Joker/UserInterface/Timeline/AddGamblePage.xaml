@@ -3,7 +3,7 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:bl="clr-namespace:Joker.BusinessLogic"
 			 x:Class="Joker.UserInterface.AddGamblePage"
-			 Title="Neue Ausgabe hinzufügen"
+			 Title="Neue Ausgabe"
 			 BackgroundColor="{StaticResource Bgr1}">
 	<ScrollView>
 		<StackLayout>
@@ -14,10 +14,8 @@
 				   CornerRadius="0">
 				<Grid>
 					<Grid.RowSpacing>
-						<OnPlatform x:TypeArguments="x:Double">
-							<On Platform="iOS"
-								Value="30" />
-						</OnPlatform>
+						<OnPlatform x:TypeArguments="x:Double"
+									iOS="30" />
 					</Grid.RowSpacing>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="2*" />
@@ -36,15 +34,9 @@
 						   FontSize="{StaticResource CustomMedium}"
 						   Text="">
 						<Entry.Keyboard>
-							<OnPlatform x:TypeArguments="Keyboard">
-								<On Platform="Android"
-									Value="Telephone" />
-								<!-- Note: MS Visual Studio might falsely throw a syntax error somewhere around here.
-								This error doesn't actually exist and is a bug in the Visual Studio editor! Try
-								building the project. It should go away then. -->
-								<On Platform="iOS"
-									Value="Numeric" />
-							</OnPlatform>
+							<OnPlatform x:TypeArguments="Keyboard"
+										Android="Telephone"
+										iOS="Numeric" />
 						</Entry.Keyboard>
 					</Entry>
 					<Label Grid.Row="1"
@@ -86,10 +78,8 @@
 				   CornerRadius="0">
 				<Grid>
 					<Grid.RowSpacing>
-						<OnPlatform x:TypeArguments="x:Double">
-							<On Platform="iOS"
-								Value="30" />
-						</OnPlatform>
+						<OnPlatform x:TypeArguments="x:Double"
+									iOS="30" />
 					</Grid.RowSpacing>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="2*" />
@@ -129,6 +119,7 @@
 						Text="Zeit zurücksetzen" />
 				<Button Clicked="OnSubmitButton"
 						HorizontalOptions="FillAndExpand"
+						Padding="{StaticResource PagePadding}"
 						BackgroundColor="{StaticResource Bgr5}"
 						TextColor="{StaticResource Text1}"
 						Text="Hinzufügen" />

@@ -5,10 +5,8 @@
 			 x:Class="Joker.UserInterface.TourPage3"
 			 BackgroundColor="{StaticResource Primary1}">
 	<ContentPage.Title>
-		<OnPlatform x:TypeArguments="x:String">
-			<On Platform="iOS"
-				Value="Erstes Limit" />
-		</OnPlatform>
+		<OnPlatform x:TypeArguments="x:String"
+					iOS="Erstes Limit" />
 	</ContentPage.Title>
 	<ScrollView>
 		<StackLayout Padding="30"
@@ -37,22 +35,13 @@
 				   Placeholder="Dein Limit"
 				   Text="">
 				<Entry.TextColor>
-					<OnPlatform x:TypeArguments="Color">
-						<On Platform="Android"
-							Value="{StaticResource TextContrast}" />
-					</OnPlatform>
+					<OnPlatform x:TypeArguments="Color"
+								Android="{StaticResource TextContrast}" />
 				</Entry.TextColor>
 				<Entry.Keyboard>
-					<OnPlatform x:TypeArguments="Keyboard">
-						<On Platform="Android"
-							Value="Telephone" />
-						<!-- Note: MS Visual Studio might falsely throw a syntax error
-													somewhere around here. This error doesn't actually exist and is
-													a bug in the Visual Studio editor! Try building	the project.
-													It should go away then. -->
-						<On Platform="iOS"
-							Value="Numeric" />
-					</OnPlatform>
+					<OnPlatform x:TypeArguments="Keyboard"
+								Android="Telephone"
+								iOS="Numeric" />
 				</Entry.Keyboard>
 			</Entry>
 			<Button Clicked="OnContinueButton"
