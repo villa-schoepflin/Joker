@@ -25,9 +25,9 @@
             Directs the user to the main view of the app, clearing the navigation stack.
             </summary>
         </member>
-        <member name="P:Joker.App.CurrentMainPage">
+        <member name="F:Joker.App.Locale">
             <summary>
-            References the current main page as an instance of the app-specific MainPage class.
+            The locale or culture setting to use for this app.
             </summary>
         </member>
         <member name="P:Joker.App.CurrentTimelineFeed">
@@ -40,9 +40,9 @@
             References the current main page's contact page.
             </summary>
         </member>
-        <member name="F:Joker.App.Locale">
+        <member name="P:Joker.App.CurrentMainPageFromStack">
             <summary>
-            The locale or culture setting to use for this app.
+            References the current main page as an instance of the app-specific MainPage class.
             </summary>
         </member>
         <member name="M:Joker.App.Color(System.String)">
@@ -52,26 +52,43 @@
             <param name="key">The key for the dictionary resource.</param>
             <returns>A Xamarin.Forms color from the dictionary.</returns>
         </member>
-        <member name="T:Joker.ApplicationLayer.IPlatformContactPicker">
+        <member name="T:Joker.AppInterface.ImageResourceExtension">
+            <summary>
+            Copied with changes from https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/images
+            </summary>
+        </member>
+        <member name="P:Joker.AppInterface.ImageResourceExtension.Source">
+            <summary>
+            The source path for the embedded resource image.
+            </summary>
+        </member>
+        <member name="M:Joker.AppInterface.ImageResourceExtension.ProvideValue(System.IServiceProvider)">
+            <summary>
+            Converts the source path to a Xamarin.Forms image source.
+            </summary>
+            <param name="serviceProvider">Provides a service object for this extension.</param>
+            <returns>A Xamarin.Forms image source as a generic object.</returns>
+        </member>
+        <member name="T:Joker.AppInterface.IPlatformContactPicker">
             <summary>
             A custom API for the shared code that abstracts away the platform-specific
             contact and address book services of the target systems.
             </summary>
         </member>
-        <member name="M:Joker.ApplicationLayer.IPlatformContactPicker.PickContact">
+        <member name="M:Joker.AppInterface.IPlatformContactPicker.PickContact">
             <summary>
             Picks a single contact from the contact list through a platform-supplied view.
             </summary>
             <returns>A contact with first and last name and phone number. Returns null if
             the picking process was cancelled or the contact has no phone number recorded.</returns>
         </member>
-        <member name="T:Joker.ApplicationLayer.IPlatformFileSaver">
+        <member name="T:Joker.AppInterface.IPlatformFileSaver">
             <summary>
             A custom API for the shared code that abstracts away the platform-specific
             file IO services of the target systems.
             </summary>
         </member>
-        <member name="M:Joker.ApplicationLayer.IPlatformFileSaver.SaveToGallery(System.String)">
+        <member name="M:Joker.AppInterface.IPlatformFileSaver.SaveToGallery(System.String)">
             <summary>
             Saves a picture's file to the user's personal storage and indicates whether
             the process was successful.
@@ -79,119 +96,119 @@
             <param name="filePath">File path to the image resource.</param>
             <returns>True if the file could be saved, otherwise false.</returns>
         </member>
-        <member name="T:Joker.ApplicationLayer.IPlatformNotifier">
+        <member name="T:Joker.AppInterface.IPlatformNotifier">
             <summary>
             A custom API for the shared code that abstracts away the platform-specific
             push notification services of the target systems specifically for use in this app.
             </summary>
         </member>
-        <member name="M:Joker.ApplicationLayer.IPlatformNotifier.ScheduleLimitExpired(System.DateTime)">
+        <member name="M:Joker.AppInterface.IPlatformNotifier.ScheduleLimitExpired(System.DateTime)">
             <summary>
             Schedules a notification indicating the current limit has expired and
             a new one should be set.
             </summary>
             <param name="timeSetting">The time at which the notification should appear.</param>
         </member>
-        <member name="M:Joker.ApplicationLayer.IPlatformNotifier.CancelLimitExpired">
+        <member name="M:Joker.AppInterface.IPlatformNotifier.CancelLimitExpired">
             <summary>
             Removes the notification that indicates that the current limit has expired.
             </summary>
         </member>
-        <member name="M:Joker.ApplicationLayer.IPlatformNotifier.ScheduleNewPicture(System.DateTime)">
+        <member name="M:Joker.AppInterface.IPlatformNotifier.ScheduleNewPicture(System.DateTime)">
             <summary>
             Schedules a notification indicating that a new picture is available to see.
             </summary>
             <param name="timeSetting">The time at which the notification should appear.</param>
         </member>
-        <member name="M:Joker.ApplicationLayer.IPlatformNotifier.ScheduleGambleReminder(System.TimeSpan)">
+        <member name="M:Joker.AppInterface.IPlatformNotifier.ScheduleGambleReminder(System.TimeSpan)">
             <summary>
             Schedules a notification reminding the user to always record acts of gambling within the app.
             </summary>
             <param name="interval">The interval for the times the notification should appear.</param>
         </member>
-        <member name="M:Joker.ApplicationLayer.IPlatformNotifier.ScheduleLimitReminder(System.TimeSpan)">
+        <member name="M:Joker.AppInterface.IPlatformNotifier.ScheduleLimitReminder(System.TimeSpan)">
             <summary>
             Schedules a notification reminding the user about the current state of their limit.
             </summary>
             <param name="interval">The interval for the times the notification should appear.</param>
         </member>
-        <member name="T:Joker.ApplicationLayer.PNType">
+        <member name="T:Joker.AppInterface.PNType">
             <summary>
             The different kinds of push notifications (PN) sent by the application.
             Also used to supply IDs to each notification and related properties.
             </summary>
         </member>
-        <member name="F:Joker.ApplicationLayer.PNType.LimitExpired">
+        <member name="F:Joker.AppInterface.PNType.LimitExpired">
             <summary>
             Notifies the user that his limit has expired and a new one must be set.
             </summary>
         </member>
-        <member name="F:Joker.ApplicationLayer.PNType.NewPicture">
+        <member name="F:Joker.AppInterface.PNType.NewPicture">
             <summary>
             Notifies the user that a new motivating picture has been added to the database.
             </summary>
         </member>
-        <member name="F:Joker.ApplicationLayer.PNType.GambleReminder">
+        <member name="F:Joker.AppInterface.PNType.GambleReminder">
             <summary>
             Notifies the user to always record his spendings for gambling.
             </summary>
         </member>
-        <member name="F:Joker.ApplicationLayer.PNType.LimitReminder">
+        <member name="F:Joker.AppInterface.PNType.LimitReminder">
             <summary>
             Notifies the user about the current state of their limit.
             </summary>
         </member>
-        <member name="T:Joker.ApplicationLayer.PNContent">
+        <member name="T:Joker.AppInterface.PNContent">
             <summary>
             Container class for constructing the text shown in the different kinds of push notifications (PN).
             </summary>
         </member>
-        <member name="T:Joker.ApplicationLayer.PNContent.Title">
+        <member name="T:Joker.AppInterface.PNContent.Title">
             <summary>
             Struct holding the titles of each kind of notification.
             </summary>
         </member>
-        <member name="P:Joker.ApplicationLayer.PNContent.Title.LimitExpired">
+        <member name="P:Joker.AppInterface.PNContent.Title.LimitExpired">
             <summary>
             Title of the notification indicating that the current has limit has expired.
             </summary>
         </member>
-        <member name="P:Joker.ApplicationLayer.PNContent.Title.NewPicture">
+        <member name="P:Joker.AppInterface.PNContent.Title.NewPicture">
             <summary>
             Title of the notification indicating that a new picture is available to see.
             </summary>
         </member>
-        <member name="P:Joker.ApplicationLayer.PNContent.Title.GambleReminder">
+        <member name="P:Joker.AppInterface.PNContent.Title.GambleReminder">
             <summary>
             Title of the notification reminding the user to always record his acts of gambling.
             </summary>
         </member>
-        <member name="P:Joker.ApplicationLayer.PNContent.Title.LimitReminder">
+        <member name="P:Joker.AppInterface.PNContent.Title.LimitReminder">
             <summary>
             Title of the notification reminding the user about their limit's current state.
             </summary>
         </member>
-        <member name="T:Joker.ApplicationLayer.PNContent.Body">
+        <member name="T:Joker.AppInterface.PNContent.Body">
             <summary>
             Struct holding the main texts of each kind of notification.
             </summary>
         </member>
-        <member name="P:Joker.ApplicationLayer.PNContent.Body.LimitExpired">
+        <member name="P:Joker.AppInterface.PNContent.Body.LimitExpired">
             <summary>
             Main text of the notification indicating that the current has limit has expired.
             </summary>
         </member>
-        <member name="P:Joker.ApplicationLayer.PNContent.Body.NewPicture">
+        <member name="P:Joker.AppInterface.PNContent.Body.NewPicture">
             <summary>
             Main text of the notification indicating that a new picture is available to see.
             </summary>
         </member>
-        <member name="P:Joker.ApplicationLayer.PNContent.Body.GambleReminder">
+        <member name="P:Joker.AppInterface.PNContent.Body.GambleReminder">
             <summary>
             Main text of the notification reminding the user to always record his acts of gambling.
             </summary>
         </member>
-        <member name="P:Joker.ApplicationLayer.PNContent.Body.LimitReminder">
+        <member name="P:Joker.AppInterface.PNContent.Body.LimitReminder">
             <summary>
             Main text of the notification reminding the user about their limit's current state.
             </summary>
@@ -554,6 +571,11 @@
             Gets or sets whether the user welcome tour was completed.
             </summary>
         </member>
+        <member name="P:Joker.DataAccess.AppSettings.UserPasswordIsSet">
+            <summary>
+            Gets or sets the checking condition whether the user has protected the app with a password.
+            </summary>
+        </member>
         <member name="P:Joker.DataAccess.AppSettings.LimitExpiredTime">
             <summary>
             Gets or sets the time when the current active limit expires and a new one must be set.
@@ -718,6 +740,16 @@
             <exception cref="T:System.ArgumentException">Thrown if the user tries to set this to an empty string or exceeds
             the maximum allowed length.</exception>
         </member>
+        <member name="F:Joker.DataAccess.UserSettings.MaxPasswordLength">
+            <summary>
+            The maximum string length of the user password.
+            </summary>
+        </member>
+        <member name="P:Joker.DataAccess.UserSettings.UserPassword">
+            <summary>
+            The optional password with which the user can protect access to the app's UI.
+            </summary>
+        </member>
         <member name="F:Joker.DataAccess.UserSettings.MinNewPictureInterval">
             <summary>
             The minimum allowed time span between two new pictures, which is 2 days.
@@ -782,23 +814,6 @@
             <returns>The parsed time span.</returns>
             <exception cref="T:System.ArgumentException">Thrown if the argument couldn't be parsed or isn't within the
             allowed TimeSpan bounds.</exception>
-        </member>
-        <member name="T:Joker.Resources.ImageResourceExtension">
-            <summary>
-            Copied with changes from https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/images
-            </summary>
-        </member>
-        <member name="P:Joker.Resources.ImageResourceExtension.Source">
-            <summary>
-            The source path for the embedded resource image.
-            </summary>
-        </member>
-        <member name="M:Joker.Resources.ImageResourceExtension.ProvideValue(System.IServiceProvider)">
-            <summary>
-            Converts the source path to a Xamarin.Forms image source.
-            </summary>
-            <param name="serviceProvider">Provides a service object for this extension.</param>
-            <returns>A Xamarin.Forms image source as a generic object.</returns>
         </member>
         <member name="T:Joker.UserInterface.AddContactPage">
             <summary>

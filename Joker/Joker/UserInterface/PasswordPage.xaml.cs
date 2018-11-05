@@ -19,7 +19,9 @@ namespace Joker.UserInterface
 		{
 			if(PasswordEntry.Text == UserSettings.UserPassword)
 			{
-				Device.StartTimer;
+				PasswordEntry.Unfocus();
+				Logo.IsVisible = false;
+				Indicator.IsRunning = true;
 
 				/* If the most recent limit hasn't expired yet, direct the user to the regular main page, otherwise
 				 * direct them to the page where they can add a new limit, then return to the regular main page. */

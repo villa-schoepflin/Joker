@@ -51,6 +51,40 @@
 								 Spacing="5">
 						<Label VerticalTextAlignment="Center"
 							   TextColor="{StaticResource Text2}"
+							   FontSize="Small">Persönliches Passwort:</Label>
+						<BoxView HeightRequest="1"
+								 HorizontalOptions="FillAndExpand"
+								 VerticalOptions="Center"
+								 Color="{StaticResource Text2}" />
+					</StackLayout>
+					<StackLayout Orientation="Horizontal"
+								 Spacing="5">
+						<Entry x:Name="UserPasswordEntry"
+							   MaxLength="{Static da:UserSettings.MaxPasswordLength}"
+							   HorizontalOptions="FillAndExpand" />
+						<Button Clicked="SavePassword"
+								BackgroundColor="{StaticResource Bgr3}"
+								WidthRequest="40"
+								HeightRequest="40"
+								Image="ui_save.png" />
+						<Button Clicked="RemovePassword"
+								BackgroundColor="{StaticResource Bgr3}"
+								WidthRequest="40"
+								HeightRequest="40"
+								Image="ui_remove.png" />
+					</StackLayout>
+				</StackLayout>
+			</Frame>
+			<Frame Margin="{StaticResource StripMargin}"
+				   Padding="{StaticResource PagePadding}"
+				   BackgroundColor="{StaticResource Bgr2}"
+				   HasShadow="False"
+				   CornerRadius="0">
+				<StackLayout>
+					<StackLayout Orientation="Horizontal"
+								 Spacing="5">
+						<Label VerticalTextAlignment="Center"
+							   TextColor="{StaticResource Text2}"
 							   FontSize="Small">Zeitspanne zwischen neuen Bildern:</Label>
 						<BoxView HeightRequest="1"
 								 HorizontalOptions="FillAndExpand"

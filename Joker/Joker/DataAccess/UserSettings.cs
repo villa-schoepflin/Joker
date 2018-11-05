@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Text.RegularExpressions;
+
 using Xamarin.Essentials;
+
 using Newtonsoft.Json;
 
 namespace Joker.DataAccess
@@ -34,12 +37,26 @@ namespace Joker.DataAccess
 		}
 
 		/// <summary>
-		/// The setting where the user's optional password is stored.
+		/// The maximum string length of the user password.
+		/// </summary>
+		public const int MaxPasswordLength = 10;
+
+		/// <summary>
+		/// The optional password with which the user can protect access to the app's UI.
 		/// </summary>
 		internal static string UserPassword
 		{
 			get => Preferences.Get("UserPassword", null);
-			set => Preferences.Set("UserPassword", value);
+			set
+			{
+				if(value.Length > MaxPasswordLength)
+					throw new ArgumentException($"Das Passwort darf nicht länger als {MaxPasswordLength} Zeichen sein.");
+				if(value.Contains(" "))
+					throw new ArgumentException("Das Passwort darf keine Leerzeichen enthalten.");
+				if(!new Regex(@"[a-zA-Z0-9]*").IsMatch(value))
+					throw new ArgumentException("Das Passwort darf nur Groß-/Kleinbuchstaben und Zahlen enthalten.");
+				Preferences.Set("UserPassword", value);
+			}
 		}
 
 		/// <summary>

@@ -34,6 +34,7 @@ namespace Joker.UserInterface
 		{
 			InitializeComponent();
 			UserNameEntry.Text = UserSettings.UserName;
+			UserPasswordEntry.Text = UserSettings.UserPassword;
 			NewPictureEntry.Text = $"{UserSettings.NewPictureInterval.TotalDays} Tage";
 			GambleReminderEntry.Text = $"{UserSettings.GambleReminderInterval.TotalHours} Stunden";
 			LimitReminderEntry.Text = $"{UserSettings.LimitReminderInterval.TotalHours} Stunden";
@@ -67,6 +68,29 @@ namespace Joker.UserInterface
 			{
 				await DisplayAlert(null, error.Message, "Ok");
 			}
+		}
+
+		private async void SavePassword(object sender, EventArgs e)
+		{
+			try
+			{
+				if(string.IsNullOrEmpty(UserPasswordEntry.Text))
+					throw new ArgumentException("Du kannst kein leeres Passwort setzen.");
+				UserSettings.UserPassword = UserPasswordEntry.Text;
+				AppSettings.UserPasswordIsSet = true;
+				await DisplayAlert("Passwort gespeichert", null, "Ok");
+			}
+			catch(ArgumentException error)
+			{
+				await DisplayAlert(null, error.Message, "Ok");
+			}
+		}
+
+		private async void RemovePassword(object sender, EventArgs e)
+		{
+			UserSettings.UserPassword = "";
+			AppSettings.UserPasswordIsSet = false;
+			await DisplayAlert("Passwort entfernt", "Die App wird Dich nicht nach einem Passwort fragen.", "Ok");
 		}
 
 		/// <summary>
