@@ -27,6 +27,15 @@ namespace Joker.DataAccess
 		}
 
 		/// <summary>
+		/// Gets or sets the checking condition whether the user has protected the app with a password.
+		/// </summary>
+		public static bool UserPasswordIsSet
+		{
+			get => Preferences.Get("UserPasswordIsSet", false);
+			set => Preferences.Set("UserPasswordIsSet", value);
+		}
+
+		/// <summary>
 		/// Gets or sets the time when the current active limit expires and a new one must be set.
 		/// </summary>
 		public static DateTime LimitExpiredTime

@@ -6,7 +6,7 @@ using ContactsUI;
 using Foundation;
 using UIKit;
 
-using Joker.ApplicationLayer;
+using Joker.AppInterface;
 using Joker.BusinessLogic;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Joker.iOS.IosContactPicker))]

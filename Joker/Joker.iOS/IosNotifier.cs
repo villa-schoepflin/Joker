@@ -3,7 +3,7 @@
 using Foundation;
 using UserNotifications;
 
-using Joker.ApplicationLayer;
+using Joker.AppInterface;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Joker.iOS.IosNotifier))]
 namespace Joker.iOS

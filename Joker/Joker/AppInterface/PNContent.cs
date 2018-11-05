@@ -1,6 +1,6 @@
 ﻿using Joker.DataAccess;
 
-namespace Joker.ApplicationLayer
+namespace Joker.AppInterface
 {
 	/// <summary>
 	/// The different kinds of push notifications (PN) sent by the application.

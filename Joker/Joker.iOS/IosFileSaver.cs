@@ -4,7 +4,7 @@ using Foundation;
 using Photos;
 using UIKit;
 
-using Joker.ApplicationLayer;
+using Joker.AppInterface;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Joker.iOS.IosFileSaver))]
 namespace Joker.iOS

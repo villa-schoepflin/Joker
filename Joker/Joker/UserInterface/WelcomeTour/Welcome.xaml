@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:r="clr-namespace:Joker.Resources;assembly=Joker"
+			 xmlns:app="clr-namespace:Joker.AppInterface;assembly=Joker"
 			 x:Class="Joker.UserInterface.Welcome"
 			 BackgroundColor="{StaticResource Primary1}">
 	<ContentPage.Title>
@@ -11,7 +11,7 @@
 	<ScrollView>
 		<StackLayout Padding="30"
 					 Spacing="20">
-			<Image Source="{r:ImageResource Joker.Resources.Icons.wt_welcome.png}"
+			<Image Source="{app:ImageResource Joker.Resources.Icons.joker.png}"
 				   HorizontalOptions="CenterAndExpand"
 				   VerticalOptions="CenterAndExpand" />
 			<Label HorizontalOptions="Center"

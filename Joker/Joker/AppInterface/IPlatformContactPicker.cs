@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Joker.BusinessLogic;
 
-namespace Joker.ApplicationLayer
+namespace Joker.AppInterface
 {
 	/// <summary>
 	/// A custom API for the shared code that abstracts away the platform-specific

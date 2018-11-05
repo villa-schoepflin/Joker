@@ -3,7 +3,7 @@
 using Android.App;
 using Android.Content;
 
-using Joker.ApplicationLayer;
+using Joker.AppInterface;
 using Joker.DataAccess;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Joker.Droid.AndroidNotifier))]

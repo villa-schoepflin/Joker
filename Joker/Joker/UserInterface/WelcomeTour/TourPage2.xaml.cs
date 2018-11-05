@@ -3,7 +3,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using Joker.ApplicationLayer;
+using Joker.AppInterface;
 using Joker.BusinessLogic;
 
 namespace Joker.UserInterface

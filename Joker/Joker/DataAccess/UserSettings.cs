@@ -34,6 +34,15 @@ namespace Joker.DataAccess
 		}
 
 		/// <summary>
+		/// The setting where the user's optional password is stored.
+		/// </summary>
+		internal static string UserPassword
+		{
+			get => Preferences.Get("UserPassword", null);
+			set => Preferences.Set("UserPassword", value);
+		}
+
+		/// <summary>
 		/// The minimum allowed time span between two new pictures, which is 2 days.
 		/// </summary>
 		internal static readonly TimeSpan MinNewPictureInterval = TimeSpan.FromDays(2);

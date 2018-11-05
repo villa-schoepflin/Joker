@@ -18,12 +18,15 @@
     <None Remove="Resources\Icons\circle.png" />
     <None Remove="Resources\Icons\circle_completed.png" />
     <None Remove="Resources\Icons\contacts.png" />
+    <None Remove="Resources\Icons\filledbar.png" />
+    <None Remove="Resources\Icons\filledcircle.png" />
     <None Remove="Resources\Icons\image.png" />
+    <None Remove="Resources\Icons\impressum.png" />
+    <None Remove="Resources\Icons\joker.png" />
     <None Remove="Resources\Icons\money.png" />
     <None Remove="Resources\Icons\motivation.png" />
     <None Remove="Resources\Icons\search.png" />
     <None Remove="Resources\Icons\settings.png" />
-    <None Remove="Resources\Icons\ui_impressum.png" />
     <None Remove="Resources\PictureFeed\Abendrot.jpg" />
     <None Remove="Resources\PictureFeed\Abfluss.jpg" />
     <None Remove="Resources\PictureFeed\Andreaskreuz.jpg" />
@@ -46,11 +49,6 @@
     <None Remove="Resources\PictureFeed\k_M_V_Grillfleisch.jpg" />
     <None Remove="Resources\PictureFeed\k_M_V_rettungswesten.jpg" />
     <None Remove="Resources\PictureFeed\k_M_V_Strasse.jpg" />
-    <None Remove="Resources\Icons\wt_bar.png" />
-    <None Remove="Resources\Icons\wt_circle.png" />
-    <None Remove="Resources\Icons\wt_filledbar.png" />
-    <None Remove="Resources\Icons\wt_filledcircle.png" />
-    <None Remove="Resources\Icons\wt_welcome.png" />
     <None Remove="Resources\PictureFeed\Meer.jpg" />
     <None Remove="Resources\PictureFeed\Mineralwasser.jpg" />
     <None Remove="Resources\PictureFeed\Pflanzen.jpg" />
@@ -69,12 +67,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Icons\wt_bar.png" />
-    <EmbeddedResource Include="Resources\Icons\wt_filledbar.png" />
-    <EmbeddedResource Include="Resources\Icons\wt_circle.png" />
-    <EmbeddedResource Include="Resources\Icons\wt_filledcircle.png" />
-    <EmbeddedResource Include="Resources\Icons\ui_impressum.png" />
-    <EmbeddedResource Include="Resources\Icons\wt_welcome.png" />
+    <EmbeddedResource Include="Resources\Icons\bar.png" />
+    <EmbeddedResource Include="Resources\Icons\filledbar.png" />
+    <EmbeddedResource Include="Resources\Icons\circle.png" />
+    <EmbeddedResource Include="Resources\Icons\filledcircle.png" />
+    <EmbeddedResource Include="Resources\Icons\impressum.png" />
+    <EmbeddedResource Include="Resources\Icons\joker.png" />
     <EmbeddedResource Include="Resources\PictureFeed\Gasse 1.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\Gasse 2.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\Tastatur.jpg" />
@@ -150,6 +148,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="UserInterface\Impressum.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserInterface\PasswordPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="UserInterface\Timeline\AddLimitPage.xaml">

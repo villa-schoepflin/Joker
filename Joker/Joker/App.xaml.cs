@@ -5,7 +5,7 @@ using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using Joker.ApplicationLayer;
+using Joker.AppInterface;
 using Joker.DataAccess;
 using Joker.UserInterface;
 
@@ -42,12 +42,17 @@ namespace Joker
 					DependencyService.Get<IPlatformNotifier>().ScheduleNewPicture(AppSettings.NewPictureTime);
 				}
 
-				/* If the most recent limit has not expired yet, direct the user to the regular main page, otherwise
-				 * direct them to the page where they can add a new limit and then return to the usual main page. */
-				if(DateTime.UtcNow < AppSettings.LimitExpiredTime)
-					SetMainPageToDefault();
+				if(AppSettings.UserPasswordIsSet)
+					MainPage = new PasswordPage();
 				else
-					MainPage = new AddLimitPage();
+				{
+					/* If the most recent limit hasn't expired yet, direct the user to the regular main page, otherwise
+					 * direct them to the page where they can add a new limit, then return to the regular main page. */
+					if(DateTime.UtcNow < AppSettings.LimitExpiredTime)
+						SetMainPageToDefault();
+					else
+						MainPage = new AddLimitPage();
+				}
 			}
 			else
 				MainPage = new NavigationPage(new Welcome())
@@ -66,24 +71,24 @@ namespace Joker
 		}
 
 		/// <summary>
-		/// References the current main page as an instance of the app-specific MainPage class.
+		/// The locale or culture setting to use for this app.
 		/// </summary>
-		internal static MainPage CurrentMainPage => (MainPage)((NavigationPage)Current.MainPage).RootPage;
+		internal static readonly CultureInfo Locale = new CultureInfo("de-DE");
 
 		/// <summary>
 		/// References the current main page's timeline feed page.
 		/// </summary>
-		internal static TimelineFeed CurrentTimelineFeed => (TimelineFeed)CurrentMainPage.Children[1];
+		internal static TimelineFeed CurrentTimelineFeed => (TimelineFeed)CurrentMainPageFromStack.Children[1];
 
 		/// <summary>
 		/// References the current main page's contact page.
 		/// </summary>
-		internal static ContactPage CurrentContactPage => (ContactPage)CurrentMainPage.Children[2];
+		internal static ContactPage CurrentContactPage => (ContactPage)CurrentMainPageFromStack.Children[2];
 
 		/// <summary>
-		/// The locale or culture setting to use for this app.
+		/// References the current main page as an instance of the app-specific MainPage class.
 		/// </summary>
-		internal static readonly CultureInfo Locale = new CultureInfo("de-DE");
+		private static MainPage CurrentMainPageFromStack => (MainPage)((NavigationPage)Current.MainPage).RootPage;
 
 		/// <summary>
 		/// Wrapper function to return a color from the application resource dictionary.

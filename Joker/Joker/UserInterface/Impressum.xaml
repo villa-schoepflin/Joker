@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:r="clr-namespace:Joker.Resources;assembly=Joker"
+			 xmlns:app="clr-namespace:Joker.AppInterface;assembly=Joker"
 			 x:Class="Joker.UserInterface.Impressum"
 			 Title="Impressum"
 			 BackgroundColor="{StaticResource Bgr1}">
@@ -12,7 +12,7 @@
 				   TextColor="{StaticResource Text1}"
 				   HorizontalTextAlignment="Center"
 				   FontSize="Medium" />
-			<Image Source="{r:ImageResource Joker.Resources.Icons.ui_impressum.png}"
+			<Image Source="{app:ImageResource Joker.Resources.Icons.impressum.png}"
 				   HorizontalOptions="FillAndExpand"
 				   VerticalOptions="FillAndExpand" />
 			<Label TextColor="{StaticResource Text2}"

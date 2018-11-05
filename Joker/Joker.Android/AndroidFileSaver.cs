@@ -7,7 +7,7 @@ using Android.Content.PM;
 using Android.Media;
 using Android.OS;
 
-using Joker.ApplicationLayer;
+using Joker.AppInterface;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Joker.Droid.AndroidFileSaver))]
 namespace Joker.Droid

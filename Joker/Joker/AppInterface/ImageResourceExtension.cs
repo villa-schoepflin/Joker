@@ -3,7 +3,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Joker.Resources
+namespace Joker.AppInterface
 {
 	/// <summary>
 	/// Copied with changes from https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/images

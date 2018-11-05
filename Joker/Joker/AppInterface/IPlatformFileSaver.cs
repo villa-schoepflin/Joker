@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Joker.ApplicationLayer
+namespace Joker.AppInterface
 {
 	/// <summary>
 	/// A custom API for the shared code that abstracts away the platform-specific

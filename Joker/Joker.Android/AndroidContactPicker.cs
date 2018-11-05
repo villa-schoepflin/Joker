@@ -4,7 +4,7 @@ using Android.App;
 using Android.Content;
 using Android.Provider;
 
-using Joker.ApplicationLayer;
+using Joker.AppInterface;
 using Joker.BusinessLogic;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Joker.Droid.AndroidContactPicker))]
