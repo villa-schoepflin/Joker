@@ -1,6 +1,7 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using Joker.AppInterface;
 using Joker.DataAccess;
 
 namespace Joker.UserInterface
@@ -20,12 +21,7 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// Info text for the user concerning the functionality of this page.
 		/// </summary>
-		public const string Info = "Auf dieser Seite kannst Du Dich durch verschiedene motivierende Bilder klicken, "
-			+ "indem Du jedesmal doppelt auf das aktuell angezeigte Bild tippst.\n\n"
-			+ "Wenn Du ein Bild mit \"Gefällt mir\" markierst, wird es häufiger erscheinen. Wenn Du auf den "
-			+ "Speicherknopf drückst, wird das aktuelle Bild in Deiner Galerie-App abgelegt.\n\n"
-			+ "Du wirst benachrichtigt, sobald die App ein neues Bild für Dich hat. Das neueste Bild wird stets "
-			+ "zuerst angezeigt. Neue Bilder bekommst Du in regelmäßigen Abständen.";
+		public static string Info => FileResourceReader.Get("Info_PictureFeed.txt");
 
 		/// <summary>
 		/// Initializes XAML elements sets binding context.

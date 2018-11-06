@@ -22,10 +22,7 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// Info text for the user concerning the functionality of this page.
 		/// </summary>
-		public const string Info = "Hier kannst Du einige Einstellungen der App ändern.\n\n"
-			+ "Neben Deinem Namen in der App und Deinem persönlichen Kontakt kannst Du hier auch einstellen, in "
-			+ "welchen Zeitabständen Dir die App Push-Benachrichtigungen mit motivierenden Texten schicken soll oder "
-			+ "wie oft Du neue Motivationsbilder erhalten möchtest.";
+		public static string Info => FileResourceReader.Get("Info_SettingsPage.txt");
 
 		/// <summary>
 		/// Initializes XAML elements.

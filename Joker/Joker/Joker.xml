@@ -52,6 +52,29 @@
             <param name="key">The key for the dictionary resource.</param>
             <returns>A Xamarin.Forms color from the dictionary.</returns>
         </member>
+        <member name="T:Joker.AppInterface.FileResourceReader">
+            <summary>
+            Utility class that handles interaction with embedded resource files.
+            </summary>
+        </member>
+        <member name="F:Joker.AppInterface.FileResourceReader.UserNamePlaceholder">
+            <summary>
+            The placeholder for when the user name should be inserted into the content of a file resource.
+            </summary>
+        </member>
+        <member name="F:Joker.AppInterface.FileResourceReader.RemainingLimitPlaceholder">
+            <summary>
+            The placeholder for when the current's limit remaining balance should be inserted into the content
+            of a file resource.
+            </summary>
+        </member>
+        <member name="M:Joker.AppInterface.FileResourceReader.Get(System.String)">
+            <summary>
+            Extracts the plaintext from a specified file resource and fills placeholders with the appropriate text.
+            </summary>
+            <param name="fileName">The file to look for.</param>
+            <returns>The plaintext content of the file as a UTF-8 string.</returns>
+        </member>
         <member name="T:Joker.AppInterface.ImageResourceExtension">
             <summary>
             Copied with changes from https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/images
@@ -877,7 +900,7 @@
             The title of this page, provided here to be accessible from anywhere.
             </summary>
         </member>
-        <member name="F:Joker.UserInterface.ContactPage.Info">
+        <member name="P:Joker.UserInterface.ContactPage.Info">
             <summary>
             Info text for the user concerning the functionality of this page.
             </summary>
@@ -1003,7 +1026,7 @@
             The title of this page, provided here to be accessible from anywhere.
             </summary>
         </member>
-        <member name="F:Joker.UserInterface.PictureFeed.Info">
+        <member name="P:Joker.UserInterface.PictureFeed.Info">
             <summary>
             Info text for the user concerning the functionality of this page.
             </summary>
@@ -1023,7 +1046,7 @@
             The title of this page, provided here to be accessible from anywhere.
             </summary>
         </member>
-        <member name="F:Joker.UserInterface.SettingsPage.Info">
+        <member name="P:Joker.UserInterface.SettingsPage.Info">
             <summary>
             Info text for the user concerning the functionality of this page.
             </summary>
@@ -1202,7 +1225,7 @@
             The title of this page, provided here to be accessible from anywhere.
             </summary>
         </member>
-        <member name="F:Joker.UserInterface.TimelineFeed.Info">
+        <member name="P:Joker.UserInterface.TimelineFeed.Info">
             <summary>
             Info text for the user concerning the functionality of this page.
             </summary>

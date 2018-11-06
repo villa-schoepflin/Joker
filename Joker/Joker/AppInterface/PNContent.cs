@@ -39,22 +39,22 @@ namespace Joker.AppInterface
 			/// <summary>
 			/// Title of the notification indicating that the current has limit has expired.
 			/// </summary>
-			public static string LimitExpired => "Zeit für ein neues Limit!";
+			public static string LimitExpired => FileResourceReader.Get("Notification_Title_LimitExpired.txt");
 
 			/// <summary>
 			/// Title of the notification indicating that a new picture is available to see.
 			/// </summary>
-			public static string NewPicture => "Es gibt ein neues Bild für Dich!";
+			public static string NewPicture => FileResourceReader.Get("Notification_Title_NewPicture.txt");
 
 			/// <summary>
 			/// Title of the notification reminding the user to always record his acts of gambling.
 			/// </summary>
-			public static string GambleReminder => $"{UserSettings.UserName}, hast Du in letzter Zeit gespielt?";
+			public static string GambleReminder => FileResourceReader.Get("Notification_Title_GambleReminder.txt");
 
 			/// <summary>
 			/// Title of the notification reminding the user about their limit's current state.
 			/// </summary>
-			public static string LimitReminder => $"Denk an Dein Limit, {UserSettings.UserName}!";
+			public static string LimitReminder => FileResourceReader.Get("Notification_Title_LimitReminder.txt");
 		}
 
 		/// <summary>
@@ -69,26 +69,22 @@ namespace Joker.AppInterface
 			{
 				get
 				{
-					string s = $"Hey {UserSettings.UserName}, ";
 					if(Database.CalcBalance(Database.MostRecentLimit()) >= 0)
-						s += "Du hast Dein Limit dieses Mal eingehalten. Sehr gut!";
+						return FileResourceReader.Get("Notification_Body_LimitExpired_Success.txt");
 					else
-						s += "leider hast Du Dein Limit diesmal überschritten.";
-					return s + "\n\nÖffne die App und gib ein neues Limit ein.";
+						return FileResourceReader.Get("Notification_Body_LimitExpired_Failure.txt");
 				}
 			}
 
 			/// <summary>
 			/// Main text of the notification indicating that a new picture is available to see.
 			/// </summary>
-			public static string NewPicture => $"{UserSettings.UserName}, schau Dir Dein neues Bild direkt in der "
-				+ "App an. Es ist das erste Bild, was Dir angezeigt wird.";
+			public static string NewPicture => FileResourceReader.Get("Notification_Body_NewPicture.txt");
 
 			/// <summary>
 			/// Main text of the notification reminding the user to always record his acts of gambling.
 			/// </summary>
-			public static string GambleReminder => "Vergiss nicht Deine Ausgaben einzutragen, " +
-				"damit Du Dein Limit im Blick behältst.";
+			public static string GambleReminder => FileResourceReader.Get("Notification_Body_GambleReminder.txt");
 
 			/// <summary>
 			/// Main text of the notification reminding the user about their limit's current state.
@@ -98,11 +94,9 @@ namespace Joker.AppInterface
 				get
 				{
 					if(Database.CalcBalance(Database.MostRecentLimit()) >= 0)
-						return "Im Moment sind noch " + Database.CalcBalance(Database.MostRecentLimit())
-							.ToString("C", App.Locale) + " von deinem Limit übrig. Immer weiter so!";
+						return FileResourceReader.Get("Notification_Body_LimitReminder_Success.txt");
 					else
-						return "Dieses Mal konntest Du es leider nicht einhalten. Aber gib nicht auf! Nächstes Mal "
-							+ "wird es besser laufen.";
+						return FileResourceReader.Get("Notification_Body_LimitReminder_Failure.txt");
 				}
 			}
 		}

@@ -5,6 +5,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using Joker.AppInterface;
 using Joker.BusinessLogic;
 using Joker.DataAccess;
 
@@ -25,11 +26,7 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// Info text for the user concerning the functionality of this page.
 		/// </summary>
-		public const string Info = "Auf dieser Seite findest Du einige nützliche Telefonnummern, die Du bei "
-			+ "Bedarf sofort anrufen kannst. Tippe dazu einfach auf das Telefonsymbol. Du kannst auch online nach "
-			+ "Beratungsstellen in Deiner Nähe suchen, indem Du auf den Link im obersten Feld tippst.\n\n"
-			+ "Kontakte kannst Du über das \"+\" in der unteren rechten Ecke hinzufügen. Wenn Du einen Kontakt "
-			+ "bearbeiten möchtest, tippe einfach auf den jeweiligen Kontakt.";
+		public static string Info => FileResourceReader.Get("Info_ContactPage.txt");
 
 		/// <summary>
 		/// An array of contacts in a view model that can be immediately called by the user.

@@ -64,6 +64,25 @@
     <None Remove="Resources\PictureFeed\Wand 1.jpg" />
     <None Remove="Resources\PictureFeed\Wand 2.jpg" />
     <None Remove="Resources\PictureFeed\Zaun.jpg" />
+    <None Remove="Resources\Text\Feedback_Current_Failure.txt" />
+    <None Remove="Resources\Text\Feedback_Current_New.txt" />
+    <None Remove="Resources\Text\Feedback_Current_Success.txt" />
+    <None Remove="Resources\Text\Feedback_Previous_Failure.txt" />
+    <None Remove="Resources\Text\Feedback_Previous_Success.txt" />
+    <None Remove="Resources\Text\Info_ContactPage.txt" />
+    <None Remove="Resources\Text\Info_PictureFeed.txt" />
+    <None Remove="Resources\Text\Info_SettingsPage.txt" />
+    <None Remove="Resources\Text\Info_TimelineFeed.txt" />
+    <None Remove="Resources\Text\Notification_Body_GambleReminder.txt" />
+    <None Remove="Resources\Text\Notification_Body_LimitExpired_Failure.txt" />
+    <None Remove="Resources\Text\Notification_Body_LimitExpired_Success.txt" />
+    <None Remove="Resources\Text\Notification_Body_LimitReminder_Failure.txt" />
+    <None Remove="Resources\Text\Notification_Body_LimitReminder_Success.txt" />
+    <None Remove="Resources\Text\Notification_Body_NewPicture.txt" />
+    <None Remove="Resources\Text\Notification_Title_GambleReminder.txt" />
+    <None Remove="Resources\Text\Notification_Title_LimitExpired.txt" />
+    <None Remove="Resources\Text\Notification_Title_LimitReminder.txt" />
+    <None Remove="Resources\Text\Notification_Title_NewPicture.txt" />
     <None Remove="Resources\Text\PushNotification_Title_LimitExpired.txt" />
     <None Remove="Resources\Text\PushNotification_Title_NewPicture.txt" />
   </ItemGroup>
@@ -109,8 +128,25 @@
     <EmbeddedResource Include="Resources\PictureFeed\Stadt 1.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\Stadt 2.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\Container.jpg" />
-    <EmbeddedResource Include="Resources\Text\PushNotification_Title_NewPicture.txt" />
-    <EmbeddedResource Include="Resources\Text\PushNotification_Title_LimitExpired.txt" />
+    <EmbeddedResource Include="Resources\Text\Feedback_Current_Failure.txt" />
+    <EmbeddedResource Include="Resources\Text\Feedback_Current_New.txt" />
+    <EmbeddedResource Include="Resources\Text\Feedback_Current_Success.txt" />
+    <EmbeddedResource Include="Resources\Text\Feedback_Previous_Failure.txt" />
+    <EmbeddedResource Include="Resources\Text\Feedback_Previous_Success.txt" />
+    <EmbeddedResource Include="Resources\Text\Info_ContactPage.txt" />
+    <EmbeddedResource Include="Resources\Text\Info_PictureFeed.txt" />
+    <EmbeddedResource Include="Resources\Text\Info_SettingsPage.txt" />
+    <EmbeddedResource Include="Resources\Text\Info_TimelineFeed.txt" />
+    <EmbeddedResource Include="Resources\Text\Notification_Body_GambleReminder.txt" />
+    <EmbeddedResource Include="Resources\Text\Notification_Body_LimitExpired_Failure.txt" />
+    <EmbeddedResource Include="Resources\Text\Notification_Body_LimitExpired_Success.txt" />
+    <EmbeddedResource Include="Resources\Text\Notification_Body_LimitReminder_Failure.txt" />
+    <EmbeddedResource Include="Resources\Text\Notification_Body_LimitReminder_Success.txt" />
+    <EmbeddedResource Include="Resources\Text\Notification_Body_NewPicture.txt" />
+    <EmbeddedResource Include="Resources\Text\Notification_Title_GambleReminder.txt" />
+    <EmbeddedResource Include="Resources\Text\Notification_Title_LimitExpired.txt" />
+    <EmbeddedResource Include="Resources\Text\Notification_Title_LimitReminder.txt" />
+    <EmbeddedResource Include="Resources\Text\Notification_Title_NewPicture.txt" />
   </ItemGroup>
 
   <ItemGroup>
