@@ -59,6 +59,14 @@ namespace Joker.DataAccess
 			}
 		}
 
+		public static string FirstSecurityQuestion { get; set; }
+
+		public static string FirstSecurityAnswer { get; set; }
+
+		public static string SecondSecurityQuestion { get; set; }
+
+		public static string SecondSecurityAnswer { get; set; }
+
 		/// <summary>
 		/// The minimum allowed time span between two new pictures, which is 2 days.
 		/// </summary>
@@ -82,14 +90,14 @@ namespace Joker.DataAccess
 		/// <summary>
 		/// Sets the time span between two new pictures from a user-supplied text string.
 		/// </summary>
-		/// <param name="str">User input from an entry to be parsed.</param>
+		/// <param name="input">User input from an entry to be parsed.</param>
 		/// <exception cref="ArgumentException">Thrown if the argument couldn't be parsed or isn't within the
 		/// allowed TimeSpan bounds.</exception>
-		internal static void SetNewPictureInterval(string str)
+		internal static void SetNewPictureInterval(string input)
 		{
-			if(str.Contains("T"))
-				str = str.Remove(str.IndexOf('T'));
-			if(!uint.TryParse(str, out uint result))
+			if(input.Contains("T"))
+				input = input.Remove(input.IndexOf('T'));
+			if(!uint.TryParse(input, out uint result))
 				throw new ArgumentException("Das ist keine gültige Zahl.");
 
 			var interval = TimeSpan.FromDays(result);
@@ -124,10 +132,10 @@ namespace Joker.DataAccess
 		/// <summary>
 		/// Sets the time span between two gambling reminders from a user-supplied text string.
 		/// </summary>
-		/// <param name="str">User input from an entry to be parsed.</param>
-		internal static void SetGambleReminderInterval(string str)
+		/// <param name="input">User input from an entry to be parsed.</param>
+		internal static void SetGambleReminderInterval(string input)
 		{
-			GambleReminderInterval = ParseReminderInterval(str);
+			GambleReminderInterval = ParseReminderInterval(input);
 		}
 
 		/// <summary>
@@ -143,29 +151,29 @@ namespace Joker.DataAccess
 		/// <summary>
 		/// Sets the time span between two limit reminders from a user-supplied text string.
 		/// </summary>
-		/// <param name="str">User input from an entry to be parsed.</param>
-		internal static void SetLimitReminderInterval(string str)
+		/// <param name="input">User input from an entry to be parsed.</param>
+		internal static void SetLimitReminderInterval(string input)
 		{
-			LimitReminderInterval = ParseReminderInterval(str);
+			LimitReminderInterval = ParseReminderInterval(input);
 		}
 
 		/// <summary>
 		/// Parses a user input string from the settings page according the bounds of reminder notifications.
 		/// </summary>
-		/// <param name="str">String to be parsed.</param>
+		/// <param name="input">String to be parsed.</param>
 		/// <returns>The parsed time span.</returns>
 		/// <exception cref="ArgumentException">Thrown if the argument couldn't be parsed or isn't within the
 		/// allowed TimeSpan bounds.</exception>
-		private static TimeSpan ParseReminderInterval(string str)
+		private static TimeSpan ParseReminderInterval(string input)
 		{
-			if(str.Contains("S"))
-				str = str.Remove(str.IndexOf('S'));
-			if(!uint.TryParse(str, out uint result))
+			if(input.Contains("S"))
+				input = input.Remove(input.IndexOf('S'));
+			if(!uint.TryParse(input, out uint result))
 				throw new ArgumentException("Das ist keine gültige Zahl.");
 
 			var interval = TimeSpan.FromHours(result);
 			if(interval < MinReminderInterval || interval > MaxReminderInterval)
-				throw new ArgumentException("Die Zeit zwischen den Erinnerungen sollte zwischen " +
+				throw new ArgumentException("Die Zeit zwischen den Erinnerungen muss zwischen " +
 					$"{MinReminderInterval.TotalHours} und {MaxReminderInterval.TotalHours} Stunden liegen.");
 
 			return interval;

@@ -20,11 +20,6 @@ namespace Joker.UserInterface
 		public const string Headline = "Einstellungen";
 
 		/// <summary>
-		/// Info text for the user concerning the functionality of this page.
-		/// </summary>
-		public static string Info => FileResourceReader.Get("Info_SettingsPage.txt");
-
-		/// <summary>
 		/// Initializes XAML elements.
 		/// </summary>
 		public SettingsPage()
@@ -42,7 +37,7 @@ namespace Joker.UserInterface
 		/// <param name="e">Contains event data.</param>
 		private async void OnInfoButton(object sender, EventArgs e)
 		{
-			await DisplayAlert(Headline, Info, "Ok");
+			await DisplayAlert(Headline, FileResourceReader.Get("Info_SettingsPage.txt"), "Ok");
 		}
 
 		/// <summary>
@@ -66,13 +61,15 @@ namespace Joker.UserInterface
 		}
 
 		/// <summary>
-		/// Button event handler that toggles whether the password should be hidden.
+		/// Button event handler that toggles whether the password and security answers should be hidden.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
 		/// <param name="e">Contains event data.</param>
 		private void TogglePasswordObfuscation(object sender, EventArgs e)
 		{
 			UserPasswordEntry.IsPassword ^= true;
+			FirstSecurityAnswer.IsPassword ^= true;
+			SecondSecurityAnswer.IsPassword ^= true;
 		}
 
 		/// <summary>
@@ -108,6 +105,26 @@ namespace Joker.UserInterface
 				await DisplayAlert(null, error.Message, "Ok");
 				UserPasswordEntry.Text = UserSettings.UserPassword;
 			}
+		}
+
+		private async void ShowSecurityQuestionProposals(object sender, EventArgs e)
+		{
+			string selectedQuestion = await DisplayActionSheet("Vorschläge für Sicherheitsfragen:", "Abbrechen", null,
+				new[] { "bla", "blub", "bliiihh" });
+			if(sender == FirstQuestionMenuButton)
+				FirstSecurityQuestion.Text = selectedQuestion;
+			else
+				SecondSecurityQuestion.Text = selectedQuestion;
+		}
+
+		private void SaveFirstSecurityQuestion(object sender, EventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("FIRST");
+		}
+
+		private void SaveSecondSecurityQuestion(object sender, EventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("SECOND");
 		}
 
 		/// <summary>

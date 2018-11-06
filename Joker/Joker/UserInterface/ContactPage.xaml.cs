@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
-using Joker.AppInterface;
 using Joker.BusinessLogic;
 using Joker.DataAccess;
 
@@ -22,11 +20,6 @@ namespace Joker.UserInterface
 		/// The title of this page, provided here to be accessible from anywhere.
 		/// </summary>
 		public const string Headline = "Kontakte";
-
-		/// <summary>
-		/// Info text for the user concerning the functionality of this page.
-		/// </summary>
-		public static string Info => FileResourceReader.Get("Info_ContactPage.txt");
 
 		/// <summary>
 		/// An array of contacts in a view model that can be immediately called by the user.

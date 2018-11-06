@@ -342,6 +342,18 @@
     <ImageAsset Include="Assets.xcassets\ui_heartoutline.png.imageset\ui_heartoutline3.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ui_menu.png.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ui_menu.png.imageset\ui_menu1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ui_menu.png.imageset\ui_menu2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ui_menu.png.imageset\ui_menu3.png">
+      <Visible>false</Visible>
+    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\ui_info.png.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>

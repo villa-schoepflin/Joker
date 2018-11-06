@@ -1,3 +1,5 @@
 Hier kannst Du die Einstellungen der App ändern.
 
-Du kannst hier den Namen ändern, mit dem Dich die App anspricht. Außerdem kannst Du hier ein optionales Passwort einrichten, dass bei jedem Öffnen der App abgefragt wird. Hier bestimmst Du auch, in welchen Zeitabständen Dir die App Push-Benachrichtigungen mit motivierenden Texten schicken soll oder wie oft Du neue Motivationsbilder erhalten möchtest.
+Du kannst hier den Namen ändern, mit dem Dich die App anspricht. Außerdem kannst Du hier ein optionales Passwort einrichten, dass bei jedem Öffnen der App abgefragt wird und die dazugehörigen Sicherheitsfragen, falls Du das Passwort mal vergessen solltest.
+
+Hier bestimmst Du auch, in welchen Zeitabständen Dir die App Push-Benachrichtigungen mit motivierenden Texten schicken soll oder wie oft Du neue Motivationsbilder erhalten möchtest.

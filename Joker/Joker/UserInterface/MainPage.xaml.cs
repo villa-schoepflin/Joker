@@ -3,6 +3,8 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using Joker.AppInterface;
+
 namespace Joker.UserInterface
 {
 	/// <summary>
@@ -42,11 +44,11 @@ namespace Joker.UserInterface
 		private async void OnInfoButton(object sender, EventArgs e)
 		{
 			if(CurrentPage is PictureFeed)
-				await DisplayAlert(PictureFeed.Headline, PictureFeed.Info, "Ok");
+				await DisplayAlert(PictureFeed.Headline, FileResourceReader.Get("Info_PictureFeed.txt"), "Ok");
 			else if(CurrentPage is TimelineFeed)
-				await DisplayAlert(TimelineFeed.Headline, TimelineFeed.Info, "Ok");
+				await DisplayAlert(TimelineFeed.Headline, FileResourceReader.Get("Info_TimelineFeed.txt"), "Ok");
 			else if(CurrentPage is ContactPage)
-				await DisplayAlert(ContactPage.Headline, ContactPage.Info, "Ok");
+				await DisplayAlert(ContactPage.Headline, FileResourceReader.Get("Info_ContactPage.txt"), "Ok");
 		}
 
 		/// <summary>

@@ -155,32 +155,6 @@
             </summary>
             <param name="interval">The interval for the times the notification should appear.</param>
         </member>
-        <member name="T:Joker.AppInterface.PNType">
-            <summary>
-            The different kinds of push notifications (PN) sent by the application.
-            Also used to supply IDs to each notification and related properties.
-            </summary>
-        </member>
-        <member name="F:Joker.AppInterface.PNType.LimitExpired">
-            <summary>
-            Notifies the user that his limit has expired and a new one must be set.
-            </summary>
-        </member>
-        <member name="F:Joker.AppInterface.PNType.NewPicture">
-            <summary>
-            Notifies the user that a new motivating picture has been added to the database.
-            </summary>
-        </member>
-        <member name="F:Joker.AppInterface.PNType.GambleReminder">
-            <summary>
-            Notifies the user to always record his spendings for gambling.
-            </summary>
-        </member>
-        <member name="F:Joker.AppInterface.PNType.LimitReminder">
-            <summary>
-            Notifies the user about the current state of their limit.
-            </summary>
-        </member>
         <member name="T:Joker.AppInterface.PNContent">
             <summary>
             Container class for constructing the text shown in the different kinds of push notifications (PN).
@@ -234,6 +208,32 @@
         <member name="P:Joker.AppInterface.PNContent.Body.LimitReminder">
             <summary>
             Main text of the notification reminding the user about their limit's current state.
+            </summary>
+        </member>
+        <member name="T:Joker.AppInterface.PNType">
+            <summary>
+            The different kinds of push notifications (PN) sent by the application.
+            Also used to supply IDs to each notification and related properties.
+            </summary>
+        </member>
+        <member name="F:Joker.AppInterface.PNType.LimitExpired">
+            <summary>
+            Notifies the user that his limit has expired and a new one must be set.
+            </summary>
+        </member>
+        <member name="F:Joker.AppInterface.PNType.NewPicture">
+            <summary>
+            Notifies the user that a new motivating picture has been added to the database.
+            </summary>
+        </member>
+        <member name="F:Joker.AppInterface.PNType.GambleReminder">
+            <summary>
+            Notifies the user to always record his spendings for gambling.
+            </summary>
+        </member>
+        <member name="F:Joker.AppInterface.PNType.LimitReminder">
+            <summary>
+            Notifies the user about the current state of their limit.
             </summary>
         </member>
         <member name="T:Joker.BusinessLogic.Contact">
@@ -792,7 +792,7 @@
             <summary>
             Sets the time span between two new pictures from a user-supplied text string.
             </summary>
-            <param name="str">User input from an entry to be parsed.</param>
+            <param name="input">User input from an entry to be parsed.</param>
             <exception cref="T:System.ArgumentException">Thrown if the argument couldn't be parsed or isn't within the
             allowed TimeSpan bounds.</exception>
         </member>
@@ -816,7 +816,7 @@
             <summary>
             Sets the time span between two gambling reminders from a user-supplied text string.
             </summary>
-            <param name="str">User input from an entry to be parsed.</param>
+            <param name="input">User input from an entry to be parsed.</param>
         </member>
         <member name="P:Joker.DataAccess.UserSettings.LimitReminderInterval">
             <summary>
@@ -827,13 +827,13 @@
             <summary>
             Sets the time span between two limit reminders from a user-supplied text string.
             </summary>
-            <param name="str">User input from an entry to be parsed.</param>
+            <param name="input">User input from an entry to be parsed.</param>
         </member>
         <member name="M:Joker.DataAccess.UserSettings.ParseReminderInterval(System.String)">
             <summary>
             Parses a user input string from the settings page according the bounds of reminder notifications.
             </summary>
-            <param name="str">String to be parsed.</param>
+            <param name="input">String to be parsed.</param>
             <returns>The parsed time span.</returns>
             <exception cref="T:System.ArgumentException">Thrown if the argument couldn't be parsed or isn't within the
             allowed TimeSpan bounds.</exception>
@@ -898,11 +898,6 @@
         <member name="F:Joker.UserInterface.ContactPage.Headline">
             <summary>
             The title of this page, provided here to be accessible from anywhere.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.ContactPage.Info">
-            <summary>
-            Info text for the user concerning the functionality of this page.
             </summary>
         </member>
         <member name="P:Joker.UserInterface.ContactPage.Contacts">
@@ -1015,6 +1010,14 @@
             <param name="sender">Reference to the event's source object.</param>
             <param name="e">Contains event data.</param>
         </member>
+        <member name="M:Joker.UserInterface.PasswordPage.ShowSecurityQuestions(System.Object,System.EventArgs)">
+            <summary>
+            Label event handler that allows the user to select one of the two security questions to answer in case
+            the password was forgotten.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
         <member name="T:Joker.UserInterface.PictureFeed">
             <summary>
             The main page's left tab. A view where the user can shuffle through the different
@@ -1024,11 +1027,6 @@
         <member name="F:Joker.UserInterface.PictureFeed.Headline">
             <summary>
             The title of this page, provided here to be accessible from anywhere.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.PictureFeed.Info">
-            <summary>
-            Info text for the user concerning the functionality of this page.
             </summary>
         </member>
         <member name="M:Joker.UserInterface.PictureFeed.#ctor">
@@ -1044,11 +1042,6 @@
         <member name="F:Joker.UserInterface.SettingsPage.Headline">
             <summary>
             The title of this page, provided here to be accessible from anywhere.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.SettingsPage.Info">
-            <summary>
-            Info text for the user concerning the functionality of this page.
             </summary>
         </member>
         <member name="M:Joker.UserInterface.SettingsPage.#ctor">
@@ -1072,7 +1065,7 @@
         </member>
         <member name="M:Joker.UserInterface.SettingsPage.TogglePasswordObfuscation(System.Object,System.EventArgs)">
             <summary>
-            Button event handler that toggles whether the password should be hidden.
+            Button event handler that toggles whether the password and security answers should be hidden.
             </summary>
             <param name="sender">Reference to the event's source object.</param>
             <param name="e">Contains event data.</param>
@@ -1223,11 +1216,6 @@
         <member name="F:Joker.UserInterface.TimelineFeed.Headline">
             <summary>
             The title of this page, provided here to be accessible from anywhere.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.TimelineFeed.Info">
-            <summary>
-            Info text for the user concerning the functionality of this page.
             </summary>
         </member>
         <member name="P:Joker.UserInterface.TimelineFeed.CurrentLimitFeedback">

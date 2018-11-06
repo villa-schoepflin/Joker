@@ -1,7 +1,6 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using Joker.AppInterface;
 using Joker.DataAccess;
 
 namespace Joker.UserInterface
@@ -17,11 +16,6 @@ namespace Joker.UserInterface
 		/// The title of this page, provided here to be accessible from anywhere.
 		/// </summary>
 		public const string Headline = "Bilder";
-
-		/// <summary>
-		/// Info text for the user concerning the functionality of this page.
-		/// </summary>
-		public static string Info => FileResourceReader.Get("Info_PictureFeed.txt");
 
 		/// <summary>
 		/// Initializes XAML elements sets binding context.

@@ -93,6 +93,93 @@
 								 Spacing="5">
 						<Label VerticalTextAlignment="Center"
 							   TextColor="{StaticResource Text2}"
+							   FontSize="Small">Erste Sicherheitsfrage:</Label>
+						<BoxView HeightRequest="1"
+								 HorizontalOptions="FillAndExpand"
+								 VerticalOptions="Center"
+								 Color="{StaticResource Text2}" />
+					</StackLayout>
+					<StackLayout Orientation="Horizontal"
+								 Spacing="5">
+						<Entry x:Name="FirstSecurityQuestion"
+							   Text="{Static da:UserSettings.FirstSecurityQuestion}"
+							   Placeholder="Frage"
+							   HorizontalOptions="FillAndExpand" />
+						<Button Clicked="ShowSecurityQuestionProposals"
+								x:Name="FirstQuestionMenuButton"
+								BackgroundColor="{StaticResource Bgr3}"
+								WidthRequest="40"
+								HeightRequest="40"
+								Image="ui_menu.png" />
+					</StackLayout>
+					<StackLayout Orientation="Horizontal"
+								 Spacing="5">
+						<Entry x:Name="FirstSecurityAnswer"
+							   Text="{Static da:UserSettings.FirstSecurityAnswer}"
+							   Placeholder="Antwort"
+							   HorizontalOptions="FillAndExpand"
+							   IsPassword="True" />
+						<Button Clicked="SaveFirstSecurityQuestion"
+								BackgroundColor="{StaticResource Bgr3}"
+								WidthRequest="40"
+								HeightRequest="40"
+								Image="ui_save.png" />
+					</StackLayout>
+				</StackLayout>
+			</Frame>
+			<Frame Margin="{StaticResource StripMargin}"
+				   Padding="{StaticResource PagePadding}"
+				   BackgroundColor="{StaticResource Bgr2}"
+				   HasShadow="False"
+				   CornerRadius="0">
+				<StackLayout>
+					<StackLayout Orientation="Horizontal"
+								 Spacing="5">
+						<Label VerticalTextAlignment="Center"
+							   TextColor="{StaticResource Text2}"
+							   FontSize="Small">Zweite Sicherheitsfrage:</Label>
+						<BoxView HeightRequest="1"
+								 HorizontalOptions="FillAndExpand"
+								 VerticalOptions="Center"
+								 Color="{StaticResource Text2}" />
+					</StackLayout>
+					<StackLayout Orientation="Horizontal"
+								 Spacing="5">
+						<Entry x:Name="SecondSecurityQuestion"
+							   Text="{Static da:UserSettings.SecondSecurityQuestion}"
+							   Placeholder="Frage"
+							   HorizontalOptions="FillAndExpand" />
+						<Button Clicked="ShowSecurityQuestionProposals"
+								BackgroundColor="{StaticResource Bgr3}"
+								WidthRequest="40"
+								HeightRequest="40"
+								Image="ui_menu.png" />
+					</StackLayout>
+					<StackLayout Orientation="Horizontal"
+								 Spacing="5">
+						<Entry x:Name="SecondSecurityAnswer"
+							   Text="{Static da:UserSettings.SecondSecurityAnswer}"
+							   Placeholder="Antwort"
+							   HorizontalOptions="FillAndExpand"
+							   IsPassword="True" />
+						<Button Clicked="SaveSecondSecurityQuestion"
+								BackgroundColor="{StaticResource Bgr3}"
+								WidthRequest="40"
+								HeightRequest="40"
+								Image="ui_save.png" />
+					</StackLayout>
+				</StackLayout>
+			</Frame>
+			<Frame Margin="{StaticResource StripMargin}"
+				   Padding="{StaticResource PagePadding}"
+				   BackgroundColor="{StaticResource Bgr2}"
+				   HasShadow="False"
+				   CornerRadius="0">
+				<StackLayout>
+					<StackLayout Orientation="Horizontal"
+								 Spacing="5">
+						<Label VerticalTextAlignment="Center"
+							   TextColor="{StaticResource Text2}"
 							   FontSize="Small">Zeitspanne zwischen neuen Bildern:</Label>
 						<BoxView HeightRequest="1"
 								 HorizontalOptions="FillAndExpand"

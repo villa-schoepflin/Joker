@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -22,7 +21,7 @@ namespace Joker.UserInterface
 		{
 			InitializeComponent();
 			if(Regex.IsMatch(UserSettings.UserPassword, @"[0-9]+"))
-				PasswordEntry.Keyboard = Keyboard.Numeric;
+				AnswerEntry.Keyboard = Keyboard.Numeric;
 		}
 
 		/// <summary>
@@ -31,13 +30,11 @@ namespace Joker.UserInterface
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
 		/// <param name="e">Contains event data.</param>
-		private async void CheckPassword(object sender, TextChangedEventArgs e)
+		private void CheckPassword(object sender, TextChangedEventArgs e)
 		{
-			if(PasswordEntry.Text == UserSettings.UserPassword)
+			if(AnswerEntry.Text == UserSettings.UserPassword)
 			{
-				PasswordEntry.Unfocus();
 				Indicator.IsRunning = true;
-				await Task.Delay(250);
 
 				/* If the most recent limit hasn't expired yet, direct the user to the regular main page, otherwise
 				 * direct them to the page where they can add a new limit, then return to the regular main page. */
@@ -55,12 +52,22 @@ namespace Joker.UserInterface
 		/// <param name="e">Contains event data.</param>
 		private void TogglePasswordObfuscation(object sender, EventArgs e)
 		{
-			PasswordEntry.IsPassword ^= true;
+			AnswerEntry.IsPassword ^= true;
 		}
 
-		private void ShowSecurityQuestion(object sender, EventArgs e)
+		/// <summary>
+		/// Label event handler that allows the user to select one of the two security questions to answer in case
+		/// the password was forgotten.
+		/// </summary>
+		/// <param name="sender">Reference to the event's source object.</param>
+		/// <param name="e">Contains event data.</param>
+		private async void ShowSecurityQuestions(object sender, EventArgs e)
 		{
-			;
+			SecurityQuestion.Text = await DisplayActionSheet(
+				"Wähle die Sicherheitsfrage aus, die Du beantworten möchtest:", "Abbrechen", null,
+				new[] { UserSettings.FirstSecurityQuestion, UserSettings.SecondSecurityQuestion });
+
+			//TODO
 		}
 	}
 }

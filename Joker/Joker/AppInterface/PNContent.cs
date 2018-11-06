@@ -3,30 +3,6 @@
 namespace Joker.AppInterface
 {
 	/// <summary>
-	/// The different kinds of push notifications (PN) sent by the application.
-	/// Also used to supply IDs to each notification and related properties.
-	/// </summary>
-	public enum PNType
-	{
-		/// <summary>
-		/// Notifies the user that his limit has expired and a new one must be set.
-		/// </summary>
-		LimitExpired = 0,
-		/// <summary>
-		/// Notifies the user that a new motivating picture has been added to the database.
-		/// </summary>
-		NewPicture = 1,
-		/// <summary>
-		/// Notifies the user to always record his spendings for gambling.
-		/// </summary>
-		GambleReminder = 2,
-		/// <summary>
-		/// Notifies the user about the current state of their limit.
-		/// </summary>
-		LimitReminder = 3
-	}
-
-	/// <summary>
 	/// Container class for constructing the text shown in the different kinds of push notifications (PN).
 	/// </summary>
 	public static class PNContent
@@ -100,5 +76,29 @@ namespace Joker.AppInterface
 				}
 			}
 		}
+	}
+
+	/// <summary>
+	/// The different kinds of push notifications (PN) sent by the application.
+	/// Also used to supply IDs to each notification and related properties.
+	/// </summary>
+	public enum PNType
+	{
+		/// <summary>
+		/// Notifies the user that his limit has expired and a new one must be set.
+		/// </summary>
+		LimitExpired = 0,
+		/// <summary>
+		/// Notifies the user that a new motivating picture has been added to the database.
+		/// </summary>
+		NewPicture = 1,
+		/// <summary>
+		/// Notifies the user to always record his spendings for gambling.
+		/// </summary>
+		GambleReminder = 2,
+		/// <summary>
+		/// Notifies the user about the current state of their limit.
+		/// </summary>
+		LimitReminder = 3
 	}
 }

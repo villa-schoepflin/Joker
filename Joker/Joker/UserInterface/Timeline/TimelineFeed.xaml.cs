@@ -21,11 +21,6 @@ namespace Joker.UserInterface
 		public const string Headline = "Chronik";
 
 		/// <summary>
-		/// Info text for the user concerning the functionality of this page.
-		/// </summary>
-		public static string Info => FileResourceReader.Get("Info_TimelineFeed.txt");
-
-		/// <summary>
 		/// Generates the feedback concerning the user's current limit.
 		/// </summary>
 		public string CurrentLimitFeedback
