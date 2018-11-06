@@ -29,6 +29,7 @@ namespace Joker.UserInterface
 		/// <param name="e">Contains event data.</param>
 		private void OnContinueButton(object sender, EventArgs e)
 		{
+			Indicator.IsRunning = true;
 			Database.Initialize();
 
 			// Inserts the optional first contact

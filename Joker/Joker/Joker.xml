@@ -967,6 +967,31 @@
             <param name="sender">Reference to the event's source object.</param>
             <param name="e">Contains event data.</param>
         </member>
+        <member name="T:Joker.UserInterface.PasswordPage">
+            <summary>
+            A page that can be set to appear upon starting the app, prompting the user for his password.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.PasswordPage.#ctor">
+            <summary>
+            Initializes XAML elements.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.PasswordPage.CheckPassword(System.Object,Xamarin.Forms.TextChangedEventArgs)">
+            <summary>
+            Text change event handler that checks whether the password is correct and directs the user to the
+            page that they would have otherwise seen if a password was not set.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.PasswordPage.TogglePasswordObfuscation(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that toggles whether the password should be hidden.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
         <member name="T:Joker.UserInterface.PictureFeed">
             <summary>
             The main page's left tab. A view where the user can shuffle through the different
@@ -1018,6 +1043,27 @@
         <member name="M:Joker.UserInterface.SettingsPage.SaveUserName(System.Object,System.EventArgs)">
             <summary>
             Button event handler that relays input validation for the user name setting and saves it if applicable.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.SettingsPage.TogglePasswordObfuscation(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that toggles whether the password should be hidden.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.SettingsPage.RemovePassword(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that removes the password and its text.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.SettingsPage.SavePassword(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that saves the text in the password entry as password if valid.
             </summary>
             <param name="sender">Reference to the event's source object.</param>
             <param name="e">Contains event data.</param>

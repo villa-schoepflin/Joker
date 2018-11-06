@@ -16,6 +16,8 @@
 				   FontSize="20"
 				   TextColor="{StaticResource TextContrast}"
 				   HorizontalTextAlignment="Center">Du kannst Deine Angaben jederzeit in den Einstellungen ändern.&#10;&#10;Dein erstes Limit gilt ab jetzt für 7 Tage.</Label>
+			<ActivityIndicator x:Name="Indicator"
+							   Color="{StaticResource TextContrast}" />
 			<Button Clicked="OnContinueButton"
 					VerticalOptions="CenterAndExpand"
 					BackgroundColor="{StaticResource Bgr1}"

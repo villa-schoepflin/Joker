@@ -46,6 +46,8 @@
 							<Label FontSize="Small"
 								   Text="{Binding CurrentLimitFeedback}"
 								   TextColor="{StaticResource Text1}" />
+							<Label Text="&#32;"
+								   FontSize="Small" />
 							<Label FontSize="Small"
 								   Text="{Binding PreviousLimitFeedback}"
 								   TextColor="{StaticResource Text2}" />

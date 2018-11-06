@@ -33,8 +33,6 @@ namespace Joker.UserInterface
 		public SettingsPage()
 		{
 			InitializeComponent();
-			UserNameEntry.Text = UserSettings.UserName;
-			UserPasswordEntry.Text = UserSettings.UserPassword;
 			NewPictureEntry.Text = $"{UserSettings.NewPictureInterval.TotalDays} Tage";
 			GambleReminderEntry.Text = $"{UserSettings.GambleReminderInterval.TotalHours} Stunden";
 			LimitReminderEntry.Text = $"{UserSettings.LimitReminderInterval.TotalHours} Stunden";
@@ -60,8 +58,8 @@ namespace Joker.UserInterface
 			try
 			{
 				UserSettings.UserName = UserNameEntry.Text;
-				await DisplayAlert("Name gespeichert",
-					$"Die App spricht Dich ab sofort mit {UserSettings.UserName} an.", "Ok");
+				await DisplayAlert("Name gespeichert", "Die App spricht Dich ab jetzt mit " + UserSettings.UserName
+					+ " an.", "Ok");
 				App.CurrentTimelineFeed.RefreshInfo();
 			}
 			catch(ArgumentException error)
@@ -70,6 +68,34 @@ namespace Joker.UserInterface
 			}
 		}
 
+		/// <summary>
+		/// Button event handler that toggles whether the password should be hidden.
+		/// </summary>
+		/// <param name="sender">Reference to the event's source object.</param>
+		/// <param name="e">Contains event data.</param>
+		private void TogglePasswordObfuscation(object sender, EventArgs e)
+		{
+			UserPasswordEntry.IsPassword ^= true;
+		}
+
+		/// <summary>
+		/// Button event handler that removes the password and its text.
+		/// </summary>
+		/// <param name="sender">Reference to the event's source object.</param>
+		/// <param name="e">Contains event data.</param>
+		private async void RemovePassword(object sender, EventArgs e)
+		{
+			UserPasswordEntry.Text = "";
+			UserSettings.UserPassword = "";
+			AppSettings.UserPasswordIsSet = false;
+			await DisplayAlert("Passwort entfernt", "Du brauchst jetzt kein Passwort mehr für die App.", "Ok");
+		}
+
+		/// <summary>
+		/// Button event handler that saves the text in the password entry as password if valid.
+		/// </summary>
+		/// <param name="sender">Reference to the event's source object.</param>
+		/// <param name="e">Contains event data.</param>
 		private async void SavePassword(object sender, EventArgs e)
 		{
 			try
@@ -78,19 +104,13 @@ namespace Joker.UserInterface
 					throw new ArgumentException("Du kannst kein leeres Passwort setzen.");
 				UserSettings.UserPassword = UserPasswordEntry.Text;
 				AppSettings.UserPasswordIsSet = true;
-				await DisplayAlert("Passwort gespeichert", null, "Ok");
+				await DisplayAlert("Passwort erstellt", "Ab jetzt wird Dich die App nach dem Passwort fragen.", "Ok");
 			}
 			catch(ArgumentException error)
 			{
 				await DisplayAlert(null, error.Message, "Ok");
+				UserPasswordEntry.Text = UserSettings.UserPassword;
 			}
-		}
-
-		private async void RemovePassword(object sender, EventArgs e)
-		{
-			UserSettings.UserPassword = "";
-			AppSettings.UserPasswordIsSet = false;
-			await DisplayAlert("Passwort entfernt", "Die App wird Dich nicht nach einem Passwort fragen.", "Ok");
 		}
 
 		/// <summary>
@@ -104,13 +124,12 @@ namespace Joker.UserInterface
 			try
 			{
 				UserSettings.SetNewPictureInterval(NewPictureEntry.Text);
-				await DisplayAlert("Gespeichert",
-					"Die Einstellung wird nach dem nächsten Bild berücksichtigt.", "Ok");
+				await DisplayAlert("Gespeichert", "Die Einstellung wird nach dem nächsten Bild berücksichtigt.", "Ok");
 			}
 			catch(ArgumentException error)
 			{
-				NewPictureEntry.Text = $"{UserSettings.NewPictureInterval.TotalDays} Tage";
 				await DisplayAlert(null, error.Message, "Ok");
+				NewPictureEntry.Text = $"{UserSettings.NewPictureInterval.TotalDays} Tage";
 			}
 		}
 
@@ -126,14 +145,13 @@ namespace Joker.UserInterface
 			{
 				UserSettings.SetGambleReminderInterval(GambleReminderEntry.Text);
 				DependencyService.Get<IPlatformNotifier>().ScheduleGambleReminder(UserSettings.GambleReminderInterval);
-				await DisplayAlert("Gespeichert",
-					$"Die nächste Erinnerung kommt in circa {UserSettings.GambleReminderInterval.TotalHours} Stunden.",
-					"Ok");
+				await DisplayAlert("Gespeichert", "Die nächste Erinnerung kommt in circa "
+					+ UserSettings.GambleReminderInterval.TotalHours + " Stunden.", "Ok");
 			}
 			catch(ArgumentException error)
 			{
-				GambleReminderEntry.Text = $"{UserSettings.GambleReminderInterval.TotalHours} Stunden";
 				await DisplayAlert(null, error.Message, "Ok");
+				GambleReminderEntry.Text = $"{UserSettings.GambleReminderInterval.TotalHours} Stunden";
 			}
 		}
 
@@ -149,14 +167,13 @@ namespace Joker.UserInterface
 			{
 				UserSettings.SetLimitReminderInterval(LimitReminderEntry.Text);
 				DependencyService.Get<IPlatformNotifier>().ScheduleLimitReminder(UserSettings.LimitReminderInterval);
-				await DisplayAlert("Gespeichert",
-					$"Die nächste Erinnerung kommt in circa {UserSettings.LimitReminderInterval.TotalHours} Stunden.",
-					"Ok");
+				await DisplayAlert("Gespeichert", "Die nächste Erinnerung kommt in circa "
+					+ UserSettings.LimitReminderInterval.TotalHours + " Stunden.", "Ok");
 			}
 			catch(ArgumentException error)
 			{
-				LimitReminderEntry.Text = $"{UserSettings.LimitReminderInterval.TotalHours} Stunden";
 				await DisplayAlert(null, error.Message, "Ok");
+				LimitReminderEntry.Text = $"{UserSettings.LimitReminderInterval.TotalHours} Stunden";
 			}
 		}
 

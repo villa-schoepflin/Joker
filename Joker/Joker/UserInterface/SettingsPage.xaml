@@ -31,6 +31,7 @@
 					<StackLayout Orientation="Horizontal"
 								 Spacing="5">
 						<Entry x:Name="UserNameEntry"
+							   Text="{Static da:UserSettings.UserName}"
 							   MaxLength="{Static da:UserSettings.MaxNameLength}"
 							   HorizontalOptions="FillAndExpand" />
 						<Button Clicked="SaveUserName"
@@ -60,18 +61,25 @@
 					<StackLayout Orientation="Horizontal"
 								 Spacing="5">
 						<Entry x:Name="UserPasswordEntry"
+							   Text="{Static da:UserSettings.UserPassword}"
 							   MaxLength="{Static da:UserSettings.MaxPasswordLength}"
-							   HorizontalOptions="FillAndExpand" />
-						<Button Clicked="SavePassword"
+							   HorizontalOptions="FillAndExpand"
+							   IsPassword="True" />
+						<Button Clicked="TogglePasswordObfuscation"
 								BackgroundColor="{StaticResource Bgr3}"
 								WidthRequest="40"
 								HeightRequest="40"
-								Image="ui_save.png" />
+								Image="ui_show.png" />
 						<Button Clicked="RemovePassword"
 								BackgroundColor="{StaticResource Bgr3}"
 								WidthRequest="40"
 								HeightRequest="40"
 								Image="ui_remove.png" />
+						<Button Clicked="SavePassword"
+								BackgroundColor="{StaticResource Bgr3}"
+								WidthRequest="40"
+								HeightRequest="40"
+								Image="ui_save.png" />
 					</StackLayout>
 				</StackLayout>
 			</Frame>

@@ -1,0 +1,3 @@
+Hier kannst Du einige Einstellungen der App ändern.
+
+Neben Deinem Namen in der App und Deinem persönlichen Kontakt kannst Du hier auch einstellen, in welchen Zeitabständen Dir die App Push-Benachrichtigungen mit motivierenden Texten schicken soll oder wie oft Du neue Motivationsbilder erhalten möchtest.

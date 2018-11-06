@@ -354,6 +354,18 @@
     <ImageAsset Include="Assets.xcassets\ui_info.png.imageset\ui_info3.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ui_show.png.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ui_show.png.imageset\show1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ui_show.png.imageset\show2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ui_show.png.imageset\show3.png">
+      <Visible>false</Visible>
+    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\ui_clipboard.png.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>

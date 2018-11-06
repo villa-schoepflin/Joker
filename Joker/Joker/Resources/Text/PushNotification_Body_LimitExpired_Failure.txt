@@ -1,0 +1,3 @@
+Hey $USERNAME$, leider hast Du Dein Limit diesmal überschritten.
+
+Öffne die App und gib ein neues Limit ein.

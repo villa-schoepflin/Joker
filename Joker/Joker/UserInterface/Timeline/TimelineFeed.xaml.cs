@@ -66,11 +66,11 @@ namespace Joker.UserInterface
 			{
 				if(Database.CountLimits() > 1)
 					if(Database.CalcPreviousLimitBalance() >= 0)
-						return "\n\nDein letztes Limit konntest Du einhalten. Ausgezeichnet! Du kannst stolz "
+						return "Dein letztes Limit konntest Du einhalten. Ausgezeichnet! Du kannst stolz "
 							+ "auf Dich sein. Denk daran, dass jedes Limit ein bisschen niedriger sein sollte als "
 							+ "das vorherige. So gewinnst Du Stück für Stück mehr Kontrolle über das Glücksspiel.";
 					else
-						return "\n\nDein letztes Limit konntest Du leider nicht einhalten. Schade, dass es nicht "
+						return "Dein letztes Limit konntest Du leider nicht einhalten. Schade, dass es nicht "
 							+ "geklappt hat. Woran es wohl gelegen hat?\n\n"
 							+ "Am besten, Du konzentrierst Dich jetzt erstmal darauf, dass Du Dein aktuelles Limit "
 							+ "nicht überschreitest. Glaub an Dich! Dieses Mal schaffst Du es sicher.";

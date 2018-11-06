@@ -22,7 +22,7 @@ namespace Joker.DataAccess
 		/// </summary>
 		/// <exception cref="ArgumentException">Thrown if the user tries to set this to an empty string or exceeds
 		/// the maximum allowed length.</exception>
-		internal static string UserName
+		public static string UserName
 		{
 			get => Preferences.Get("UserName", null);
 			set
@@ -44,7 +44,7 @@ namespace Joker.DataAccess
 		/// <summary>
 		/// The optional password with which the user can protect access to the app's UI.
 		/// </summary>
-		internal static string UserPassword
+		public static string UserPassword
 		{
 			get => Preferences.Get("UserPassword", null);
 			set
@@ -53,7 +53,7 @@ namespace Joker.DataAccess
 					throw new ArgumentException($"Das Passwort darf nicht länger als {MaxPasswordLength} Zeichen sein.");
 				if(value.Contains(" "))
 					throw new ArgumentException("Das Passwort darf keine Leerzeichen enthalten.");
-				if(!new Regex(@"[a-zA-Z0-9]*").IsMatch(value))
+				if(!Regex.IsMatch(value, @"[a-zA-Z0-9]*"))
 					throw new ArgumentException("Das Passwort darf nur Groß-/Kleinbuchstaben und Zahlen enthalten.");
 				Preferences.Set("UserPassword", value);
 			}

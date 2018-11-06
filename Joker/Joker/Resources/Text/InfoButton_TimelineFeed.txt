@@ -1,0 +1,5 @@
+Auf dieser Seite findest Du einen Überblick über Deine Limits (blau markiert) und Glücksspielausgaben (grau markiert), die Du in der App festgehalten hast.
+
+Wenn Du eine neue Ausgabe hinzufügen möchtest, tippe auf das "+" in der unteren rechten Ecke. Das Hinzufügen eines neuen Limits ist erst möglich, wenn das aktuell bestehende Limit abgelaufen ist.
+
+Details zu jedem Limit und jeder Ausgabe findest Du, wenn Du den dazugehörigen Eintrag antippst.

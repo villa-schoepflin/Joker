@@ -64,6 +64,8 @@
 					</Entry.TextColor>
 				</Entry>
 			</Grid>
+			<ActivityIndicator x:Name="Indicator"
+							   Color="{StaticResource TextContrast}" />
 			<Button Clicked="OnContinueButton"
 					HorizontalOptions="CenterAndExpand"
 					VerticalOptions="CenterAndExpand"

@@ -46,6 +46,7 @@ namespace Joker.UserInterface
 		{
 			try
 			{
+				Indicator.IsRunning = true;
 				DependencyService.Get<IPlatformNotifier>().CancelLimitExpired();
 
 				var limit = new Limit(AmountEntry.Text, DurationEntry.Text);
@@ -57,6 +58,7 @@ namespace Joker.UserInterface
 			}
 			catch(ArgumentException error)
 			{
+				Indicator.IsRunning = false;
 				await DisplayAlert(null, error.Message, "Ok");
 			}
 		}

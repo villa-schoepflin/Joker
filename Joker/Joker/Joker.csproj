@@ -64,6 +64,8 @@
     <None Remove="Resources\PictureFeed\Wand 1.jpg" />
     <None Remove="Resources\PictureFeed\Wand 2.jpg" />
     <None Remove="Resources\PictureFeed\Zaun.jpg" />
+    <None Remove="Resources\Text\PushNotification_Title_LimitExpired.txt" />
+    <None Remove="Resources\Text\PushNotification_Title_NewPicture.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -107,6 +109,8 @@
     <EmbeddedResource Include="Resources\PictureFeed\Stadt 1.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\Stadt 2.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\Container.jpg" />
+    <EmbeddedResource Include="Resources\Text\PushNotification_Title_NewPicture.txt" />
+    <EmbeddedResource Include="Resources\Text\PushNotification_Title_LimitExpired.txt" />
   </ItemGroup>
 
   <ItemGroup>
