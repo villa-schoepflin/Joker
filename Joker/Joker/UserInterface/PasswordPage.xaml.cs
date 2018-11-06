@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -14,6 +15,8 @@ namespace Joker.UserInterface
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class PasswordPage : ContentPage
 	{
+		private bool SwitchedToSecurityQuestions;
+
 		/// <summary>
 		/// Initializes XAML elements.
 		/// </summary>
@@ -25,24 +28,28 @@ namespace Joker.UserInterface
 		}
 
 		/// <summary>
-		/// Text change event handler that checks whether the password is correct and directs the user to the
-		/// page that they would have otherwise seen if a password was not set.
+		/// Text change event handler that checks whether the password is correct.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
 		/// <param name="e">Contains event data.</param>
 		private void CheckPassword(object sender, TextChangedEventArgs e)
 		{
 			if(AnswerEntry.Text == UserSettings.UserPassword)
-			{
-				Indicator.IsRunning = true;
+				OnSecurityInformationConfirmed();
+		}
 
-				/* If the most recent limit hasn't expired yet, direct the user to the regular main page, otherwise
-				 * direct them to the page where they can add a new limit, then return to the regular main page. */
-				if(DateTime.UtcNow < AppSettings.LimitExpiredTime)
-					App.SetMainPageToDefault();
-				else
-					Application.Current.MainPage = new AddLimitPage();
-			}
+		private async void OnSecurityInformationConfirmed()
+		{
+			Indicator.IsRunning = true;
+			AnswerEntry.Unfocus();
+			await Task.Delay(300);
+
+			/* If the most recent limit hasn't expired yet, direct the user to the regular main page, otherwise
+			 * direct them to the page where they can add a new limit, then return to the regular main page. */
+			if(DateTime.UtcNow < AppSettings.LimitExpiredTime)
+				App.SetMainPageToDefault();
+			else
+				Application.Current.MainPage = new AddLimitPage();
 		}
 
 		/// <summary>
@@ -63,11 +70,22 @@ namespace Joker.UserInterface
 		/// <param name="e">Contains event data.</param>
 		private async void ShowSecurityQuestions(object sender, EventArgs e)
 		{
+			SwitchedToSecurityQuestions ^= true;
 			SecurityQuestion.Text = await DisplayActionSheet(
 				"Wähle die Sicherheitsfrage aus, die Du beantworten möchtest:", "Abbrechen", null,
-				new[] { UserSettings.FirstSecurityQuestion, UserSettings.SecondSecurityQuestion });
+				UserSettings.FirstSecurityQuestion, UserSettings.SecondSecurityQuestion);
 
-			//TODO
+			if(SwitchedToSecurityQuestions)
+			{
+				AnswerEntry.TextChanged -= CheckPassword;
+				AnswerEntry.TextChanged += CheckFirstSecurityQuestion;
+				AnswerEntry.Placeholder = "Deine Antwort";
+			}
+			else
+			{
+				AnswerEntry.TextChanged += CheckPassword;
+				AnswerEntry.Placeholder = "Dein Passwort";
+			}
 		}
 	}
 }

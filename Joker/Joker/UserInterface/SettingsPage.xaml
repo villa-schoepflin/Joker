@@ -104,7 +104,8 @@
 						<Entry x:Name="FirstSecurityQuestion"
 							   Text="{Static da:UserSettings.FirstSecurityQuestion}"
 							   Placeholder="Frage"
-							   HorizontalOptions="FillAndExpand" />
+							   HorizontalOptions="FillAndExpand"
+							   FontAttributes="Bold" />
 						<Button Clicked="ShowSecurityQuestionProposals"
 								x:Name="FirstQuestionMenuButton"
 								BackgroundColor="{StaticResource Bgr3}"
@@ -148,7 +149,8 @@
 						<Entry x:Name="SecondSecurityQuestion"
 							   Text="{Static da:UserSettings.SecondSecurityQuestion}"
 							   Placeholder="Frage"
-							   HorizontalOptions="FillAndExpand" />
+							   HorizontalOptions="FillAndExpand"
+							   FontAttributes="Bold" />
 						<Button Clicked="ShowSecurityQuestionProposals"
 								BackgroundColor="{StaticResource Bgr3}"
 								WidthRequest="40"

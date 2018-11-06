@@ -44,6 +44,8 @@ namespace Joker.DataAccess
 		/// <summary>
 		/// The optional password with which the user can protect access to the app's UI.
 		/// </summary>
+		/// <exception cref="ArgumentException">Thrown if the user tries to set this property to a text that is longer
+		/// than the maximum allowed length or doesn't contain anything except alphanumeric characters.</exception>
 		public static string UserPassword
 		{
 			get => Preferences.Get("UserPassword", null);
@@ -59,13 +61,90 @@ namespace Joker.DataAccess
 			}
 		}
 
-		public static string FirstSecurityQuestion { get; set; }
+		/// <summary>
+		/// The maximum string length for either a security question or answer.
+		/// </summary>
+		public const int MaxSecurityEntryLength = 80;
 
-		public static string FirstSecurityAnswer { get; set; }
+		/// <summary>
+		/// Holds the text of the first security question.
+		/// </summary>
+		/// <exception cref="ArgumentException">Thrown if the user tries to set this property to a text that is longer
+		/// than the maximum allowed length or is a null or empty string.</exception>
+		public static string FirstSecurityQuestion
+		{
+			get => Preferences.Get("FirstSecurityQuestion", null);
+			set
+			{
+				if(value.Length > MaxSecurityEntryLength)
+					throw new ArgumentException("Die Sicherheitsfrage darf nicht länger als "
+						+ MaxSecurityEntryLength + " sein.");
+				value = value.Trim();
+				if(string.IsNullOrEmpty(value))
+					throw new ArgumentException("Der angegebene Text ist leer.");
+				Preferences.Set("FirstSecurityQuestion", value);
+			}
+		}
 
-		public static string SecondSecurityQuestion { get; set; }
+		/// <summary>
+		/// Holds the text of the answer to the first security question.
+		/// </summary>
+		/// <exception cref="ArgumentException">Thrown if the user tries to set this property to a text that is longer
+		/// than the maximum allowed length or is a null or empty string.</exception>
+		public static string FirstSecurityAnswer
+		{
+			get => Preferences.Get("FirstSecurityAnswer", null);
+			set
+			{
+				if(value.Length > MaxSecurityEntryLength)
+					throw new ArgumentException("Die Sicherheitsfrage darf nicht länger als "
+						+ MaxSecurityEntryLength + " sein.");
+				value = value.Trim();
+				if(string.IsNullOrEmpty(value))
+					throw new ArgumentException("Der angegebene Text ist leer.");
+				Preferences.Set("FirstSecurityAnswer", value);
+			}
+		}
 
-		public static string SecondSecurityAnswer { get; set; }
+		/// <summary>
+		/// Holds the text of the second security question.
+		/// </summary>
+		/// <exception cref="ArgumentException">Thrown if the user tries to set this property to a text that is longer
+		/// than the maximum allowed length or is a null or empty string.</exception>
+		public static string SecondSecurityQuestion
+		{
+			get => Preferences.Get("SecondSecurityQuestion", null);
+			set
+			{
+				if(value.Length > MaxSecurityEntryLength)
+					throw new ArgumentException("Die Antwort auf die Sicherheitsfrage darf nicht länger als "
+						+ MaxSecurityEntryLength + " sein.");
+				value = value.Trim();
+				if(string.IsNullOrEmpty(value))
+					throw new ArgumentException("Der angegebene Text ist leer.");
+				Preferences.Set("SecondSecurityQuestion", value);
+			}
+		}
+
+		/// <summary>
+		/// Holds the text of the answer to the second security question.
+		/// </summary>
+		/// <exception cref="ArgumentException">Thrown if the user tries to set this property to a text that is longer
+		/// than the maximum allowed length or is a null or empty string.</exception>
+		public static string SecondSecurityAnswer
+		{
+			get => Preferences.Get("SecondSecurityAnswer", null);
+			set
+			{
+				if(value.Length > MaxSecurityEntryLength)
+					throw new ArgumentException("Die Antwort auf die Sicherheitsfrage darf nicht länger als "
+						+ MaxSecurityEntryLength + " sein.");
+				value = value.Trim();
+				if(string.IsNullOrEmpty(value))
+					throw new ArgumentException("Der angegebene Text ist leer.");
+				Preferences.Set("SecondSecurityAnswer", value);
+			}
+		}
 
 		/// <summary>
 		/// The minimum allowed time span between two new pictures, which is 2 days.

@@ -36,6 +36,24 @@ namespace Joker.DataAccess
 		}
 
 		/// <summary>
+		/// Gets or sets the checking condition whether the user has set their first security question.
+		/// </summary>
+		public static bool FirstSecurityQuestionIsSet
+		{
+			get => Preferences.Get("FirstSecurityQuestionIsSet", false);
+			set => Preferences.Set("FirstSecurityQuestionIsSet", value);
+		}
+
+		/// <summary>
+		/// Gets or sets the checking condition whether the user has set their second security question.
+		/// </summary>
+		public static bool SecondSecurityQuestionIsSet
+		{
+			get => Preferences.Get("SecondSecurityQuestionIsSet", false);
+			set => Preferences.Set("SecondSecurityQuestionIsSet", value);
+		}
+
+		/// <summary>
 		/// Gets or sets the time when the current active limit expires and a new one must be set.
 		/// </summary>
 		public static DateTime LimitExpiredTime

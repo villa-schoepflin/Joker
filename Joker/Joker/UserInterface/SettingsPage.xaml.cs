@@ -94,6 +94,8 @@ namespace Joker.UserInterface
 		{
 			try
 			{
+				if(!AppSettings.FirstSecurityQuestionIsSet || !AppSettings.SecondSecurityQuestionIsSet)
+					throw new ArgumentException("Bitte lege die Sicherheitsfragen vor dem Passwort fest.");
 				if(string.IsNullOrEmpty(UserPasswordEntry.Text))
 					throw new ArgumentException("Du kannst kein leeres Passwort setzen.");
 				UserSettings.UserPassword = UserPasswordEntry.Text;
@@ -107,6 +109,11 @@ namespace Joker.UserInterface
 			}
 		}
 
+		/// <summary>
+		/// Button event handler that opens an input dialog for selecting one of several predefined security questions.
+		/// </summary>
+		/// <param name="sender">Reference to the event's source object.</param>
+		/// <param name="e">Contains event data.</param>
 		private async void ShowSecurityQuestionProposals(object sender, EventArgs e)
 		{
 			string selectedQuestion = await DisplayActionSheet("Vorschläge für Sicherheitsfragen:", "Abbrechen", null,
@@ -117,14 +124,44 @@ namespace Joker.UserInterface
 				SecondSecurityQuestion.Text = selectedQuestion;
 		}
 
-		private void SaveFirstSecurityQuestion(object sender, EventArgs e)
+		/// <summary>
+		/// Saves the text of the first security question and its answer and relays possible input errors to the user.
+		/// </summary>
+		/// <param name="sender">Reference to the event's source object.</param>
+		/// <param name="e">Contains event data.</param>
+		private async void SaveFirstSecurityQuestion(object sender, EventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine("FIRST");
+			try
+			{
+				UserSettings.FirstSecurityQuestion = FirstSecurityQuestion.Text;
+				UserSettings.FirstSecurityAnswer = FirstSecurityAnswer.Text;
+				AppSettings.FirstSecurityQuestionIsSet = true;
+				await DisplayAlert("Gespeichert", "Die erste Sicherheitsfrage und -antwort sind gespeichert.", "Ok");
+			}
+			catch(ArgumentException error)
+			{
+				await DisplayAlert(null, error.Message, "Ok");
+			}
 		}
 
-		private void SaveSecondSecurityQuestion(object sender, EventArgs e)
+		/// <summary>
+		/// Saves the text of the second security question and its answer and relays possible input errors to the user.
+		/// </summary>
+		/// <param name="sender">Reference to the event's source object.</param>
+		/// <param name="e">Contains event data.</param>
+		private async void SaveSecondSecurityQuestion(object sender, EventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine("SECOND");
+			try
+			{
+				UserSettings.SecondSecurityQuestion = SecondSecurityQuestion.Text;
+				UserSettings.SecondSecurityAnswer = SecondSecurityAnswer.Text;
+				AppSettings.SecondSecurityQuestionIsSet = true;
+				await DisplayAlert("Gespeichert", "Die zweite Sicherheitsfrage und -antwort sind gespeichert.", "Ok");
+			}
+			catch(ArgumentException error)
+			{
+				await DisplayAlert(null, error.Message, "Ok");
+			}
 		}
 
 		/// <summary>
