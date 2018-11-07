@@ -74,7 +74,7 @@ namespace Joker.DataAccess
 		{
 			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
 			{
-				if(db.Table<Contact>().Any(c => c == contact || contact == Contact.Bzga))
+				if(db.Table<Contact>().Any(c => c == contact) || contact == Contact.Bzga)
 					throw new ArgumentException("Ein Kontakt mit dieser Telefonnummer ist bereits verzeichnet.");
 				db.Insert(contact);
 			}
