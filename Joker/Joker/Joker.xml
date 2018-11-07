@@ -22,8 +22,8 @@
         </member>
         <member name="M:Joker.App.SetMainPageToDefault">
             <summary>
-            If the most recent limit hasn't expired yet, direct the user to the regular main page, otherwise
-            direct them to the page where they can add a new limit, then return to the regular main page.
+            Directs the user to the regular main page if the most recent limit hasn't expired yet, otherwise
+            directs them to the page where they can add a new limit.
             </summary>
         </member>
         <member name="F:Joker.App.Locale">

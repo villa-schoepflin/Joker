@@ -125,7 +125,7 @@ namespace Joker.UserInterface
 		private async void ShowSecurityQuestionProposals(object sender, EventArgs e)
 		{
 			string selection = await DisplayActionSheet("Vorschläge für Sicherheitsfragen:", "Abbrechen", null,
-				FileResourceReader.Get("SecurityQuestions.txt").Split('\n'));
+				FileResourceReader.Get("SecurityQuestions.txt").Replace("\r", "").Split('\n'));
 			if(!string.IsNullOrEmpty(selection) && selection != "Abbrechen")
 			{
 				if(sender == FirstQuestionMenuButton)
