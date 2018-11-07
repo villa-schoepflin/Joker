@@ -1,0 +1,3 @@
+﻿$USERNAME$, leider konntest Du Dein letztes Limit nicht einhalten. Aber das ist nicht so schlimm. Überlege Dir gut wie Du Dein nächstes Limit setzt. Diesmal schaffst Du es sicher!
+
+Dein letztes Limit war $LASTLIMITAMOUNT$.

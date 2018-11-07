@@ -60,13 +60,17 @@
         </member>
         <member name="F:Joker.AppInterface.FileResourceReader.UserNamePlaceholder">
             <summary>
-            The placeholder for when the user name should be inserted into the content of a file resource.
+            The placeholder of the user name for a text resource file.
             </summary>
         </member>
         <member name="F:Joker.AppInterface.FileResourceReader.RemainingLimitPlaceholder">
             <summary>
-            The placeholder for when the current's limit remaining balance should be inserted into the content
-            of a file resource.
+            The placeholder of the current's limit remaining balance for a text resource file.
+            </summary>
+        </member>
+        <member name="F:Joker.AppInterface.FileResourceReader.LastLimitAmountPlaceholder">
+            <summary>
+            The placeholder of the value of the most recent limit's amount for a text resource file.
             </summary>
         </member>
         <member name="M:Joker.AppInterface.FileResourceReader.Get(System.String)">

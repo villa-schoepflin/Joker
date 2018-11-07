@@ -23,14 +23,10 @@ namespace Joker.UserInterface
 		{
 			get
 			{
-				string s = UserSettings.UserName + ", ";
 				if(Database.CalcBalance(Database.MostRecentLimit()) >= 0)
-					s += "Du konntest Dein letztes Limit einhalten. Du kannst stolz auf Dich sein! Jetzt ist es "
-						+ "erstmal Zeit Dein nächstes Limit festzulegen, am besten ein bisschen niedriger.";
+					return FileResourceReader.Get("AddNewLimit_Success.txt");
 				else
-					s += "leider konntest Du Dein letztes Limit nicht einhalten. Aber das ist nicht so schlimm. "
-						+ "Überlege Dir gut wie Du Dein nächstes Limit setzt. Diesmal schaffst Du es sicher!";
-				return s + $"\n\nDein letztes Limit war {Database.MostRecentLimit().Amount.ToString("C", App.Locale)}.";
+					return FileResourceReader.Get("AddNewLimit_Failure.txt");
 			}
 		}
 
