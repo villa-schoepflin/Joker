@@ -6,8 +6,7 @@
 			 Icon="ui_timeline.png"
 			 BackgroundColor="{StaticResource Bgr1}">
 	<ContentPage.Title>
-		<OnPlatform x:TypeArguments="x:String"
-					iOS="{Static ui:TimelineFeed.Headline}" />
+		<OnPlatform iOS="{Static ui:TimelineFeed.Headline}" />
 	</ContentPage.Title>
 	<Grid>
 		<Grid.RowDefinitions>

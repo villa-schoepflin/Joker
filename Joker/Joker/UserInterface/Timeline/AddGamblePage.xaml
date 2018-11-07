@@ -14,8 +14,7 @@
 				   CornerRadius="0">
 				<Grid>
 					<Grid.RowSpacing>
-						<OnPlatform x:TypeArguments="x:Double"
-									iOS="30" />
+						<OnPlatform iOS="30" />
 					</Grid.RowSpacing>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="2*" />
@@ -34,8 +33,7 @@
 						   FontSize="{StaticResource CustomMedium}"
 						   Text="">
 						<Entry.Keyboard>
-							<OnPlatform x:TypeArguments="Keyboard"
-										Android="Telephone"
+							<OnPlatform Android="Telephone"
 										iOS="Numeric" />
 						</Entry.Keyboard>
 					</Entry>
@@ -78,8 +76,7 @@
 				   CornerRadius="0">
 				<Grid>
 					<Grid.RowSpacing>
-						<OnPlatform x:TypeArguments="x:Double"
-									iOS="30" />
+						<OnPlatform iOS="30" />
 					</Grid.RowSpacing>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="2*" />

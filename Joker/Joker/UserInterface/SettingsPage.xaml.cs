@@ -79,6 +79,14 @@ namespace Joker.UserInterface
 		/// <param name="e">Contains event data.</param>
 		private async void RemovePassword(object sender, EventArgs e)
 		{
+			FirstSecurityQuestion.Text = UserSettings.FirstSecurityQuestion = "";
+			FirstSecurityAnswer.Text = UserSettings.FirstSecurityAnswer = "";
+			AppSettings.FirstSecurityQuestionIsSet = false;
+
+			SecondSecurityQuestion.Text = UserSettings.SecondSecurityQuestion = "";
+			SecondSecurityAnswer.Text = UserSettings.SecondSecurityAnswer = "";
+			AppSettings.SecondSecurityQuestionIsSet = false;
+
 			UserPasswordEntry.Text = "";
 			UserSettings.UserPassword = "";
 			AppSettings.UserPasswordIsSet = false;
@@ -116,12 +124,15 @@ namespace Joker.UserInterface
 		/// <param name="e">Contains event data.</param>
 		private async void ShowSecurityQuestionProposals(object sender, EventArgs e)
 		{
-			string selectedQuestion = await DisplayActionSheet("Vorschläge für Sicherheitsfragen:", "Abbrechen", null,
-				new[] { "bla", "blub", "bliiihh" });
-			if(sender == FirstQuestionMenuButton)
-				FirstSecurityQuestion.Text = selectedQuestion;
-			else
-				SecondSecurityQuestion.Text = selectedQuestion;
+			string selection = await DisplayActionSheet("Vorschläge für Sicherheitsfragen:", "Abbrechen", null,
+				FileResourceReader.Get("SecurityQuestions.txt").Split('\n'));
+			if(!string.IsNullOrEmpty(selection) && selection != "Abbrechen")
+			{
+				if(sender == FirstQuestionMenuButton)
+					FirstSecurityQuestion.Text = selection;
+				else
+					SecondSecurityQuestion.Text = selection;
+			}
 		}
 
 		/// <summary>
@@ -133,10 +144,12 @@ namespace Joker.UserInterface
 		{
 			try
 			{
+				if(string.IsNullOrEmpty(FirstSecurityQuestion.Text) || string.IsNullOrEmpty(FirstSecurityAnswer.Text))
+					throw new ArgumentException("Deine Angabe darf hier nicht leer sein.");
 				UserSettings.FirstSecurityQuestion = FirstSecurityQuestion.Text;
 				UserSettings.FirstSecurityAnswer = FirstSecurityAnswer.Text;
 				AppSettings.FirstSecurityQuestionIsSet = true;
-				await DisplayAlert("Gespeichert", "Die erste Sicherheitsfrage und -antwort sind gespeichert.", "Ok");
+				await DisplayAlert("Gespeichert", "Die erste Sicherheitsfrage und Antwort sind gespeichert.", "Ok");
 			}
 			catch(ArgumentException error)
 			{
@@ -153,10 +166,12 @@ namespace Joker.UserInterface
 		{
 			try
 			{
+				if(string.IsNullOrEmpty(SecondSecurityQuestion.Text) || string.IsNullOrEmpty(SecondSecurityAnswer.Text))
+					throw new ArgumentException("Deine Angabe darf hier nicht leer sein.");
 				UserSettings.SecondSecurityQuestion = SecondSecurityQuestion.Text;
 				UserSettings.SecondSecurityAnswer = SecondSecurityAnswer.Text;
 				AppSettings.SecondSecurityQuestionIsSet = true;
-				await DisplayAlert("Gespeichert", "Die zweite Sicherheitsfrage und -antwort sind gespeichert.", "Ok");
+				await DisplayAlert("Gespeichert", "Die zweite Sicherheitsfrage und Antwort sind gespeichert.", "Ok");
 			}
 			catch(ArgumentException error)
 			{

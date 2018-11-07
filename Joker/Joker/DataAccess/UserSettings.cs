@@ -27,12 +27,11 @@ namespace Joker.DataAccess
 			get => Preferences.Get("UserName", null);
 			set
 			{
+				if(string.IsNullOrEmpty(value))
+					throw new ArgumentException("Deine Angabe darf hier nicht leer sein.");
 				if(value.Length > MaxNameLength)
 					throw new ArgumentException($"Der Name darf nicht länger als {MaxNameLength} Zeichen sein.");
-				value = value.Trim();
-				if(string.IsNullOrEmpty(value))
-					throw new ArgumentException("Der angegebene Name ist leer.");
-				Preferences.Set("UserName", value);
+				Preferences.Set("UserName", value.Trim());
 			}
 		}
 
@@ -79,10 +78,7 @@ namespace Joker.DataAccess
 				if(value.Length > MaxSecurityEntryLength)
 					throw new ArgumentException("Die Sicherheitsfrage darf nicht länger als "
 						+ MaxSecurityEntryLength + " sein.");
-				value = value.Trim();
-				if(string.IsNullOrEmpty(value))
-					throw new ArgumentException("Der angegebene Text ist leer.");
-				Preferences.Set("FirstSecurityQuestion", value);
+				Preferences.Set("FirstSecurityQuestion", value.Trim());
 			}
 		}
 
@@ -99,10 +95,7 @@ namespace Joker.DataAccess
 				if(value.Length > MaxSecurityEntryLength)
 					throw new ArgumentException("Die Sicherheitsfrage darf nicht länger als "
 						+ MaxSecurityEntryLength + " sein.");
-				value = value.Trim();
-				if(string.IsNullOrEmpty(value))
-					throw new ArgumentException("Der angegebene Text ist leer.");
-				Preferences.Set("FirstSecurityAnswer", value);
+				Preferences.Set("FirstSecurityAnswer", value.Trim());
 			}
 		}
 
@@ -119,10 +112,7 @@ namespace Joker.DataAccess
 				if(value.Length > MaxSecurityEntryLength)
 					throw new ArgumentException("Die Antwort auf die Sicherheitsfrage darf nicht länger als "
 						+ MaxSecurityEntryLength + " sein.");
-				value = value.Trim();
-				if(string.IsNullOrEmpty(value))
-					throw new ArgumentException("Der angegebene Text ist leer.");
-				Preferences.Set("SecondSecurityQuestion", value);
+				Preferences.Set("SecondSecurityQuestion", value.Trim());
 			}
 		}
 
@@ -139,10 +129,7 @@ namespace Joker.DataAccess
 				if(value.Length > MaxSecurityEntryLength)
 					throw new ArgumentException("Die Antwort auf die Sicherheitsfrage darf nicht länger als "
 						+ MaxSecurityEntryLength + " sein.");
-				value = value.Trim();
-				if(string.IsNullOrEmpty(value))
-					throw new ArgumentException("Der angegebene Text ist leer.");
-				Preferences.Set("SecondSecurityAnswer", value);
+				Preferences.Set("SecondSecurityAnswer", value.Trim());
 			}
 		}
 

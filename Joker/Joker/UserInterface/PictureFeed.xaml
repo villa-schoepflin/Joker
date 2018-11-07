@@ -5,8 +5,7 @@
 			 x:Class="Joker.UserInterface.PictureFeed"
 			 Icon="ui_pictures.png">
 	<ContentPage.Title>
-		<OnPlatform x:TypeArguments="x:String"
-					iOS="{Static ui:PictureFeed.Headline}" />
+		<OnPlatform iOS="{Static ui:PictureFeed.Headline}" />
 	</ContentPage.Title>
 	<Grid RowSpacing="0"
 		  ColumnSpacing="0"
@@ -30,8 +29,7 @@
 			   Padding="0">
 			<Image Source="{Binding PresentedImage}">
 				<Image.Aspect>
-					<OnPlatform x:TypeArguments="Aspect"
-								Android="AspectFill"
+					<OnPlatform Android="AspectFill"
 								iOS="Fill" />
 				</Image.Aspect>
 				<Image.GestureRecognizers>
@@ -56,8 +54,7 @@
 				BackgroundColor="{StaticResource Bgr4}"
 				CornerRadius="0">
 			<Button.Padding>
-				<OnPlatform x:TypeArguments="Thickness"
-							Android="{StaticResource PagePadding}"
+				<OnPlatform Android="{StaticResource PagePadding}"
 							iOS="25" />
 			</Button.Padding>
 		</Button>

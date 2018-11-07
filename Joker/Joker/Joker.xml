@@ -22,7 +22,8 @@
         </member>
         <member name="M:Joker.App.SetMainPageToDefault">
             <summary>
-            Directs the user to the main view of the app, clearing the navigation stack.
+            If the most recent limit hasn't expired yet, direct the user to the regular main page, otherwise
+            direct them to the page where they can add a new limit, then return to the regular main page.
             </summary>
         </member>
         <member name="F:Joker.App.Locale">
@@ -599,6 +600,16 @@
             Gets or sets the checking condition whether the user has protected the app with a password.
             </summary>
         </member>
+        <member name="P:Joker.DataAccess.AppSettings.FirstSecurityQuestionIsSet">
+            <summary>
+            Gets or sets the checking condition whether the user has set their first security question.
+            </summary>
+        </member>
+        <member name="P:Joker.DataAccess.AppSettings.SecondSecurityQuestionIsSet">
+            <summary>
+            Gets or sets the checking condition whether the user has set their second security question.
+            </summary>
+        </member>
         <member name="P:Joker.DataAccess.AppSettings.LimitExpiredTime">
             <summary>
             Gets or sets the time when the current active limit expires and a new one must be set.
@@ -772,6 +783,41 @@
             <summary>
             The optional password with which the user can protect access to the app's UI.
             </summary>
+            <exception cref="T:System.ArgumentException">Thrown if the user tries to set this property to a text that is longer
+            than the maximum allowed length or doesn't contain anything except alphanumeric characters.</exception>
+        </member>
+        <member name="F:Joker.DataAccess.UserSettings.MaxSecurityEntryLength">
+            <summary>
+            The maximum string length for either a security question or answer.
+            </summary>
+        </member>
+        <member name="P:Joker.DataAccess.UserSettings.FirstSecurityQuestion">
+            <summary>
+            Holds the text of the first security question.
+            </summary>
+            <exception cref="T:System.ArgumentException">Thrown if the user tries to set this property to a text that is longer
+            than the maximum allowed length or is a null or empty string.</exception>
+        </member>
+        <member name="P:Joker.DataAccess.UserSettings.FirstSecurityAnswer">
+            <summary>
+            Holds the text of the answer to the first security question.
+            </summary>
+            <exception cref="T:System.ArgumentException">Thrown if the user tries to set this property to a text that is longer
+            than the maximum allowed length or is a null or empty string.</exception>
+        </member>
+        <member name="P:Joker.DataAccess.UserSettings.SecondSecurityQuestion">
+            <summary>
+            Holds the text of the second security question.
+            </summary>
+            <exception cref="T:System.ArgumentException">Thrown if the user tries to set this property to a text that is longer
+            than the maximum allowed length or is a null or empty string.</exception>
+        </member>
+        <member name="P:Joker.DataAccess.UserSettings.SecondSecurityAnswer">
+            <summary>
+            Holds the text of the answer to the second security question.
+            </summary>
+            <exception cref="T:System.ArgumentException">Thrown if the user tries to set this property to a text that is longer
+            than the maximum allowed length or is a null or empty string.</exception>
         </member>
         <member name="F:Joker.DataAccess.UserSettings.MinNewPictureInterval">
             <summary>
@@ -997,8 +1043,7 @@
         </member>
         <member name="M:Joker.UserInterface.PasswordPage.CheckPassword(System.Object,Xamarin.Forms.TextChangedEventArgs)">
             <summary>
-            Text change event handler that checks whether the password is correct and directs the user to the
-            page that they would have otherwise seen if a password was not set.
+            Text change event handler that checks whether the password is correct.
             </summary>
             <param name="sender">Reference to the event's source object.</param>
             <param name="e">Contains event data.</param>
@@ -1012,8 +1057,7 @@
         </member>
         <member name="M:Joker.UserInterface.PasswordPage.ShowSecurityQuestions(System.Object,System.EventArgs)">
             <summary>
-            Label event handler that allows the user to select one of the two security questions to answer in case
-            the password was forgotten.
+            Label event handler that navigates the user to the page where they can answer their security questions.
             </summary>
             <param name="sender">Reference to the event's source object.</param>
             <param name="e">Contains event data.</param>
@@ -1033,6 +1077,36 @@
             <summary>
             Initializes XAML elements sets binding context.
             </summary>
+        </member>
+        <member name="T:Joker.UserInterface.SecurityQuestionPage">
+            <summary>
+            Page where the user answers their security questions to access the app in case they forgot their password.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.SecurityQuestionPage.#ctor">
+            <summary>
+            Initializes XAML elements.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.SecurityQuestionPage.CheckFirstSecurityQuestion(System.Object,Xamarin.Forms.TextChangedEventArgs)">
+            <summary>
+            Text change event handler that checks whether the answer to the first security question is correct.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.SecurityQuestionPage.CheckSecondSecurityQuestion(System.Object,Xamarin.Forms.TextChangedEventArgs)">
+            <summary>
+            Text change event handler that checks whether the answer to the first security question is correct.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.SecurityQuestionPage.OnSecurityConfirmed(Xamarin.Forms.Entry)">
+            <summary>
+            Navigates the user to the appropriate main page, closing the password dialog pages.
+            </summary>
+            <param name="sender">The entry where the user has correctly answered a security question.</param>
         </member>
         <member name="T:Joker.UserInterface.SettingsPage">
             <summary>
@@ -1080,6 +1154,27 @@
         <member name="M:Joker.UserInterface.SettingsPage.SavePassword(System.Object,System.EventArgs)">
             <summary>
             Button event handler that saves the text in the password entry as password if valid.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.SettingsPage.ShowSecurityQuestionProposals(System.Object,System.EventArgs)">
+            <summary>
+            Button event handler that opens an input dialog for selecting one of several predefined security questions.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.SettingsPage.SaveFirstSecurityQuestion(System.Object,System.EventArgs)">
+            <summary>
+            Saves the text of the first security question and its answer and relays possible input errors to the user.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.SettingsPage.SaveSecondSecurityQuestion(System.Object,System.EventArgs)">
+            <summary>
+            Saves the text of the second security question and its answer and relays possible input errors to the user.
             </summary>
             <param name="sender">Reference to the event's source object.</param>
             <param name="e">Contains event data.</param>

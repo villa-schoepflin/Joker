@@ -5,8 +5,7 @@
 			 x:Class="Joker.UserInterface.TourPage3"
 			 BackgroundColor="{StaticResource Primary1}">
 	<ContentPage.Title>
-		<OnPlatform x:TypeArguments="x:String"
-					iOS="Erstes Limit" />
+		<OnPlatform iOS="Erstes Limit" />
 	</ContentPage.Title>
 	<ScrollView>
 		<StackLayout Padding="30"
@@ -35,12 +34,10 @@
 				   Placeholder="Dein Limit"
 				   Text="">
 				<Entry.TextColor>
-					<OnPlatform x:TypeArguments="Color"
-								Android="{StaticResource TextContrast}" />
+					<OnPlatform Android="{StaticResource TextContrast}" />
 				</Entry.TextColor>
 				<Entry.Keyboard>
-					<OnPlatform x:TypeArguments="Keyboard"
-								Android="Telephone"
+					<OnPlatform Android="Telephone"
 								iOS="Numeric" />
 				</Entry.Keyboard>
 			</Entry>

@@ -6,8 +6,7 @@
 			 Icon="ui_support.png"
 			 BackgroundColor="{StaticResource Bgr1}">
 	<ContentPage.Title>
-		<OnPlatform x:TypeArguments="x:String"
-					iOS="{Static ui:ContactPage.Headline}" />
+		<OnPlatform iOS="{Static ui:ContactPage.Headline}" />
 	</ContentPage.Title>
 	<Grid>
 		<Grid.RowDefinitions>

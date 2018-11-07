@@ -43,16 +43,9 @@ namespace Joker
 				}
 
 				if(AppSettings.UserPasswordIsSet)
-					MainPage = new PasswordPage();
+					MainPage = new NavigationPage(new PasswordPage());
 				else
-				{
-					/* If the most recent limit hasn't expired yet, direct the user to the regular main page, otherwise
-					 * direct them to the page where they can add a new limit, then return to the regular main page. */
-					if(DateTime.UtcNow < AppSettings.LimitExpiredTime)
-						SetMainPageToDefault();
-					else
-						MainPage = new AddLimitPage();
-				}
+					SetMainPageToDefault();
 			}
 			else
 				MainPage = new NavigationPage(new Welcome())
@@ -63,11 +56,15 @@ namespace Joker
 		}
 
 		/// <summary>
-		/// Directs the user to the main view of the app, clearing the navigation stack.
+		/// Directs the user to the regular main page if the most recent limit hasn't expired yet, otherwise
+		/// directs them to the page where they can add a new limit.
 		/// </summary>
 		internal static void SetMainPageToDefault()
 		{
-			Current.MainPage = new NavigationPage(new MainPage());
+			if(DateTime.UtcNow < AppSettings.LimitExpiredTime)
+				Current.MainPage = new NavigationPage(new MainPage());
+			else
+				Current.MainPage = new AddLimitPage();
 		}
 
 		/// <summary>

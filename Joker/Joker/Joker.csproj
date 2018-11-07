@@ -85,6 +85,7 @@
     <None Remove="Resources\Text\Notification_Title_NewPicture.txt" />
     <None Remove="Resources\Text\PushNotification_Title_LimitExpired.txt" />
     <None Remove="Resources\Text\PushNotification_Title_NewPicture.txt" />
+    <None Remove="Resources\Text\SecurityQuestions.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -147,6 +148,7 @@
     <EmbeddedResource Include="Resources\Text\Notification_Title_LimitExpired.txt" />
     <EmbeddedResource Include="Resources\Text\Notification_Title_LimitReminder.txt" />
     <EmbeddedResource Include="Resources\Text\Notification_Title_NewPicture.txt" />
+    <EmbeddedResource Include="Resources\Text\SecurityQuestions.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -191,6 +193,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="UserInterface\PasswordPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UserInterface\SecurityQuestionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="UserInterface\Timeline\AddLimitPage.xaml">

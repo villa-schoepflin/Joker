@@ -5,8 +5,7 @@
 			 x:Class="Joker.UserInterface.TourPage2"
 			 BackgroundColor="{StaticResource Primary1}">
 	<ContentPage.Title>
-		<OnPlatform x:TypeArguments="x:String"
-					iOS="Kontaktperson" />
+		<OnPlatform iOS="Kontaktperson" />
 	</ContentPage.Title>
 	<ScrollView>
 		<StackLayout Padding="30"
@@ -36,8 +35,7 @@
 				   HorizontalOptions="FillAndExpand"
 				   Placeholder="Deine Kontaktperson">
 				<Entry.TextColor>
-					<OnPlatform x:TypeArguments="Color"
-								Android="{StaticResource TextContrast}" />
+					<OnPlatform Android="{StaticResource TextContrast}" />
 				</Entry.TextColor>
 			</Entry>
 			<Button Clicked="OnContinueButton"

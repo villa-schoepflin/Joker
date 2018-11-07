@@ -5,8 +5,7 @@
 			 x:Class="Joker.UserInterface.Welcome"
 			 BackgroundColor="{StaticResource Primary1}">
 	<ContentPage.Title>
-		<OnPlatform x:TypeArguments="x:String"
-					iOS="Willkommen" />
+		<OnPlatform iOS="Willkommen" />
 	</ContentPage.Title>
 	<ScrollView>
 		<StackLayout Padding="30"
