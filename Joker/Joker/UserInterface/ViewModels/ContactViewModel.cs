@@ -20,7 +20,11 @@ namespace Joker.UserInterface
 		public string ContactName
 		{
 			get => Model.Name;
-			set => Model.Name = value;
+			set
+			{
+				Model.Name = value;
+				OnPropertyChanged(nameof(ContactName));
+			}
 		}
 
 		/// <summary>
@@ -29,7 +33,11 @@ namespace Joker.UserInterface
 		public string PhoneNumber
 		{
 			get => Model.PhoneNumber;
-			set => Model.PhoneNumber = value;
+			set
+			{
+				Model.PhoneNumber = value;
+				OnPropertyChanged(nameof(PhoneNumber));
+			}
 		}
 
 		/// <summary>
@@ -44,10 +52,20 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// Indicates whether editing of the contact model is currently enabled.
 		/// </summary>
-		public bool EditingEnabled { get; set; }
+		public bool EditingEnabled
+		{
+			get => _editingEnabled;
+			set
+			{
+				_editingEnabled = value;
+				OnPropertyChanged(nameof(EditingEnabled));
+				OnPropertyChanged(nameof(EditButtonText));
+			}
+		}
+		private bool _editingEnabled;
 
 		/// <summary>
-		/// Sets the text of the button that toggles the editing status.
+		/// Determines the text of the button that toggles the editing status.
 		/// </summary>
 		public string EditButtonText => EditingEnabled ? "Änderungen speichern" : "Kontakt bearbeiten";
 
@@ -66,7 +84,7 @@ namespace Joker.UserInterface
 		/// </summary>
 		public ICommand OpenDetailPage => new Command(async () =>
 		{
-			await View.Navigation.PushAsync(new ContactInspector(Model.Copy()));
+			await View.Navigation.PushAsync(new ContactInspector(Model));
 		});
 
 		/// <summary>
@@ -79,11 +97,9 @@ namespace Joker.UserInterface
 			{
 				case nameof(ContactName):
 					ContactName = text;
-					OnPropertyChanged(nameof(ContactName));
 					break;
 				case nameof(PhoneNumber):
 					PhoneNumber = text;
-					OnPropertyChanged(nameof(PhoneNumber));
 					break;
 				default:
 					throw new InvalidOperationException($"Property {propertyName} not found.");
@@ -99,7 +115,7 @@ namespace Joker.UserInterface
 		});
 
 		/// <summary>
-		/// Toggles the editing status for the contact detail page.
+		/// Toggles the editing status for the contact detail page, saving the changes on deactivating editing.
 		/// </summary>
 		public ICommand ToggleEditingStatus => new Command(async () =>
 		{
@@ -116,8 +132,6 @@ namespace Joker.UserInterface
 					App.CurrentContactPage.RefreshContacts();
 				}
 				EditingEnabled ^= true;
-				OnPropertyChanged(nameof(EditingEnabled));
-				OnPropertyChanged(nameof(EditButtonText));
 			}
 			catch(ArgumentException error)
 			{

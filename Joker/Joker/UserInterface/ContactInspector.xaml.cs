@@ -18,7 +18,7 @@ namespace Joker.UserInterface
 		public ContactInspector(Contact contact)
 		{
 			InitializeComponent();
-			BindingContext = new ContactViewModel(this, contact);
+			BindingContext = new ContactViewModel(this, contact.Copy());
 		}
 	}
 }

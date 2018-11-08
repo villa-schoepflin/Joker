@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:bl="clr-namespace:Joker.BusinessLogic"
 			 x:Class="Joker.UserInterface.GambleInspector"
 			 Title="Ausgabendetails"
 			 BackgroundColor="{StaticResource Bgr1}">
@@ -9,7 +10,6 @@
 			<Grid Padding="{StaticResource PagePadding}"
 				  RowSpacing="30">
 				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto" />
 					<RowDefinition Height="Auto" />
 					<RowDefinition Height="Auto" />
 					<RowDefinition Height="*" />
@@ -55,26 +55,38 @@
 							   VerticalTextAlignment="Center" />
 					</StackLayout>
 				</Frame>
-				<Label Grid.Row="2"
-					   Grid.Column="0"
-					   HorizontalOptions="StartAndExpand">Beschreibung:</Label>
-				<Frame Grid.Row="3"
-					   Grid.Column="0"
-					   Grid.ColumnSpan="2"
-					   HeightRequest="125"
-					   BackgroundColor="{Binding CellColor1}"
-					   VerticalOptions="Center"
-					   Padding="10">
-					<ScrollView>
-						<Label Text="{Binding DescriptionText}"
-							   FontSize="{StaticResource CustomMedium}"
-							   TextColor="{Binding DescriptionColor}" />
-					</ScrollView>
-				</Frame>
-				<Label Grid.Row="4"
+				<StackLayout Grid.Row="2"
+							 Grid.Column="0"
+							 Grid.ColumnSpan="2">
+					<StackLayout Orientation="Horizontal">
+						<Label HorizontalOptions="StartAndExpand"
+							   VerticalTextAlignment="Center">Beschreibung:</Label>
+						<Button Command="{Binding ToggleDescriptionEditing}"
+								Text="{Binding EditButtonText}"
+								HorizontalOptions="End"
+								Padding="{StaticResource PagePadding}"
+								BackgroundColor="{StaticResource Bgr4}"
+								TextColor="{StaticResource Text1}" />
+					</StackLayout>
+					<Frame HeightRequest="125"
+						   BackgroundColor="{Binding CellColor1}"
+						   VerticalOptions="Center"
+						   Padding="10">
+						<ScrollView>
+							<Editor Text="{Binding Description}"
+									IsEnabled="{Binding DescriptionEditable}"
+									MaxLength="{Static bl:Gamble.MaxDescriptionLength}"
+									BackgroundColor="{Binding CellColor1}"
+									FontSize="{StaticResource CustomMedium}"
+									TextColor="{StaticResource Text1}"
+									Placeholder="Keine Beschreibung vorhanden." />
+						</ScrollView>
+					</Frame>
+				</StackLayout>
+				<Label Grid.Row="3"
 					   Grid.Column="0"
 					   VerticalOptions="Center">Verbleibendes Limit:</Label>
-				<Frame Grid.Row="4"
+				<Frame Grid.Row="3"
 					   Grid.Column="1"
 					   BackgroundColor="{Binding CellColor1}"
 					   VerticalOptions="Center"
@@ -83,10 +95,10 @@
 						   FontSize="{StaticResource CustomMedium}"
 						   TextColor="{Binding CellText}" />
 				</Frame>
-				<Label Grid.Row="5"
+				<Label Grid.Row="4"
 					   Grid.Column="0"
 					   VerticalOptions="Center">Datum:</Label>
-				<Frame Grid.Row="5"
+				<Frame Grid.Row="4"
 					   Grid.Column="1"
 					   BackgroundColor="{Binding CellColor1}"
 					   VerticalOptions="Center"

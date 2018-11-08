@@ -91,7 +91,7 @@ namespace Joker.DataAccess
 			{
 				// All resource paths in the PictureFeed folder are put into an array.
 				string[] files = typeof(App).Assembly.GetManifestResourceNames()
-					.Where(name => name.Contains("PictureFeed")).ToArray();
+					.Where(name => name.StartsWith("Joker.Resources.PictureFeed.")).ToArray();
 
 				/* If the count of pictures in the Picture table is not less than the number of resource paths,
 				 * the method returns false because there would be no more new pictures to add. */
@@ -277,6 +277,16 @@ namespace Joker.DataAccess
 				pic.Liked ^= true;
 				db.Update(pic);
 			}
+		}
+
+		/// <summary>
+		/// Updates the specified gamble in the database.
+		/// </summary>
+		/// <param name="gamble">The gamble to be updated.</param>
+		internal static void Update(Gamble gamble)
+		{
+			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
+				db.Update(gamble);
 		}
 
 		/// <summary>

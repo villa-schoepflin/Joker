@@ -51,10 +51,19 @@ namespace Joker.BusinessLogic
 		}
 
 		/// <summary>
-		/// This constructor only exists for SQLite to be able to return collections of Gambles from the database.
-		/// It should never be used to instantiate a Gamble directly within the app.
+		/// This constructor only exists for cloning and for SQLite to be able to return collections of Gambles from
+		/// the database. It should never be used to instantiate a Gamble directly within the app.
 		/// </summary>
 		public Gamble() : base() { }
+
+		/// <summary>
+		/// Creates an identical clone of a gamble.
+		/// </summary>
+		/// <returns>A deep copy of the gamble.</returns>
+		public Gamble Copy()
+		{
+			return new Gamble { Time = Time, Amount = Amount, Type = Type, Description = Description };
+		}
 
 		/// <summary>
 		/// Contains the database-relevant properties of this gamble.

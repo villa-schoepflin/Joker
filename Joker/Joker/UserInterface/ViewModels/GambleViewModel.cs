@@ -1,5 +1,9 @@
-﻿using Xamarin.Forms;
+﻿using System.Windows.Input;
+
+using Xamarin.Forms;
+
 using Joker.BusinessLogic;
+using Joker.DataAccess;
 
 namespace Joker.UserInterface
 {
@@ -16,14 +20,44 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// The description of this gamble as supplied from a model object.
 		/// </summary>
-		public string DescriptionText => string.IsNullOrEmpty(((Gamble)Model).Description)
-			? "Keine Beschreibung vorhanden." : ((Gamble)Model).Description;
+		public string Description
+		{
+			get => ((Gamble)Model).Description;
+			set => ((Gamble)Model).Description = value;
+		}
 
 		/// <summary>
-		/// The color of the description text.
+		/// Indicates whether the description of the gamble can currently be edited by the user.
 		/// </summary>
-		public Color DescriptionColor => string.IsNullOrEmpty(((Gamble)Model).Description)
-			? App.Color("Text2") : CellText;
+		public bool DescriptionEditable
+		{
+			get => _descriptionEditable;
+			set
+			{
+				_descriptionEditable = value;
+				OnPropertyChanged(nameof(DescriptionEditable));
+				OnPropertyChanged(nameof(EditButtonText));
+			}
+		}
+		private bool _descriptionEditable;
+
+		/// <summary>
+		/// Determines the text of the button that toggles the editing status.
+		/// </summary>
+		public string EditButtonText => DescriptionEditable ? "Speichern" : "Bearbeiten";
+
+		/// <summary>
+		/// Toggles the editability of the gamble's description, saving the changes when deactivating editing.
+		/// </summary>
+		public ICommand ToggleDescriptionEditing => new Command(() =>
+		{
+			if(DescriptionEditable)
+			{
+				Database.Update((Gamble)Model);
+				App.CurrentTimelineFeed.RefreshRecords();
+			}
+			DescriptionEditable ^= true;
+		});
 
 		/// <summary>
 		/// Constructs the view model for a gamble.

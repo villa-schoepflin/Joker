@@ -378,9 +378,15 @@
         </member>
         <member name="M:Joker.BusinessLogic.Gamble.#ctor">
             <summary>
-            This constructor only exists for SQLite to be able to return collections of Gambles from the database.
-            It should never be used to instantiate a Gamble directly within the app.
+            This constructor only exists for cloning and for SQLite to be able to return collections of Gambles from
+            the database. It should never be used to instantiate a Gamble directly within the app.
             </summary>
+        </member>
+        <member name="M:Joker.BusinessLogic.Gamble.Copy">
+            <summary>
+            Creates an identical clone of a gamble.
+            </summary>
+            <returns>A deep copy of the gamble.</returns>
         </member>
         <member name="M:Joker.BusinessLogic.Gamble.ToString">
             <summary>
@@ -746,6 +752,12 @@
             Switches the Liked status of the supplied picture in the database if it exists.
             </summary>
             <param name="pic">The picture whose Liked status should be toggled.</param>
+        </member>
+        <member name="M:Joker.DataAccess.Database.Update(Joker.BusinessLogic.Gamble)">
+            <summary>
+            Updates the specified gamble in the database.
+            </summary>
+            <param name="gamble">The gamble to be updated.</param>
         </member>
         <member name="M:Joker.DataAccess.Database.Update(Joker.BusinessLogic.Contact)">
             <summary>
@@ -1393,7 +1405,7 @@
         </member>
         <member name="P:Joker.UserInterface.ContactViewModel.EditButtonText">
             <summary>
-            Sets the text of the button that toggles the editing status.
+            Determines the text of the button that toggles the editing status.
             </summary>
         </member>
         <member name="P:Joker.UserInterface.ContactViewModel.IconBackgroundColor">
@@ -1423,7 +1435,7 @@
         </member>
         <member name="P:Joker.UserInterface.ContactViewModel.ToggleEditingStatus">
             <summary>
-            Toggles the editing status for the contact detail page.
+            Toggles the editing status for the contact detail page, saving the changes on deactivating editing.
             </summary>
         </member>
         <member name="P:Joker.UserInterface.ContactViewModel.DeleteContact">
@@ -1448,14 +1460,24 @@
             The type of this gamble as the proper translation.
             </summary>
         </member>
-        <member name="P:Joker.UserInterface.GambleViewModel.DescriptionText">
+        <member name="P:Joker.UserInterface.GambleViewModel.Description">
             <summary>
             The description of this gamble as supplied from a model object.
             </summary>
         </member>
-        <member name="P:Joker.UserInterface.GambleViewModel.DescriptionColor">
+        <member name="P:Joker.UserInterface.GambleViewModel.DescriptionEditable">
             <summary>
-            The color of the description text.
+            Indicates whether the description of the gamble can currently be edited by the user.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.GambleViewModel.EditButtonText">
+            <summary>
+            Determines the text of the button that toggles the editing status.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.GambleViewModel.ToggleDescriptionEditing">
+            <summary>
+            Toggles the editability of the gamble's description, saving the changes when deactivating editing.
             </summary>
         </member>
         <member name="M:Joker.UserInterface.GambleViewModel.#ctor(Xamarin.Forms.Page,Joker.BusinessLogic.Gamble)">

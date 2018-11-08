@@ -18,7 +18,7 @@ namespace Joker.UserInterface
 		public GambleInspector(Gamble gamble)
 		{
 			InitializeComponent();
-			BindingContext = new GambleViewModel(this, gamble);
+			BindingContext = new GambleViewModel(this, gamble.Copy());
 		}
 	}
 }
