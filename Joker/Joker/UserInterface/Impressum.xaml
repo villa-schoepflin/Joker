@@ -122,6 +122,15 @@ Zlatko Najdenovski (</Span>
 							</Span.GestureRecognizers>
 						</Span>
 						<Span>)
+Chanut (</Span>
+						<Span Text="flaticon.com/chanut"
+							  TextColor="{StaticResource Link}">
+							<Span.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding OpenWebsite}"
+													  CommandParameter="https://www.flaticon.com/authors/chanut" />
+							</Span.GestureRecognizers>
+						</Span>
+						<Span>)
 lizenziert über Creative Commons BY 3.0</Span>
 					</FormattedString>
 				</Label.FormattedText>
