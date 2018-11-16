@@ -12,8 +12,7 @@
 							   Color="{StaticResource TextContrast}" />
 			<Frame Margin="{StaticResource StripMargin}"
 				   Padding="{StaticResource PagePadding}"
-				   BackgroundColor="{StaticResource Primary2}"
-				   HasShadow="False">
+				   BackgroundColor="{StaticResource Primary1}">
 				<StackLayout>
 					<Label Text="{Static da:UserSettings.FirstSecurityQuestion}"
 						   TextColor="{StaticResource TextContrast}"
@@ -28,8 +27,7 @@
 			</Frame>
 			<Frame Margin="{StaticResource StripMargin}"
 				   Padding="{StaticResource PagePadding}"
-				   BackgroundColor="{StaticResource Primary2}"
-				   HasShadow="False">
+				   BackgroundColor="{StaticResource Primary1}">
 				<StackLayout>
 					<Label Text="{Static da:UserSettings.SecondSecurityQuestion}"
 						   TextColor="{StaticResource TextContrast}"

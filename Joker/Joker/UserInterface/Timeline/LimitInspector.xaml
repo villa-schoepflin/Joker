@@ -45,6 +45,7 @@
 				</Frame>
 				<Label Grid.Row="2"
 					   Grid.Column="0"
+					   Grid.RowSpan="2"
 					   VerticalOptions="Center">Endstand:</Label>
 				<Frame Grid.Row="2"
 					   Grid.Column="1"
