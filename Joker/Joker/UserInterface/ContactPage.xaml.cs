@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+
 using Joker.BusinessLogic;
 using Joker.DataAccess;
 
