@@ -45,9 +45,9 @@ namespace Joker.iOS
 			// These 3 statements fix the bug that forces the app's color scheme over foreign view controllers.
 			UINavigationBar.Appearance.BarTintColor = UIColor.White;
 			UINavigationBar.Appearance.TintColor = UIColor.Red;
-			UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes() { TextColor = UIColor.Black });
+			UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes { TextColor = UIColor.Black });
 
-			var picker = new CNContactPickerViewController() { Delegate = this };
+			var picker = new CNContactPickerViewController { Delegate = this };
 			UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(picker, true, null);
 
 			return Callback.Task;

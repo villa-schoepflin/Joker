@@ -42,7 +42,7 @@ namespace Joker.iOS
 		{
 			UINavigationBar.Appearance.BarTintColor = App.Color("Primary1").ToUIColor();
 			UINavigationBar.Appearance.TintColor = App.Color("TextContrast").ToUIColor();
-			UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes()
+			UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes
 			{
 				TextColor = App.Color("TextContrast").ToUIColor()
 			});
