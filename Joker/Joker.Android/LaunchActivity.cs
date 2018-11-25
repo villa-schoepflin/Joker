@@ -1,8 +1,8 @@
-﻿using Xamarin.Forms;
+﻿using Xamarin.Essentials;
+using Xamarin.Forms;
 
 using Android.App;
 using Android.Content;
-using Android.Content.PM;
 using Android.OS;
 
 namespace Joker.Droid
@@ -13,7 +13,7 @@ namespace Joker.Droid
 	[Activity(NoHistory = true,
 			  MainLauncher = true,
 			  Theme = "@style/Splash",
-			  ScreenOrientation = ScreenOrientation.Portrait)]
+			  ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
 	public class LaunchActivity : Activity
 	{
 		/// <summary>
@@ -24,6 +24,7 @@ namespace Joker.Droid
 		{
 			base.OnCreate(savedInstanceState);
 
+			Platform.Init(this, savedInstanceState);
 			Forms.Init(this, savedInstanceState);
 			StartActivity(new Intent(this, typeof(MainActivity)));
 		}
