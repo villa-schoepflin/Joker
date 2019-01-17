@@ -101,6 +101,8 @@
     <Compile Include="LaunchActivity.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="VillaSchoepflin.keyInfo" />
+    <None Include="VillaSchoepflin.keystore" />
     <ProguardConfiguration Include="proguard.cfg" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
