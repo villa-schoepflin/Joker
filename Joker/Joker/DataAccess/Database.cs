@@ -51,13 +51,13 @@ namespace Joker.DataAccess
 			{
 				/* Prevents the insertion of Gamble objects when there is no limit set before the gamble's
 				 * time property as this wouldn't make sense for the app's use cases. */
-				if(db.Table<Limit>().Where(l => l.Time < gamble.Time).Count() == 0)
+				if(!db.Table<Limit>().Any(l => l.Time < gamble.Time))
 					throw new ArgumentException("Bitte gib keine Ausgabe ein, die zeitlich vor dem ersten Limit liegt.");
 
 				/* If there already exists an entry in the database with the same time as the argument, the
 				 * milliseconds of the timestamp will continually be incremented. This is to keep the Time
 				 * property (primary key) unique without raising exceptions. */
-				while(db.Table<Gamble>().Where(g => g.Time == gamble.Time).Count() > 0)
+				while(db.Table<Gamble>().Any(g => g.Time == gamble.Time))
 					gamble.Time = gamble.Time.AddMilliseconds(1);
 
 				db.Insert(gamble);
@@ -100,10 +100,12 @@ namespace Joker.DataAccess
 
 				/* If there are still image resources available, select a random resource path that isn't in the
 				 * database yet, wrap it in a Picture instance, insert it and return true if a row was added. */
+				var random = new Random();
 				Picture pic;
 				do
-					pic = new Picture(files[new Random().Next(0, files.Length)]);
-				while(db.Table<Picture>().Where(p => p.FilePath == pic.FilePath).Count() > 0);
+					pic = new Picture(files[random.Next(0, files.Length)]);
+				while(db.Table<Picture>().Any(p => p.FilePath == pic.FilePath));
+
 				return db.Insert(pic) > 0;
 			}
 		}
@@ -215,20 +217,19 @@ namespace Joker.DataAccess
 			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
 			{
 				TableQuery<Gamble> query;
-				try
-				{
-					// Finds the next limit after this one, chronologically.
-					var nextLimit = db.Table<Limit>().Where(l => l.Time > limit.Time).First();
 
-					// Finds all gambles that lie chronologically between the parameter limit and the limit after it.
-					query = db.Table<Gamble>().Where(g => g.Time > limit.Time && g.Time < nextLimit.Time);
-				}
-				catch(InvalidOperationException)
-				{
-					/* If the next limit after the argument can't be found (because it doesn't exist yet), only the
-					 * gambles directly after the argument are queried, without an upper bound. */
+				// Finds the next limits after this one, chronologically.
+				var nextLimits = db.Table<Limit>().Where(l => l.Time > limit.Time);
+
+				// Finds all gambles that lie chronologically between the parameter limit and the limit after it.
+				if(nextLimits.Any())
+					query = db.Table<Gamble>().Where(g => g.Time > limit.Time && g.Time < nextLimits.First().Time);
+
+				/* If the next limit after the argument can't be found (because it doesn't exist yet), only the
+				 * gambles directly after the argument are queried, without an upper bound. */
+				else
 					query = db.Table<Gamble>().Where(g => g.Time > limit.Time);
-				}
+
 				// Subtracts the amounts of all gambles captured by the query from the supplied parameter limit.
 				return query.Aggregate(limit.Amount, (limitAmount, g) => limitAmount - g.Amount);
 			}

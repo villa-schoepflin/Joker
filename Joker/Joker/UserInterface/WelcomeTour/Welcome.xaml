@@ -22,7 +22,7 @@
 				   VerticalOptions="CenterAndExpand"
 				   FontSize="20"
 				   TextColor="{StaticResource TextContrast}"
-				   HorizontalTextAlignment="Center">Das ist die Joker App.&#10;&#10;Sie hilft Dir dabei, die Kontrolle zu behalten.</Label>
+				   HorizontalTextAlignment="Center">Das ist die Joker-App.&#10;&#10;Sie hilft Dir dabei, die Kontrolle zu behalten.</Label>
 			<Button Clicked="OnContinueButton"
 					VerticalOptions="CenterAndExpand"
 					BackgroundColor="{StaticResource Bgr1}"

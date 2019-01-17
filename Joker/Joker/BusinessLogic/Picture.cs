@@ -32,7 +32,8 @@ namespace Joker.BusinessLogic
 		/// <param name="filePath">The file path of the embedded image resource.</param>
 		public Picture(string filePath)
 		{
-			FilePath = filePath;
+			string[] parts = filePath.Split('.');
+			FilePath = $"{parts[parts.Length - 2]}.{parts[parts.Length - 1]}";
 			TimeAdded = DateTime.UtcNow;
 			Liked = false;
 		}

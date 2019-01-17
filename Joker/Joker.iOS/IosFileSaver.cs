@@ -27,9 +27,10 @@ namespace Joker.iOS
 				=> callback.SetResult(grant == PHAuthorizationStatus.Authorized));
 
 			if(PHPhotoLibrary.AuthorizationStatus == PHAuthorizationStatus.Authorized)
-				new UIImage(NSData.FromStream(
-					typeof(App).Assembly.GetManifestResourceStream(filePath)
-				)).SaveToPhotosAlbum(null);
+			{
+				var stream = typeof(App).Assembly.GetManifestResourceStream($"Joker.Resources.PictureFeed.{filePath}");
+				new UIImage(NSData.FromStream(stream)).SaveToPhotosAlbum(null);
+			}
 
 			return callback.Task;
 		}

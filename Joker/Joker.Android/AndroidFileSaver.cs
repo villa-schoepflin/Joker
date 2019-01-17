@@ -67,14 +67,13 @@ namespace Joker.Droid
 				folder.Mkdir();
 
 			byte[] fileData;
-			using(var stream = typeof(App).Assembly.GetManifestResourceStream(FilePath))
+			using(var stream = typeof(App).Assembly.GetManifestResourceStream($"Joker.Resources.PictureFeed.{FilePath}"))
 			{
 				fileData = new byte[stream.Length];
 				stream.Read(fileData, 0, (int)stream.Length);
 			}
 
-			string[] parts = FilePath.Split('.');
-			string file = Path.Combine(dir, $"{parts[parts.Length - 2]}.{parts[parts.Length - 1]}");
+			string file = Path.Combine(dir, FilePath);
 			File.WriteAllBytes(file, fileData);
 			MediaScannerConnection.ScanFile(Application.Context, new[] { file }, null, null);
 		}

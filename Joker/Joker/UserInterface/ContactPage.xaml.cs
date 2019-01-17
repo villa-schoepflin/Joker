@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -29,9 +28,11 @@ namespace Joker.UserInterface
 		{
 			get
 			{
-				var contacts = new List<Contact>(Database.AllContacts());
-				contacts.Insert(0, Contact.Bzga);
-				return Array.ConvertAll(contacts.ToArray(), contact => new ContactViewModel(this, contact));
+				var dbContacts = Database.AllContacts();
+				var allContacts = new Contact[dbContacts.Length + 1];
+				Array.ConstrainedCopy(dbContacts, 0, allContacts, 1, dbContacts.Length);
+				allContacts[0] = Contact.Bzga;
+				return Array.ConvertAll(allContacts, contact => new ContactViewModel(this, contact));
 			}
 		}
 

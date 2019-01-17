@@ -34,7 +34,7 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// Creates a Xamarin.Forms image from the embedded resource file path.
 		/// </summary>
-		public ImageSource PresentedImage => ImageSource.FromResource(Model.FilePath);
+		public ImageSource PresentedImage => ImageSource.FromResource($"Joker.Resources.PictureFeed.{Model.FilePath}");
 
 		/// <summary>
 		/// Determines the image to display on the Like button based on the current Liked status.
@@ -63,10 +63,13 @@ namespace Joker.UserInterface
 				pics.Add(pic);
 				pics.Add(pic);
 			}
+
+			var random = new Random();
 			Picture nextPic;
 			do
-				nextPic = pics[new Random().Next(0, pics.Count)];
+				nextPic = pics[random.Next(0, pics.Count)];
 			while(nextPic.FilePath == Model.FilePath);
+
 			Model = Database.GetPictureByFileName(nextPic.FilePath);
 		});
 
