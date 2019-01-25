@@ -82,7 +82,7 @@
     <DocumentationFile>Joker.iOS.xml</DocumentationFile>
     <CodesignProvision>Joker Distribution Profile</CodesignProvision>
     <BuildIpa>true</BuildIpa>
-    <IpaIncludeArtwork>true</IpaIncludeArtwork>
+    <IpaIncludeArtwork>false</IpaIncludeArtwork>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>none</DebugType>
