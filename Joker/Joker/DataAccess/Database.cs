@@ -223,8 +223,10 @@ namespace Joker.DataAccess
 
 				// Finds all gambles that lie chronologically between the parameter limit and the limit after it.
 				if(nextLimits.Any())
-					query = db.Table<Gamble>().Where(g => g.Time > limit.Time && g.Time < nextLimits.First().Time);
-
+				{
+					var nextLimit = nextLimits.First();
+					query = db.Table<Gamble>().Where(g => g.Time > limit.Time && g.Time < nextLimit.Time);
+				}
 				/* If the next limit after the argument can't be found (because it doesn't exist yet), only the
 				 * gambles directly after the argument are queried, without an upper bound. */
 				else
