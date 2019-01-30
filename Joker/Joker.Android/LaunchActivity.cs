@@ -13,6 +13,7 @@ namespace Joker.Droid
 	[Activity(NoHistory = true,
 			  MainLauncher = true,
 			  Theme = "@style/Splash",
+			  Icon = "@mipmap/ic_launcher",
 			  ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
 	public class LaunchActivity : Activity
 	{

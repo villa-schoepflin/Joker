@@ -12,6 +12,7 @@ namespace Joker.Droid
 	/// The entry point for the Android app after preliminary launching has finished behind the splash screen.
 	/// </summary>
 	[Activity(Theme = "@style/MainTheme",
+			  Icon = "@mipmap/ic_launcher",
 			  ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class MainActivity : FormsAppCompatActivity
 	{
