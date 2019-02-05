@@ -76,7 +76,7 @@
     <CodesignKey>iPhone Distribution: Villa Schopflin Gemeinnutzige GmbH-Zentrum fur Suchtpravention (WVJ97JV68M)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchUseLlvm>true</MtouchUseLlvm>
-    <MtouchSdkVersion>12.0</MtouchSdkVersion>
+    <MtouchSdkVersion>12.1</MtouchSdkVersion>
     <OptimizePNGs>true</OptimizePNGs>
     <MtouchLink>Full</MtouchLink>
     <DocumentationFile>Joker.iOS.xml</DocumentationFile>
@@ -110,6 +110,7 @@
     <CodesignKey>iPhone Developer: hannes-harnisch@t-online.de (92KL3672Z9)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <DocumentationFile>Joker.iOS.xml</DocumentationFile>
+    <MtouchSdkVersion>12.1</MtouchSdkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <AppExtensionDebugBundleId />
