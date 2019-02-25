@@ -103,7 +103,7 @@ namespace Joker.UserInterface
 			try
 			{
 				if(!AppSettings.FirstSecurityQuestionIsSet || !AppSettings.SecondSecurityQuestionIsSet)
-					throw new ArgumentException("Bitte lege die Sicherheitsfragen vor dem Passwort fest.");
+					throw new ArgumentException("Bitte speichere zuerst die Sicherheitsfragen und Antworten.");
 				if(string.IsNullOrEmpty(UserPasswordEntry.Text))
 					throw new ArgumentException("Du kannst kein leeres Passwort setzen.");
 				UserSettings.UserPassword = UserPasswordEntry.Text;
