@@ -64,6 +64,7 @@
     <CodesignExtraArgs />
     <CodesignResourceRules />
     <OptimizePNGs>false</OptimizePNGs>
+    <MtouchLink>SdkOnly</MtouchLink>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -78,7 +79,7 @@
     <MtouchUseLlvm>true</MtouchUseLlvm>
     <MtouchSdkVersion>12.1</MtouchSdkVersion>
     <OptimizePNGs>true</OptimizePNGs>
-    <MtouchLink>Full</MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
     <DocumentationFile>Joker.iOS.xml</DocumentationFile>
     <CodesignProvision>Joker Distribution Profile</CodesignProvision>
     <BuildIpa>true</BuildIpa>
