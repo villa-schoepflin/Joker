@@ -36,11 +36,8 @@
 					   Grid.Column="1"
 					   FontSize="Large"
 					   Placeholder="0,00 €"
+					   Keyboard="Numeric"
 					   Text="">
-					<Entry.Keyboard>
-						<OnPlatform Android="Telephone"
-									iOS="Numeric" />
-					</Entry.Keyboard>
 					<Entry.TextColor>
 						<OnPlatform Android="{StaticResource TextContrast}" />
 					</Entry.TextColor>

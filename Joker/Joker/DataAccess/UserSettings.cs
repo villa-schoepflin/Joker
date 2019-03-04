@@ -163,7 +163,7 @@ namespace Joker.DataAccess
 		{
 			if(input.Contains("T"))
 				input = input.Remove(input.IndexOf('T'));
-			if(!uint.TryParse(input, out uint result))
+			if(!uint.TryParse(input, out uint result) || result > TimeSpan.MaxValue.TotalMilliseconds)
 				throw new ArgumentException("Das ist keine gültige Zahl.");
 
 			var interval = TimeSpan.FromDays(result);

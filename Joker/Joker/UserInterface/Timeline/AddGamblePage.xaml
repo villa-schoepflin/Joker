@@ -31,11 +31,8 @@
 						   Placeholder="0,00 €"
 						   TextColor="{StaticResource Text1}"
 						   FontSize="{StaticResource CustomMedium}"
+						   Keyboard="Numeric"
 						   Text="">
-						<Entry.Keyboard>
-							<OnPlatform Android="Telephone"
-										iOS="Numeric" />
-						</Entry.Keyboard>
 					</Entry>
 					<Label Grid.Row="1"
 						   Grid.Column="0"

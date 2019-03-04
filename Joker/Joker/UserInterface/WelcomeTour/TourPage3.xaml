@@ -32,14 +32,11 @@
 				   HorizontalTextAlignment="Center">Gib an, wieviel Du in der ersten Woche maximal für Glücksspiel ausgeben möchtest.</Label>
 			<Entry x:Name="LimitEntry"
 				   Placeholder="Dein Limit"
+				   Keyboard="Numeric"
 				   Text="">
 				<Entry.TextColor>
 					<OnPlatform Android="{StaticResource TextContrast}" />
 				</Entry.TextColor>
-				<Entry.Keyboard>
-					<OnPlatform Android="Telephone"
-								iOS="Numeric" />
-				</Entry.Keyboard>
 			</Entry>
 			<Button Clicked="OnContinueButton"
 					VerticalOptions="CenterAndExpand"

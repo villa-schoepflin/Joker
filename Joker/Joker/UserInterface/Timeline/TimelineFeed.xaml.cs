@@ -49,9 +49,9 @@ namespace Joker.UserInterface
 				if(Database.CountLimits() > 1)
 				{
 					if(Database.CalcPreviousLimitBalance() >= 0)
-						return FileResourceReader.Get("Feedback_Previous_Success.txt");
+						return "\n" + FileResourceReader.Get("Feedback_Previous_Success.txt");
 					else
-						return FileResourceReader.Get("Feedback_Previous_Failure.txt");
+						return "\n" + FileResourceReader.Get("Feedback_Previous_Failure.txt");
 				}
 				else
 					return "";

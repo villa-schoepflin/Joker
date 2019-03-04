@@ -95,6 +95,7 @@
     <Compile Include="AndroidContactPicker.cs" />
     <Compile Include="AndroidFileSaver.cs" />
     <Compile Include="AndroidNotifier.cs" />
+    <Compile Include="InputCorrectedEntry.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
