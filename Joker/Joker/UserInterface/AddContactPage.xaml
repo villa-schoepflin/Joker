@@ -58,6 +58,7 @@
 							   HorizontalOptions="FillAndExpand"
 							   TextColor="{StaticResource Text1}"
 							   FontSize="{StaticResource CustomMedium}"
+							   Keyboard="Telephone"
 							   Text="" />
 						<Button Clicked="OnPhoneNumberClipboardButton"
 								BackgroundColor="{StaticResource Bgr3}"

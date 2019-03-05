@@ -163,11 +163,21 @@ namespace Joker.DataAccess
 		{
 			if(input.Contains("T"))
 				input = input.Remove(input.IndexOf('T'));
-			if(!uint.TryParse(input, out uint result) || result > TimeSpan.MaxValue.TotalMilliseconds)
+			if(!uint.TryParse(input, out uint result))
 				throw new ArgumentException("Das ist keine gültige Zahl.");
 
-			var interval = TimeSpan.FromDays(result);
-			if(interval < MinNewPictureInterval || interval > MaxNewPictureInterval)
+			TimeSpan interval;
+			bool overflowOccurred = false;
+			try
+			{
+				interval = TimeSpan.FromDays(result);
+			}
+			catch(OverflowException)
+			{
+				overflowOccurred = true;
+			}
+
+			if(overflowOccurred || interval < MinNewPictureInterval || interval > MaxNewPictureInterval)
 				throw new ArgumentException($"Die Zeit zwischen neuen Bildern sollte zwischen " +
 					$"{MinNewPictureInterval.TotalDays} und {MaxNewPictureInterval.TotalDays} Tagen liegen.");
 

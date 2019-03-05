@@ -93,16 +93,18 @@ namespace Joker.UserInterface
 		public ICommand InsertFromClipboard => new Command<string>(async propertyName =>
 		{
 			string text = await Clipboard.GetTextAsync();
-			switch(propertyName)
+
+			if(!string.IsNullOrEmpty(text))
 			{
-				case nameof(ContactName):
-					ContactName = text;
-					break;
-				case nameof(PhoneNumber):
-					PhoneNumber = text;
-					break;
-				default:
-					throw new InvalidOperationException($"Property {propertyName} not found.");
+				switch(propertyName)
+				{
+					case nameof(ContactName):
+						ContactName = text;
+						break;
+					case nameof(PhoneNumber):
+						PhoneNumber = text;
+						break;
+				}
 			}
 		});
 

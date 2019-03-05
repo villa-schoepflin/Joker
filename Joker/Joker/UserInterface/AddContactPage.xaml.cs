@@ -31,7 +31,9 @@ namespace Joker.UserInterface
 		/// <param name="e">Contains event data.</param>
 		private async void OnNameClipboardButton(object sender, EventArgs e)
 		{
-			NameEntry.Text = await Clipboard.GetTextAsync();
+			string text = await Clipboard.GetTextAsync();
+			if(!string.IsNullOrEmpty(text))
+				NameEntry.Text = text;
 		}
 
 		/// <summary>
@@ -41,7 +43,9 @@ namespace Joker.UserInterface
 		/// <param name="e">Contains event data.</param>
 		private async void OnPhoneNumberClipboardButton(object sender, EventArgs e)
 		{
-			PhoneNumberEntry.Text = await Clipboard.GetTextAsync();
+			string text = await Clipboard.GetTextAsync();
+			if(!string.IsNullOrEmpty(text))
+				PhoneNumberEntry.Text = text;
 		}
 
 		/// <summary>
