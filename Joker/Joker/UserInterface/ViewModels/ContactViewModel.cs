@@ -125,7 +125,7 @@ namespace Joker.UserInterface
 			{
 				if(Model == Contact.Bzga)
 				{
-					await View.DisplayAlert(null, "Dieser Kontakt kann nicht geändert werden.", "Ok");
+					await View.DisplayAlert(null, "Dieser Kontakt ist fest eingespeichert.", "Ok");
 					return;
 				}
 				if(EditingEnabled)
@@ -148,7 +148,7 @@ namespace Joker.UserInterface
 		{
 			if(Model == Contact.Bzga)
 			{
-				await View.DisplayAlert(null, "Dieser Kontakt kann nicht geändert werden.", "Ok");
+				await View.DisplayAlert(null, "Dieser Kontakt ist fest eingespeichert.", "Ok");
 				return;
 			}
 			if(await View.DisplayAlert(null, "Soll dieser Kontakt gelöscht werden?", "Ja", "Nein"))

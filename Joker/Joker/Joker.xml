@@ -727,6 +727,13 @@
             </summary>
             <returns>True when there are no gambles after the most recent limit, false otherwise.</returns>
         </member>
+        <member name="M:Joker.DataAccess.Database.AllGamblesWithinLimit(Joker.BusinessLogic.Limit)">
+            <summary>
+            Returns all gambles lying within the duration of a specific limit.
+            </summary>
+            <param name="limit">The limit whose gambles are searched for.</param>
+            <returns>All gambles within the duration of the limit in an array.</returns>
+        </member>
         <member name="M:Joker.DataAccess.Database.CalcBalance(Joker.BusinessLogic.Limit)">
             <summary>
             Returns how much of a limit's amount has been consumed by the gambles within its duration.

@@ -1,7 +1,13 @@
-﻿using Xamarin.Forms;
+﻿using System;
+
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using Microcharts;
+using SkiaSharp;
+
 using Joker.BusinessLogic;
+using Joker.DataAccess;
 
 namespace Joker.UserInterface
 {
@@ -19,6 +25,19 @@ namespace Joker.UserInterface
 		{
 			InitializeComponent();
 			BindingContext = new LimitViewModel(this, limit);
+
+			var entries = Array.ConvertAll(Database.AllGamblesWithinLimit(limit),
+				gamble => new Microcharts.Entry((float)Database.CalcRemainingLimit(gamble))
+				{
+					Color = SKColors.White
+				});
+
+			ChartView.Chart = new LineChart()
+			{
+				Entries = entries,
+				PointMode = PointMode.None,
+				BackgroundColor = SKColors.Transparent
+			};
 		}
 	}
 }

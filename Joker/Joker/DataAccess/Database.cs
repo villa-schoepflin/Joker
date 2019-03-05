@@ -208,11 +208,11 @@ namespace Joker.DataAccess
 		}
 
 		/// <summary>
-		/// Returns how much of a limit's amount has been consumed by the gambles within its duration.
+		/// Returns all gambles lying within the duration of a specific limit.
 		/// </summary>
-		/// <param name="limit">The limit whose balance should be calculated.</param>
-		/// <returns>How much of the limit remains as a decimal number.</returns>
-		internal static decimal CalcBalance(Limit limit)
+		/// <param name="limit">The limit whose gambles are searched for.</param>
+		/// <returns>All gambles within the duration of the limit in an array.</returns>
+		internal static Gamble[] AllGamblesWithinLimit(Limit limit)
 		{
 			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
 			{
@@ -231,10 +231,19 @@ namespace Joker.DataAccess
 				 * gambles directly after the argument are queried, without an upper bound. */
 				else
 					query = db.Table<Gamble>().Where(g => g.Time > limit.Time);
-
-				// Subtracts the amounts of all gambles captured by the query from the supplied parameter limit.
-				return query.Aggregate(limit.Amount, (limitAmount, g) => limitAmount - g.Amount);
+				return query.ToArray();
 			}
+		}
+
+		/// <summary>
+		/// Returns how much of a limit's amount has been consumed by the gambles within its duration.
+		/// </summary>
+		/// <param name="limit">The limit whose balance should be calculated.</param>
+		/// <returns>How much of the limit remains as a decimal number.</returns>
+		internal static decimal CalcBalance(Limit limit)
+		{
+			// Subtracts the amounts of all gambles captured by the query from the supplied parameter limit.
+			return AllGamblesWithinLimit(limit).Aggregate(limit.Amount, (limitAmount, g) => limitAmount - g.Amount);
 		}
 
 		/// <summary>
