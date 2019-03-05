@@ -1,9 +1,9 @@
-﻿using Android.Content;
-using Android.Text;
-
-using Xamarin.Essentials;
+﻿using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+
+using Android.Content;
+using Android.Text;
 
 [assembly: ExportRenderer(typeof(Entry), typeof(Joker.Droid.InputCorrectedEntry))]
 namespace Joker.Droid
