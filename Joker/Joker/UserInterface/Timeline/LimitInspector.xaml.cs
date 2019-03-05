@@ -36,6 +36,7 @@ namespace Joker.UserInterface
 			{
 				Entries = entries,
 				PointMode = PointMode.None,
+				LineMode = LineMode.Straight,
 				BackgroundColor = SKColors.Transparent
 			};
 		}

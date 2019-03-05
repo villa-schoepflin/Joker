@@ -87,9 +87,9 @@
 							 Grid.ColumnSpan="2">
 					<Label>Verlauf:</Label>
 					<Frame BackgroundColor="{Binding CellColor1}"
-						   Padding="15,5,5,5">
+						   Padding="5,5,5,5">
 						<charts:ChartView x:Name="ChartView"
-										  HeightRequest="200" />
+										  HeightRequest="300" />
 					</Frame>
 				</StackLayout>
 			</Grid>
