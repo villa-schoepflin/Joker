@@ -13,17 +13,26 @@ namespace Joker.UserInterface
 	public class GambleViewModel : TimelineRecordViewModel
 	{
 		/// <summary>
+		/// Wrapper in order to treat the model as a gamble because of inheritance from TimelineRecordViewModel.
+		/// </summary>
+		private Gamble OwnModel
+		{
+			get => (Gamble)Model;
+			set => Model = value;
+		}
+
+		/// <summary>
 		/// The type of this gamble as the proper translation.
 		/// </summary>
-		public string GambleType => GambleTypes.GetName(((Gamble)Model).Type);
+		public string GambleType => GambleTypes.GetName(OwnModel.Type);
 
 		/// <summary>
 		/// The description of this gamble as supplied from a model object.
 		/// </summary>
 		public string Description
 		{
-			get => ((Gamble)Model).Description;
-			set => ((Gamble)Model).Description = value;
+			get => OwnModel.Description;
+			set => OwnModel.Description = value;
 		}
 
 		/// <summary>
@@ -59,7 +68,7 @@ namespace Joker.UserInterface
 		{
 			if(DescriptionEditable)
 			{
-				Database.Update((Gamble)Model);
+				Database.Update(OwnModel);
 				App.CurrentTimelineFeed.RefreshRecords();
 			}
 			DescriptionEditable ^= true;

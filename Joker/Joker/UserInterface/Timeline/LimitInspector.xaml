@@ -89,7 +89,7 @@
 					   BackgroundColor="{Binding CellColor1}"
 					   Padding="5,5,5,5">
 					<charts:ChartView x:Name="ChartView"
-									  VerticalOptions="FillAndExpand" />
+									  HeightRequest="{Binding Path=Width, Source={x:Reference Name=ChartView}}" />
 				</Frame>
 			</Grid>
 		</StackLayout>

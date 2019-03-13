@@ -115,7 +115,7 @@ namespace Joker.UserInterface
 		}
 
 		/// <summary>
-		/// Button event handler that removes the limit feedback frame.
+		/// Button event handler that toggles the visibility of the limit feedback text.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
 		/// <param name="e">Contains event data.</param>

@@ -1378,7 +1378,7 @@
         </member>
         <member name="M:Joker.UserInterface.TimelineFeed.OnToggleFeedbackButton(System.Object,System.EventArgs)">
             <summary>
-            Button event handler that removes the limit feedback frame.
+            Button event handler that toggles the visibility of the limit feedback text.
             </summary>
             <param name="sender">Reference to the event's source object.</param>
             <param name="e">Contains event data.</param>
@@ -1467,6 +1467,11 @@
             View model for a gamble in the gamble inspector. Uses many properties of the timeline record view model.
             </summary>
         </member>
+        <member name="P:Joker.UserInterface.GambleViewModel.OwnModel">
+            <summary>
+            Wrapper in order to treat the model as a gamble because of inheritance from TimelineRecordViewModel.
+            </summary>
+        </member>
         <member name="P:Joker.UserInterface.GambleViewModel.GambleType">
             <summary>
             The type of this gamble as the proper translation.
@@ -1507,6 +1512,11 @@
         <member name="T:Joker.UserInterface.LimitViewModel">
             <summary>
             View model for a limit in the limit inspector. Uses many properties of the timeline record view model.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.LimitViewModel.OwnModel">
+            <summary>
+            Wrapper in order to treat the model as a limit because of inheritance from TimelineRecordViewModel.
             </summary>
         </member>
         <member name="P:Joker.UserInterface.LimitViewModel.Balance">
