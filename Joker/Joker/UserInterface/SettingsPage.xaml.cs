@@ -65,11 +65,14 @@ namespace Joker.UserInterface
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
 		/// <param name="e">Contains event data.</param>
-		private void TogglePasswordObfuscation(object sender, EventArgs e)
+		private void ToggleObfuscation(object sender, EventArgs e)
 		{
-			UserPasswordEntry.IsPassword ^= true;
-			FirstSecurityAnswer.IsPassword ^= true;
-			SecondSecurityAnswer.IsPassword ^= true;
+			if(sender == FirstAnswerObfuscator)
+				FirstSecurityAnswer.IsPassword ^= true;
+			else if(sender == SecondAnswerObfuscator)
+				SecondSecurityAnswer.IsPassword ^= true;
+			else
+				UserPasswordEntry.IsPassword ^= true;
 		}
 
 		/// <summary>

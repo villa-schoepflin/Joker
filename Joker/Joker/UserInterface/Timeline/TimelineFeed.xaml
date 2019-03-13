@@ -17,8 +17,7 @@
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="Auto" />
 		</Grid.ColumnDefinitions>
-		<ListView x:Name="RecordView"
-				  ItemsSource="{Binding Records}"
+		<ListView ItemsSource="{Binding Records}"
 				  Grid.Row="0"
 				  Grid.Column="0"
 				  Grid.RowSpan="2"
@@ -26,31 +25,32 @@
 				  SeparatorColor="Transparent"
 				  HasUnevenRows="True">
 			<ListView.Header>
-				<StackLayout x:Name="FeedbackHeader">
-					<Frame x:Name="Frame"
-						   BackgroundColor="{StaticResource Bgr3}"
-						   Margin="10,10,10,5"
-						   Padding="15"
-						   CornerRadius="5">
-						<StackLayout Spacing="0">
-							<Frame HorizontalOptions="End"
-								   BackgroundColor="{StaticResource Bgr4}"
-								   Padding="4">
-								<Frame.GestureRecognizers>
-									<TapGestureRecognizer Tapped="OnCloseFeedbackButton" />
-								</Frame.GestureRecognizers>
-								<Image Source="ui_remove.png"
-									   HeightRequest="12" />
-							</Frame>
+				<Frame x:Name="Frame"
+					   BackgroundColor="{StaticResource Bgr3}"
+					   Margin="10,10,10,5"
+					   Padding="15"
+					   CornerRadius="5">
+					<StackLayout Spacing="0">
+						<Frame HorizontalOptions="End"
+							   BackgroundColor="{StaticResource Bgr4}"
+							   Padding="2">
+							<Frame.GestureRecognizers>
+								<TapGestureRecognizer Tapped="OnToggleFeedbackButton" />
+							</Frame.GestureRecognizers>
+							<Image Source="{Binding FeedbackTogglerIcon}"
+								   HeightRequest="16" />
+						</Frame>
+						<StackLayout x:Name="FeedbackHeader">
 							<Label FontSize="Small"
 								   Text="{Binding CurrentLimitFeedback}"
 								   TextColor="{StaticResource Text1}" />
-							<Label FontSize="Small"
+							<Label x:Name="PreviousLimitFeedbackLabel"
+								   FontSize="Small"
 								   Text="{Binding PreviousLimitFeedback}"
 								   TextColor="{StaticResource Text2}" />
 						</StackLayout>
-					</Frame>
-				</StackLayout>
+					</StackLayout>
+				</Frame>
 			</ListView.Header>
 			<ListView.ItemTemplate>
 				<DataTemplate>

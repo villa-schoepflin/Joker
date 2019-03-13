@@ -99,9 +99,13 @@ namespace Joker.UserInterface
 				switch(propertyName)
 				{
 					case nameof(ContactName):
+						if(text.Length > Contact.MaxNameLength)
+							text = text.Substring(0, Contact.MaxNameLength);
 						ContactName = text;
 						break;
 					case nameof(PhoneNumber):
+						if(text.Length > Contact.MaxPhoneNumberLength)
+							text = text.Substring(0, Contact.MaxPhoneNumberLength);
 						PhoneNumber = text;
 						break;
 				}

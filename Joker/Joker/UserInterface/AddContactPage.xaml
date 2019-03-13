@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:bl="clr-namespace:Joker.BusinessLogic"
 			 x:Class="Joker.UserInterface.AddContactPage"
 			 Title="Neuer Kontakt">
 	<ScrollView>
@@ -27,6 +28,7 @@
 							   HorizontalOptions="FillAndExpand"
 							   TextColor="{StaticResource Text1}"
 							   FontSize="{StaticResource CustomMedium}"
+							   MaxLength="{Static bl:Contact.MaxNameLength}"
 							   Text="" />
 						<Button Clicked="OnNameClipboardButton"
 								BackgroundColor="{StaticResource Bgr3}"
@@ -58,6 +60,7 @@
 							   HorizontalOptions="FillAndExpand"
 							   TextColor="{StaticResource Text1}"
 							   FontSize="{StaticResource CustomMedium}"
+							   MaxLength="{Static bl:Contact.MaxPhoneNumberLength}"
 							   Keyboard="Telephone"
 							   Text="" />
 						<Button Clicked="OnPhoneNumberClipboardButton"

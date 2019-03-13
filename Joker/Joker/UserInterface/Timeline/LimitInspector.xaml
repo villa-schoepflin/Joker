@@ -82,16 +82,15 @@
 						   FontSize="{StaticResource CustomMedium}"
 						   TextColor="{Binding CellText}" />
 				</Frame>
-				<StackLayout Grid.Row="5"
-							 Grid.Column="0"
-							 Grid.ColumnSpan="2">
-					<Label>Verlauf:</Label>
-					<Frame BackgroundColor="{Binding CellColor1}"
-						   Padding="5,5,5,5">
-						<charts:ChartView x:Name="ChartView"
-										  HeightRequest="300" />
-					</Frame>
-				</StackLayout>
+				<Label Grid.Row="5"
+					   Grid.Column="0">Verlauf:</Label>
+				<Frame Grid.Row="5"
+					   Grid.Column="1"
+					   BackgroundColor="{Binding CellColor1}"
+					   Padding="5,5,5,5">
+					<charts:ChartView x:Name="ChartView"
+									  VerticalOptions="FillAndExpand" />
+				</Frame>
 			</Grid>
 		</StackLayout>
 	</ScrollView>

@@ -63,6 +63,7 @@
 							   VerticalTextAlignment="Center">Beschreibung:</Label>
 						<Button Command="{Binding ToggleDescriptionEditing}"
 								Text="{Binding EditButtonText}"
+								Image="{Binding EditButtonIcon}"
 								HorizontalOptions="End"
 								Padding="{StaticResource PagePadding}"
 								BackgroundColor="{StaticResource Bgr4}"

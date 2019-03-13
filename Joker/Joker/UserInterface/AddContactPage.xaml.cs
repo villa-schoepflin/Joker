@@ -32,8 +32,13 @@ namespace Joker.UserInterface
 		private async void OnNameClipboardButton(object sender, EventArgs e)
 		{
 			string text = await Clipboard.GetTextAsync();
+
 			if(!string.IsNullOrEmpty(text))
+			{
+				if(text.Length > Contact.MaxNameLength)
+					text = text.Substring(0, Contact.MaxNameLength);
 				NameEntry.Text = text;
+			}
 		}
 
 		/// <summary>
@@ -44,8 +49,13 @@ namespace Joker.UserInterface
 		private async void OnPhoneNumberClipboardButton(object sender, EventArgs e)
 		{
 			string text = await Clipboard.GetTextAsync();
+
 			if(!string.IsNullOrEmpty(text))
+			{
+				if(text.Length > Contact.MaxPhoneNumberLength)
+					text = text.Substring(0, Contact.MaxPhoneNumberLength);
 				PhoneNumberEntry.Text = text;
+			}
 		}
 
 		/// <summary>

@@ -54,9 +54,18 @@ namespace Joker.UserInterface
 						return "\n" + FileResourceReader.Get("Feedback_Previous_Failure.txt");
 				}
 				else
+				{
+					PreviousLimitFeedbackLabel.IsVisible = false;
 					return "";
+				}
 			}
 		}
+
+		/// <summary>
+		/// Determines the icon shown depending on whether the feedback text is visible.
+		/// </summary>
+		public ImageSource FeedbackTogglerIcon
+			=> ImageSource.FromFile(FeedbackHeader.IsVisible ? "ui_remove.png" : "ui_show.png");
 
 		/// <summary>
 		/// The data to be displayed, wrapped in view models based on the Limit and Gamble tables of the database.
@@ -78,8 +87,8 @@ namespace Joker.UserInterface
 		/// </summary>
 		public void FlashLimitFeedback()
 		{
-			if(RecordView.Header == null)
-				RecordView.Header = FeedbackHeader;
+			FeedbackHeader.IsVisible = true;
+			OnPropertyChanged(nameof(FeedbackTogglerIcon));
 
 			int cycle = 0;
 			Device.StartTimer(TimeSpan.FromMilliseconds(250), () =>
@@ -110,9 +119,10 @@ namespace Joker.UserInterface
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
 		/// <param name="e">Contains event data.</param>
-		private void OnCloseFeedbackButton(object sender, EventArgs e)
+		private void OnToggleFeedbackButton(object sender, EventArgs e)
 		{
-			RecordView.Header = null;
+			FeedbackHeader.IsVisible ^= true;
+			OnPropertyChanged(nameof(FeedbackTogglerIcon));
 		}
 
 		/// <summary>

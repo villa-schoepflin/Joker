@@ -37,6 +37,7 @@ namespace Joker.UserInterface
 				_descriptionEditable = value;
 				OnPropertyChanged(nameof(DescriptionEditable));
 				OnPropertyChanged(nameof(EditButtonText));
+				OnPropertyChanged(nameof(EditButtonIcon));
 			}
 		}
 		private bool _descriptionEditable;
@@ -45,6 +46,11 @@ namespace Joker.UserInterface
 		/// Determines the text of the button that toggles the editing status.
 		/// </summary>
 		public string EditButtonText => DescriptionEditable ? "Speichern" : "Bearbeiten";
+
+		/// <summary>
+		/// Determines the icon shown in the button that toggles the editing status.
+		/// </summary>
+		public ImageSource EditButtonIcon => DescriptionEditable ? ImageSource.FromFile("ui_save.png") : null;
 
 		/// <summary>
 		/// Toggles the editability of the gamble's description, saving the changes when deactivating editing.

@@ -1160,7 +1160,7 @@
             <param name="sender">Reference to the event's source object.</param>
             <param name="e">Contains event data.</param>
         </member>
-        <member name="M:Joker.UserInterface.SettingsPage.TogglePasswordObfuscation(System.Object,System.EventArgs)">
+        <member name="M:Joker.UserInterface.SettingsPage.ToggleObfuscation(System.Object,System.EventArgs)">
             <summary>
             Button event handler that toggles whether the password and security answers should be hidden.
             </summary>
@@ -1346,6 +1346,11 @@
             Generates the feedback concerning the user's previous limit.
             </summary>
         </member>
+        <member name="P:Joker.UserInterface.TimelineFeed.FeedbackTogglerIcon">
+            <summary>
+            Determines the icon shown depending on whether the feedback text is visible.
+            </summary>
+        </member>
         <member name="P:Joker.UserInterface.TimelineFeed.Records">
             <summary>
             The data to be displayed, wrapped in view models based on the Limit and Gamble tables of the database.
@@ -1371,7 +1376,7 @@
             Refreshes the list view's data bindings from a database-supplied collection.
             </summary>
         </member>
-        <member name="M:Joker.UserInterface.TimelineFeed.OnCloseFeedbackButton(System.Object,System.EventArgs)">
+        <member name="M:Joker.UserInterface.TimelineFeed.OnToggleFeedbackButton(System.Object,System.EventArgs)">
             <summary>
             Button event handler that removes the limit feedback frame.
             </summary>
@@ -1480,6 +1485,11 @@
         <member name="P:Joker.UserInterface.GambleViewModel.EditButtonText">
             <summary>
             Determines the text of the button that toggles the editing status.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.GambleViewModel.EditButtonIcon">
+            <summary>
+            Determines the icon shown in the button that toggles the editing status.
             </summary>
         </member>
         <member name="P:Joker.UserInterface.GambleViewModel.ToggleDescriptionEditing">
