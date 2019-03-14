@@ -47,9 +47,8 @@ namespace Joker.BusinessLogic
 		/// <exception cref="ArgumentException">Thrown if the time parameter specifies a future time.</exception>
 		protected TimelineRecord(DateTime time, string amount)
 		{
-#warning DEBUG FEATURE IN TIMELINERECORD CTOR
-			//if(time > DateTime.Now)
-			//	throw new ArgumentException("Der Zeitpunkt der Ausgabe sollte nicht in der Zukunft liegen.");
+			if(time > DateTime.Now)
+				throw new ArgumentException("Der Zeitpunkt der Ausgabe sollte nicht in der Zukunft liegen.");
 			Time = time.ToUniversalTime();
 			Amount = Parse(amount);
 		}

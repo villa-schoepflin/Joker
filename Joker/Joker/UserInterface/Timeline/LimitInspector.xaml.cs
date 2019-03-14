@@ -1,10 +1,5 @@
-﻿using System;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
-using Microcharts;
-using SkiaSharp;
 
 using Joker.BusinessLogic;
 
@@ -23,19 +18,7 @@ namespace Joker.UserInterface
 		public LimitInspector(Limit limit)
 		{
 			InitializeComponent();
-			var viewModel = new LimitViewModel(this, limit);
-			BindingContext = viewModel;
-
-			ChartView.Chart = new LineChart()
-			{
-				Entries = Array.ConvertAll(viewModel.GetHistory(10), value => new Microcharts.Entry(value)
-				{
-					Color = value < 0 ? SKColors.Red : SKColors.White
-				}),
-				PointMode = PointMode.None,
-				LineMode = LineMode.Straight,
-				BackgroundColor = SKColors.Transparent
-			};
+			BindingContext = new LimitViewModel(this, limit);
 		}
 	}
 }

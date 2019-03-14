@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:charts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
 			 x:Class="Joker.UserInterface.LimitInspector"
 			 Title="Limit-Details"
 			 BackgroundColor="{StaticResource Bgr1}">
@@ -10,7 +9,6 @@
 			<Grid Padding="{StaticResource PagePadding}"
 				  RowSpacing="30">
 				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto" />
 					<RowDefinition Height="Auto" />
 					<RowDefinition Height="Auto" />
 					<RowDefinition Height="Auto" />
@@ -81,15 +79,6 @@
 					<Label Text="{Binding LocalizedTime}"
 						   FontSize="{StaticResource CustomMedium}"
 						   TextColor="{Binding CellText}" />
-				</Frame>
-				<Label Grid.Row="5"
-					   Grid.Column="0">Verlauf:</Label>
-				<Frame Grid.Row="5"
-					   Grid.Column="1"
-					   BackgroundColor="{Binding CellColor1}"
-					   Padding="5,5,5,5">
-					<charts:ChartView x:Name="ChartView"
-									  HeightRequest="{Binding Path=Width, Source={x:Reference Name=ChartView}}" />
 				</Frame>
 			</Grid>
 		</StackLayout>

@@ -3,14 +3,17 @@
 	<style name="Splash"
 		   parent="Theme.AppCompat.Light.DarkActionBar">
 		<item name="android:windowBackground">
-			@drawable/app_splash
+			@drawable/splash
 		</item>
 		<item name="android:windowNoTitle">true</item>
 		<item name="android:windowIsTranslucent">false</item>
 		<item name="android:windowIsFloating">false</item>
 		<item name="android:backgroundDimEnabled">true</item>
 		<item name="android:scaleType">center</item>
-		<item name="colorPrimaryDark">@color/Primary1</item>
+		<item name="colorPrimary">@color/colorPrimary</item>
+		<!-- colorPrimaryDark is used for the status bar -->
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+		<item name="colorAccent">@color/colorPrimaryDark</item>
 	</style>
 	<!-- Base theme applied no matter what API -->
 	<style name="MainTheme"
@@ -21,29 +24,26 @@
 		<item name="windowActionBar">false</item>
 		<!-- Set theme colors from http://www.google.com/design/spec/style/color.html#color-color-palette -->
 		<!-- colorPrimary is used for the default action bar background -->
-		<item name="colorPrimary">@color/Primary1</item>
+		<item name="colorPrimary">@color/colorPrimary</item>
 		<!-- colorPrimaryDark is used for the status bar -->
-		<item name="colorPrimaryDark">@color/Primary1</item>
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 		<!-- colorAccent is used as the default value for colorControlActivated
          which is used to tint widgets -->
-		<item name="colorAccent">@color/Primary2</item>
+		<item name="colorAccent">@color/colorPrimaryDark</item>
 		<!-- You can also set colorControlNormal, colorControlActivated
          colorControlHighlight and colorSwitchThumbNormal. -->
 		<item name="windowActionModeOverlay">true</item>
-		<item name="android:navigationBarColor">@color/Primary1</item>
+		<item name="android:navigationBarColor">@color/colorPrimary</item>
 		<item name="android:timePickerStyle">@style/SpinnerTimePicker</item>
-		<item name="android:colorPressedHighlight">@color/ListView</item>
-		<item name="android:colorLongPressedHighlight">@color/ListView</item>
-		<item name="android:colorFocusedHighlight">@color/ListView</item>
-		<item name="android:colorActivatedHighlight">@color/ListView</item>
-		<item name="android:activatedBackgroundIndicator">@color/ListView</item>
+		<item name="android:colorPressedHighlight">@color/listView</item>
+		<item name="android:colorLongPressedHighlight">@color/listView</item>
+		<item name="android:colorFocusedHighlight">@color/listView</item>
+		<item name="android:colorActivatedHighlight">@color/listView</item>
+		<item name="android:activatedBackgroundIndicator">@color/listView</item>
 	</style>
 
 	<style name="SpinnerTimePicker"
 		   parent="android:Widget.Material.Light.TimePicker">
 		<item name="android:timePickerMode">spinner</item>
 	</style>
-	<color name="Primary1">#0369a9</color>
-	<color name="Primary2">#024976</color>
-	<color name="ListView">#e1e1e1</color>
 </resources>

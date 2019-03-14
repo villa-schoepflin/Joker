@@ -18,12 +18,21 @@ namespace Joker.UserInterface
 		public const string Headline = "Bilder";
 
 		/// <summary>
-		/// Initializes XAML elements sets binding context.
+		/// Initializes XAML elements and sets the binding context.
 		/// </summary>
 		public PictureFeed()
 		{
 			InitializeComponent();
 			BindingContext = new PictureFeedViewModel(this, Database.MostRecentPicture());
+			Picture.Aspect = UserSettings.PreferredAspect;
+		}
+
+		/// <summary>
+		/// Refreshes the aspect ratio of the picture to whatever the user set in the settings.
+		/// </summary>
+		public void RefreshPreferredAspect()
+		{
+			Picture.Aspect = UserSettings.PreferredAspect;
 		}
 	}
 }

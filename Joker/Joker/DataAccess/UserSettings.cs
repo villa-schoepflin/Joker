@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 using Newtonsoft.Json;
 
@@ -33,6 +34,16 @@ namespace Joker.DataAccess
 					throw new ArgumentException($"Der Name darf nicht länger als {MaxNameLength} Zeichen sein.");
 				Preferences.Set("UserName", value.Trim());
 			}
+		}
+
+		/// <summary>
+		/// The preferred aspect to use in the picture feed as set by the user.
+		/// </summary>
+		public static Aspect PreferredAspect
+		{
+			get => JsonConvert.DeserializeObject<Aspect>(Preferences.Get("PreferredAspect",
+				JsonConvert.SerializeObject(Aspect.AspectFill)));
+			set => Preferences.Set("PreferredAspect", JsonConvert.SerializeObject(value));
 		}
 
 		/// <summary>

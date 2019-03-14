@@ -1,5 +1,7 @@
 Auf dieser Seite kannst Du Dich durch verschiedene motivierende Bilder klicken, indem Du jedesmal doppelt auf das aktuell angezeigte Bild tippst.
 
+Wenn Dein Gerät das Bild nicht im richtigen Seitenverhältnis anzeigt, kannst Du das in den Einstellungen anpassen.
+
 Wenn Du ein Bild mit "Gefällt mir" markierst, wird es häufiger erscheinen. Wenn Du auf den Speicherknopf drückst, wird das aktuelle Bild in Deiner Galerie-App abgelegt.
 
 Du wirst benachrichtigt, sobald die App ein neues Bild für Dich hat. Das neueste Bild wird stets zuerst angezeigt. Neue Bilder bekommst Du in regelmäßigen Abständen.

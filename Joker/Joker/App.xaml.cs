@@ -75,6 +75,11 @@ namespace Joker
 		/// <summary>
 		/// References the current main page's timeline feed page.
 		/// </summary>
+		internal static PictureFeed CurrentPictureFeed => (PictureFeed)CurrentMainPageFromStack.Children[0];
+
+		/// <summary>
+		/// References the current main page's timeline feed page.
+		/// </summary>
 		internal static TimelineFeed CurrentTimelineFeed => (TimelineFeed)CurrentMainPageFromStack.Children[1];
 
 		/// <summary>

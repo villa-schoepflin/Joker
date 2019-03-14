@@ -22,16 +22,13 @@
 		<Frame Grid.Row="0"
 			   Grid.Column="0"
 			   Grid.ColumnSpan="2"
-			   BackgroundColor="{StaticResource Text2}"
+			   BackgroundColor="{StaticResource Bgr1}"
 			   HorizontalOptions="FillAndExpand"
 			   VerticalOptions="FillAndExpand"
 			   CornerRadius="0"
 			   Padding="0">
-			<Image Source="{Binding PresentedImage}">
-				<Image.Aspect>
-					<OnPlatform Android="AspectFill"
-								iOS="Fill" />
-				</Image.Aspect>
+			<Image x:Name="Picture"
+				   Source="{Binding PresentedImage}">
 				<Image.GestureRecognizers>
 					<TapGestureRecognizer Command="{Binding SetNextPicture}"
 										  NumberOfTapsRequired="2" />

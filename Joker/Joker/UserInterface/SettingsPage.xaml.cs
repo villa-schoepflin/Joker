@@ -25,6 +25,10 @@ namespace Joker.UserInterface
 		public SettingsPage()
 		{
 			InitializeComponent();
+
+			AspectPicker.ItemsSource = new[] { "Anpassen", "Dehnen", "Ausfüllen" };
+			AspectPicker.SelectedIndex = (int)UserSettings.PreferredAspect;
+
 			NewPictureEntry.Text = $"{UserSettings.NewPictureInterval.TotalDays} Tage";
 			GambleReminderEntry.Text = $"{UserSettings.GambleReminderInterval.TotalHours} Stunden";
 			LimitReminderEntry.Text = $"{UserSettings.LimitReminderInterval.TotalHours} Stunden";
@@ -61,6 +65,17 @@ namespace Joker.UserInterface
 		}
 
 		/// <summary>
+		/// Picker event handler that saves the selected image aspect for the picture feed.
+		/// </summary>
+		/// <param name="sender">Reference to the event's source object.</param>
+		/// <param name="e">Contains event data.</param>
+		private void SavePictureAspect(object sender, EventArgs e)
+		{
+			UserSettings.PreferredAspect = (Aspect)AspectPicker.SelectedIndex;
+			App.CurrentPictureFeed.RefreshPreferredAspect();
+		}
+
+		/// <summary>
 		/// Button event handler that toggles whether the password and security answers should be hidden.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
@@ -82,18 +97,23 @@ namespace Joker.UserInterface
 		/// <param name="e">Contains event data.</param>
 		private async void RemovePassword(object sender, EventArgs e)
 		{
-			FirstSecurityQuestion.Text = UserSettings.FirstSecurityQuestion = "";
-			FirstSecurityAnswer.Text = UserSettings.FirstSecurityAnswer = "";
-			AppSettings.FirstSecurityQuestionIsSet = false;
+			if(!AppSettings.UserPasswordIsSet)
+				await DisplayAlert(null, "Du müsstest erstmal ein Passwort setzen, um es entfernen zu können.", "Ok");
+			else if(await DisplayAlert(null, "Möchtest Du den Passwortschutz entfernen?", "Ja", "Nein"))
+			{
+				FirstSecurityQuestion.Text = UserSettings.FirstSecurityQuestion = "";
+				FirstSecurityAnswer.Text = UserSettings.FirstSecurityAnswer = "";
+				AppSettings.FirstSecurityQuestionIsSet = false;
 
-			SecondSecurityQuestion.Text = UserSettings.SecondSecurityQuestion = "";
-			SecondSecurityAnswer.Text = UserSettings.SecondSecurityAnswer = "";
-			AppSettings.SecondSecurityQuestionIsSet = false;
+				SecondSecurityQuestion.Text = UserSettings.SecondSecurityQuestion = "";
+				SecondSecurityAnswer.Text = UserSettings.SecondSecurityAnswer = "";
+				AppSettings.SecondSecurityQuestionIsSet = false;
 
-			UserPasswordEntry.Text = "";
-			UserSettings.UserPassword = "";
-			AppSettings.UserPasswordIsSet = false;
-			await DisplayAlert("Passwort entfernt", "Du brauchst jetzt kein Passwort mehr für die App.", "Ok");
+				UserPasswordEntry.Text = "";
+				UserSettings.UserPassword = "";
+				AppSettings.UserPasswordIsSet = false;
+				await DisplayAlert("Passwort entfernt", "Du brauchst jetzt kein Passwort mehr für die App.", "Ok");
+			}
 		}
 
 		/// <summary>

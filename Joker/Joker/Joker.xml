@@ -31,6 +31,11 @@
             The locale or culture setting to use for this app.
             </summary>
         </member>
+        <member name="P:Joker.App.CurrentPictureFeed">
+            <summary>
+            References the current main page's timeline feed page.
+            </summary>
+        </member>
         <member name="P:Joker.App.CurrentTimelineFeed">
             <summary>
             References the current main page's timeline feed page.
@@ -797,6 +802,11 @@
             <exception cref="T:System.ArgumentException">Thrown if the user tries to set this to an empty string or exceeds
             the maximum allowed length.</exception>
         </member>
+        <member name="P:Joker.DataAccess.UserSettings.PreferredAspect">
+            <summary>
+            The preferred aspect to use in the picture feed as set by the user.
+            </summary>
+        </member>
         <member name="F:Joker.DataAccess.UserSettings.MaxPasswordLength">
             <summary>
             The maximum string length of the user password.
@@ -1098,7 +1108,12 @@
         </member>
         <member name="M:Joker.UserInterface.PictureFeed.#ctor">
             <summary>
-            Initializes XAML elements sets binding context.
+            Initializes XAML elements and sets the binding context.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.PictureFeed.RefreshPreferredAspect">
+            <summary>
+            Refreshes the aspect ratio of the picture to whatever the user set in the settings.
             </summary>
         </member>
         <member name="T:Joker.UserInterface.SecurityQuestionPage">
@@ -1156,6 +1171,13 @@
         <member name="M:Joker.UserInterface.SettingsPage.SaveUserName(System.Object,System.EventArgs)">
             <summary>
             Button event handler that relays input validation for the user name setting and saves it if applicable.
+            </summary>
+            <param name="sender">Reference to the event's source object.</param>
+            <param name="e">Contains event data.</param>
+        </member>
+        <member name="M:Joker.UserInterface.SettingsPage.SavePictureAspect(System.Object,System.EventArgs)">
+            <summary>
+            Picker event handler that saves the selected image aspect for the picture feed.
             </summary>
             <param name="sender">Reference to the event's source object.</param>
             <param name="e">Contains event data.</param>
@@ -1492,9 +1514,14 @@
             Determines the text of the button that toggles the editing status.
             </summary>
         </member>
-        <member name="P:Joker.UserInterface.GambleViewModel.EditButtonIcon">
+        <member name="P:Joker.UserInterface.GambleViewModel.EditButtonBgrColor">
             <summary>
-            Determines the icon shown in the button that toggles the editing status.
+            Determines the background color of the button that toggles the editing status.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.GambleViewModel.EditButtonTextColor">
+            <summary>
+            Determines the text color of the button that toggles the editing status.
             </summary>
         </member>
         <member name="P:Joker.UserInterface.GambleViewModel.ToggleDescriptionEditing">
