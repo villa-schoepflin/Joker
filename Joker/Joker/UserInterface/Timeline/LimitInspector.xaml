@@ -80,6 +80,16 @@
 						   FontSize="{StaticResource CustomMedium}"
 						   TextColor="{Binding CellText}" />
 				</Frame>
+				<Label Grid.Row="5"
+					   Grid.Column="0"
+					   VerticalOptions="Center">Verlauf:</Label>
+				<Frame x:Name="History"
+					   Grid.Row="5"
+					   Grid.Column="1"
+					   BackgroundColor="{Binding CellColor1}"
+					   VerticalOptions="Center"
+					   Padding="15,5,5,5"
+					   HeightRequest="{Binding Source=History, Path=Width}"></Frame>
 			</Grid>
 		</StackLayout>
 	</ScrollView>
