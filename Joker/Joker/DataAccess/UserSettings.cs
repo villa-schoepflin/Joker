@@ -172,8 +172,6 @@ namespace Joker.DataAccess
 		/// allowed TimeSpan bounds.</exception>
 		internal static void SetNewPictureInterval(string input)
 		{
-			if(input.Contains("T"))
-				input = input.Remove(input.IndexOf('T'));
 			if(!uint.TryParse(input, out uint result))
 				throw new ArgumentException("Das ist keine gültige Zahl.");
 
@@ -253,8 +251,6 @@ namespace Joker.DataAccess
 		/// allowed TimeSpan bounds.</exception>
 		private static TimeSpan ParseReminderInterval(string input)
 		{
-			if(input.Contains("S"))
-				input = input.Remove(input.IndexOf('S'));
 			if(!uint.TryParse(input, out uint result))
 				throw new ArgumentException("Das ist keine gültige Zahl.");
 

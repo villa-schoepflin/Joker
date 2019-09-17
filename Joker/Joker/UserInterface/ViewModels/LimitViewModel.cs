@@ -107,11 +107,14 @@ namespace Joker.UserInterface
 					else
 						n++;
 					// Adds the captions for the points which correspond roughly to the beginning of new days.
-					int hour = Limit.Time.Hour + (Limit.Time.Minute < 30 ? 0 : 1);
+					int hour = Limit.Time.ToLocalTime().Hour + (Limit.Time.Minute < 30 ? 0 : 1);
 					int except12am = hour == 0 ? 0 : 1;
 					int daysBetween = Limit.Duration.TotalDays > 15 ? 3 : 1;
 					if(i % (24 * daysBetween) == 24 * except12am - hour)
-						points[i].ValueLabel = (Limit.Time + TimeSpan.FromDays(i / 24)).ToLocalTime().ToString("d");
+					{
+						var captionDate = Limit.Time + TimeSpan.FromDays(1 + i / 24);
+						points[i].ValueLabel = captionDate.ToLocalTime().ToString("d");
+					}
 				}
 
 				return new LineChart()

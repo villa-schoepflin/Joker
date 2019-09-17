@@ -46,16 +46,27 @@
 					   Grid.Column="0"
 					   TextColor="{StaticResource TextContrast}"
 					   VerticalTextAlignment="Center">Dauer in Tagen:</Label>
-				<Entry x:Name="DurationEntry"
-					   Grid.Row="1"
-					   Grid.Column="1"
-					   Keyboard="Numeric"
-					   FontSize="Large"
-					   Text="7 Tage">
-					<Entry.TextColor>
-						<OnPlatform Android="{StaticResource TextContrast}" />
-					</Entry.TextColor>
-				</Entry>
+				<Grid Grid.Row="1"
+					  Grid.Column="1">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<Entry Grid.Column="0"
+						   x:Name="DurationEntry"
+						   Keyboard="Numeric"
+						   FontSize="Large"
+						   Text="7"
+						   HorizontalTextAlignment="End">
+						<Entry.TextColor>
+							<OnPlatform Android="{StaticResource TextContrast}" />
+						</Entry.TextColor>
+					</Entry>
+					<Label Grid.Column="1"
+						   TextColor="{StaticResource TextContrast}"
+						   FontSize="Large"
+						   Margin="0,9.5,0,0">Tage</Label>
+				</Grid>
 			</Grid>
 			<ActivityIndicator x:Name="Indicator"
 							   Color="{StaticResource TextContrast}" />

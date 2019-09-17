@@ -29,9 +29,9 @@ namespace Joker.UserInterface
 			AspectPicker.ItemsSource = new[] { "Anpassen", "Dehnen", "Ausfüllen" };
 			AspectPicker.SelectedIndex = (int)UserSettings.PreferredAspect;
 
-			NewPictureEntry.Text = $"{UserSettings.NewPictureInterval.TotalDays} Tage";
-			GambleReminderEntry.Text = $"{UserSettings.GambleReminderInterval.TotalHours} Stunden";
-			LimitReminderEntry.Text = $"{UserSettings.LimitReminderInterval.TotalHours} Stunden";
+			NewPictureEntry.Text = UserSettings.NewPictureInterval.TotalDays.ToString();
+			GambleReminderEntry.Text = UserSettings.GambleReminderInterval.TotalHours.ToString();
+			LimitReminderEntry.Text = UserSettings.LimitReminderInterval.TotalHours.ToString();
 		}
 
 		/// <summary>

@@ -34,7 +34,6 @@ namespace Joker.BusinessLogic
 		/// or the parsed duration isn't within the allowed bounds.</exception>
 		public Limit(string amount, string durationInDays) : base(amount)
 		{
-			durationInDays = durationInDays.Replace("Tage", "");
 			if(!uint.TryParse(durationInDays, out uint result))
 				throw new ArgumentException("Das ist keine erkennbare Dauer.");
 			var duration = TimeSpan.FromDays(result);

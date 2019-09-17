@@ -230,17 +230,27 @@
 								 VerticalOptions="Center"
 								 Color="{StaticResource Text2}" />
 					</StackLayout>
-					<StackLayout Orientation="Horizontal"
-								 Spacing="5">
-						<Entry x:Name="NewPictureEntry"
-							   HorizontalOptions="FillAndExpand"
+					<Grid ColumnSpacing="5">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="Auto" />
+						</Grid.ColumnDefinitions>
+						<Entry Grid.Column="0"
+							   x:Name="NewPictureEntry"
+							   HorizontalTextAlignment="End"
 							   Keyboard="Numeric" />
-						<Button Clicked="SaveNewPictureInterval"
+						<Label Grid.Column="1"
+							   Margin="0,9.5,0,0"
+							   FontSize="{StaticResource CustomMedium}"
+							   TextColor="{StaticResource Text1}">Tage</Label>
+						<Button Grid.Column="2"
+								Clicked="SaveNewPictureInterval"
 								BackgroundColor="{StaticResource Bgr3}"
 								WidthRequest="40"
 								HeightRequest="40"
 								Image="ui_save.png" />
-					</StackLayout>
+					</Grid>
 				</StackLayout>
 			</Frame>
 			<Frame Margin="{StaticResource StripMargin}"
@@ -259,17 +269,27 @@
 								 VerticalOptions="Center"
 								 Color="{StaticResource Text2}" />
 					</StackLayout>
-					<StackLayout Orientation="Horizontal"
-								 Spacing="5">
-						<Entry x:Name="GambleReminderEntry"
-							   HorizontalOptions="FillAndExpand"
+					<Grid ColumnSpacing="5">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="Auto" />
+						</Grid.ColumnDefinitions>
+						<Entry Grid.Column="0"
+							   x:Name="GambleReminderEntry"
+							   HorizontalTextAlignment="End"
 							   Keyboard="Numeric" />
-						<Button Clicked="SaveGambleReminderInterval"
+						<Label Grid.Column="1"
+							   Margin="0,9.5,0,0"
+							   FontSize="{StaticResource CustomMedium}"
+							   TextColor="{StaticResource Text1}">Stunden</Label>
+						<Button Grid.Column="2"
+								Clicked="SaveGambleReminderInterval"
 								BackgroundColor="{StaticResource Bgr3}"
 								WidthRequest="40"
 								HeightRequest="40"
 								Image="ui_save.png" />
-					</StackLayout>
+					</Grid>
 				</StackLayout>
 			</Frame>
 			<Frame Margin="{StaticResource StripMargin}"
@@ -288,17 +308,27 @@
 								 VerticalOptions="Center"
 								 Color="{StaticResource Text2}" />
 					</StackLayout>
-					<StackLayout Orientation="Horizontal"
-								 Spacing="5">
-						<Entry x:Name="LimitReminderEntry"
-							   HorizontalOptions="FillAndExpand"
+					<Grid ColumnSpacing="5">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="Auto" />
+						</Grid.ColumnDefinitions>
+						<Entry Grid.Column="0"
+							   x:Name="LimitReminderEntry"
+							   HorizontalTextAlignment="End"
 							   Keyboard="Numeric" />
-						<Button Clicked="SaveLimitReminderInterval"
+						<Label Grid.Column="1"
+							   Margin="0,9.5,0,0"
+							   FontSize="{StaticResource CustomMedium}"
+							   TextColor="{StaticResource Text1}">Stunden</Label>
+						<Button Grid.Column="2"
+								Clicked="SaveLimitReminderInterval"
 								BackgroundColor="{StaticResource Bgr3}"
 								WidthRequest="40"
 								HeightRequest="40"
 								Image="ui_save.png" />
-					</StackLayout>
+					</Grid>
 				</StackLayout>
 			</Frame>
 			<Button Clicked="OnImpressumButton"
