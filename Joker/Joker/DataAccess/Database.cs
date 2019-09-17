@@ -208,6 +208,17 @@ namespace Joker.DataAccess
 		}
 
 		/// <summary>
+		/// Returns the limit stored after the specified limit or null if no such limit exists.
+		/// </summary>
+		/// <param name="limit">The limit whose following limit is to be found.</param>
+		/// <returns>The limit directly after the argument or null.</returns>
+		internal static Limit NextLimitAfter(Limit limit)
+		{
+			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
+				return db.Table<Limit>().Where(l => l.Time > limit.Time).FirstOrDefault();
+		}
+
+		/// <summary>
 		/// Returns all gambles lying within the duration of a specific limit.
 		/// </summary>
 		/// <param name="limit">The limit whose gambles are searched for.</param>

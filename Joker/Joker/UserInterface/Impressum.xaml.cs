@@ -18,7 +18,7 @@ namespace Joker.UserInterface
 		/// </summary>
 		public string VersionText => "Joker – Behalte die Kontrolle!\n"
 			+ "\n"
-			+ "Joker." + (Device.RuntimePlatform == Device.iOS ? "iOS" : "Android") + " Version 1.0.6\n"
+			+ "Joker." + (Device.RuntimePlatform == Device.iOS ? "iOS" : "Android") + " Version 1.0.7\n"
 			+ "© 2018 Villa Schöpflin gGmbH\n"
 			+ "Alle Rechte vorbehalten.";
 

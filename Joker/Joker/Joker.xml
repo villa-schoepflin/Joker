@@ -732,6 +732,13 @@
             </summary>
             <returns>True when there are no gambles after the most recent limit, false otherwise.</returns>
         </member>
+        <member name="M:Joker.DataAccess.Database.NextLimitAfter(Joker.BusinessLogic.Limit)">
+            <summary>
+            Returns the limit stored after the specified limit or null if no such limit exists.
+            </summary>
+            <param name="limit">The limit whose following limit is to be found.</param>
+            <returns>The limit directly after the argument or null.</returns>
+        </member>
         <member name="M:Joker.DataAccess.Database.AllGamblesWithinLimit(Joker.BusinessLogic.Limit)">
             <summary>
             Returns all gambles lying within the duration of a specific limit.
@@ -1489,7 +1496,7 @@
             View model for a gamble in the gamble inspector. Uses many properties of the timeline record view model.
             </summary>
         </member>
-        <member name="P:Joker.UserInterface.GambleViewModel.OwnModel">
+        <member name="P:Joker.UserInterface.GambleViewModel.Gamble">
             <summary>
             Wrapper in order to treat the model as a gamble because of inheritance from TimelineRecordViewModel.
             </summary>
@@ -1541,7 +1548,7 @@
             View model for a limit in the limit inspector. Uses many properties of the timeline record view model.
             </summary>
         </member>
-        <member name="P:Joker.UserInterface.LimitViewModel.OwnModel">
+        <member name="P:Joker.UserInterface.LimitViewModel.Limit">
             <summary>
             Wrapper in order to treat the model as a limit because of inheritance from TimelineRecordViewModel.
             </summary>
@@ -1569,6 +1576,11 @@
         <member name="P:Joker.UserInterface.LimitViewModel.LimitStateTextColor">
             <summary>
             The color for the text that indicates the limit state.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.LimitViewModel.Chart">
+            <summary>
+            Returns the Microcharts chart associated with how the limit was depleted over time.
             </summary>
         </member>
         <member name="M:Joker.UserInterface.LimitViewModel.#ctor(Xamarin.Forms.Page,Joker.BusinessLogic.Limit)">
