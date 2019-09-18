@@ -27,7 +27,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.villaschoepflin.Joker</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.8</string>
+	<string>1.0.9</string>
 	<key>CFBundleName</key>
 	<string>Joker</string>
 	<key>NSContactsUsageDescription</key>
@@ -35,7 +35,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Joker möchte auf Dein Fotoalbum zugreifen, damit Du auf Wunsch Bilder speichern kannst.</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.8</string>
+	<string>1.0.9</string>
 	<key>XSLaunchImageAssets</key>
 	<string>Assets.xcassets/LaunchImage.launchimage</string>
 	<key>XSAppIconAssets</key>

@@ -58,6 +58,7 @@
     <None Remove="Resources\PictureFeed\Sonnenuntergang.jpg" />
     <None Remove="Resources\PictureFeed\stadt1.jpg" />
     <None Remove="Resources\PictureFeed\stadt2.jpg" />
+    <None Remove="Resources\PictureFeed\sterne.jpg" />
     <None Remove="Resources\PictureFeed\Stromkasten.jpg" />
     <None Remove="Resources\PictureFeed\Tastatur.jpg" />
     <None Remove="Resources\PictureFeed\truemmer.jpg" />
@@ -99,6 +100,7 @@
     <EmbeddedResource Include="Resources\Icons\joker.png" />
     <EmbeddedResource Include="Resources\PictureFeed\gasse1.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\gasse2.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\sterne.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\tastatur.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\abendrot.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\fernsehturm.jpg" />
