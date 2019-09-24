@@ -25,9 +25,9 @@ namespace Joker.iOS
 
 			var content = new UNMutableNotificationContent
 			{
-				Title = PNContent.Title.LimitExpired,
+				Title = Notifications.Title.LimitExpired,
 				Subtitle = "",
-				Body = PNContent.Body.LimitExpired,
+				Body = Notifications.Body.LimitExpired,
 				Badge = 0,
 			};
 
@@ -65,9 +65,9 @@ namespace Joker.iOS
 		{
 			var content = new UNMutableNotificationContent
 			{
-				Title = PNContent.Title.NewPicture,
+				Title = Notifications.Title.NewPicture,
 				Subtitle = "",
-				Body = PNContent.Body.NewPicture,
+				Body = Notifications.Body.NewPicture,
 				Badge = 0,
 			};
 
@@ -96,9 +96,9 @@ namespace Joker.iOS
 		{
 			var content = new UNMutableNotificationContent
 			{
-				Title = PNContent.Title.GambleReminder,
+				Title = Notifications.Title.GambleReminder,
 				Subtitle = "",
-				Body = PNContent.Body.GambleReminder,
+				Body = Notifications.Body.GambleReminder,
 				Badge = 0,
 			};
 
@@ -116,9 +116,9 @@ namespace Joker.iOS
 		{
 			var content = new UNMutableNotificationContent
 			{
-				Title = PNContent.Title.LimitReminder,
+				Title = Notifications.Title.LimitReminder,
 				Subtitle = "",
-				Body = PNContent.Body.LimitReminder,
+				Body = Notifications.Body.LimitReminder,
 				Badge = 0,
 			};
 

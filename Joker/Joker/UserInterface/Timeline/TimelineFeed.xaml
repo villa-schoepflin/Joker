@@ -72,7 +72,7 @@
 											   HeightRequest="25" />
 									</Frame>
 									<Label HorizontalOptions="FillAndExpand"
-										   Margin="15,0,0,0"
+										   Margin="5,0,0,0"
 										   Text="{Binding AmountInEuro}"
 										   FontSize="{StaticResource CustomMedium}"
 										   TextColor="{Binding CellText}"

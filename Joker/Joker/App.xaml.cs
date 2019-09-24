@@ -1,7 +1,9 @@
 using System;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -32,8 +34,15 @@ namespace Joker
 		/// </summary>
 		protected override void OnStart()
 		{
+			VersionTracking.Track();
 			if(AppSettings.WelcomeTourCompleted)
 			{
+				// Deletes a picture from the database if it was removed in an update.
+				string[] picFiles = typeof(App).Assembly.GetManifestResourceNames();
+				foreach(var pic in Database.AllPictures())
+					if(!picFiles.Contains($"Joker.Resources.PictureFeed.{pic.FilePath}"))
+						Database.Delete(pic);
+
 				/* If the app was opened when there is a new picture to display, insert it and re-schedule the time 
 				 * and notification for when to insert the next one. */
 				if(DateTime.UtcNow >= AppSettings.NewPictureTime && Database.InsertPictureFromRandomResource())

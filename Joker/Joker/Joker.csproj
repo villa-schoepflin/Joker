@@ -27,44 +27,44 @@
     <None Remove="Resources\Icons\motivation.png" />
     <None Remove="Resources\Icons\search.png" />
     <None Remove="Resources\Icons\settings.png" />
-    <None Remove="Resources\PictureFeed\Abendrot.jpg" />
-    <None Remove="Resources\PictureFeed\Abfluss.jpg" />
-    <None Remove="Resources\PictureFeed\Andreaskreuz.jpg" />
-    <None Remove="Resources\PictureFeed\Asphalt.jpg" />
-    <None Remove="Resources\PictureFeed\Brunnen.jpg" />
-    <None Remove="Resources\PictureFeed\Container.jpg" />
+    <None Remove="Resources\PictureFeed\abendrot.jpg" />
+    <None Remove="Resources\PictureFeed\abfluss.jpg" />
+    <None Remove="Resources\PictureFeed\andreaskreuz.jpg" />
+    <None Remove="Resources\PictureFeed\asphalt.jpg" />
+    <None Remove="Resources\PictureFeed\brunnen.jpg" />
+    <None Remove="Resources\PictureFeed\container.jpg" />
     <None Remove="Resources\PictureFeed\duerre.jpg" />
-    <None Remove="Resources\PictureFeed\Felsen.jpg" />
-    <None Remove="Resources\PictureFeed\Fernsehturm.jpg" />
-    <None Remove="Resources\PictureFeed\Fliege.jpg" />
+    <None Remove="Resources\PictureFeed\felsen.jpg" />
+    <None Remove="Resources\PictureFeed\fernsehturm.jpg" />
+    <None Remove="Resources\PictureFeed\fliege.jpg" />
     <None Remove="Resources\PictureFeed\freunde1.jpg" />
     <None Remove="Resources\PictureFeed\freunde2.jpg" />
     <None Remove="Resources\PictureFeed\gasse1.jpg" />
     <None Remove="Resources\PictureFeed\gasse2.jpg" />
-    <None Remove="Resources\PictureFeed\Gleis.jpg" />
-    <None Remove="Resources\PictureFeed\Graffiti.jpg" />
-    <None Remove="Resources\PictureFeed\Haufen.jpg" />
-    <None Remove="Resources\PictureFeed\Jungs.jpg" />
-    <None Remove="Resources\PictureFeed\Kirmes.jpg" />
+    <None Remove="Resources\PictureFeed\gleis.jpg" />
+    <None Remove="Resources\PictureFeed\graffiti.jpg" />
+    <None Remove="Resources\PictureFeed\haufen.jpg" />
+    <None Remove="Resources\PictureFeed\jungs.jpg" />
+    <None Remove="Resources\PictureFeed\kirmes.jpg" />
     <None Remove="Resources\PictureFeed\k_M_V_Grillfleisch.jpg" />
     <None Remove="Resources\PictureFeed\k_M_V_rettungswesten.jpg" />
     <None Remove="Resources\PictureFeed\k_M_V_Strasse.jpg" />
-    <None Remove="Resources\PictureFeed\Meer.jpg" />
-    <None Remove="Resources\PictureFeed\Mineralwasser.jpg" />
-    <None Remove="Resources\PictureFeed\Pflanzen.jpg" />
-    <None Remove="Resources\PictureFeed\Sackgasse.jpg" />
-    <None Remove="Resources\PictureFeed\Schild.jpg" />
-    <None Remove="Resources\PictureFeed\Sonnenstrahl.jpg" />
-    <None Remove="Resources\PictureFeed\Sonnenuntergang.jpg" />
+    <None Remove="Resources\PictureFeed\meer.jpg" />
+    <None Remove="Resources\PictureFeed\mineralwasser.jpg" />
+    <None Remove="Resources\PictureFeed\pflanzen.jpg" />
+    <None Remove="Resources\PictureFeed\sackgasse.jpg" />
+    <None Remove="Resources\PictureFeed\schild.jpg" />
+    <None Remove="Resources\PictureFeed\sonnenstrahl.jpg" />
+    <None Remove="Resources\PictureFeed\sonnenuntergang.jpg" />
     <None Remove="Resources\PictureFeed\stadt1.jpg" />
     <None Remove="Resources\PictureFeed\stadt2.jpg" />
     <None Remove="Resources\PictureFeed\sterne.jpg" />
-    <None Remove="Resources\PictureFeed\Stromkasten.jpg" />
-    <None Remove="Resources\PictureFeed\Tastatur.jpg" />
+    <None Remove="Resources\PictureFeed\stromkasten.jpg" />
+    <None Remove="Resources\PictureFeed\tastatur.jpg" />
     <None Remove="Resources\PictureFeed\truemmer.jpg" />
     <None Remove="Resources\PictureFeed\wand1.jpg" />
     <None Remove="Resources\PictureFeed\wand2.jpg" />
-    <None Remove="Resources\PictureFeed\Zaun.jpg" />
+    <None Remove="Resources\PictureFeed\zaun.jpg" />
     <None Remove="Resources\Text\AddNewLimit_Failure.txt" />
     <None Remove="Resources\Text\AddNewLimit_Success.txt" />
     <None Remove="Resources\Text\Feedback_Current_Failure.txt" />
@@ -72,6 +72,9 @@
     <None Remove="Resources\Text\Feedback_Current_Success.txt" />
     <None Remove="Resources\Text\Feedback_Previous_Failure.txt" />
     <None Remove="Resources\Text\Feedback_Previous_Success.txt" />
+    <None Remove="Resources\Text\Impressum_ContactInfo.txt" />
+    <None Remove="Resources\Text\Impressum_PrivacyPolicy.txt" />
+    <None Remove="Resources\Text\Impressum_Version.txt" />
     <None Remove="Resources\Text\Info_ContactPage.txt" />
     <None Remove="Resources\Text\Info_PictureFeed.txt" />
     <None Remove="Resources\Text\Info_SettingsPage.txt" />
@@ -98,41 +101,41 @@
     <EmbeddedResource Include="Resources\Icons\filledcircle.png" />
     <EmbeddedResource Include="Resources\Icons\impressum.png" />
     <EmbeddedResource Include="Resources\Icons\joker.png" />
-    <EmbeddedResource Include="Resources\PictureFeed\gasse1.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\gasse2.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\sterne.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\tastatur.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\abendrot.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\fernsehturm.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\sonnenstrahl.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\wand1.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\wand2.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\abfluss.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\andreaskreuz.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\asphalt.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\brunnen.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\fliege.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\container.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\duerre.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\felsen.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\fernsehturm.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\fliege.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\freunde1.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\freunde2.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\mineralwasser.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\pflanzen.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\graffiti.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\duerre.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\sackgasse.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\gasse1.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\gasse2.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\gleis.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\graffiti.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\haufen.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\sonnenuntergang.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\zaun.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\stromkasten.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\schild.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\truemmer.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\jungs.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\kirmes.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\meer.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\mineralwasser.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\pflanzen.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\sackgasse.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\schild.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\sonnenstrahl.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\sonnenuntergang.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\stadt1.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\stadt2.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\container.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\sterne.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\stromkasten.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\tastatur.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\truemmer.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\wand1.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\wand2.jpg" />
+    <EmbeddedResource Include="Resources\PictureFeed\zaun.jpg" />
     <EmbeddedResource Include="Resources\Text\AddNewLimit_Failure.txt" />
     <EmbeddedResource Include="Resources\Text\AddNewLimit_Success.txt" />
     <EmbeddedResource Include="Resources\Text\Feedback_Current_Failure.txt" />
@@ -140,6 +143,7 @@
     <EmbeddedResource Include="Resources\Text\Feedback_Current_Success.txt" />
     <EmbeddedResource Include="Resources\Text\Feedback_Previous_Failure.txt" />
     <EmbeddedResource Include="Resources\Text\Feedback_Previous_Success.txt" />
+    <EmbeddedResource Include="Resources\Text\Impressum_ContactInfo.txt" />
     <EmbeddedResource Include="Resources\Text\Info_ContactPage.txt" />
     <EmbeddedResource Include="Resources\Text\Info_PictureFeed.txt" />
     <EmbeddedResource Include="Resources\Text\Info_SettingsPage.txt" />
@@ -154,16 +158,18 @@
     <EmbeddedResource Include="Resources\Text\Notification_Title_LimitExpired.txt" />
     <EmbeddedResource Include="Resources\Text\Notification_Title_LimitReminder.txt" />
     <EmbeddedResource Include="Resources\Text\Notification_Title_NewPicture.txt" />
+    <EmbeddedResource Include="Resources\Text\Impressum_PrivacyPolicy.txt" />
     <EmbeddedResource Include="Resources\Text\SecurityQuestions.txt" />
+    <EmbeddedResource Include="Resources\Text\Impressum_Version.txt" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microcharts" Version="0.7.1" />
     <PackageReference Include="Microcharts.Forms" Version="0.7.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.3.0" />
-    <PackageReference Include="Xamarin.Forms" Version="4.2.0.778463" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+    <PackageReference Include="Xamarin.Forms" Version="4.2.0.815419" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,5 +1,5 @@
-Hey $USERNAME$,
+Hey %USERNAME%,
 
-bisher hast Du Dein aktuelles Limit eingehalten. Im Moment sind noch $REMAININGLIMIT$ von Deinem Limit übrig. Immer weiter so!
+bisher hast Du Dein aktuelles Limit eingehalten. Im Moment sind noch %REMAININGLIMIT% von Deinem Limit übrig. Immer weiter so!
 
 Vergiss nicht Deine Ausgaben für Glücksspiel in die Chronik einzutragen, damit Du immer weißt, was der aktuelle Stand Deines Limits ist.

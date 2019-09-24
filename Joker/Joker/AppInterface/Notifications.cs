@@ -5,7 +5,7 @@ namespace Joker.AppInterface
 	/// <summary>
 	/// Container class for constructing the text shown in the different kinds of push notifications (PN).
 	/// </summary>
-	public static class PNContent
+	public static class Notifications
 	{
 		/// <summary>
 		/// Struct holding the titles of each kind of notification.

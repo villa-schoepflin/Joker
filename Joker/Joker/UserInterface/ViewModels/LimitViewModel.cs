@@ -65,17 +65,17 @@ namespace Joker.UserInterface
 				else
 					span = nextLimit.Time - Limit.Time;
 
-				var points = new Microcharts.Entry[(int)span.TotalHours];
+				var data = new Microcharts.Entry[(int)span.TotalHours];
 				var gambles = Database.AllGamblesWithinLimit(Limit);
 
 				int[] indices = new int[gambles.Length + 2];
 				indices[0] = 0;
-				indices[indices.Length - 1] = points.Length - 1;
+				indices[indices.Length - 1] = data.Length - 1;
 
-				points[0] = new Microcharts.Entry((float)Limit.Amount) { Color = SKColors.White };
+				data[0] = new Microcharts.Entry((float)Limit.Amount) { Color = SKColors.White };
 
 				float lastValue = (float)Database.CalcBalance(Limit);
-				points[points.Length - 1] = new Microcharts.Entry(lastValue)
+				data[data.Length - 1] = new Microcharts.Entry(lastValue)
 				{
 					Color = lastValue < 0 ? SKColors.Red : SKColors.White
 				};
@@ -83,10 +83,9 @@ namespace Joker.UserInterface
 				// Enters the remaining limit values after each gamble at appropriate places in the graph.
 				for(int i = 0; i < gambles.Length; i++)
 				{
-					var interval = gambles[i].Time - Limit.Time;
-					indices[i + 1] = (int)(interval.Ticks / (float)span.Ticks * (points.Length - 1));
+					indices[i + 1] = (int)((gambles[i].Time - Limit.Time).Ticks / (float)span.Ticks * (data.Length - 1));
 					decimal value = Database.CalcRemainingLimit(gambles[i]);
-					points[indices[i + 1]] = new Microcharts.Entry((float)value)
+					data[indices[i + 1]] = new Microcharts.Entry((float)value)
 					{
 						Color = value < 0 ? SKColors.Red : SKColors.White
 					};
@@ -94,32 +93,27 @@ namespace Joker.UserInterface
 
 				// Enters all remaining points in the graph by interpolating values.
 				indices = indices.Distinct().ToArray();
-				for(int i = 0, n = -1; i < points.Length; i++)
+				for(int i = 0, n = -1; i < data.Length; i++)
 				{
-					if(points[i] == null)
+					if(data[i] == null)
 					{
 						int last = indices[n];
 						int next = indices[n + 1];
-						float value = points[last].Value - (points[last].Value - points[next].Value)
-							/ (next - last) * (i - last);
-						points[i] = new Microcharts.Entry(value) { Color = value < 0 ? SKColors.Red : SKColors.White };
+						float value = data[last].Value - (data[last].Value - data[next].Value) / (next - last) * (i - last);
+						data[i] = new Microcharts.Entry(value) { Color = value < 0 ? SKColors.Red : SKColors.White };
 					}
 					else
 						n++;
 					// Adds the captions for the points which correspond roughly to the beginning of new days.
 					int hour = Limit.Time.ToLocalTime().Hour + (Limit.Time.Minute < 30 ? 0 : 1);
 					int except12am = hour == 0 ? 0 : 1;
-					int daysBetween = Limit.Duration.TotalDays > 15 ? 3 : 1;
-					if(i % (24 * daysBetween) == 24 * except12am - hour)
-					{
-						var captionDate = Limit.Time + TimeSpan.FromDays(1 + i / 24);
-						points[i].ValueLabel = captionDate.ToLocalTime().ToString("d");
-					}
+					if(i % ((int)Limit.Duration.TotalDays / 5 * 24) == 24 * except12am - hour)
+						data[i].ValueLabel = (Limit.Time + TimeSpan.FromDays(1 + i / 24)).ToLocalTime().ToString("d");
 				}
 
 				return new LineChart()
 				{
-					Entries = points,
+					Entries = data,
 					PointMode = PointMode.None,
 					LineMode = LineMode.Straight,
 					BackgroundColor = SKColors.Transparent

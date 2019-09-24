@@ -1,3 +1,3 @@
-﻿$USERNAME$, Du konntest Dein letztes Limit einhalten. Du kannst stolz auf Dich sein! Jetzt ist es erstmal Zeit Dein nächstes Limit festzulegen, am besten ein bisschen niedriger.
+﻿%USERNAME%, Du konntest Dein letztes Limit einhalten. Du kannst stolz auf Dich sein! Jetzt ist es erstmal Zeit Dein nächstes Limit festzulegen, am besten ein bisschen niedriger.
 
-Dein letztes Limit war $LASTLIMITAMOUNT$.
+Dein letztes Limit war %LASTLIMITAMOUNT%.

@@ -72,10 +72,10 @@ namespace Joker.Droid
 
 				var launch = PendingIntent.GetActivity(context, 0, new Intent(context, typeof(LaunchActivity)), 0);
 				var notifBuilder = new Notification.Builder(context, PNType.LimitExpired.ToString())
-					.SetContentTitle(PNContent.Title.LimitExpired)
-					.SetContentText(PNContent.Body.LimitExpired)
+					.SetContentTitle(Notifications.Title.LimitExpired)
+					.SetContentText(Notifications.Body.LimitExpired)
 					.SetSmallIcon(Resource.Drawable.ui_icon)
-					.SetStyle(new Notification.BigTextStyle().BigText(PNContent.Body.LimitExpired))
+					.SetStyle(new Notification.BigTextStyle().BigText(Notifications.Body.LimitExpired))
 					.SetOngoing(true)
 					.SetAutoCancel(false)
 					.SetContentIntent(launch);
@@ -121,10 +121,10 @@ namespace Joker.Droid
 
 				var launch = PendingIntent.GetActivity(context, 0, new Intent(context, typeof(LaunchActivity)), 0);
 				var notifBuilder = new Notification.Builder(context, PNType.NewPicture.ToString())
-					.SetContentTitle(PNContent.Title.NewPicture)
-					.SetContentText(PNContent.Body.NewPicture)
+					.SetContentTitle(Notifications.Title.NewPicture)
+					.SetContentText(Notifications.Body.NewPicture)
 					.SetSmallIcon(Resource.Drawable.ui_icon)
-					.SetStyle(new Notification.BigTextStyle().BigText(PNContent.Body.NewPicture))
+					.SetStyle(new Notification.BigTextStyle().BigText(Notifications.Body.NewPicture))
 					.SetAutoCancel(true)
 					.SetOngoing(true)
 					.SetContentIntent(launch);
@@ -173,10 +173,10 @@ namespace Joker.Droid
 
 				var launch = PendingIntent.GetActivity(context, 0, new Intent(context, typeof(LaunchActivity)), 0);
 				var notifBuilder = new Notification.Builder(context, PNType.GambleReminder.ToString())
-					.SetContentTitle(PNContent.Title.GambleReminder)
-					.SetContentText(PNContent.Body.GambleReminder)
+					.SetContentTitle(Notifications.Title.GambleReminder)
+					.SetContentText(Notifications.Body.GambleReminder)
 					.SetSmallIcon(Resource.Drawable.ui_icon)
-					.SetStyle(new Notification.BigTextStyle().BigText(PNContent.Body.GambleReminder))
+					.SetStyle(new Notification.BigTextStyle().BigText(Notifications.Body.GambleReminder))
 					.SetAutoCancel(true)
 					.SetContentIntent(launch);
 				Notifier.Notify((int)PNType.GambleReminder, notifBuilder.Build());
@@ -223,10 +223,10 @@ namespace Joker.Droid
 
 				var launch = PendingIntent.GetActivity(context, 0, new Intent(context, typeof(LaunchActivity)), 0);
 				var notifBuilder = new Notification.Builder(context, PNType.LimitReminder.ToString())
-					.SetContentTitle(PNContent.Title.LimitReminder)
-					.SetContentText(PNContent.Body.LimitReminder)
+					.SetContentTitle(Notifications.Title.LimitReminder)
+					.SetContentText(Notifications.Body.LimitReminder)
 					.SetSmallIcon(Resource.Drawable.ui_icon)
-					.SetStyle(new Notification.BigTextStyle().BigText(PNContent.Body.LimitReminder))
+					.SetStyle(new Notification.BigTextStyle().BigText(Notifications.Body.LimitReminder))
 					.SetAutoCancel(true)
 					.SetContentIntent(launch);
 				Notifier.Notify((int)PNType.LimitReminder, notifBuilder.Build());

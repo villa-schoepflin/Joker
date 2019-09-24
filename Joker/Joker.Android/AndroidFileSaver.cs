@@ -62,9 +62,11 @@ namespace Joker.Droid
 				return;
 
 			string dir = Path.Combine(Environment.ExternalStorageDirectory.Path, "Joker");
-			var folder = new Java.IO.File(dir);
-			if(!folder.Exists())
-				folder.Mkdir();
+			using(var folder = new Java.IO.File(dir))
+			{
+				if(!folder.Exists())
+					folder.Mkdir();
+			}
 
 			byte[] fileData;
 			using(var stream = typeof(App).Assembly.GetManifestResourceStream($"Joker.Resources.PictureFeed.{FilePath}"))

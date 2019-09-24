@@ -187,17 +187,6 @@ namespace Joker.DataAccess
 		}
 
 		/// <summary>
-		/// Returns a copy of the picture from the database whose file name matches the argument.
-		/// </summary>
-		/// <param name="filePath">File path by which the picture should be found.</param>
-		/// <returns>A single Picture instance, unbound to the database.</returns>
-		internal static Picture GetPictureByFileName(string filePath)
-		{
-			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
-				return db.Table<Picture>().Where(p => p.FilePath == filePath).First();
-		}
-
-		/// <summary>
 		/// Indicates whether the user has entered a gamble after the most recent limit has been set.
 		/// </summary>
 		/// <returns>True when there are no gambles after the most recent limit, false otherwise.</returns>
@@ -279,8 +268,7 @@ namespace Joker.DataAccess
 				/* First, the most recent limit before the argument is selected by querying all limits
 				 * whose times are earlier than the argument's time, then ordering them descending by time
 				 * and selecting the first element. */
-				var prevLimit = db.Table<Limit>().Where(l => l.Time < gamble.Time)
-					.OrderByDescending(l => l.Time).First();
+				var prevLimit = db.Table<Limit>().Where(l => l.Time < gamble.Time).OrderByDescending(l => l.Time).First();
 
 				/* Then, all gambles whose times are later than the last limit's time up to the argument are selected
 				 * from the Gamble table and their amounts are sequentially subtracted from the last limit's amount. */
@@ -339,6 +327,16 @@ namespace Joker.DataAccess
 		{
 			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
 				db.Delete(contact);
+		}
+
+		/// <summary>
+		/// Deletes the specified picture in the database.
+		/// </summary>
+		/// <param name="pic">The picture to be deleted.</param>
+		internal static void Delete(Picture pic)
+		{
+			using(var db = new SQLiteConnection(AppSettings.DatabaseFilePath))
+				db.Delete(pic);
 		}
 	}
 }

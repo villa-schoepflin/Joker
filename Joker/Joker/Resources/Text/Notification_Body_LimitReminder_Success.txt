@@ -1,1 +1,1 @@
-Im Moment sind noch $REMAININGLIMIT$ von deinem Limit übrig. Immer weiter so!
+Im Moment sind noch %REMAININGLIMIT% von deinem Limit übrig. Immer weiter so!

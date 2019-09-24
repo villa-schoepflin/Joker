@@ -1,1 +1,1 @@
-﻿$USERNAME$, hast Du in letzter Zeit gespielt?
+﻿%USERNAME%, hast Du in letzter Zeit gespielt?

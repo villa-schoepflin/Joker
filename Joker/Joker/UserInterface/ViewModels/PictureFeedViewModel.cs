@@ -69,8 +69,7 @@ namespace Joker.UserInterface
 			do
 				nextPic = pics[random.Next(0, pics.Count)];
 			while(nextPic.FilePath == Model.FilePath);
-
-			Model = Database.GetPictureByFileName(nextPic.FilePath);
+			Model = nextPic;
 		});
 
 		/// <summary>

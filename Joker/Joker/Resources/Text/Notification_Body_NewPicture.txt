@@ -1,1 +1,1 @@
-$USERNAME$, schau Dir Dein neues Bild direkt in der App an. Es ist das erste Bild, was Dir angezeigt wird.
+%USERNAME%, schau Dir Dein neues Bild direkt in der App an. Es ist das erste Bild, was Dir angezeigt wird.

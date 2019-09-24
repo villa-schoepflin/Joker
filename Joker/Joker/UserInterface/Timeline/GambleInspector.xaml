@@ -27,7 +27,7 @@
 					   Grid.Column="1"
 					   BackgroundColor="{Binding CellColor1}"
 					   VerticalOptions="Center"
-					   Padding="15,5,5,5">
+					   Padding="10,5,5,5">
 					<Label Text="{Binding AmountInEuro}"
 						   FontSize="{StaticResource CustomMedium}"
 						   TextColor="{Binding CellText}" />
@@ -49,7 +49,7 @@
 						</Frame>
 						<Label Text="{Binding GambleType}"
 							   HorizontalOptions="FillAndExpand"
-							   Margin="15,0,0,0"
+							   Margin="5,0,0,0"
 							   FontSize="{StaticResource CustomMedium}"
 							   TextColor="{Binding CellText}"
 							   VerticalTextAlignment="Center" />
@@ -90,7 +90,7 @@
 					   Grid.Column="1"
 					   BackgroundColor="{Binding CellColor1}"
 					   VerticalOptions="Center"
-					   Padding="15,5,5,5">
+					   Padding="10,5,5,5">
 					<Label Text="{Binding RemainingLimit}"
 						   FontSize="{StaticResource CustomMedium}"
 						   TextColor="{Binding CellText}" />
@@ -102,7 +102,7 @@
 					   Grid.Column="1"
 					   BackgroundColor="{Binding CellColor1}"
 					   VerticalOptions="Center"
-					   Padding="15,5,5,5">
+					   Padding="10,5,5,5">
 					<Label Text="{Binding LocalizedTime}"
 						   FontSize="{StaticResource CustomMedium}"
 						   TextColor="{Binding CellText}" />

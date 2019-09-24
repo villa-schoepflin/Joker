@@ -22,7 +22,7 @@
 		<Frame Grid.Row="0"
 			   Grid.Column="0"
 			   Grid.ColumnSpan="2"
-			   BackgroundColor="{StaticResource Bgr1}"
+			   BackgroundColor="#333333"
 			   HorizontalOptions="FillAndExpand"
 			   VerticalOptions="FillAndExpand"
 			   CornerRadius="0"

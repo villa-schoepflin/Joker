@@ -60,7 +60,7 @@
 											   HeightRequest="30" />
 									</Frame>
 									<StackLayout HorizontalOptions="FillAndExpand"
-												 Margin="15,0,0,0"
+												 Margin="5,0,0,0"
 												 Spacing="3">
 										<Label Text="{Binding ContactName}"
 											   VerticalOptions="CenterAndExpand"

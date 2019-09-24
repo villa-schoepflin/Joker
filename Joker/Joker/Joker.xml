@@ -63,19 +63,24 @@
             Utility class that handles interaction with embedded resource files.
             </summary>
         </member>
-        <member name="F:Joker.AppInterface.FileResourceReader.UserNamePlaceholder">
+        <member name="F:Joker.AppInterface.FileResourceReader.UserName">
             <summary>
             The placeholder of the user name for a text resource file.
             </summary>
         </member>
-        <member name="F:Joker.AppInterface.FileResourceReader.RemainingLimitPlaceholder">
+        <member name="F:Joker.AppInterface.FileResourceReader.RemainingLimit">
             <summary>
             The placeholder of the current's limit remaining balance for a text resource file.
             </summary>
         </member>
-        <member name="F:Joker.AppInterface.FileResourceReader.LastLimitAmountPlaceholder">
+        <member name="F:Joker.AppInterface.FileResourceReader.LastLimitAmount">
             <summary>
             The placeholder of the value of the most recent limit's amount for a text resource file.
+            </summary>
+        </member>
+        <member name="F:Joker.AppInterface.FileResourceReader.Version">
+            <summary>
+            The placeholder for the mobile OS on which the app runs.
             </summary>
         </member>
         <member name="M:Joker.AppInterface.FileResourceReader.Get(System.String)">
@@ -84,6 +89,13 @@
             </summary>
             <param name="fileName">The file to look for.</param>
             <returns>The plaintext content of the file as a UTF-8 string.</returns>
+        </member>
+        <member name="M:Joker.AppInterface.FileResourceReader.Replace(System.Text.RegularExpressions.Match)">
+            <summary>
+            Replaces matches for the placeholder keywords with their appropriate values.
+            </summary>
+            <param name="match">Match of a placeholder.</param>
+            <returns>Text with which to replace the placeholders.</returns>
         </member>
         <member name="T:Joker.AppInterface.ImageResourceExtension">
             <summary>
@@ -165,57 +177,57 @@
             </summary>
             <param name="interval">The interval for the times the notification should appear.</param>
         </member>
-        <member name="T:Joker.AppInterface.PNContent">
+        <member name="T:Joker.AppInterface.Notifications">
             <summary>
             Container class for constructing the text shown in the different kinds of push notifications (PN).
             </summary>
         </member>
-        <member name="T:Joker.AppInterface.PNContent.Title">
+        <member name="T:Joker.AppInterface.Notifications.Title">
             <summary>
             Struct holding the titles of each kind of notification.
             </summary>
         </member>
-        <member name="P:Joker.AppInterface.PNContent.Title.LimitExpired">
+        <member name="P:Joker.AppInterface.Notifications.Title.LimitExpired">
             <summary>
             Title of the notification indicating that the current has limit has expired.
             </summary>
         </member>
-        <member name="P:Joker.AppInterface.PNContent.Title.NewPicture">
+        <member name="P:Joker.AppInterface.Notifications.Title.NewPicture">
             <summary>
             Title of the notification indicating that a new picture is available to see.
             </summary>
         </member>
-        <member name="P:Joker.AppInterface.PNContent.Title.GambleReminder">
+        <member name="P:Joker.AppInterface.Notifications.Title.GambleReminder">
             <summary>
             Title of the notification reminding the user to always record his acts of gambling.
             </summary>
         </member>
-        <member name="P:Joker.AppInterface.PNContent.Title.LimitReminder">
+        <member name="P:Joker.AppInterface.Notifications.Title.LimitReminder">
             <summary>
             Title of the notification reminding the user about their limit's current state.
             </summary>
         </member>
-        <member name="T:Joker.AppInterface.PNContent.Body">
+        <member name="T:Joker.AppInterface.Notifications.Body">
             <summary>
             Struct holding the main texts of each kind of notification.
             </summary>
         </member>
-        <member name="P:Joker.AppInterface.PNContent.Body.LimitExpired">
+        <member name="P:Joker.AppInterface.Notifications.Body.LimitExpired">
             <summary>
             Main text of the notification indicating that the current has limit has expired.
             </summary>
         </member>
-        <member name="P:Joker.AppInterface.PNContent.Body.NewPicture">
+        <member name="P:Joker.AppInterface.Notifications.Body.NewPicture">
             <summary>
             Main text of the notification indicating that a new picture is available to see.
             </summary>
         </member>
-        <member name="P:Joker.AppInterface.PNContent.Body.GambleReminder">
+        <member name="P:Joker.AppInterface.Notifications.Body.GambleReminder">
             <summary>
             Main text of the notification reminding the user to always record his acts of gambling.
             </summary>
         </member>
-        <member name="P:Joker.AppInterface.PNContent.Body.LimitReminder">
+        <member name="P:Joker.AppInterface.Notifications.Body.LimitReminder">
             <summary>
             Main text of the notification reminding the user about their limit's current state.
             </summary>
@@ -719,13 +731,6 @@
             </summary>
             <returns>A single Picture instance, unbound to the database.</returns>
         </member>
-        <member name="M:Joker.DataAccess.Database.GetPictureByFileName(System.String)">
-            <summary>
-            Returns a copy of the picture from the database whose file name matches the argument.
-            </summary>
-            <param name="filePath">File path by which the picture should be found.</param>
-            <returns>A single Picture instance, unbound to the database.</returns>
-        </member>
         <member name="M:Joker.DataAccess.Database.NoGambleAfterMostRecentLimit">
             <summary>
             Indicates whether the user has entered a gamble after the most recent limit has been set.
@@ -791,6 +796,12 @@
             Deletes the specified contact in the database.
             </summary>
             <param name="contact">The contact to be deleted.</param>
+        </member>
+        <member name="M:Joker.DataAccess.Database.Delete(Joker.BusinessLogic.Picture)">
+            <summary>
+            Deletes the specified picture in the database.
+            </summary>
+            <param name="pic">The picture to be deleted.</param>
         </member>
         <member name="T:Joker.DataAccess.UserSettings">
             <summary>
@@ -1020,9 +1031,19 @@
             View containing information about the creator and publisher of the app.
             </summary>
         </member>
-        <member name="P:Joker.UserInterface.Impressum.VersionText">
+        <member name="P:Joker.UserInterface.Impressum.Version">
             <summary>
             Contains the information of the app version.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.Impressum.ContactInfo">
+            <summary>
+            Contains contact information about the publisher.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.Impressum.PrivacyPolicy">
+            <summary>
+            Contains the privacy policy.
             </summary>
         </member>
         <member name="M:Joker.UserInterface.Impressum.#ctor">

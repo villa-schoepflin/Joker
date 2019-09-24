@@ -1,1 +1,1 @@
-Denk an Dein Limit, $USERNAME$!
+Denk an Dein Limit, %USERNAME%!
