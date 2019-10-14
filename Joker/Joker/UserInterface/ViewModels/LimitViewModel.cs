@@ -106,9 +106,9 @@ namespace Joker.UserInterface
 						n++;
 					// Adds the captions for the points which correspond roughly to the beginning of new days.
 					int hour = Limit.Time.ToLocalTime().Hour + (Limit.Time.Minute < 30 ? 0 : 1);
-					int except12am = hour == 0 ? 0 : 1;
-					if(i % ((int)Limit.Duration.TotalDays / 5 * 24) == 24 * except12am - hour)
-						data[i].ValueLabel = (Limit.Time + TimeSpan.FromDays(1 + i / 24)).ToLocalTime().ToString("d");
+					int not12am = hour == 0 ? 0 : 1;
+					if(i % ((int)span.TotalDays / 5 * 24) == 24 * not12am - hour)
+						data[i].ValueLabel = (Limit.Time + TimeSpan.FromDays(not12am + i / 24)).ToLocalTime().ToString("d");
 				}
 
 				return new LineChart()
