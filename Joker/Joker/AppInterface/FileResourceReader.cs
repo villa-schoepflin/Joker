@@ -34,6 +34,11 @@ namespace Joker.AppInterface
 		private const string Version = "%VERSION%";
 
 		/// <summary>
+		/// Regex pattern for detecting uses of placeholder keywords in a text resource file.
+		/// </summary>
+		private static readonly Regex Pattern = new Regex($"({UserName}|{RemainingLimit}|{LastLimitAmount}|{Version})");
+
+		/// <summary>
 		/// Extracts the plaintext from a specified file resource and fills placeholders with the appropriate text.
 		/// </summary>
 		/// <param name="fileName">The file to look for.</param>
@@ -42,10 +47,7 @@ namespace Joker.AppInterface
 		{
 			using(var stream = typeof(App).Assembly.GetManifestResourceStream($"Joker.Resources.Text.{fileName}"))
 			using(var fileReader = new StreamReader(stream))
-			{
-				string pattern = $"({UserName}|{RemainingLimit}|{LastLimitAmount}|{Version})";
-				return Regex.Replace(fileReader.ReadToEnd(), pattern, new MatchEvaluator(Replace));
-			}
+				return Pattern.Replace(fileReader.ReadToEnd(), Replace);
 		}
 
 		/// <summary>
