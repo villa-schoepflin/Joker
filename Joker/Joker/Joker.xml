@@ -83,6 +83,11 @@
             The placeholder for the mobile OS on which the app runs.
             </summary>
         </member>
+        <member name="F:Joker.AppInterface.FileResourceReader.Pattern">
+            <summary>
+            Regex pattern for detecting uses of placeholder keywords in a text resource file.
+            </summary>
+        </member>
         <member name="M:Joker.AppInterface.FileResourceReader.Get(System.String)">
             <summary>
             Extracts the plaintext from a specified file resource and fills placeholders with the appropriate text.
