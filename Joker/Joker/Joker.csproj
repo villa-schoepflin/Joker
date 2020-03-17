@@ -132,8 +132,6 @@
     <EmbeddedResource Include="Resources\PictureFeed\stadt2.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\sterne.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\stromkasten.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\tastatur.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\truemmer.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\wand1.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\wand2.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\zaun.jpg" />
