@@ -35,7 +35,6 @@
     <None Remove="Resources\PictureFeed\brunnen.jpg" />
     <None Remove="Resources\PictureFeed\container.jpg" />
     <None Remove="Resources\PictureFeed\duerre.jpg" />
-    <None Remove="Resources\PictureFeed\felsen.jpg" />
     <None Remove="Resources\PictureFeed\fernsehturm.jpg" />
     <None Remove="Resources\PictureFeed\fliege.jpg" />
     <None Remove="Resources\PictureFeed\freunde1.jpg" />
@@ -45,7 +44,6 @@
     <None Remove="Resources\PictureFeed\gleis.jpg" />
     <None Remove="Resources\PictureFeed\graffiti.jpg" />
     <None Remove="Resources\PictureFeed\haufen.jpg" />
-    <None Remove="Resources\PictureFeed\jungs.jpg" />
     <None Remove="Resources\PictureFeed\kirmes.jpg" />
     <None Remove="Resources\PictureFeed\k_M_V_Grillfleisch.jpg" />
     <None Remove="Resources\PictureFeed\k_M_V_rettungswesten.jpg" />
@@ -109,7 +107,6 @@
     <EmbeddedResource Include="Resources\PictureFeed\brunnen.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\container.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\duerre.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\felsen.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\fernsehturm.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\fliege.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\freunde1.jpg" />
@@ -119,7 +116,6 @@
     <EmbeddedResource Include="Resources\PictureFeed\gleis.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\graffiti.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\haufen.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\jungs.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\kirmes.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\meer.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\mineralwasser.jpg" />
