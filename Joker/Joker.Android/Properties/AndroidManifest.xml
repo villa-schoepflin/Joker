@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.villaschoepflin.Joker" android:installLocation="internalOnly" android:versionName="1.0.13" android:versionCode="14">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.villaschoepflin.Joker" android:installLocation="internalOnly" android:versionName="1.0.14" android:versionCode="15">
 	<uses-sdk android:minSdkVersion="22" android:targetSdkVersion="29" />
 	<uses-permission android:name="android.permission.READ_CONTACTS" />
 	<uses-permission android:name="android.permission.CALL_PHONE" />

@@ -56,7 +56,6 @@
     <None Remove="Resources\PictureFeed\sonnenstrahl.jpg" />
     <None Remove="Resources\PictureFeed\sonnenuntergang.jpg" />
     <None Remove="Resources\PictureFeed\stadt1.jpg" />
-    <None Remove="Resources\PictureFeed\stadt2.jpg" />
     <None Remove="Resources\PictureFeed\sterne.jpg" />
     <None Remove="Resources\PictureFeed\stromkasten.jpg" />
     <None Remove="Resources\PictureFeed\tastatur.jpg" />
@@ -125,7 +124,6 @@
     <EmbeddedResource Include="Resources\PictureFeed\sonnenstrahl.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\sonnenuntergang.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\stadt1.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\stadt2.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\sterne.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\stromkasten.jpg" />
     <EmbeddedResource Include="Resources\PictureFeed\wand1.jpg" />
