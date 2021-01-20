@@ -1,19 +1,17 @@
-﻿using System;
-
-using Xamarin.Essentials;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-using Joker.AppInterface;
+using System;
+using System.Threading.Tasks;
 using Joker.BusinessLogic;
 using Joker.DataAccess;
+using Xamarin.Essentials;
+using Xamarin.Forms;
+
+using Contact = Joker.BusinessLogic.Contact;
 
 namespace Joker.UserInterface
 {
 	/// <summary>
 	/// View where the user defines the data for a new contact and can insert it into the database.
 	/// </summary>
-	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AddContactPage : ContentPage
 	{
 		/// <summary>
@@ -66,17 +64,31 @@ namespace Joker.UserInterface
 		/// <param name="e">Contains event data.</param>
 		private async void OnSearchDeviceContactsButton(object sender, EventArgs e)
 		{
-			var contact = await DependencyService.Get<IPlatformContactPicker>().PickContact();
-			if((object)contact != null)
+			try
 			{
-				NameEntry.Text = contact.Name;
-				PhoneNumberEntry.Text = contact.PhoneNumber;
+				var contact = await Contacts.PickContactAsync();
+
+				if(contact.Phones.Count == 0)
+					await DisplayAlert(null, Alerts.ContactWithoutPhoneNumber, Alerts.Ok);
+				else
+				{
+					NameEntry.Text = contact.DisplayName;
+					PhoneNumberEntry.Text = contact.Phones[0].PhoneNumber;
+				}
+			}
+			catch(PermissionException)
+			{
+				await DisplayAlert(null, Alerts.ContactPermissionDenied, Alerts.Ok);
+			}
+			catch(TaskCanceledException)
+			{
+				// Happens when the contact selection screen is returned from without picking a contact. Can be ignored.
 			}
 		}
 
 		/// <summary>
-		/// Button event handler that relays input validation, inserts the contact into the database,
-		/// performs necessary refresh actions and navigates the user back to the main page.
+		/// Button event handler that inserts the contact into the database, performs necessary
+		/// refresh actions and navigates the user back to the main page.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
 		/// <param name="e">Contains event data.</param>
@@ -84,13 +96,14 @@ namespace Joker.UserInterface
 		{
 			try
 			{
-				Database.Insert(new Contact(NameEntry.Text, PhoneNumberEntry.Text, ExpertMarker.IsToggled));
+				var contact = new Contact(NameEntry.Text, PhoneNumberEntry.Text, ExpertMarker.IsToggled);
+				Database.Insert(contact);
 				await Navigation.PopAsync();
 				App.CurrentContactPage.RefreshContacts();
 			}
 			catch(ArgumentException error)
 			{
-				await DisplayAlert(null, error.Message, "Ok");
+				await DisplayAlert(null, error.Message, Alerts.Ok);
 			}
 		}
 	}

@@ -1,19 +1,15 @@
-﻿using System;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
+using System;
 using Joker.AppInterface;
 using Joker.BusinessLogic;
 using Joker.DataAccess;
+using Xamarin.Forms;
 
 namespace Joker.UserInterface
 {
 	/// <summary>
-	/// Inescapable view presented only when opening up the app after a limit has expired,
-	/// forcing the user to set a new one.
+	/// Inescapable view presented only when opening up the app after a limit has expired, forcing
+	/// the user to set a new one.
 	/// </summary>
-	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AddLimitPage : ContentPage
 	{
 		/// <summary>
@@ -24,9 +20,9 @@ namespace Joker.UserInterface
 			get
 			{
 				if(Database.CalcBalance(Database.MostRecentLimit()) >= 0)
-					return FileResourceReader.Get("AddNewLimit_Success.txt");
+					return TextAssetReader.Get("AddNewLimit_Success.txt");
 				else
-					return FileResourceReader.Get("AddNewLimit_Failure.txt");
+					return TextAssetReader.Get("AddNewLimit_Failure.txt");
 			}
 		}
 
@@ -40,8 +36,8 @@ namespace Joker.UserInterface
 		}
 
 		/// <summary>
-		/// Button event handler that relays input validation, inserts the new limit into the database,
-		/// schedules the corresponding notifications and directs the user to the main page.
+		/// Button event handler that relays input validation, inserts the new limit into the
+		/// database, schedules the corresponding notifications and gets the user to the main page.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
 		/// <param name="e">Contains event data.</param>
@@ -62,7 +58,7 @@ namespace Joker.UserInterface
 			catch(ArgumentException error)
 			{
 				Indicator.IsRunning = false;
-				await DisplayAlert(null, error.Message, "Ok");
+				await DisplayAlert(null, error.Message, Alerts.Ok);
 			}
 		}
 	}

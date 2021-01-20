@@ -1,17 +1,14 @@
-﻿using System;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
+using System;
 using Joker.AppInterface;
+using Joker.BusinessLogic;
 using Joker.DataAccess;
+using Xamarin.Forms;
 
 namespace Joker.UserInterface
 {
 	/// <summary>
 	/// View where the user can change user-specific settings.
 	/// </summary>
-	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class SettingsPage : ContentPage
 	{
 		/// <summary>
@@ -26,8 +23,10 @@ namespace Joker.UserInterface
 		{
 			InitializeComponent();
 
-			AspectPicker.ItemsSource = new[] { "Anpassen", "Dehnen", "Ausfüllen" };
-			AspectPicker.SelectedIndex = (int)UserSettings.PreferredAspect;
+			SecurityQuestion1.Text = UserSettings.FirstSecurityAttribute.Item1;
+			SecurityAnswer1.Text = UserSettings.FirstSecurityAttribute.Item2;
+			SecurityQuestion2.Text = UserSettings.SecondSecurityAttribute.Item1;
+			SecurityAnswer2.Text = UserSettings.SecondSecurityAttribute.Item2;
 
 			NewPictureEntry.Text = UserSettings.NewPictureInterval.TotalDays.ToString();
 			GambleReminderEntry.Text = UserSettings.GambleReminderInterval.TotalHours.ToString();
@@ -41,11 +40,12 @@ namespace Joker.UserInterface
 		/// <param name="e">Contains event data.</param>
 		private async void OnInfoButton(object sender, EventArgs e)
 		{
-			await DisplayAlert(Headline, FileResourceReader.Get("Info_SettingsPage.txt"), "Ok");
+			await DisplayAlert(Headline, TextAssetReader.Get("Info_SettingsPage.txt"), Alerts.Ok);
 		}
 
 		/// <summary>
-		/// Button event handler that relays input validation for the user name setting and saves it if applicable.
+		/// Button event handler that relays input validation for the user name setting and saves it
+		/// if applicable.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
 		/// <param name="e">Contains event data.</param>
@@ -54,38 +54,30 @@ namespace Joker.UserInterface
 			try
 			{
 				UserSettings.UserName = UserNameEntry.Text;
-				await DisplayAlert("Name gespeichert", "Die App spricht Dich ab jetzt mit " + UserSettings.UserName
-					+ " an.", "Ok");
+
+				string msg = string.Format(Alerts.NameSaved, UserSettings.UserName);
+				await DisplayAlert(Alerts.TitleOnSaved, msg, Alerts.Ok);
+
 				App.CurrentTimelineFeed.RefreshInfo();
 			}
 			catch(ArgumentException error)
 			{
-				await DisplayAlert(null, error.Message, "Ok");
+				await DisplayAlert(null, error.Message, Alerts.Ok);
 			}
 		}
 
 		/// <summary>
-		/// Picker event handler that saves the selected image aspect for the picture feed.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private void SavePictureAspect(object sender, EventArgs e)
-		{
-			UserSettings.PreferredAspect = (Aspect)AspectPicker.SelectedIndex;
-			App.CurrentPictureFeed.RefreshPreferredAspect();
-		}
-
-		/// <summary>
-		/// Button event handler that toggles whether the password and security answers should be hidden.
+		/// Button event handler that toggles whether the password and security answers should be
+		/// hidden.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
 		/// <param name="e">Contains event data.</param>
 		private void ToggleObfuscation(object sender, EventArgs e)
 		{
 			if(sender == FirstAnswerObfuscator)
-				FirstSecurityAnswer.IsPassword ^= true;
+				SecurityAnswer1.IsPassword ^= true;
 			else if(sender == SecondAnswerObfuscator)
-				SecondSecurityAnswer.IsPassword ^= true;
+				SecurityAnswer2.IsPassword ^= true;
 			else
 				UserPasswordEntry.IsPassword ^= true;
 		}
@@ -97,23 +89,25 @@ namespace Joker.UserInterface
 		/// <param name="e">Contains event data.</param>
 		private async void RemovePassword(object sender, EventArgs e)
 		{
-			if(!AppSettings.UserPasswordIsSet)
-				await DisplayAlert(null, "Du müsstest erstmal ein Passwort setzen, um es entfernen zu können.", "Ok");
-			else if(await DisplayAlert(null, "Möchtest Du den Passwortschutz entfernen?", "Ja", "Nein"))
-			{
-				FirstSecurityQuestion.Text = UserSettings.FirstSecurityQuestion = "";
-				FirstSecurityAnswer.Text = UserSettings.FirstSecurityAnswer = "";
-				AppSettings.FirstSecurityQuestionIsSet = false;
+			if(AppSettings.UserPasswordIsSet)
+				if(await DisplayAlert(null, Alerts.PasswordAboutToBeDeleted, Alerts.Yes, Alerts.No))
+				{
+					UserSettings.UserPassword = "";
+					AppSettings.UserPasswordIsSet = false;
 
-				SecondSecurityQuestion.Text = UserSettings.SecondSecurityQuestion = "";
-				SecondSecurityAnswer.Text = UserSettings.SecondSecurityAnswer = "";
-				AppSettings.SecondSecurityQuestionIsSet = false;
+					UserSettings.FirstSecurityAttribute = ("", "");
+					UserSettings.SecondSecurityAttribute = ("", "");
+					AppSettings.FirstSecurityQuestionIsSet = false;
+					AppSettings.SecondSecurityQuestionIsSet = false;
 
-				UserPasswordEntry.Text = "";
-				UserSettings.UserPassword = "";
-				AppSettings.UserPasswordIsSet = false;
-				await DisplayAlert("Passwort entfernt", "Du brauchst jetzt kein Passwort mehr für die App.", "Ok");
-			}
+					UserPasswordEntry.Text = "";
+					SecurityQuestion1.Text = UserSettings.FirstSecurityAttribute.Item1;
+					SecurityAnswer1.Text = UserSettings.FirstSecurityAttribute.Item2;
+					SecurityQuestion2.Text = UserSettings.SecondSecurityAttribute.Item1;
+					SecurityAnswer2.Text = UserSettings.SecondSecurityAttribute.Item2;
+
+					await DisplayAlert(Alerts.TitleOnPasswordDeleted, Alerts.PasswordDeleted, Alerts.Ok);
+				}
 		}
 
 		/// <summary>
@@ -126,86 +120,78 @@ namespace Joker.UserInterface
 			try
 			{
 				if(!AppSettings.FirstSecurityQuestionIsSet || !AppSettings.SecondSecurityQuestionIsSet)
-					throw new ArgumentException("Bitte speichere zuerst die Sicherheitsfragen und Antworten.");
-				if(string.IsNullOrEmpty(UserPasswordEntry.Text))
-					throw new ArgumentException("Du kannst kein leeres Passwort setzen.");
+					throw new ArgumentException(Alerts.SecurityAttributesNotSaved);
+
+				if(string.IsNullOrWhiteSpace(UserPasswordEntry.Text))
+					throw new ArgumentException(Alerts.InputEmpty);
+
 				UserSettings.UserPassword = UserPasswordEntry.Text;
 				AppSettings.UserPasswordIsSet = true;
-				await DisplayAlert("Passwort erstellt", "Ab jetzt wird Dich die App nach dem Passwort fragen.", "Ok");
+				await DisplayAlert(Alerts.TitleOnPasswordSaved, Alerts.PasswordSaved, Alerts.Ok);
 			}
 			catch(ArgumentException error)
 			{
-				await DisplayAlert(null, error.Message, "Ok");
+				await DisplayAlert(null, error.Message, Alerts.Ok);
 				UserPasswordEntry.Text = UserSettings.UserPassword;
 			}
 		}
 
 		/// <summary>
-		/// Button event handler that opens an input dialog for selecting one of several predefined security questions.
+		/// Button event handler that opens an input dialog for selecting one of several predefined
+		/// security questions.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
 		/// <param name="e">Contains event data.</param>
 		private async void ShowSecurityQuestionProposals(object sender, EventArgs e)
 		{
-			string selection = await DisplayActionSheet("Vorschläge für Sicherheitsfragen:", "Abbrechen", null,
-				FileResourceReader.Get("SecurityQuestions.txt").Replace("\r", "").Split('\n'));
+			string proposalsAsset = TextAssetReader.Get("SecurityQuestions.txt");
+			string[] proposals = proposalsAsset.Replace("\r", "").Split('\n');
+			string question = await DisplayActionSheet(Alerts.TitleOnSecurityProposals, Alerts.Cancel, null, proposals);
 
-			if(!string.IsNullOrEmpty(selection) && selection != "Abbrechen")
+			if(!string.IsNullOrWhiteSpace(question) && question != Alerts.Cancel)
 			{
 				if(sender == FirstQuestionMenuButton)
-					FirstSecurityQuestion.Text = selection;
+					SecurityQuestion1.Text = question;
 				else
-					SecondSecurityQuestion.Text = selection;
+					SecurityQuestion2.Text = question;
 			}
 		}
 
 		/// <summary>
-		/// Saves the text of the first security question and its answer and relays possible input errors to the user.
+		/// Saves the text of the security question and its answer based on which button was pressed and relays possible
+		/// input errors to the user.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
 		/// <param name="e">Contains event data.</param>
-		private async void SaveFirstSecurityQuestion(object sender, EventArgs e)
+		private async void SaveSecurityAttribute(object sender, EventArgs e)
 		{
 			try
 			{
-				if(string.IsNullOrEmpty(FirstSecurityQuestion.Text) || string.IsNullOrEmpty(FirstSecurityAnswer.Text))
-					throw new ArgumentException("Deine Angabe darf hier nicht leer sein.");
-				UserSettings.FirstSecurityQuestion = FirstSecurityQuestion.Text;
-				UserSettings.FirstSecurityAnswer = FirstSecurityAnswer.Text;
-				AppSettings.FirstSecurityQuestionIsSet = true;
-				await DisplayAlert("Gespeichert", "Die erste Sicherheitsfrage und Antwort sind gespeichert.", "Ok");
+				if(sender == FirstSecurityAttributeSaver)
+				{
+					if(string.IsNullOrEmpty(SecurityQuestion1.Text) || string.IsNullOrEmpty(SecurityAnswer1.Text))
+						throw new ArgumentException(Alerts.InputEmpty);
+					UserSettings.FirstSecurityAttribute = (SecurityQuestion1.Text, SecurityAnswer1.Text);
+					AppSettings.FirstSecurityQuestionIsSet = true;
+				}
+				else
+				{
+					if(string.IsNullOrEmpty(SecurityQuestion2.Text) || string.IsNullOrEmpty(SecurityAnswer2.Text))
+						throw new ArgumentException(Alerts.InputEmpty);
+					UserSettings.SecondSecurityAttribute = (SecurityQuestion2.Text, SecurityAnswer2.Text);
+					AppSettings.SecondSecurityQuestionIsSet = true;
+				}
+				await DisplayAlert(Alerts.TitleOnSaved, Alerts.SecurityAttributeSaved, Alerts.Ok);
 			}
 			catch(ArgumentException error)
 			{
-				await DisplayAlert(null, error.Message, "Ok");
+				await DisplayAlert(null, error.Message, Alerts.Ok);
 			}
 		}
 
 		/// <summary>
-		/// Saves the text of the second security question and its answer and relays possible input errors to the user.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private async void SaveSecondSecurityQuestion(object sender, EventArgs e)
-		{
-			try
-			{
-				if(string.IsNullOrEmpty(SecondSecurityQuestion.Text) || string.IsNullOrEmpty(SecondSecurityAnswer.Text))
-					throw new ArgumentException("Deine Angabe darf hier nicht leer sein.");
-				UserSettings.SecondSecurityQuestion = SecondSecurityQuestion.Text;
-				UserSettings.SecondSecurityAnswer = SecondSecurityAnswer.Text;
-				AppSettings.SecondSecurityQuestionIsSet = true;
-				await DisplayAlert("Gespeichert", "Die zweite Sicherheitsfrage und Antwort sind gespeichert.", "Ok");
-			}
-			catch(ArgumentException error)
-			{
-				await DisplayAlert(null, error.Message, "Ok");
-			}
-		}
-
-		/// <summary>
-		/// Button event handler that relays input validation for saving the interval between the insertion
-		/// of new pictures into the database and saves the setting if applicable.
+		/// Button event handler that relays input validation for saving the interval between the
+		/// insertion of new pictures into the database and saves the setting if applicable.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
 		/// <param name="e">Contains event data.</param>
@@ -214,18 +200,18 @@ namespace Joker.UserInterface
 			try
 			{
 				UserSettings.SetNewPictureInterval(NewPictureEntry.Text);
-				await DisplayAlert("Gespeichert", "Die Einstellung wird nach dem nächsten Bild berücksichtigt.", "Ok");
+				await DisplayAlert(Alerts.TitleOnSaved, Alerts.PictureIntervalSaved, Alerts.Ok);
 			}
 			catch(ArgumentException error)
 			{
-				await DisplayAlert(null, error.Message, "Ok");
-				NewPictureEntry.Text = $"{UserSettings.NewPictureInterval.TotalDays} Tage";
+				await DisplayAlert(null, error.Message, Alerts.Ok);
+				NewPictureEntry.Text = UserSettings.NewPictureInterval.TotalDays.ToString();
 			}
 		}
 
 		/// <summary>
-		/// Button event handler that relays input validation for saving the interval between gambling 
-		/// reminders and saves the setting if applicable.
+		/// Button event handler that relays input validation for saving the interval between
+		/// gambling reminders and saves the setting if applicable.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
 		/// <param name="e">Contains event data.</param>
@@ -235,13 +221,15 @@ namespace Joker.UserInterface
 			{
 				UserSettings.SetGambleReminderInterval(GambleReminderEntry.Text);
 				DependencyService.Get<IPlatformNotifier>().ScheduleGambleReminder(UserSettings.GambleReminderInterval);
-				await DisplayAlert("Gespeichert", "Die nächste Erinnerung kommt in circa "
-					+ UserSettings.GambleReminderInterval.TotalHours + " Stunden.", "Ok");
+
+				double hours = UserSettings.GambleReminderInterval.TotalHours;
+				string msg = string.Format(Alerts.ReminderIntervalSaved, hours);
+				await DisplayAlert(Alerts.TitleOnSaved, msg, Alerts.Ok);
 			}
 			catch(ArgumentException error)
 			{
-				await DisplayAlert(null, error.Message, "Ok");
-				GambleReminderEntry.Text = $"{UserSettings.GambleReminderInterval.TotalHours} Stunden";
+				await DisplayAlert(null, error.Message, Alerts.Ok);
+				GambleReminderEntry.Text = UserSettings.GambleReminderInterval.TotalHours.ToString();
 			}
 		}
 
@@ -257,13 +245,15 @@ namespace Joker.UserInterface
 			{
 				UserSettings.SetLimitReminderInterval(LimitReminderEntry.Text);
 				DependencyService.Get<IPlatformNotifier>().ScheduleLimitReminder(UserSettings.LimitReminderInterval);
-				await DisplayAlert("Gespeichert", "Die nächste Erinnerung kommt in circa "
-					+ UserSettings.LimitReminderInterval.TotalHours + " Stunden.", "Ok");
+
+				double hours = UserSettings.LimitReminderInterval.TotalHours;
+				string msg = string.Format(Alerts.ReminderIntervalSaved, hours);
+				await DisplayAlert(Alerts.TitleOnSaved, msg, Alerts.Ok);
 			}
 			catch(ArgumentException error)
 			{
-				await DisplayAlert(null, error.Message, "Ok");
-				LimitReminderEntry.Text = $"{UserSettings.LimitReminderInterval.TotalHours} Stunden";
+				await DisplayAlert(null, error.Message, Alerts.Ok);
+				LimitReminderEntry.Text = UserSettings.LimitReminderInterval.TotalHours.ToString();
 			}
 		}
 

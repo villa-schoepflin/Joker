@@ -1,242 +1,266 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.0.11</Version>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<Version>1.0.11</Version>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>Joker.xml</DocumentationFile>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>Joker.xml</DocumentationFile>
+		<WarningLevel>5</WarningLevel>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>Joker.xml</DocumentationFile>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DocumentationFile>Joker.xml</DocumentationFile>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Resources\Icons\bar.png" />
-    <None Remove="Resources\Icons\bar_completed.png" />
-    <None Remove="Resources\Icons\circle.png" />
-    <None Remove="Resources\Icons\circle_completed.png" />
-    <None Remove="Resources\Icons\contacts.png" />
-    <None Remove="Resources\Icons\filledbar.png" />
-    <None Remove="Resources\Icons\filledcircle.png" />
-    <None Remove="Resources\Icons\image.png" />
-    <None Remove="Resources\Icons\impressum.png" />
-    <None Remove="Resources\Icons\joker.png" />
-    <None Remove="Resources\Icons\money.png" />
-    <None Remove="Resources\Icons\motivation.png" />
-    <None Remove="Resources\Icons\search.png" />
-    <None Remove="Resources\Icons\settings.png" />
-    <None Remove="Resources\PictureFeed\abendrot.jpg" />
-    <None Remove="Resources\PictureFeed\abfluss.jpg" />
-    <None Remove="Resources\PictureFeed\andreaskreuz.jpg" />
-    <None Remove="Resources\PictureFeed\asphalt.jpg" />
-    <None Remove="Resources\PictureFeed\brunnen.jpg" />
-    <None Remove="Resources\PictureFeed\container.jpg" />
-    <None Remove="Resources\PictureFeed\duerre.jpg" />
-    <None Remove="Resources\PictureFeed\fernsehturm.jpg" />
-    <None Remove="Resources\PictureFeed\fliege.jpg" />
-    <None Remove="Resources\PictureFeed\freunde1.jpg" />
-    <None Remove="Resources\PictureFeed\freunde2.jpg" />
-    <None Remove="Resources\PictureFeed\gasse1.jpg" />
-    <None Remove="Resources\PictureFeed\gasse2.jpg" />
-    <None Remove="Resources\PictureFeed\gleis.jpg" />
-    <None Remove="Resources\PictureFeed\graffiti.jpg" />
-    <None Remove="Resources\PictureFeed\haufen.jpg" />
-    <None Remove="Resources\PictureFeed\kirmes.jpg" />
-    <None Remove="Resources\PictureFeed\k_M_V_Grillfleisch.jpg" />
-    <None Remove="Resources\PictureFeed\k_M_V_rettungswesten.jpg" />
-    <None Remove="Resources\PictureFeed\k_M_V_Strasse.jpg" />
-    <None Remove="Resources\PictureFeed\meer.jpg" />
-    <None Remove="Resources\PictureFeed\mineralwasser.jpg" />
-    <None Remove="Resources\PictureFeed\pflanzen.jpg" />
-    <None Remove="Resources\PictureFeed\sackgasse.jpg" />
-    <None Remove="Resources\PictureFeed\schild.jpg" />
-    <None Remove="Resources\PictureFeed\sonnenstrahl.jpg" />
-    <None Remove="Resources\PictureFeed\sonnenuntergang.jpg" />
-    <None Remove="Resources\PictureFeed\stadt1.jpg" />
-    <None Remove="Resources\PictureFeed\sterne.jpg" />
-    <None Remove="Resources\PictureFeed\stromkasten.jpg" />
-    <None Remove="Resources\PictureFeed\tastatur.jpg" />
-    <None Remove="Resources\PictureFeed\truemmer.jpg" />
-    <None Remove="Resources\PictureFeed\wand1.jpg" />
-    <None Remove="Resources\PictureFeed\wand2.jpg" />
-    <None Remove="Resources\PictureFeed\zaun.jpg" />
-    <None Remove="Resources\Text\AddNewLimit_Failure.txt" />
-    <None Remove="Resources\Text\AddNewLimit_Success.txt" />
-    <None Remove="Resources\Text\Feedback_Current_Failure.txt" />
-    <None Remove="Resources\Text\Feedback_Current_New.txt" />
-    <None Remove="Resources\Text\Feedback_Current_Success.txt" />
-    <None Remove="Resources\Text\Feedback_Previous_Failure.txt" />
-    <None Remove="Resources\Text\Feedback_Previous_Success.txt" />
-    <None Remove="Resources\Text\Impressum_ContactInfo.txt" />
-    <None Remove="Resources\Text\Impressum_PrivacyPolicy.txt" />
-    <None Remove="Resources\Text\Impressum_Version.txt" />
-    <None Remove="Resources\Text\Info_ContactPage.txt" />
-    <None Remove="Resources\Text\Info_PictureFeed.txt" />
-    <None Remove="Resources\Text\Info_SettingsPage.txt" />
-    <None Remove="Resources\Text\Info_TimelineFeed.txt" />
-    <None Remove="Resources\Text\Notification_Body_GambleReminder.txt" />
-    <None Remove="Resources\Text\Notification_Body_LimitExpired_Failure.txt" />
-    <None Remove="Resources\Text\Notification_Body_LimitExpired_Success.txt" />
-    <None Remove="Resources\Text\Notification_Body_LimitReminder_Failure.txt" />
-    <None Remove="Resources\Text\Notification_Body_LimitReminder_Success.txt" />
-    <None Remove="Resources\Text\Notification_Body_NewPicture.txt" />
-    <None Remove="Resources\Text\Notification_Title_GambleReminder.txt" />
-    <None Remove="Resources\Text\Notification_Title_LimitExpired.txt" />
-    <None Remove="Resources\Text\Notification_Title_LimitReminder.txt" />
-    <None Remove="Resources\Text\Notification_Title_NewPicture.txt" />
-    <None Remove="Resources\Text\PushNotification_Title_LimitExpired.txt" />
-    <None Remove="Resources\Text\PushNotification_Title_NewPicture.txt" />
-    <None Remove="Resources\Text\SecurityQuestions.txt" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="Assets\Icons\bar.png" />
+		<None Remove="Assets\Icons\bar_completed.png" />
+		<None Remove="Assets\Icons\circle.png" />
+		<None Remove="Assets\Icons\circle_completed.png" />
+		<None Remove="Assets\Icons\contacts.png" />
+		<None Remove="Assets\Icons\filledbar.png" />
+		<None Remove="Assets\Icons\filledcircle.png" />
+		<None Remove="Assets\Icons\image.png" />
+		<None Remove="Assets\Icons\impressum.png" />
+		<None Remove="Assets\Icons\joker.png" />
+		<None Remove="Assets\Icons\money.png" />
+		<None Remove="Assets\Icons\motivation.png" />
+		<None Remove="Assets\Icons\search.png" />
+		<None Remove="Assets\Icons\settings.png" />
+		<None Remove="Assets\PictureFeed\abendrot.jpg" />
+		<None Remove="Assets\PictureFeed\abfluss.jpg" />
+		<None Remove="Assets\PictureFeed\andreaskreuz.jpg" />
+		<None Remove="Assets\PictureFeed\asphalt.jpg" />
+		<None Remove="Assets\PictureFeed\aufgeben.jpg" />
+		<None Remove="Assets\PictureFeed\brunnen.jpg" />
+		<None Remove="Assets\PictureFeed\container.jpg" />
+		<None Remove="Assets\PictureFeed\duerre.jpg" />
+		<None Remove="Assets\PictureFeed\eis.jpg" />
+		<None Remove="Assets\PictureFeed\fernsehturm.jpg" />
+		<None Remove="Assets\PictureFeed\fliege.jpg" />
+		<None Remove="Assets\PictureFeed\freunde1.jpg" />
+		<None Remove="Assets\PictureFeed\freunde2.jpg" />
+		<None Remove="Assets\PictureFeed\gasse1.jpg" />
+		<None Remove="Assets\PictureFeed\gasse2.jpg" />
+		<None Remove="Assets\PictureFeed\gleis.jpg" />
+		<None Remove="Assets\PictureFeed\graffiti.jpg" />
+		<None Remove="Assets\PictureFeed\haufen.jpg" />
+		<None Remove="Assets\PictureFeed\hortensie.jpg" />
+		<None Remove="Assets\PictureFeed\hund.jpg" />
+		<None Remove="Assets\PictureFeed\kirmes.jpg" />
+		<None Remove="Assets\PictureFeed\k_M_V_Grillfleisch.jpg" />
+		<None Remove="Assets\PictureFeed\k_M_V_rettungswesten.jpg" />
+		<None Remove="Assets\PictureFeed\k_M_V_Strasse.jpg" />
+		<None Remove="Assets\PictureFeed\meer.jpg" />
+		<None Remove="Assets\PictureFeed\mineralwasser.jpg" />
+		<None Remove="Assets\PictureFeed\palme.jpg" />
+		<None Remove="Assets\PictureFeed\pflanzen.jpg" />
+		<None Remove="Assets\PictureFeed\regentanz.jpg" />
+		<None Remove="Assets\PictureFeed\sackgasse.jpg" />
+		<None Remove="Assets\PictureFeed\schild.jpg" />
+		<None Remove="Assets\PictureFeed\sonnenstrahl.jpg" />
+		<None Remove="Assets\PictureFeed\sonnenuntergang.jpg" />
+		<None Remove="Assets\PictureFeed\stadt1.jpg" />
+		<None Remove="Assets\PictureFeed\sterne.jpg" />
+		<None Remove="Assets\PictureFeed\strasse.jpg" />
+		<None Remove="Assets\PictureFeed\stromkasten.jpg" />
+		<None Remove="Assets\PictureFeed\tastatur.jpg" />
+		<None Remove="Assets\PictureFeed\truemmer.jpg" />
+		<None Remove="Assets\PictureFeed\wand1.jpg" />
+		<None Remove="Assets\PictureFeed\wand2.jpg" />
+		<None Remove="Assets\PictureFeed\zaun.jpg" />
+		<None Remove="Assets\Text\AddNewLimit_Failure.txt" />
+		<None Remove="Assets\Text\AddNewLimit_Success.txt" />
+		<None Remove="Assets\Text\Feedback_Current_Failure.txt" />
+		<None Remove="Assets\Text\Feedback_Current_New.txt" />
+		<None Remove="Assets\Text\Feedback_Current_Success.txt" />
+		<None Remove="Assets\Text\Feedback_Previous_Failure.txt" />
+		<None Remove="Assets\Text\Feedback_Previous_Success.txt" />
+		<None Remove="Assets\Text\Impressum_ContactInfo.txt" />
+		<None Remove="Assets\Text\Impressum_PrivacyPolicy.txt" />
+		<None Remove="Assets\Text\Impressum_Version.txt" />
+		<None Remove="Assets\Text\Info_ContactPage.txt" />
+		<None Remove="Assets\Text\Info_PictureFeed.txt" />
+		<None Remove="Assets\Text\Info_SettingsPage.txt" />
+		<None Remove="Assets\Text\Info_TimelineFeed.txt" />
+		<None Remove="Assets\Text\Notification_Body_GambleReminder.txt" />
+		<None Remove="Assets\Text\Notification_Body_LimitExpired_Failure.txt" />
+		<None Remove="Assets\Text\Notification_Body_LimitExpired_Success.txt" />
+		<None Remove="Assets\Text\Notification_Body_LimitReminder_Failure.txt" />
+		<None Remove="Assets\Text\Notification_Body_LimitReminder_Success.txt" />
+		<None Remove="Assets\Text\Notification_Body_NewPicture.txt" />
+		<None Remove="Assets\Text\Notification_Title_GambleReminder.txt" />
+		<None Remove="Assets\Text\Notification_Title_LimitExpired.txt" />
+		<None Remove="Assets\Text\Notification_Title_LimitReminder.txt" />
+		<None Remove="Assets\Text\Notification_Title_NewPicture.txt" />
+		<None Remove="Assets\Text\PushNotification_Title_LimitExpired.txt" />
+		<None Remove="Assets\Text\PushNotification_Title_NewPicture.txt" />
+		<None Remove="Assets\Text\SecurityQuestions.txt" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Icons\bar.png" />
-    <EmbeddedResource Include="Resources\Icons\filledbar.png" />
-    <EmbeddedResource Include="Resources\Icons\circle.png" />
-    <EmbeddedResource Include="Resources\Icons\filledcircle.png" />
-    <EmbeddedResource Include="Resources\Icons\impressum.png" />
-    <EmbeddedResource Include="Resources\Icons\joker.png" />
-    <EmbeddedResource Include="Resources\PictureFeed\abendrot.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\abfluss.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\andreaskreuz.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\asphalt.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\brunnen.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\container.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\duerre.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\fernsehturm.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\fliege.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\freunde1.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\freunde2.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\gasse1.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\gasse2.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\gleis.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\graffiti.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\haufen.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\kirmes.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\meer.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\mineralwasser.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\pflanzen.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\sackgasse.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\schild.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\sonnenstrahl.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\sonnenuntergang.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\stadt1.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\sterne.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\stromkasten.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\wand1.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\wand2.jpg" />
-    <EmbeddedResource Include="Resources\PictureFeed\zaun.jpg" />
-    <EmbeddedResource Include="Resources\Text\AddNewLimit_Failure.txt" />
-    <EmbeddedResource Include="Resources\Text\AddNewLimit_Success.txt" />
-    <EmbeddedResource Include="Resources\Text\Feedback_Current_Failure.txt" />
-    <EmbeddedResource Include="Resources\Text\Feedback_Current_New.txt" />
-    <EmbeddedResource Include="Resources\Text\Feedback_Current_Success.txt" />
-    <EmbeddedResource Include="Resources\Text\Feedback_Previous_Failure.txt" />
-    <EmbeddedResource Include="Resources\Text\Feedback_Previous_Success.txt" />
-    <EmbeddedResource Include="Resources\Text\Impressum_ContactInfo.txt" />
-    <EmbeddedResource Include="Resources\Text\Info_ContactPage.txt" />
-    <EmbeddedResource Include="Resources\Text\Info_PictureFeed.txt" />
-    <EmbeddedResource Include="Resources\Text\Info_SettingsPage.txt" />
-    <EmbeddedResource Include="Resources\Text\Info_TimelineFeed.txt" />
-    <EmbeddedResource Include="Resources\Text\Notification_Body_GambleReminder.txt" />
-    <EmbeddedResource Include="Resources\Text\Notification_Body_LimitExpired_Failure.txt" />
-    <EmbeddedResource Include="Resources\Text\Notification_Body_LimitExpired_Success.txt" />
-    <EmbeddedResource Include="Resources\Text\Notification_Body_LimitReminder_Failure.txt" />
-    <EmbeddedResource Include="Resources\Text\Notification_Body_LimitReminder_Success.txt" />
-    <EmbeddedResource Include="Resources\Text\Notification_Body_NewPicture.txt" />
-    <EmbeddedResource Include="Resources\Text\Notification_Title_GambleReminder.txt" />
-    <EmbeddedResource Include="Resources\Text\Notification_Title_LimitExpired.txt" />
-    <EmbeddedResource Include="Resources\Text\Notification_Title_LimitReminder.txt" />
-    <EmbeddedResource Include="Resources\Text\Notification_Title_NewPicture.txt" />
-    <EmbeddedResource Include="Resources\Text\Impressum_PrivacyPolicy.txt" />
-    <EmbeddedResource Include="Resources\Text\SecurityQuestions.txt" />
-    <EmbeddedResource Include="Resources\Text\Impressum_Version.txt" />
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Assets\Icons\bar.png" />
+		<EmbeddedResource Include="Assets\Icons\filledbar.png" />
+		<EmbeddedResource Include="Assets\Icons\circle.png" />
+		<EmbeddedResource Include="Assets\Icons\filledcircle.png" />
+		<EmbeddedResource Include="Assets\Icons\impressum.png" />
+		<EmbeddedResource Include="Assets\Icons\joker.png" />
+		<EmbeddedResource Include="Assets\PictureFeed\abendrot.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\abfluss.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\andreaskreuz.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\asphalt.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\aufgeben.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\brunnen.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\container.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\duerre.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\eis.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\fernsehturm.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\fliege.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\freunde1.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\freunde2.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\gasse1.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\gasse2.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\gleis.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\graffiti.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\haufen.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\hortensie.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\hund.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\kirmes.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\meer.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\mineralwasser.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\palme.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\pflanzen.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\regentanz.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\sackgasse.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\schild.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\sonnenstrahl.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\sonnenuntergang.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\stadt1.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\sterne.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\strasse.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\stromkasten.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\wand1.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\wand2.jpg" />
+		<EmbeddedResource Include="Assets\PictureFeed\zaun.jpg" />
+		<EmbeddedResource Include="Assets\Text\AddNewLimit_Failure.txt" />
+		<EmbeddedResource Include="Assets\Text\AddNewLimit_Success.txt" />
+		<EmbeddedResource Include="Assets\Text\Feedback_Current_Failure.txt" />
+		<EmbeddedResource Include="Assets\Text\Feedback_Current_New.txt" />
+		<EmbeddedResource Include="Assets\Text\Feedback_Current_Success.txt" />
+		<EmbeddedResource Include="Assets\Text\Feedback_Previous_Failure.txt" />
+		<EmbeddedResource Include="Assets\Text\Feedback_Previous_Success.txt" />
+		<EmbeddedResource Include="Assets\Text\Impressum_ContactInfo.txt" />
+		<EmbeddedResource Include="Assets\Text\Info_ContactPage.txt" />
+		<EmbeddedResource Include="Assets\Text\Info_PictureFeed.txt" />
+		<EmbeddedResource Include="Assets\Text\Info_SettingsPage.txt" />
+		<EmbeddedResource Include="Assets\Text\Info_TimelineFeed.txt" />
+		<EmbeddedResource Include="Assets\Text\Notification_Body_GambleReminder.txt" />
+		<EmbeddedResource Include="Assets\Text\Notification_Body_LimitExpired_Failure.txt" />
+		<EmbeddedResource Include="Assets\Text\Notification_Body_LimitExpired_Success.txt" />
+		<EmbeddedResource Include="Assets\Text\Notification_Body_LimitReminder_Failure.txt" />
+		<EmbeddedResource Include="Assets\Text\Notification_Body_LimitReminder_Success.txt" />
+		<EmbeddedResource Include="Assets\Text\Notification_Body_NewPicture.txt" />
+		<EmbeddedResource Include="Assets\Text\Notification_Title_GambleReminder.txt" />
+		<EmbeddedResource Include="Assets\Text\Notification_Title_LimitExpired.txt" />
+		<EmbeddedResource Include="Assets\Text\Notification_Title_LimitReminder.txt" />
+		<EmbeddedResource Include="Assets\Text\Notification_Title_NewPicture.txt" />
+		<EmbeddedResource Include="Assets\Text\Impressum_PrivacyPolicy.txt" />
+		<EmbeddedResource Include="Assets\Text\SecurityQuestions.txt" />
+		<EmbeddedResource Include="Assets\Text\Impressum_Version.txt" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microcharts" Version="0.7.1" />
-    <PackageReference Include="Microcharts.Forms" Version="0.7.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.1" />
-    <PackageReference Include="Xamarin.Forms" Version="4.5.0.657" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microcharts" Version="0.7.1" />
+		<PackageReference Include="Microcharts.Forms" Version="0.7.1" />
+		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
+		<PackageReference Include="Xamarin.Essentials" Version="1.6.0" />
+		<PackageReference Include="Xamarin.Forms" Version="5.0.0.1874" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="UserInterface\Timeline\GambleInspector.xaml.cs">
-      <DependentUpon>GambleInspector.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="UserInterface\Timeline\LimitInspector.xaml.cs">
-      <DependentUpon>LimitInspector.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="UserInterface\Timeline\AddGamblePage.xaml.cs">
-      <DependentUpon>AddGamblePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="UserInterface\ContactPage.xaml.cs">
-      <DependentUpon>ContactPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="UserInterface\PictureFeed.xaml.cs">
-      <DependentUpon>PictureFeed.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="UserInterface\Timeline\AddLimitPage.xaml.cs">
-      <DependentUpon>AddLimitPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="UserInterface\Timeline\TimelineFeed.xaml.cs">
-      <DependentUpon>TimelineFeed.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Update="UserInterface\Timeline\GambleInspector.xaml.cs">
+			<DependentUpon>GambleInspector.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="UserInterface\Timeline\LimitInspector.xaml.cs">
+			<DependentUpon>LimitInspector.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="UserInterface\Timeline\AddGamblePage.xaml.cs">
+			<DependentUpon>AddGamblePage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="UserInterface\ContactPage.xaml.cs">
+			<DependentUpon>ContactPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="UserInterface\PictureFeed.xaml.cs">
+			<DependentUpon>PictureFeed.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="UserInterface\Timeline\AddLimitPage.xaml.cs">
+			<DependentUpon>AddLimitPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="UserInterface\Timeline\TimelineFeed.xaml.cs">
+			<DependentUpon>TimelineFeed.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="UserInterface\WelcomeTour\NameTourPage.xaml.cs">
+		  <DependentUpon>NameTourPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="UserInterface\WelcomeTour\ContactTourPage.xaml.cs">
+		  <DependentUpon>ContactTourPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="UserInterface\WelcomeTour\LimitTourPage.xaml.cs">
+		  <DependentUpon>LimitTourPage.xaml</DependentUpon>
+		</Compile>
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="UserInterface\AddContactPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="UserInterface\ContactInspector.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="UserInterface\Impressum.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="UserInterface\PasswordPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="UserInterface\SecurityQuestionPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="UserInterface\Timeline\AddLimitPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="UserInterface\Timeline\GambleInspector.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="UserInterface\Timeline\LimitInspector.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="UserInterface\Timeline\AddGamblePage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="UserInterface\ContactPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="UserInterface\MainPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="UserInterface\SettingsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="UserInterface\Timeline\TimelineFeed.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="UserInterface\WelcomeTour\TourPage1.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="UserInterface\WelcomeTour\TourPage2.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="UserInterface\WelcomeTour\TourPage3.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Update="UserInterface\AddContactPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\ContactInspector.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\Impressum.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\PasswordPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\SecurityQuestionPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\Timeline\AddLimitPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\Timeline\GambleInspector.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\Timeline\LimitInspector.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\Timeline\AddGamblePage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\ContactPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\MainPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\SettingsPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\Timeline\TimelineFeed.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\WelcomeTour\NameTourPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\WelcomeTour\ContactTourPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\WelcomeTour\LimitTourPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+	</ItemGroup>
 </Project>

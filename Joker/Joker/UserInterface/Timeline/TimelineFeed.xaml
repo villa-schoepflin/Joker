@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:ui="clr-namespace:Joker.UserInterface"
@@ -6,7 +6,11 @@
 			 Icon="ui_timeline.png"
 			 BackgroundColor="{StaticResource Bgr1}">
 	<ContentPage.Title>
-		<OnPlatform iOS="{Static ui:TimelineFeed.Headline}" />
+		<OnPlatform x:TypeArguments="x:String">
+			<OnPlatform.Platforms>
+				<On Platform="iOS" Value="{Static ui:TimelineFeed.Headline}" />
+			</OnPlatform.Platforms>
+		</OnPlatform>
 	</ContentPage.Title>
 	<Grid>
 		<Grid.RowDefinitions>
@@ -39,7 +43,7 @@
 									<TapGestureRecognizer Tapped="OnToggleFeedbackButton" />
 								</Frame.GestureRecognizers>
 								<Image Source="{Binding FeedbackTogglerIcon}"
-									   HeightRequest="16" />
+									   HeightRequest="20" />
 							</Frame>
 							<StackLayout x:Name="FeedbackHeader">
 								<Label FontSize="Small"
@@ -61,11 +65,11 @@
 							<StackLayout.GestureRecognizers>
 								<TapGestureRecognizer Command="{Binding OpenDetailPage}" />
 							</StackLayout.GestureRecognizers>
-							<Frame BackgroundColor="{Binding CellColor1}"
+							<Frame BackgroundColor="{Binding CellBgrColor}"
 								   Padding="5"
 								   CornerRadius="5">
 								<StackLayout Orientation="Horizontal">
-									<Frame BackgroundColor="{Binding CellColor2}"
+									<Frame BackgroundColor="{Binding IconBgrColor}"
 										   Padding="3"
 										   CornerRadius="5">
 										<Image Source="{Binding TypeIcon}"
@@ -75,7 +79,7 @@
 										   Margin="5,0,0,0"
 										   Text="{Binding AmountInEuro}"
 										   FontSize="{StaticResource CustomMedium}"
-										   TextColor="{Binding CellText}"
+										   TextColor="{Binding CellTextColor}"
 										   VerticalTextAlignment="Center" />
 									<Label HorizontalOptions="Center"
 										   Text="{Binding RemainingLimit}"
@@ -87,7 +91,7 @@
 										   Margin="10,0,10,0"
 										   Text="{Binding LocalizedTime}"
 										   FontSize="{StaticResource CustomSmall}"
-										   TextColor="{Binding CellText}"
+										   TextColor="{Binding CellTextColor}"
 										   VerticalTextAlignment="Center" />
 								</StackLayout>
 							</Frame>

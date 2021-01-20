@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Windows.Input;
-
+using Joker.BusinessLogic;
+using Joker.DataAccess;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-using Joker.BusinessLogic;
-using Joker.DataAccess;
+using Contact = Joker.BusinessLogic.Contact;
 
 namespace Joker.UserInterface
 {
@@ -84,7 +84,8 @@ namespace Joker.UserInterface
 		/// </summary>
 		public ICommand OpenDetailPage => new Command(async () =>
 		{
-			await View.Navigation.PushAsync(new ContactInspector(Model));
+			var contactInspector = new ContactInspector(Model);
+			await View.Navigation.PushAsync(contactInspector);
 		});
 
 		/// <summary>
@@ -108,6 +109,8 @@ namespace Joker.UserInterface
 							text = text.Substring(0, Contact.MaxPhoneNumberLength);
 						PhoneNumber = text;
 						break;
+					default:
+						throw new NotImplementedException();
 				}
 			}
 		});
@@ -115,13 +118,11 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// Opens the platform's telephone app with the corresponding contact's phone number.
 		/// </summary>
-		public ICommand CallContact => new Command(() =>
-		{
-			PhoneDialer.Open(Model.PhoneNumber);
-		});
+		public ICommand CallContact => new Command(() => PhoneDialer.Open(Model.PhoneNumber));
 
 		/// <summary>
-		/// Toggles the editing status for the contact detail page, saving the changes on deactivating editing.
+		/// Toggles the editing status for the contact detail page, saving the changes on
+		/// deactivating editing.
 		/// </summary>
 		public ICommand ToggleEditingStatus => new Command(async () =>
 		{
@@ -129,7 +130,7 @@ namespace Joker.UserInterface
 			{
 				if(Model == Contact.Bzga)
 				{
-					await View.DisplayAlert(null, "Dieser Kontakt ist fest eingespeichert.", "Ok");
+					await View.DisplayAlert(null, Alerts.ContactNotDeletable, Alerts.Ok);
 					return;
 				}
 				if(EditingEnabled)
@@ -141,7 +142,7 @@ namespace Joker.UserInterface
 			}
 			catch(ArgumentException error)
 			{
-				await View.DisplayAlert(null, error.Message, "Ok");
+				await View.DisplayAlert(null, error.Message, Alerts.Ok);
 			}
 		});
 
@@ -152,10 +153,10 @@ namespace Joker.UserInterface
 		{
 			if(Model == Contact.Bzga)
 			{
-				await View.DisplayAlert(null, "Dieser Kontakt ist fest eingespeichert.", "Ok");
+				await View.DisplayAlert(null, Alerts.ContactNotDeletable, Alerts.Ok);
 				return;
 			}
-			if(await View.DisplayAlert(null, "Soll dieser Kontakt gelöscht werden?", "Ja", "Nein"))
+			if(await View.DisplayAlert(null, Alerts.ContactAboutToBeDeleted, Alerts.Yes, Alerts.No))
 			{
 				Database.Delete(Model);
 				await View.Navigation.PopAsync();

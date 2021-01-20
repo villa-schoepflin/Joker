@@ -1,13 +1,11 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content;
-
 using Joker.AppInterface;
 using Joker.DataAccess;
 
-[assembly: Xamarin.Forms.Dependency(typeof(Joker.Droid.AndroidNotifier))]
-namespace Joker.Droid
+[assembly: Xamarin.Forms.Dependency(typeof(Joker.Android.AndroidNotifier))]
+namespace Joker.Android
 {
 	/// <summary>
 	/// Contains Android-specific notification functionality.
@@ -21,7 +19,8 @@ namespace Joker.Droid
 			=> (AlarmManager)Application.Context.GetSystemService(Context.AlarmService);
 
 		/// <summary>
-		/// Gets the app-specific Android notification manager to create push notifications on the phone.
+		/// Gets the app-specific Android notification manager to create push notifications on the
+		/// phone.
 		/// </summary>
 		private static NotificationManager Notifier
 			=> (NotificationManager)Application.Context.GetSystemService(Context.NotificationService);
@@ -57,17 +56,19 @@ namespace Joker.Droid
 		internal class LimitExpiredReceiver : BroadcastReceiver
 		{
 			/// <summary>
-			/// Receives the broadcast from Android and pushes an ongoing notification indicating that the
-			/// current limit has expired. Creates the respective notification channel if necessary.
+			/// Receives the broadcast from Android and pushes an ongoing notification indicating
+			/// that the current limit has expired. Creates the respective notification channel if
+			/// necessary.
 			/// </summary>
 			/// <param name="context">The context through which the broadcast is processed.</param>
 			/// <param name="intent">Not used here.</param>
 			public override void OnReceive(Context context, Intent intent)
 			{
 				var channel = new NotificationChannel(PNType.LimitExpired.ToString(),
-					"Limit-Benachrichtigungen",
-					NotificationImportance.Max);
-				channel.LockscreenVisibility = NotificationVisibility.Public;
+					"Limit-Benachrichtigungen", NotificationImportance.Max)
+				{
+					LockscreenVisibility = NotificationVisibility.Public
+				};
 				Notifier.CreateNotificationChannel(channel);
 
 				var launch = PendingIntent.GetActivity(context, 0, new Intent(context, typeof(LaunchActivity)), 0);
@@ -75,7 +76,8 @@ namespace Joker.Droid
 					.SetContentTitle(Notifications.Title.LimitExpired)
 					.SetContentText(Notifications.Body.LimitExpired)
 					.SetSmallIcon(Resource.Drawable.ui_icon)
-					.SetStyle(new Notification.BigTextStyle().BigText(Notifications.Body.LimitExpired))
+					.SetStyle(new Notification.BigTextStyle()
+					.BigText(Notifications.Body.LimitExpired))
 					.SetOngoing(true)
 					.SetAutoCancel(false)
 					.SetContentIntent(launch);
@@ -105,18 +107,19 @@ namespace Joker.Droid
 		internal class NewPictureReceiver : BroadcastReceiver
 		{
 			/// <summary>
-			/// Receives the broadcast from Android and pushes an ongoing notification indicating that a
-			/// new pictures is available to see. Creates the respective notification channel if necessary.
-			/// The notification is removed when it is opened.
+			/// Receives the broadcast from Android and pushes an ongoing notification indicating
+			/// that a new pictures is available to see. Creates the respective notification channel
+			/// if necessary. The notification is removed when it is opened.
 			/// </summary>
 			/// <param name="context">The context through which the broadcast is processed.</param>
 			/// <param name="intent">Not used here.</param>
 			public override void OnReceive(Context context, Intent intent)
 			{
 				var channel = new NotificationChannel(PNType.NewPicture.ToString(),
-					"Bilderbenachrichtigungen",
-					NotificationImportance.High);
-				channel.LockscreenVisibility = NotificationVisibility.Public;
+					"Bilderbenachrichtigungen", NotificationImportance.High)
+				{
+					LockscreenVisibility = NotificationVisibility.Public
+				};
 				Notifier.CreateNotificationChannel(channel);
 
 				var launch = PendingIntent.GetActivity(context, 0, new Intent(context, typeof(LaunchActivity)), 0);
@@ -124,7 +127,8 @@ namespace Joker.Droid
 					.SetContentTitle(Notifications.Title.NewPicture)
 					.SetContentText(Notifications.Body.NewPicture)
 					.SetSmallIcon(Resource.Drawable.ui_icon)
-					.SetStyle(new Notification.BigTextStyle().BigText(Notifications.Body.NewPicture))
+					.SetStyle(new Notification.BigTextStyle()
+					.BigText(Notifications.Body.NewPicture))
 					.SetAutoCancel(true)
 					.SetOngoing(true)
 					.SetContentIntent(launch);
@@ -133,10 +137,10 @@ namespace Joker.Droid
 		}
 
 		/// <summary>
-		/// Android-specific implementation of an API method that schedules a notification
-		/// reminding the user to always record acts of gambling within the app.
+		/// Android-specific implementation of an API method that schedules a notification reminding
+		/// the user to always record acts of gambling within the app.
 		/// </summary>
-		/// <param name="interval">The interval for the times the notification should appear.</param>
+		/// <param name="interval">The interval for the time the notification should appear.</param>
 		public void ScheduleGambleReminder(TimeSpan interval)
 		{
 			var broadcast = PendingIntent.GetBroadcast(Application.Context,
@@ -144,10 +148,8 @@ namespace Joker.Droid
 				new Intent(Application.Context, typeof(GambleReminderReceiver)),
 				PendingIntentFlags.UpdateCurrent);
 
-			Scheduler.SetRepeating(AlarmType.RtcWakeup,
-				GetSystemTime(DateTime.UtcNow + interval),
-				(long)interval.TotalMilliseconds,
-				broadcast);
+			long time = GetSystemTime(DateTime.UtcNow + interval);
+			Scheduler.SetRepeating(AlarmType.RtcWakeup, time, (long)interval.TotalMilliseconds, broadcast);
 		}
 
 		/// <summary>
@@ -157,26 +159,29 @@ namespace Joker.Droid
 		internal class GambleReminderReceiver : BroadcastReceiver
 		{
 			/// <summary>
-			/// Receives the broadcast from Android and pushes a notification reminding the user that
-			/// their acts of gambling should be recorded with the app. Creates the respective notification
-			/// channel if necessary.
+			/// Receives the broadcast from Android and pushes a notification reminding the user
+			/// that their acts of gambling should be recorded with the app. Creates the respective
+			/// notification channel if necessary.
 			/// </summary>
 			/// <param name="context">The context through which the broadcast is processed.</param>
 			/// <param name="intent">Not used here.</param>
 			public override void OnReceive(Context context, Intent intent)
 			{
 				var channel = new NotificationChannel(PNType.GambleReminder.ToString(),
-					"Spieleinsatz-Erinnerungen",
-					NotificationImportance.Default);
-				channel.LockscreenVisibility = NotificationVisibility.Public;
+					"Spieleinsatz-Erinnerungen", NotificationImportance.Default)
+				{
+					LockscreenVisibility = NotificationVisibility.Public
+				};
 				Notifier.CreateNotificationChannel(channel);
 
 				var launch = PendingIntent.GetActivity(context, 0, new Intent(context, typeof(LaunchActivity)), 0);
-				var notifBuilder = new Notification.Builder(context, PNType.GambleReminder.ToString())
+				var notifBuilder = new Notification.Builder(context,
+					PNType.GambleReminder.ToString())
 					.SetContentTitle(Notifications.Title.GambleReminder)
 					.SetContentText(Notifications.Body.GambleReminder)
 					.SetSmallIcon(Resource.Drawable.ui_icon)
-					.SetStyle(new Notification.BigTextStyle().BigText(Notifications.Body.GambleReminder))
+					.SetStyle(new Notification.BigTextStyle()
+					.BigText(Notifications.Body.GambleReminder))
 					.SetAutoCancel(true)
 					.SetContentIntent(launch);
 				Notifier.Notify((int)PNType.GambleReminder, notifBuilder.Build());
@@ -184,10 +189,10 @@ namespace Joker.Droid
 		}
 
 		/// <summary>
-		/// Android-specific implementation of an API method that schedules a notification
-		/// reminding the user about their current limit's state.
+		/// Android-specific implementation of an API method that schedules a notification reminding the user about
+		/// their current limit's state.
 		/// </summary>
-		/// <param name="interval">The interval for the times the notification should appear.</param>
+		/// <param name="interval">The interval for the time the notification should appear.</param>
 		public void ScheduleLimitReminder(TimeSpan interval)
 		{
 			var broadcast = PendingIntent.GetBroadcast(Application.Context,
@@ -195,10 +200,8 @@ namespace Joker.Droid
 				new Intent(Application.Context, typeof(LimitReminderReceiver)),
 				PendingIntentFlags.UpdateCurrent);
 
-			Scheduler.SetRepeating(AlarmType.RtcWakeup,
-				GetSystemTime(DateTime.UtcNow + interval),
-				(long)interval.TotalMilliseconds,
-				broadcast);
+			long time = GetSystemTime(DateTime.UtcNow + interval);
+			Scheduler.SetRepeating(AlarmType.RtcWakeup, time, (long)interval.TotalMilliseconds, broadcast);
 		}
 
 		/// <summary>
@@ -216,9 +219,10 @@ namespace Joker.Droid
 			public override void OnReceive(Context context, Intent intent)
 			{
 				var channel = new NotificationChannel(PNType.LimitReminder.ToString(),
-					"Limit-Erinnerungen",
-					NotificationImportance.Default);
-				channel.LockscreenVisibility = NotificationVisibility.Public;
+					"Limit-Erinnerungen", NotificationImportance.Default)
+				{
+					LockscreenVisibility = NotificationVisibility.Public
+				};
 				Notifier.CreateNotificationChannel(channel);
 
 				var launch = PendingIntent.GetActivity(context, 0, new Intent(context, typeof(LaunchActivity)), 0);
@@ -226,7 +230,8 @@ namespace Joker.Droid
 					.SetContentTitle(Notifications.Title.LimitReminder)
 					.SetContentText(Notifications.Body.LimitReminder)
 					.SetSmallIcon(Resource.Drawable.ui_icon)
-					.SetStyle(new Notification.BigTextStyle().BigText(Notifications.Body.LimitReminder))
+					.SetStyle(new Notification.BigTextStyle()
+					.BigText(Notifications.Body.LimitReminder))
 					.SetAutoCancel(true)
 					.SetContentIntent(launch);
 				Notifier.Notify((int)PNType.LimitReminder, notifBuilder.Build());
@@ -259,8 +264,7 @@ namespace Joker.Droid
 		}
 
 		/// <summary>
-		/// Converts a C# DateTime object into an Android-specific time format as represented by
-		/// a 64-bit integer.
+		/// Converts a C# DateTime object into an Android-specific time format as represented by a 64-bit integer.
 		/// </summary>
 		/// <param name="time">The DateTime object to be converted.</param>
 		/// <returns>A 64-bit integer representing a point in time.</returns>

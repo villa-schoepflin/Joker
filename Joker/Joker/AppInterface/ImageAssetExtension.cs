@@ -1,15 +1,14 @@
-﻿using System;
-
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Joker.AppInterface
 {
 	/// <summary>
-	/// Copied with changes from https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/images
+	/// Necessary for images to be embedded in XAML.
 	/// </summary>
 	[ContentProperty(nameof(Source))]
-	public class ImageResourceExtension : IMarkupExtension
+	public class ImageAssetExtension : IMarkupExtension
 	{
 		/// <summary>
 		/// The source path for the embedded resource image.
@@ -25,7 +24,7 @@ namespace Joker.AppInterface
 		{
 			if(Source == null)
 				return null;
-			return ImageSource.FromResource(Source, typeof(ImageResourceExtension).Assembly);
+			return ImageSource.FromResource(Source, typeof(ImageAssetExtension).Assembly);
 		}
 	}
 }

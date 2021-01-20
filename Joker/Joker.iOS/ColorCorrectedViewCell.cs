@@ -1,7 +1,6 @@
-﻿using Xamarin.Forms;
-using Xamarin.Forms.Platform.iOS;
-
 using UIKit;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportRenderer(typeof(ViewCell), typeof(Joker.iOS.ColorCorrectedViewCell))]
 namespace Joker.iOS

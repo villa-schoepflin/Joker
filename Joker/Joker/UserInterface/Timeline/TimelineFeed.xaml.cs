@@ -1,18 +1,14 @@
-﻿using System;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
+using System;
 using Joker.AppInterface;
 using Joker.DataAccess;
+using Xamarin.Forms;
 
 namespace Joker.UserInterface
 {
 	/// <summary>
-	/// The main page's middle tab. A listing of all gambling-related spendings and
-	/// the limits that the user sets for themself.
+	/// The main page's middle tab. A listing of all gambling-related spendings and the limits that
+	/// the user sets for themself.
 	/// </summary>
-	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class TimelineFeed : ContentPage
 	{
 		/// <summary>
@@ -30,12 +26,12 @@ namespace Joker.UserInterface
 				if(Database.CalcBalance(Database.MostRecentLimit()) >= 0)
 				{
 					if(Database.NoGambleAfterMostRecentLimit())
-						return FileResourceReader.Get("Feedback_Current_New.txt");
+						return TextAssetReader.Get("Feedback_Current_New.txt");
 					else
-						return FileResourceReader.Get("Feedback_Current_Success.txt");
+						return TextAssetReader.Get("Feedback_Current_Success.txt");
 				}
 				else
-					return FileResourceReader.Get("Feedback_Current_Failure.txt");
+					return TextAssetReader.Get("Feedback_Current_Failure.txt");
 			}
 		}
 
@@ -49,9 +45,9 @@ namespace Joker.UserInterface
 				if(Database.CountLimits() > 1)
 				{
 					if(Database.CalcPreviousLimitBalance() >= 0)
-						return "\n" + FileResourceReader.Get("Feedback_Previous_Success.txt");
+						return "\n" + TextAssetReader.Get("Feedback_Previous_Success.txt");
 					else
-						return "\n" + FileResourceReader.Get("Feedback_Previous_Failure.txt");
+						return "\n" + TextAssetReader.Get("Feedback_Previous_Failure.txt");
 				}
 				else
 				{
@@ -71,7 +67,13 @@ namespace Joker.UserInterface
 		/// The data to be displayed, wrapped in view models based on the Limit and Gamble tables of the database.
 		/// </summary>
 		public TimelineRecordViewModel[] Records
-			=> Array.ConvertAll(Database.AllGamblesAndLimits(), tr => new TimelineRecordViewModel(this, tr));
+		{
+			get
+			{
+				var timelineRecords = Database.AllGamblesAndLimits();
+				return Array.ConvertAll(timelineRecords, tr => new TimelineRecordViewModel(this, tr));
+			}
+		}
 
 		/// <summary>
 		/// Initializes XAML elements.
@@ -85,16 +87,26 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// Performs a flashing animation on the frame containing the limit feedback.
 		/// </summary>
-		public void FlashLimitFeedback()
+		public void BlinkLimitFeedback()
 		{
 			FeedbackHeader.IsVisible = true;
 			OnPropertyChanged(nameof(FeedbackTogglerIcon));
 
+			const uint colorCount = 2;
+			const uint blinkCount = 3;
+			const double blinkFrequency = 0.25;
+
 			int cycle = 0;
-			Device.StartTimer(TimeSpan.FromMilliseconds(250), () =>
+			Device.StartTimer(TimeSpan.FromSeconds(blinkFrequency), () =>
 			{
-				Frame.BackgroundColor = App.Color(cycle % 2 == 0 ? "Bgr5" : "Bgr3");
-				return ++cycle < 4;
+				string color = (cycle % colorCount) switch
+				{
+					0 => "Bgr5",
+					1 => "Bgr3",
+					_ => throw new NotImplementedException(),
+				};
+				Frame.BackgroundColor = App.Color(color);
+				return ++cycle < colorCount * blinkCount;
 			});
 		}
 
@@ -126,7 +138,8 @@ namespace Joker.UserInterface
 		}
 
 		/// <summary>
-		/// Button event handler that navigates the user to a view where they can add a new gamble to the database.
+		/// Button event handler that navigates the user to a view where they can add a new gamble
+		/// to the database.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
 		/// <param name="e">Contains event data.</param>

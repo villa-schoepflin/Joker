@@ -1,19 +1,19 @@
-﻿using System.Windows.Input;
-
-using Xamarin.Forms;
-
+using System.Windows.Input;
 using Joker.BusinessLogic;
 using Joker.DataAccess;
+using Xamarin.Forms;
 
 namespace Joker.UserInterface
 {
 	/// <summary>
-	/// View model for a gamble in the gamble inspector. Uses many properties of the timeline record view model.
+	/// View model for a gamble in the gamble inspector. Uses many properties of the timeline record
+	/// view model.
 	/// </summary>
 	public class GambleViewModel : TimelineRecordViewModel
 	{
 		/// <summary>
-		/// Wrapper in order to treat the model as a gamble because of inheritance from TimelineRecordViewModel.
+		/// Wrapper in order to treat the model as a gamble because of inheritance from
+		/// TimelineRecordViewModel.
 		/// </summary>
 		private Gamble Gamble
 		{
@@ -68,7 +68,8 @@ namespace Joker.UserInterface
 		public Color EditButtonTextColor => App.Color(DescriptionEditable ? "TextContrast" : "Text1");
 
 		/// <summary>
-		/// Toggles the editability of the gamble's description, saving the changes when deactivating editing.
+		/// Toggles the editability of the gamble's description, saving the changes when
+		/// deactivating editing.
 		/// </summary>
 		public ICommand ToggleDescriptionEditing => new Command(() =>
 		{

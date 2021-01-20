@@ -2,14 +2,12 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-
-using Xamarin.Essentials;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
 using Joker.AppInterface;
 using Joker.DataAccess;
 using Joker.UserInterface;
+using Xamarin.Essentials;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Joker
@@ -36,26 +34,7 @@ namespace Joker
 		{
 			VersionTracking.Track();
 			if(AppSettings.WelcomeTourCompleted)
-			{
-				// Deletes a picture from the database if it was removed in an update.
-				string[] picFiles = typeof(App).Assembly.GetManifestResourceNames();
-				foreach(var pic in Database.AllPictures())
-					if(!picFiles.Contains($"Joker.Resources.PictureFeed.{pic.FilePath}"))
-						Database.Delete(pic);
-
-				/* If the app was opened when there is a new picture to display, insert it and re-schedule the time 
-				 * and notification for when to insert the next one. */
-				if(DateTime.UtcNow >= AppSettings.NewPictureTime && Database.InsertPictureFromRandomResource())
-				{
-					AppSettings.NewPictureTime = DateTime.UtcNow + UserSettings.NewPictureInterval;
-					DependencyService.Get<IPlatformNotifier>().ScheduleNewPicture(AppSettings.NewPictureTime);
-				}
-
-				if(AppSettings.UserPasswordIsSet)
-					MainPage = new NavigationPage(new PasswordPage());
-				else
-					SetMainPageToDefault();
-			}
+				DefaultStart();
 			else
 				MainPage = new NavigationPage(new Welcome())
 				{
@@ -65,8 +44,33 @@ namespace Joker
 		}
 
 		/// <summary>
-		/// Directs the user to the regular main page if the most recent limit hasn't expired yet, otherwise
-		/// directs them to the page where they can add a new limit.
+		/// Entry point if the welcome tour has been completed.
+		/// </summary>
+		private void DefaultStart()
+		{
+			// Deletes a picture from the database if it was removed in an update.
+			string[] picFiles = typeof(App).Assembly.GetManifestResourceNames();
+			foreach(var pic in Database.AllPictures())
+				if(!picFiles.Contains($"Joker.Assets.PictureFeed.{pic.FilePath}"))
+					Database.Delete(pic);
+
+			/* If the app was opened when there is a new picture to display, insert it and
+			 * re-schedule the time  and notification for when to insert the next one. */
+			if(DateTime.UtcNow >= AppSettings.NewPictureTime && Database.InsertPictureFromRandomAsset())
+			{
+				AppSettings.NewPictureTime = DateTime.UtcNow + UserSettings.NewPictureInterval;
+				DependencyService.Get<IPlatformNotifier>().ScheduleNewPicture(AppSettings.NewPictureTime);
+			}
+
+			if(AppSettings.UserPasswordIsSet)
+				MainPage = new NavigationPage(new PasswordPage());
+			else
+				SetMainPageToDefault();
+		}
+
+		/// <summary>
+		/// Directs the user to the regular main page if the most recent limit hasn't expired yet,
+		/// otherwise directs them to the page where they can add a new limit.
 		/// </summary>
 		internal static void SetMainPageToDefault()
 		{

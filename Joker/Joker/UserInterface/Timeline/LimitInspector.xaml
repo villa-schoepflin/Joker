@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:charts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
@@ -26,24 +26,24 @@
 					   VerticalOptions="Center">Geldbetrag:</Label>
 				<Frame Grid.Row="0"
 					   Grid.Column="1"
-					   BackgroundColor="{Binding CellColor1}"
+					   BackgroundColor="{Binding CellBgrColor}"
 					   VerticalOptions="Center"
 					   Padding="10,5,5,5">
 					<Label Text="{Binding AmountInEuro}"
 						   FontSize="{StaticResource CustomMedium}"
-						   TextColor="{Binding CellText}" />
+						   TextColor="{Binding CellTextColor}" />
 				</Frame>
 				<Label Grid.Row="1"
 					   Grid.Column="0"
 					   VerticalOptions="Center">Geltungsdauer:</Label>
 				<Frame Grid.Row="1"
 					   Grid.Column="1"
-					   BackgroundColor="{Binding CellColor1}"
+					   BackgroundColor="{Binding CellBgrColor}"
 					   VerticalOptions="Center"
 					   Padding="10,5,5,5">
 					<Label Text="{Binding DurationInDays}"
 						   FontSize="{StaticResource CustomMedium}"
-						   TextColor="{Binding CellText}" />
+						   TextColor="{Binding CellTextColor}" />
 				</Frame>
 				<Label Grid.Row="2"
 					   Grid.Column="0"
@@ -56,13 +56,13 @@
 					   Padding="0">
 					<StackLayout Spacing="0"
 								 Padding="0">
-						<Frame BackgroundColor="{Binding CellColor1}"
+						<Frame BackgroundColor="{Binding CellBgrColor}"
 							   VerticalOptions="Center"
 							   Padding="10,5,5,5"
 							   HasShadow="False">
 							<Label Text="{Binding Balance}"
 								   FontSize="{StaticResource CustomMedium}"
-								   TextColor="{Binding CellText}" />
+								   TextColor="{Binding CellTextColor}" />
 						</Frame>
 						<Label Text="{Binding LimitState}"
 							   FontSize="{StaticResource CustomMedium}"
@@ -75,24 +75,24 @@
 					   VerticalOptions="Center">Gesetzt am:</Label>
 				<Frame Grid.Row="4"
 					   Grid.Column="1"
-					   BackgroundColor="{Binding CellColor1}"
+					   BackgroundColor="{Binding CellBgrColor}"
 					   VerticalOptions="Center"
 					   Padding="10,5,5,5">
 					<Label Text="{Binding LocalizedTime}"
 						   FontSize="{StaticResource CustomMedium}"
-						   TextColor="{Binding CellText}" />
+						   TextColor="{Binding CellTextColor}" />
 				</Frame>
 				<Label Grid.Row="5"
 					   Grid.Column="0"
 					   VerticalOptions="Center">Verlauf:</Label>
 				<Frame Grid.Row="5"
 					   Grid.Column="1"
-					   BackgroundColor="{Binding CellColor1}"
+					   BackgroundColor="{Binding CellBgrColor}"
 					   VerticalOptions="Center"
 					   Padding="10,10,10,0"
-					   HeightRequest="{Binding Path=Width, Source={Reference ChartView}}">
-					<charts:ChartView x:Name="ChartView"
-									  Chart="{Binding Chart}" />
+					   HeightRequest="{Binding Path=Width, Source={Reference HistoryChartView}}">
+					<charts:ChartView x:Name="HistoryChartView"
+									  Chart="{Binding HistoryChart}" />
 				</Frame>
 			</Grid>
 		</StackLayout>

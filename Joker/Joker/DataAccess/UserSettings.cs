@@ -1,15 +1,13 @@
-﻿using System;
+using System;
 using System.Text.RegularExpressions;
-
-using Xamarin.Essentials;
-using Xamarin.Forms;
-
+using Joker.BusinessLogic;
 using Newtonsoft.Json;
+using Xamarin.Essentials;
 
 namespace Joker.DataAccess
 {
 	/// <summary>
-	/// A wrapper class that simplifies access to persistent preferences concerning the user directly.
+	/// A wrapper class that simplifies access to persistent preferences set by the user directly.
 	/// </summary>
 	public static class UserSettings
 	{
@@ -21,29 +19,21 @@ namespace Joker.DataAccess
 		/// <summary>
 		/// The name used to address the user in personalized texts or push notifications.
 		/// </summary>
-		/// <exception cref="ArgumentException">Thrown if the user tries to set this to an empty string or exceeds
-		/// the maximum allowed length.</exception>
+		/// <exception cref="ArgumentException">Thrown if the user tries to set this property to a text that is longer
+		/// than the maximum allowed length or is a null or empty string.</exception>
 		public static string UserName
 		{
-			get => Preferences.Get("UserName", null);
+			get => Preferences.Get(UserNameKey, null);
 			set
 			{
+				value = value?.Trim();
 				if(string.IsNullOrEmpty(value))
-					throw new ArgumentException("Deine Angabe darf hier nicht leer sein.");
+					throw new ArgumentException(Alerts.InputEmpty);
 				if(value.Length > MaxNameLength)
-					throw new ArgumentException($"Der Name darf nicht länger als {MaxNameLength} Zeichen sein.");
-				Preferences.Set("UserName", value.Trim());
-			}
-		}
+					throw new ArgumentException(string.Format(Alerts.InputTooLong, MaxNameLength));
 
-		/// <summary>
-		/// The preferred aspect to use in the picture feed as set by the user.
-		/// </summary>
-		public static Aspect PreferredAspect
-		{
-			get => JsonConvert.DeserializeObject<Aspect>(Preferences.Get("PreferredAspect",
-				JsonConvert.SerializeObject(Aspect.AspectFill)));
-			set => Preferences.Set("PreferredAspect", JsonConvert.SerializeObject(value));
+				Preferences.Set(UserNameKey, value);
+			}
 		}
 
 		/// <summary>
@@ -52,96 +42,71 @@ namespace Joker.DataAccess
 		public const int MaxPasswordLength = 10;
 
 		/// <summary>
-		/// The optional password with which the user can protect access to the app's UI.
+		/// The optional password with which the user can protect access to the app's content.
 		/// </summary>
 		/// <exception cref="ArgumentException">Thrown if the user tries to set this property to a text that is longer
-		/// than the maximum allowed length or doesn't contain anything except alphanumeric characters.</exception>
+		/// than the maximum allowed length or is a null or empty string.</exception>
 		public static string UserPassword
 		{
-			get => Preferences.Get("UserPassword", null);
+			get => Preferences.Get(UserPasswordKey, null);
 			set
 			{
 				if(value.Length > MaxPasswordLength)
-					throw new ArgumentException($"Das Passwort darf nicht länger als {MaxPasswordLength} Zeichen sein.");
+					throw new ArgumentException(string.Format(Alerts.PasswordTooLong, MaxPasswordLength));
+
 				if(value.Contains(" "))
-					throw new ArgumentException("Das Passwort darf keine Leerzeichen enthalten.");
+					throw new ArgumentException(Alerts.PasswordContainsSpaces);
+
 				if(!Regex.IsMatch(value, @"[a-zA-Z0-9]*"))
-					throw new ArgumentException("Das Passwort darf nur Groß-/Kleinbuchstaben und Zahlen enthalten.");
-				Preferences.Set("UserPassword", value);
+					throw new ArgumentException(Alerts.PasswordContainsSpecialChars);
+
+				Preferences.Set(UserPasswordKey, value);
 			}
 		}
 
 		/// <summary>
 		/// The maximum string length for either a security question or answer.
 		/// </summary>
-		public const int MaxSecurityEntryLength = 80;
+		public const int MaxSecurityAttributeLength = 80;
 
 		/// <summary>
-		/// Holds the text of the first security question.
+		/// Holds the text of the first security question and its answer.
 		/// </summary>
 		/// <exception cref="ArgumentException">Thrown if the user tries to set this property to a text that is longer
 		/// than the maximum allowed length or is a null or empty string.</exception>
-		public static string FirstSecurityQuestion
+		public static (string, string) FirstSecurityAttribute
 		{
-			get => Preferences.Get("FirstSecurityQuestion", null);
+			get => (Preferences.Get(FirstSecurityQuestionKey, null), Preferences.Get(FirstSecurityAnswerKey, null));
 			set
 			{
-				if(value.Length > MaxSecurityEntryLength)
-					throw new ArgumentException("Die Sicherheitsfrage darf nicht länger als "
-						+ MaxSecurityEntryLength + " sein.");
-				Preferences.Set("FirstSecurityQuestion", value.Trim());
+				CheckSecurityAttributePair(ref value);
+				Preferences.Set(FirstSecurityQuestionKey, value.Item1);
+				Preferences.Set(FirstSecurityAnswerKey, value.Item2);
 			}
 		}
 
 		/// <summary>
-		/// Holds the text of the answer to the first security question.
+		/// Holds the text of the second security question and its answer.
 		/// </summary>
 		/// <exception cref="ArgumentException">Thrown if the user tries to set this property to a text that is longer
 		/// than the maximum allowed length or is a null or empty string.</exception>
-		public static string FirstSecurityAnswer
+		public static (string, string) SecondSecurityAttribute
 		{
-			get => Preferences.Get("FirstSecurityAnswer", null);
+			get => (Preferences.Get(SecondSecurityQuestionKey, null), Preferences.Get(SecondSecurityAnswerKey, null));
 			set
 			{
-				if(value.Length > MaxSecurityEntryLength)
-					throw new ArgumentException("Die Sicherheitsfrage darf nicht länger als "
-						+ MaxSecurityEntryLength + " sein.");
-				Preferences.Set("FirstSecurityAnswer", value.Trim());
+				CheckSecurityAttributePair(ref value);
+				Preferences.Set(SecondSecurityQuestionKey, value.Item1);
+				Preferences.Set(SecondSecurityAnswerKey, value.Item2);
 			}
 		}
 
-		/// <summary>
-		/// Holds the text of the second security question.
-		/// </summary>
-		/// <exception cref="ArgumentException">Thrown if the user tries to set this property to a text that is longer
-		/// than the maximum allowed length or is a null or empty string.</exception>
-		public static string SecondSecurityQuestion
+		private static void CheckSecurityAttributePair(ref (string, string) pair)
 		{
-			get => Preferences.Get("SecondSecurityQuestion", null);
-			set
-			{
-				if(value.Length > MaxSecurityEntryLength)
-					throw new ArgumentException("Die Antwort auf die Sicherheitsfrage darf nicht länger als "
-						+ MaxSecurityEntryLength + " sein.");
-				Preferences.Set("SecondSecurityQuestion", value.Trim());
-			}
-		}
-
-		/// <summary>
-		/// Holds the text of the answer to the second security question.
-		/// </summary>
-		/// <exception cref="ArgumentException">Thrown if the user tries to set this property to a text that is longer
-		/// than the maximum allowed length or is a null or empty string.</exception>
-		public static string SecondSecurityAnswer
-		{
-			get => Preferences.Get("SecondSecurityAnswer", null);
-			set
-			{
-				if(value.Length > MaxSecurityEntryLength)
-					throw new ArgumentException("Die Antwort auf die Sicherheitsfrage darf nicht länger als "
-						+ MaxSecurityEntryLength + " sein.");
-				Preferences.Set("SecondSecurityAnswer", value.Trim());
-			}
+			pair.Item1 = pair.Item1?.Trim();
+			pair.Item2 = pair.Item2?.Trim();
+			if(pair.Item1.Length > MaxSecurityAttributeLength || pair.Item2.Length > MaxSecurityAttributeLength)
+				throw new ArgumentException(string.Format(Alerts.InputTooLong, MaxSecurityAttributeLength));
 		}
 
 		/// <summary>
@@ -159,37 +124,39 @@ namespace Joker.DataAccess
 		/// </summary>
 		internal static TimeSpan NewPictureInterval
 		{
-			get => JsonConvert.DeserializeObject<TimeSpan>(Preferences.Get("NewPictureInterval",
+			get => JsonConvert.DeserializeObject<TimeSpan>(Preferences.Get(NewPictureIntervalKey,
 				JsonConvert.SerializeObject(TimeSpan.FromDays(2))));
-			private set => Preferences.Set("NewPictureInterval", JsonConvert.SerializeObject(value));
+			private set => Preferences.Set(NewPictureIntervalKey, JsonConvert.SerializeObject(value));
 		}
 
 		/// <summary>
 		/// Sets the time span between two new pictures from a user-supplied text string.
 		/// </summary>
 		/// <param name="input">User input from an entry to be parsed.</param>
-		/// <exception cref="ArgumentException">Thrown if the argument couldn't be parsed or isn't within the
-		/// allowed TimeSpan bounds.</exception>
+		/// <exception cref="ArgumentException">Thrown if the argument couldn't be parsed or isn't
+		/// within the allowed TimeSpan bounds.</exception>
 		internal static void SetNewPictureInterval(string input)
 		{
 			if(!uint.TryParse(input, out uint result))
-				throw new ArgumentException("Das ist keine gültige Zahl.");
+				throw new ArgumentException(Alerts.NumberInvalid);
 
-			TimeSpan interval;
-			bool overflowOccurred = false;
+			var interval = TimeSpan.Zero;
+			bool overflowed = false;
 			try
 			{
 				interval = TimeSpan.FromDays(result);
 			}
 			catch(OverflowException)
 			{
-				overflowOccurred = true;
+				overflowed = true;
 			}
 
-			if(overflowOccurred || interval < MinNewPictureInterval || interval > MaxNewPictureInterval)
-				throw new ArgumentException($"Die Zeit zwischen neuen Bildern sollte zwischen " +
-					$"{MinNewPictureInterval.TotalDays} und {MaxNewPictureInterval.TotalDays} Tagen liegen.");
-
+			if(interval < MinNewPictureInterval || interval > MaxNewPictureInterval || overflowed)
+			{
+				double min = MinNewPictureInterval.TotalDays;
+				double max = MaxNewPictureInterval.TotalDays;
+				throw new ArgumentException(string.Format(Alerts.PictureIntervalBounds, min, max));
+			}
 			NewPictureInterval = interval;
 		}
 
@@ -209,9 +176,9 @@ namespace Joker.DataAccess
 		/// </summary>
 		public static TimeSpan GambleReminderInterval
 		{
-			get => JsonConvert.DeserializeObject<TimeSpan>(Preferences.Get("GambleReminderInterval",
+			get => JsonConvert.DeserializeObject<TimeSpan>(Preferences.Get(GambleReminderIntervalKey,
 				JsonConvert.SerializeObject(TimeSpan.FromHours(8))));
-			private set => Preferences.Set("GambleReminderInterval", JsonConvert.SerializeObject(value));
+			private set => Preferences.Set(GambleReminderIntervalKey, JsonConvert.SerializeObject(value));
 		}
 
 		/// <summary>
@@ -224,13 +191,14 @@ namespace Joker.DataAccess
 		}
 
 		/// <summary>
-		/// The time span between two push notifications, that remind the user about the current state of their limit.
+		/// The time span between two push notifications, that remind the user about the current
+		/// state of their limit.
 		/// </summary>
 		public static TimeSpan LimitReminderInterval
 		{
-			get => JsonConvert.DeserializeObject<TimeSpan>(Preferences.Get("LimitReminderInterval",
+			get => JsonConvert.DeserializeObject<TimeSpan>(Preferences.Get(LimitReminderIntervalKey,
 				JsonConvert.SerializeObject(TimeSpan.FromHours(12))));
-			private set => Preferences.Set("LimitReminderInterval", JsonConvert.SerializeObject(value));
+			private set => Preferences.Set(LimitReminderIntervalKey, JsonConvert.SerializeObject(value));
 		}
 
 		/// <summary>
@@ -243,23 +211,38 @@ namespace Joker.DataAccess
 		}
 
 		/// <summary>
-		/// Parses a user input string from the settings page according the bounds of reminder notifications.
+		/// Parses a user input string from the settings page according the bounds of reminder
+		/// notifications.
 		/// </summary>
 		/// <param name="input">String to be parsed.</param>
 		/// <returns>The parsed time span.</returns>
-		/// <exception cref="ArgumentException">Thrown if the argument couldn't be parsed or isn't within the
-		/// allowed TimeSpan bounds.</exception>
+		/// <exception cref="ArgumentException">Thrown if the argument couldn't be parsed or isn't
+		/// within the allowed TimeSpan bounds.</exception>
 		private static TimeSpan ParseReminderInterval(string input)
 		{
 			if(!uint.TryParse(input, out uint result))
-				throw new ArgumentException("Das ist keine gültige Zahl.");
+				throw new ArgumentException(Alerts.NumberInvalid);
 
 			var interval = TimeSpan.FromHours(result);
 			if(interval < MinReminderInterval || interval > MaxReminderInterval)
-				throw new ArgumentException("Die Zeit zwischen den Erinnerungen muss zwischen " +
-					$"{MinReminderInterval.TotalHours} und {MaxReminderInterval.TotalHours} Stunden liegen.");
-
+			{
+				double min = MinReminderInterval.TotalHours;
+				double max = MaxReminderInterval.TotalHours;
+				throw new ArgumentException(string.Format(Alerts.ReminderIntervalBounds, min, max));
+			}
 			return interval;
 		}
+
+		#region Identifier keys for the settings (DO NOT CHANGE!)
+		private const string UserNameKey = "UserName";
+		private const string UserPasswordKey = "UserPassword";
+		private const string FirstSecurityQuestionKey = "FirstSecurityQuestion";
+		private const string FirstSecurityAnswerKey = "FirstSecurityAnswer";
+		private const string SecondSecurityQuestionKey = "SecondSecurityQuestion";
+		private const string SecondSecurityAnswerKey = "SecondSecurityAnswer";
+		private const string NewPictureIntervalKey = "NewPictureInterval";
+		private const string GambleReminderIntervalKey = "GambleReminderInterval";
+		private const string LimitReminderIntervalKey = "LimitReminderInterval";
+		#endregion
 	}
 }

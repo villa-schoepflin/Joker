@@ -1,14 +1,11 @@
-﻿using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
 using Joker.BusinessLogic;
+using Xamarin.Forms;
 
 namespace Joker.UserInterface
 {
 	/// <summary>
 	/// A view containing the database-supplied details and properties of a selected gamble.
 	/// </summary>
-	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class GambleInspector : ContentPage
 	{
 		/// <summary>

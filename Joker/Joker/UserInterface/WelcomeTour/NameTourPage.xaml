@@ -1,11 +1,15 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:app="clr-namespace:Joker.AppInterface;assembly=Joker"
-			 x:Class="Joker.UserInterface.TourPage1"
+			 x:Class="Joker.UserInterface.NameTourPage"
 			 BackgroundColor="{StaticResource Primary1}">
 	<ContentPage.Title>
-		<OnPlatform iOS="Name" />
+		<OnPlatform x:TypeArguments="x:String">
+			<OnPlatform.Platforms>
+				<On Platform="iOS" Value="Name" />
+			</OnPlatform.Platforms>
+		</OnPlatform>
 	</ContentPage.Title>
 	<ScrollView>
 		<StackLayout Padding="30"
@@ -14,11 +18,11 @@
 						 Padding="50,10,50,70"
 						 Spacing="0"
 						 HorizontalOptions="CenterAndExpand">
-				<Image Source="{app:ImageResource Joker.Resources.Icons.filledcircle.png}" />
-				<Image Source="{app:ImageResource Joker.Resources.Icons.bar.png}" />
-				<Image Source="{app:ImageResource Joker.Resources.Icons.circle.png}" />
-				<Image Source="{app:ImageResource Joker.Resources.Icons.bar.png}" />
-				<Image Source="{app:ImageResource Joker.Resources.Icons.circle.png}" />
+				<Image Source="{app:ImageAsset Joker.Assets.Icons.filledcircle.png}" />
+				<Image Source="{app:ImageAsset Joker.Assets.Icons.bar.png}" />
+				<Image Source="{app:ImageAsset Joker.Assets.Icons.circle.png}" />
+				<Image Source="{app:ImageAsset Joker.Assets.Icons.bar.png}" />
+				<Image Source="{app:ImageAsset Joker.Assets.Icons.circle.png}" />
 			</StackLayout>
 			<Label HorizontalOptions="Center"
 				   VerticalOptions="Center"
@@ -34,7 +38,11 @@
 				   Placeholder="Dein Name"
 				   Text="">
 				<Entry.TextColor>
-					<OnPlatform Android="{StaticResource TextContrast}" />
+					<OnPlatform x:TypeArguments="Color">
+						<OnPlatform.Platforms>
+							<On Platform="Android" Value="{StaticResource TextContrast}" />
+						</OnPlatform.Platforms>
+					</OnPlatform>
 				</Entry.TextColor>
 			</Entry>
 			<Button Clicked="OnContinueButton"

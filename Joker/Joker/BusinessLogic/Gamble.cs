@@ -1,5 +1,4 @@
-﻿using System;
-
+using System;
 using SQLite;
 
 namespace Joker.BusinessLogic
@@ -8,23 +7,23 @@ namespace Joker.BusinessLogic
 	/// A gamble is an act of spending for gambling purposes, used
 	/// to calculate how much of each limit has been depleted.
 	/// </summary>
-	[Table("Gamble")]
+	[Table(GambleTableName)]
 	public sealed class Gamble : TimelineRecord
 	{
 		/// <summary>
 		/// Maximum length of a gamble's description.
 		/// </summary>
-		public const int MaxDescriptionLength = 500;
+		public const int MaxDescriptionLength = 10000;
 
 		/// <summary>
 		/// The type this gamble is classified as.
 		/// </summary>
-		[Column("Type")] public GambleType Type { get; set; }
+		[Column(TypeColumnName)] public GambleType Type { get; set; }
 
 		/// <summary>
 		/// Optional description given verbatim by the user.
 		/// </summary>
-		[Column("Description")] public string Description { get; set; }
+		[Column(DescriptionColumnName)] public string Description { get; set; }
 
 		/// <summary>
 		/// Constructor used when the user doesn't specify a time.
@@ -45,15 +44,18 @@ namespace Joker.BusinessLogic
 		/// <param name="amount">The amount as given by the user.</param>
 		/// <param name="type">The type as selected by the user.</param>
 		/// <param name="description">The description as given by the user.</param>
-		public Gamble(DateTime time, string amount, GambleType type, string description) : base(time, amount)
+		public Gamble(DateTime time, string amount, GambleType type, string description)
+			: this(amount, type, description)
 		{
-			Type = type;
-			Description = description;
+			if(time > DateTime.Now)
+				throw new ArgumentException(Alerts.GambleTimeInFuture);
+			Time = time.ToUniversalTime();
 		}
 
 		/// <summary>
-		/// This constructor only exists for cloning and for SQLite to be able to return collections of Gambles from
-		/// the database. It should never be used to instantiate a Gamble directly within the app.
+		/// This constructor only exists for cloning and for SQLite to be able to return collections
+		/// of Gambles from the database. It should never be used to instantiate a Gamble directly
+		/// within the app.
 		/// </summary>
 		public Gamble() : base() { }
 
@@ -63,7 +65,13 @@ namespace Joker.BusinessLogic
 		/// <returns>A deep copy of the gamble.</returns>
 		public Gamble Copy()
 		{
-			return new Gamble { Time = Time, Amount = Amount, Type = Type, Description = Description };
+			return new Gamble
+			{
+				Time = Time,
+				Amount = Amount,
+				Type = Type,
+				Description = Description
+			};
 		}
 
 		/// <summary>
@@ -72,7 +80,13 @@ namespace Joker.BusinessLogic
 		/// <returns>A one-line string that represents this gamble.</returns>
 		public override string ToString()
 		{
-			return $"Time: {Time}  |  Amount: {Amount}  |  Type: {Type}  |  Description: {Description}";
+			return $"Time: {Time} | Amount: {Amount} | Type: {Type} | Description: {Description}";
 		}
+
+		#region Identifiers for the database schema (DO NOT CHANGE!)
+		private const string GambleTableName = "Gamble";
+		private const string TypeColumnName = "Type";
+		private const string DescriptionColumnName = "Description";
+		#endregion
 	}
 }

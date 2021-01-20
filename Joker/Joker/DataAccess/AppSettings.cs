@@ -1,5 +1,4 @@
-﻿using System;
-
+using System;
 using Xamarin.Essentials;
 
 namespace Joker.DataAccess
@@ -14,8 +13,8 @@ namespace Joker.DataAccess
 		/// </summary>
 		internal static string DatabaseFilePath
 		{
-			get => Preferences.Get("DatabaseFilePath", null);
-			set => Preferences.Set("DatabaseFilePath", value);
+			get => Preferences.Get(DatabaseFilePathKey, null);
+			set => Preferences.Set(DatabaseFilePathKey, value);
 		}
 
 		/// <summary>
@@ -23,35 +22,35 @@ namespace Joker.DataAccess
 		/// </summary>
 		public static bool WelcomeTourCompleted
 		{
-			get => Preferences.Get("WelcomeTourCompleted", false);
-			set => Preferences.Set("WelcomeTourCompleted", value);
+			get => Preferences.Get(WelcomeTourCompletedKey, false);
+			set => Preferences.Set(WelcomeTourCompletedKey, value);
 		}
 
 		/// <summary>
-		/// Gets or sets the checking condition whether the user has protected the app with a password.
+		/// Gets or sets the condition whether the user has protected the app with a password.
 		/// </summary>
 		public static bool UserPasswordIsSet
 		{
-			get => Preferences.Get("UserPasswordIsSet", false);
-			set => Preferences.Set("UserPasswordIsSet", value);
+			get => Preferences.Get(UserPasswordIsSetKey, false);
+			set => Preferences.Set(UserPasswordIsSetKey, value);
 		}
 
 		/// <summary>
-		/// Gets or sets the checking condition whether the user has set their first security question.
+		/// Gets or sets the condition whether the user has set their first security question.
 		/// </summary>
 		public static bool FirstSecurityQuestionIsSet
 		{
-			get => Preferences.Get("FirstSecurityQuestionIsSet", false);
-			set => Preferences.Set("FirstSecurityQuestionIsSet", value);
+			get => Preferences.Get(FirstSecurityQuestionIsSetKey, false);
+			set => Preferences.Set(FirstSecurityQuestionIsSetKey, value);
 		}
 
 		/// <summary>
-		/// Gets or sets the checking condition whether the user has set their second security question.
+		/// Gets or sets the condition whether the user has set their second security question.
 		/// </summary>
 		public static bool SecondSecurityQuestionIsSet
 		{
-			get => Preferences.Get("SecondSecurityQuestionIsSet", false);
-			set => Preferences.Set("SecondSecurityQuestionIsSet", value);
+			get => Preferences.Get(SecondSecurityQuestionIsSetKey, false);
+			set => Preferences.Set(SecondSecurityQuestionIsSetKey, value);
 		}
 
 		/// <summary>
@@ -59,17 +58,27 @@ namespace Joker.DataAccess
 		/// </summary>
 		public static DateTime LimitExpiredTime
 		{
-			get => Preferences.Get("LimitExpiredTime", DateTime.MinValue);
-			set => Preferences.Set("LimitExpiredTime", value);
+			get => Preferences.Get(LimitExpiredTimeKey, DateTime.MinValue);
+			set => Preferences.Set(LimitExpiredTimeKey, value);
 		}
 
 		/// <summary>
-		/// Gets or sets the time when the availability of a new picture should be notified to the user.
+		/// Gets or sets the time when the availability of a new picture should be notified.
 		/// </summary>
 		public static DateTime NewPictureTime
 		{
-			get => Preferences.Get("NewPictureTime", DateTime.MinValue);
-			set => Preferences.Set("NewPictureTime", value);
+			get => Preferences.Get(NewPictureTimeKey, DateTime.MinValue);
+			set => Preferences.Set(NewPictureTimeKey, value);
 		}
+
+		#region Identifier keys for the settings (DO NOT CHANGE!)
+		private const string DatabaseFilePathKey = "DatabaseFilePath";
+		private const string WelcomeTourCompletedKey = "WelcomeTourCompleted";
+		private const string UserPasswordIsSetKey = "UserPasswordIsSet";
+		private const string FirstSecurityQuestionIsSetKey = "FirstSecurityQuestionIsSet";
+		private const string SecondSecurityQuestionIsSetKey = "SecondSecurityQuestionIsSet";
+		private const string LimitExpiredTimeKey = "LimitExpiredTime";
+		private const string NewPictureTimeKey = "NewPictureTime";
+		#endregion
 	}
 }

@@ -1,14 +1,11 @@
-﻿using System;
-
+using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Joker.UserInterface
 {
 	/// <summary>
 	/// View presented after opening the app for the first time.
 	/// </summary>
-	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Welcome : ContentPage
 	{
 		/// <summary>
@@ -26,7 +23,7 @@ namespace Joker.UserInterface
 		/// <param name="e">Contains event data.</param>
 		private async void OnContinueButton(object sender, EventArgs e)
 		{
-			await Navigation.PushAsync(new TourPage1());
+			await Navigation.PushAsync(new NameTourPage());
 		}
 	}
 }

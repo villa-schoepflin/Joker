@@ -7,7 +7,7 @@
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{c9e5eea5-ca05-42a1-839b-61506e0a37df}</TemplateGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Joker.Droid</RootNamespace>
+    <RootNamespace>Joker.Android</RootNamespace>
     <AssemblyName>Joker.Android</AssemblyName>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
@@ -16,7 +16,7 @@
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -28,7 +28,7 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <AndroidLinkMode>None</AndroidLinkMode>
     <AotAssemblies>false</AotAssemblies>
     <EnableLLVM>false</EnableLLVM>
     <BundleAssemblies>false</BundleAssemblies>
@@ -60,7 +60,6 @@
     <BundleAssemblies>false</BundleAssemblies>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
     <AndroidCreatePackagePerAbi>true</AndroidCreatePackagePerAbi>
-    <EnableProguard>true</EnableProguard>
     <AndroidSupportedAbis>armeabi-v7a;x86;x86_64;arm64-v8a</AndroidSupportedAbis>
     <AndroidLinkSkip>
     </AndroidLinkSkip>
@@ -71,6 +70,8 @@
     <AndroidSigningStorePass>J0K3rApp</AndroidSigningStorePass>
     <AndroidSigningKeyPass>J0K3rApp</AndroidSigningKeyPass>
     <AndroidSigningKeyAlias>villaschoepflin</AndroidSigningKeyAlias>
+    <AndroidLinkTool>r8</AndroidLinkTool>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -90,7 +91,7 @@
       <Version>12.0.3</Version>
     </PackageReference>
     <PackageReference Include="sqlite-net-pcl">
-      <Version>1.6.292</Version>
+      <Version>1.7.335</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Annotations">
       <Version>28.0.0.3</Version>
@@ -101,10 +102,16 @@
     <PackageReference Include="Xamarin.Android.Support.CustomTabs">
       <Version>28.0.0.3</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Essentials">
-      <Version>1.5.3.1</Version>
+    <PackageReference Include="Xamarin.AndroidX.MediaRouter">
+      <Version>1.2.0.1</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.5.0.657" />
+    <PackageReference Include="Xamarin.AndroidX.Palette">
+      <Version>1.0.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Essentials">
+      <Version>1.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.1874" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v4" Version="28.0.0.3" />
@@ -112,7 +119,6 @@
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.3" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AndroidContactPicker.cs" />
     <Compile Include="AndroidFileSaver.cs" />
     <Compile Include="AndroidNotifier.cs" />
     <Compile Include="InputCorrectedEntry.cs" />
@@ -466,4 +472,9 @@
     <AndroidResource Include="Resources\drawable-hdpi\app_logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties XamarinHotReloadWrongLinkerErrorInfoBarJokerAndroidHideInfoBar="True" TriggeredFromHotReload="False" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

@@ -1,18 +1,13 @@
-﻿using System;
+using System;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
 using Joker.DataAccess;
+using Xamarin.Forms;
 
 namespace Joker.UserInterface
 {
 	/// <summary>
 	/// A page that can be set to appear upon starting the app, prompting the user for his password.
 	/// </summary>
-	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class PasswordPage : ContentPage
 	{
 		/// <summary>
@@ -30,13 +25,12 @@ namespace Joker.UserInterface
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
 		/// <param name="e">Contains event data.</param>
-		private async void CheckPassword(object sender, TextChangedEventArgs e)
+		private void CheckPassword(object sender, TextChangedEventArgs e)
 		{
 			if(e.NewTextValue == UserSettings.UserPassword)
 			{
 				Indicator.IsRunning = true;
 				PasswordEntry.Unfocus();
-				await Task.Delay(300);
 				App.SetMainPageToDefault();
 			}
 		}
@@ -52,7 +46,8 @@ namespace Joker.UserInterface
 		}
 
 		/// <summary>
-		/// Label event handler that navigates the user to the page where they can answer their security questions.
+		/// Label event handler that navigates the user to the page where they can answer their
+		/// security questions.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
 		/// <param name="e">Contains event data.</param>

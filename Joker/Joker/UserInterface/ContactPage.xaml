@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:ui="clr-namespace:Joker.UserInterface"
@@ -6,7 +6,11 @@
 			 Icon="ui_support.png"
 			 BackgroundColor="{StaticResource Bgr1}">
 	<ContentPage.Title>
-		<OnPlatform iOS="{Static ui:ContactPage.Headline}" />
+		<OnPlatform x:TypeArguments="x:String">
+			<OnPlatform.Platforms>
+				<On Platform="iOS" Value="{Static ui:ContactPage.Headline}" />
+			</OnPlatform.Platforms>
+		</OnPlatform>
 	</ContentPage.Title>
 	<Grid>
 		<Grid.RowDefinitions>
@@ -32,7 +36,7 @@
 						   Padding="15"
 						   CornerRadius="5">
 						<Frame.GestureRecognizers>
-							<TapGestureRecognizer Tapped="OnOnlineSearchLink" />
+							<TapGestureRecognizer Tapped="OnSearchCounselingCentersOnline" />
 						</Frame.GestureRecognizers>
 						<Label HorizontalTextAlignment="Center"
 							   TextColor="{StaticResource TextContrast}"

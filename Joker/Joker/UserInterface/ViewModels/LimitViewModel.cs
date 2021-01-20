@@ -1,23 +1,24 @@
-﻿using System;
+using System;
 using System.Linq;
-
-using Xamarin.Forms;
-
-using SkiaSharp;
-using Microcharts;
-
 using Joker.BusinessLogic;
 using Joker.DataAccess;
+using Microcharts;
+using SkiaSharp;
+using Xamarin.Forms;
+
+using Entry = Microcharts.Entry;
 
 namespace Joker.UserInterface
 {
 	/// <summary>
-	/// View model for a limit in the limit inspector. Uses many properties of the timeline record view model.
+	/// View model for a limit in the limit inspector. Uses many properties of the timeline record
+	/// view model.
 	/// </summary>
 	public class LimitViewModel : TimelineRecordViewModel
 	{
 		/// <summary>
-		/// Wrapper in order to treat the model as a limit because of inheritance from TimelineRecordViewModel.
+		/// Wrapper in order to treat the model as a limit because of inheritance from
+		/// TimelineRecordViewModel.
 		/// </summary>
 		private Limit Limit
 		{
@@ -51,74 +52,75 @@ namespace Joker.UserInterface
 		public Color LimitStateTextColor => Color.FromHex(Balance.StartsWith("-") ? "#75585d" : "#406e40");
 
 		/// <summary>
-		/// Returns the Microcharts chart associated with how the limit was depleted over time.
+		/// Returns the chart associated with how the limit was depleted over time.
 		/// </summary>
-		public LineChart Chart
+		public LineChart HistoryChart => new LineChart()
 		{
-			get
+			Entries = CalculateChartEntries(SKColors.White, SKColors.Red),
+			PointMode = PointMode.None,
+			LineMode = LineMode.Straight,
+			BackgroundColor = SKColors.Transparent
+		};
+
+		/* If you're getting errors here because Entry was changed to ChartEntry, then you changed the Microcharts
+		 * version to something later than 0.7.1. Before going with the newer version, you might need to explicitly set
+		 * the Label and ValueLabel properties to empty strings. That will fix a crash in SkiaSharp, but now the dates
+		 * probably won't be drawn in the chart. So unless the dates show up correctly in the chart, you need to stick
+		 * with Microcharts 0.7.1. */
+		private Entry[] CalculateChartEntries(SKColor goodColor, SKColor badColor)
+		{
+			var nextLimit = Database.NextLimitAfter(Limit);
+			var gambles = Database.AllGamblesWithinLimit(Limit);
+
+			TimeSpan span;
+			if(nextLimit == null)
+				span = Limit.Duration;
+			else
+				span = nextLimit.Time - Limit.Time;
+			var entries = new Entry[(int)span.TotalHours];
+
+			int[] indices = new int[gambles.Length + 2];
+			indices[0] = 0;
+			indices[^1] = entries.Length - 1;
+
+			entries[0] = new Entry((float)Limit.Amount) { Color = goodColor };
+			float lastValue = (float)Database.CalcBalance(Limit);
+			entries[^1] = new Entry(lastValue) { Color = lastValue < 0 ? badColor : goodColor };
+
+			// Enters the remaining limit values after each gamble at appropriate places in the graph.
+			for(int i = 0; i < gambles.Length; i++)
 			{
-				var nextLimit = Database.NextLimitAfter(Limit);
-
-				TimeSpan span;
-				if(nextLimit == null)
-					span = Limit.Duration;
-				else
-					span = nextLimit.Time - Limit.Time;
-
-				var data = new Microcharts.Entry[(int)span.TotalHours];
-				var gambles = Database.AllGamblesWithinLimit(Limit);
-
-				int[] indices = new int[gambles.Length + 2];
-				indices[0] = 0;
-				indices[indices.Length - 1] = data.Length - 1;
-
-				data[0] = new Microcharts.Entry((float)Limit.Amount) { Color = SKColors.White };
-
-				float lastValue = (float)Database.CalcBalance(Limit);
-				data[data.Length - 1] = new Microcharts.Entry(lastValue)
-				{
-					Color = lastValue < 0 ? SKColors.Red : SKColors.White
-				};
-
-				// Enters the remaining limit values after each gamble at appropriate places in the graph.
-				for(int i = 0; i < gambles.Length; i++)
-				{
-					indices[i + 1] = (int)((gambles[i].Time - Limit.Time).Ticks / (float)span.Ticks * (data.Length - 1));
-					decimal value = Database.CalcRemainingLimit(gambles[i]);
-					data[indices[i + 1]] = new Microcharts.Entry((float)value)
-					{
-						Color = value < 0 ? SKColors.Red : SKColors.White
-					};
-				}
-
-				// Enters all remaining points in the graph by interpolating values.
-				indices = indices.Distinct().ToArray();
-				for(int i = 0, n = -1; i < data.Length; i++)
-				{
-					if(data[i] == null)
-					{
-						int last = indices[n];
-						int next = indices[n + 1];
-						float value = data[last].Value - (data[last].Value - data[next].Value) / (next - last) * (i - last);
-						data[i] = new Microcharts.Entry(value) { Color = value < 0 ? SKColors.Red : SKColors.White };
-					}
-					else
-						n++;
-					// Adds the captions for the points which correspond roughly to the beginning of new days.
-					int hour = Limit.Time.ToLocalTime().Hour + (Limit.Time.Minute < 30 ? 0 : 1);
-					int not12am = hour == 0 ? 0 : 1;
-					if(i % ((int)span.TotalDays / 5 * 24) == 24 * not12am - hour)
-						data[i].ValueLabel = (Limit.Time + TimeSpan.FromDays(not12am + i / 24)).ToLocalTime().ToString("d");
-				}
-
-				return new LineChart()
-				{
-					Entries = data,
-					PointMode = PointMode.None,
-					LineMode = LineMode.Straight,
-					BackgroundColor = SKColors.Transparent
-				};
+				long gambleTimeOffset = (gambles[i].Time - Limit.Time).Ticks;
+				indices[i + 1] = (int)(gambleTimeOffset / (float)span.Ticks * (entries.Length - 1));
+				float value = (float)Database.CalcRemainingLimit(gambles[i]);
+				entries[indices[i + 1]] = new Entry(value) { Color = value < 0 ? badColor : goodColor };
 			}
+
+			// Enters all remaining points in the graph by linearly interpolating values.
+			indices = indices.Distinct().ToArray();
+			for(int i = 0, n = -1; i < entries.Length; i++)
+			{
+				if(entries[i] == null)
+				{
+					int last = indices[n];
+					int next = indices[n + 1];
+					float lastEntry = entries[last].Value;
+					float value = lastEntry - (lastEntry - entries[next].Value) / (next - last) * (i - last);
+					entries[i] = new Entry(value) { Color = value < 0 ? badColor : goodColor };
+				}
+				else
+					n++;
+
+				// Adds the captions for the points which correspond roughly to the beginning of new days.
+				int hour = Limit.Time.ToLocalTime().Hour + (Limit.Time.Minute < 30 ? 0 : 1);
+				int not12am = hour == 0 ? 0 : 1;
+				if(i % ((int)span.TotalDays / 5 * 24) == 24 * not12am - hour)
+				{
+					var date = Limit.Time + TimeSpan.FromDays(not12am + i / 24);
+					entries[i].ValueLabel = date.ToLocalTime().ToString("d");
+				}
+			}
+			return entries;
 		}
 
 		/// <summary>

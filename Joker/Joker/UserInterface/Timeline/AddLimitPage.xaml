@@ -20,8 +20,12 @@
 				   HorizontalTextAlignment="Start" />
 			<Grid>
 				<Grid.RowSpacing>
-					<OnPlatform Android="10"
-								iOS="30" />
+					<OnPlatform x:TypeArguments="x:Double">
+						<OnPlatform.Platforms>
+							<On Platform="Android" Value="10" />
+							<On Platform="iOS" Value="30" />
+						</OnPlatform.Platforms>
+					</OnPlatform>
 				</Grid.RowSpacing>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="2*" />
@@ -39,7 +43,11 @@
 					   Keyboard="Numeric"
 					   Text="">
 					<Entry.TextColor>
-						<OnPlatform Android="{StaticResource TextContrast}" />
+						<OnPlatform x:TypeArguments="Color">
+							<OnPlatform.Platforms>
+								<On Platform="Android" Value="{StaticResource TextContrast}" />
+							</OnPlatform.Platforms>
+						</OnPlatform>
 					</Entry.TextColor>
 				</Entry>
 				<Label Grid.Row="1"
@@ -59,7 +67,11 @@
 						   Text="7"
 						   HorizontalTextAlignment="End">
 						<Entry.TextColor>
-							<OnPlatform Android="{StaticResource TextContrast}" />
+							<OnPlatform x:TypeArguments="Color">
+								<OnPlatform.Platforms>
+									<On Platform="Android" Value="{StaticResource TextContrast}" />
+								</OnPlatform.Platforms>
+							</OnPlatform>
 						</Entry.TextColor>
 					</Entry>
 					<Label Grid.Column="1"

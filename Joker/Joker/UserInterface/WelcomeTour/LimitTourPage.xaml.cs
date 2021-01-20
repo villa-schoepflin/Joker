@@ -1,17 +1,13 @@
-﻿using System;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
+using System;
 using Joker.BusinessLogic;
+using Xamarin.Forms;
 
 namespace Joker.UserInterface
 {
 	/// <summary>
 	/// View where the user must set their first limit.
 	/// </summary>
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class TourPage3 : ContentPage
+	public partial class LimitTourPage : ContentPage
 	{
 		/// <summary>
 		/// The first limit to be inserted into the database on finishing the welcome tour.
@@ -21,7 +17,7 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// Initializes XAML elements.
 		/// </summary>
-		public TourPage3()
+		public LimitTourPage()
 		{
 			InitializeComponent();
 		}
@@ -35,12 +31,12 @@ namespace Joker.UserInterface
 		{
 			try
 			{
-				FirstLimit = new Limit(LimitEntry.Text, "7");
+				FirstLimit = new Limit(LimitEntry.Text, Limit.InitialLimitDuration.TotalDays.ToString());
 				await Navigation.PushAsync(new Finish());
 			}
 			catch(ArgumentException error)
 			{
-				await DisplayAlert(null, error.Message, "Ok");
+				await DisplayAlert(null, error.Message, Alerts.Ok);
 			}
 		}
 	}

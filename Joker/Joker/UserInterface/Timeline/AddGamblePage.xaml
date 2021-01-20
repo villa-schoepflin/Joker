@@ -14,7 +14,11 @@
 				   CornerRadius="0">
 				<Grid>
 					<Grid.RowSpacing>
-						<OnPlatform iOS="30" />
+						<OnPlatform x:TypeArguments="x:Double">
+							<OnPlatform.Platforms>
+								<On Platform="iOS" Value="30" />
+							</OnPlatform.Platforms>
+						</OnPlatform>
 					</Grid.RowSpacing>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="2*" />
@@ -73,7 +77,11 @@
 				   CornerRadius="0">
 				<Grid>
 					<Grid.RowSpacing>
-						<OnPlatform iOS="30" />
+						<OnPlatform x:TypeArguments="x:Double">
+							<OnPlatform.Platforms>
+								<On Platform="iOS" Value="30" />
+							</OnPlatform.Platforms>
+						</OnPlatform>
 					</Grid.RowSpacing>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="2*" />

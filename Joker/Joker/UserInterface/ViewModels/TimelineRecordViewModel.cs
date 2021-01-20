@@ -1,9 +1,7 @@
-﻿using System.Windows.Input;
-
-using Xamarin.Forms;
-
+using System.Windows.Input;
 using Joker.BusinessLogic;
 using Joker.DataAccess;
+using Xamarin.Forms;
 
 namespace Joker.UserInterface
 {
@@ -13,7 +11,7 @@ namespace Joker.UserInterface
 	public class TimelineRecordViewModel : ViewModel<Page, TimelineRecord>
 	{
 		/// <summary>
-		/// Converts the record's time property to the system's time zone in the German 24-hour format.
+		/// Converts the record's time property to the system's time zone in the 24-hour format.
 		/// </summary>
 		public string LocalizedTime => Model.Time.ToLocalTime().ToString("dd.MM.yyyy, HH:mm");
 
@@ -35,31 +33,33 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// The primary tinting color used in the timeline.
 		/// </summary>
-		public Color CellColor1 { get; private set; }
+		public Color CellBgrColor { get; private set; }
 
 		/// <summary>
 		/// The secondary tinting color used in the timeline.
 		/// </summary>
-		public Color CellColor2 { get; private set; }
+		public Color IconBgrColor { get; private set; }
 
 		/// <summary>
 		/// The primary text color used in the timeline.
 		/// </summary>
-		public Color CellText { get; private set; }
+		public Color CellTextColor { get; private set; }
 
 		/// <summary>
 		/// Navigates the user to a detailed view of the selected limit or gamble item.
 		/// </summary>
+
 		public ICommand OpenDetailPage => new Command(async () =>
 		{
-			if(Model is Gamble)
-				await View.Navigation.PushAsync(new GambleInspector((Gamble)Model));
+			if(Model is Gamble gamble)
+				await View.Navigation.PushAsync(new GambleInspector(gamble));
 			else
 				await View.Navigation.PushAsync(new LimitInspector((Limit)Model));
 		});
 
 		/// <summary>
-		/// Constructs a row view model based on whether the corresponding timeline record is a Gamble or a Limit.
+		/// Constructs a row view model based on whether the corresponding timeline record is a
+		/// Gamble or a Limit.
 		/// </summary>
 		/// <param name="view">The view for this view model.</param>
 		/// <param name="model">The model for this view model.</param>
@@ -69,17 +69,17 @@ namespace Joker.UserInterface
 			{
 				RemainingLimit = Database.CalcRemainingLimit(gamble).ToString("C", App.Locale);
 				TypeIcon = ImageSource.FromFile($"tl_{gamble.Type.ToString().ToLower()}.png");
-				CellColor1 = App.Color("Bgr3");
-				CellColor2 = App.Color("Bgr4");
-				CellText = App.Color("Text1");
+				CellBgrColor = App.Color("Bgr3");
+				IconBgrColor = App.Color("Bgr4");
+				CellTextColor = App.Color("Text1");
 			}
 			else
 			{
 				RemainingLimit = null;
 				TypeIcon = ImageSource.FromFile("tl_limit.png");
-				CellColor1 = App.Color("Primary1");
-				CellColor2 = App.Color("Primary1");
-				CellText = App.Color("TextContrast");
+				CellBgrColor = App.Color("Primary1");
+				IconBgrColor = App.Color("Primary1");
+				CellTextColor = App.Color("TextContrast");
 			}
 		}
 	}

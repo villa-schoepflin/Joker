@@ -1,16 +1,11 @@
-﻿using System.Threading.Tasks;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
 using Joker.DataAccess;
+using Xamarin.Forms;
 
 namespace Joker.UserInterface
 {
 	/// <summary>
 	/// Page where the user answers their security questions to access the app in case they forgot their password.
 	/// </summary>
-	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class SecurityQuestionPage : ContentPage
 	{
 		/// <summary>
@@ -19,40 +14,31 @@ namespace Joker.UserInterface
 		public SecurityQuestionPage()
 		{
 			InitializeComponent();
+
+			SecurityQuestion1.Text = UserSettings.FirstSecurityAttribute.Item1;
+			SecurityQuestion2.Text = UserSettings.SecondSecurityAttribute.Item1;
 		}
 
 		/// <summary>
-		/// Text change event handler that checks whether the answer to the first security question is correct.
+		/// Text change event handler that checks whether the answer to the first security question is correct. If it's
+		/// correct, the user gets navigated to the main page.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
 		/// <param name="e">Contains event data.</param>
-		private void CheckFirstSecurityQuestion(object sender, TextChangedEventArgs e)
+		private void CheckSecurityAnswer(object sender, TextChangedEventArgs e)
 		{
-			if(e.NewTextValue == UserSettings.FirstSecurityAnswer)
-				OnSecurityConfirmed((Entry)sender);
-		}
+			string correctAnswer;
+			if(sender == FirstSecurityAnswerEntry)
+				correctAnswer = UserSettings.FirstSecurityAttribute.Item2;
+			else
+				correctAnswer = UserSettings.SecondSecurityAttribute.Item2;
 
-		/// <summary>
-		/// Text change event handler that checks whether the answer to the first security question is correct.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private void CheckSecondSecurityQuestion(object sender, TextChangedEventArgs e)
-		{
-			if(e.NewTextValue == UserSettings.SecondSecurityAnswer)
-				OnSecurityConfirmed((Entry)sender);
-		}
-
-		/// <summary>
-		/// Navigates the user to the appropriate main page, closing the password dialog pages.
-		/// </summary>
-		/// <param name="sender">The entry where the user has correctly answered a security question.</param>
-		private async void OnSecurityConfirmed(Entry sender)
-		{
-			Indicator.IsRunning = true;
-			sender.Unfocus();
-			await Task.Delay(300);
-			App.SetMainPageToDefault();
+			if(e.NewTextValue == correctAnswer)
+			{
+				Indicator.IsRunning = true;
+				((Entry)sender).Unfocus();
+				App.SetMainPageToDefault();
+			}
 		}
 	}
 }

@@ -1,10 +1,8 @@
 ﻿using System.Threading.Tasks;
-
 using Foundation;
+using Joker.AppInterface;
 using Photos;
 using UIKit;
-
-using Joker.AppInterface;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Joker.iOS.IosFileSaver))]
 namespace Joker.iOS
@@ -23,12 +21,11 @@ namespace Joker.iOS
 		{
 			var callback = new TaskCompletionSource<bool>();
 
-			PHPhotoLibrary.RequestAuthorization(grant
-				=> callback.SetResult(grant == PHAuthorizationStatus.Authorized));
-
+			PHPhotoLibrary.RequestAuthorization(grant => callback.SetResult(grant == PHAuthorizationStatus.Authorized));
 			if(PHPhotoLibrary.AuthorizationStatus == PHAuthorizationStatus.Authorized)
 			{
-				var stream = typeof(App).Assembly.GetManifestResourceStream($"Joker.Resources.PictureFeed.{filePath}");
+				string pictureFilePath = $"Joker.Assets.PictureFeed.{filePath}";
+				var stream = typeof(App).Assembly.GetManifestResourceStream(pictureFilePath);
 				new UIImage(NSData.FromStream(stream)).SaveToPhotosAlbum(null);
 			}
 

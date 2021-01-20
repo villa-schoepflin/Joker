@@ -1,5 +1,4 @@
-﻿using System;
-
+using System;
 using SQLite;
 
 namespace Joker.BusinessLogic
@@ -7,41 +6,42 @@ namespace Joker.BusinessLogic
 	/// <summary>
 	/// Represents a motivating or informing picture in the database and in the app view.
 	/// </summary>
-	[Table("Picture")]
+	[Table(PictureTableName)]
 	public sealed class Picture
 	{
 		/// <summary>
 		/// The file path of the image resource associated with the picture, used as a primary key.
 		/// </summary>
-		[PrimaryKey, Column("FilePath")] public string FilePath { get; set; }
+		[PrimaryKey, Column(FilePathColumnName)] public string FilePath { get; set; }
 
 		/// <summary>
 		/// The time this picture was added to the database.
 		/// </summary>
-		[Column("TimeAdded")] public DateTime TimeAdded { get; set; }
+		[Column(TimeAddedColumnName)] public DateTime TimeAdded { get; set; }
 
 		/// <summary>
-		/// The status indicating whether this picture is preferred by the user, which makes the picture
-		/// appear more often by the randomized refresh in the picture feed.
+		/// The status indicating whether this picture is preferred by the user, which makes the
+		/// picture appear more often by the randomized refresh in the picture feed.
 		/// </summary>
-		[Column("Liked")] public bool Liked { get; set; }
+		[Column(LikedColumnName)] public bool Liked { get; set; }
 
 		/// <summary>
-		/// The standard constructor for this class. Creates a picture based on the given file path and sets its
-		/// properties to their default value.
+		/// The standard constructor for this class. Creates a picture based on the given file path
+		/// and sets its properties to their default value.
 		/// </summary>
 		/// <param name="filePath">The file path of the embedded image resource.</param>
 		public Picture(string filePath)
 		{
 			string[] parts = filePath.Split('.');
-			FilePath = $"{parts[parts.Length - 2]}.{parts[parts.Length - 1]}";
+			FilePath = $"{parts[^2]}.{parts[^1]}";
 			TimeAdded = DateTime.UtcNow;
 			Liked = false;
 		}
 
 		/// <summary>
-		/// This constructor only exists for SQLite to be able to return collections of Pictures from the database.
-		/// It should never be used to instantiate a Picture directly within the app.
+		/// This constructor only exists for SQLite to be able to return collections of Pictures
+		/// from the database. It should never be used to instantiate a Picture directly within the
+		/// app.
 		/// </summary>
 		public Picture() { }
 
@@ -51,7 +51,14 @@ namespace Joker.BusinessLogic
 		/// <returns>A one-line string that represents this picture.</returns>
 		public override string ToString()
 		{
-			return $"File path: {FilePath}  |  Time added: {TimeAdded}  |  Liked: {Liked}";
+			return $"File path: {FilePath} | Time added: {TimeAdded} | Liked: {Liked}";
 		}
+
+		#region Identifiers for the database schema (DO NOT CHANGE!)
+		private const string PictureTableName = "Picture";
+		private const string FilePathColumnName = "FilePath";
+		private const string TimeAddedColumnName = "TimeAdded";
+		private const string LikedColumnName = "Liked";
+		#endregion
 	}
 }

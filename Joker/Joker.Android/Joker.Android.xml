@@ -4,163 +4,138 @@
         <name>Joker.Android</name>
     </assembly>
     <members>
-        <member name="T:Joker.Droid.AndroidContactPicker">
-            <summary>
-            Contains Android-specific functionality to interact with the contact list.
-            </summary>
-        </member>
-        <member name="F:Joker.Droid.AndroidContactPicker.RequestCode">
-            <summary>
-            The constant request code associated with the contact-picking activity.
-            </summary>
-        </member>
-        <member name="F:Joker.Droid.AndroidContactPicker.Callback">
-            <summary>
-            The callback handler for the asynchronous task through which the contact is picked.
-            </summary>
-        </member>
-        <member name="M:Joker.Droid.AndroidContactPicker.PickContact">
-            <summary>
-            Opens a result-based activity from the main activity to the Android contact list
-            allowing the user to pick a single contact with name and phone number.
-            </summary>
-            <returns>The contact contained in an asynchronous task result.</returns>
-        </member>
-        <member name="M:Joker.Droid.AndroidContactPicker.Finish(Android.Content.Intent)">
-            <summary>
-            Handles all actions for when the contact-picking activity was cancelled or a contact was picked.
-            </summary>
-            <param name="intent">The intent containing the picked contact if one was picked.</param>
-        </member>
-        <member name="T:Joker.Droid.AndroidFileSaver">
+        <member name="T:Joker.Android.AndroidFileSaver">
             <summary>
             Contains Android-specific file IO functionality.
             </summary>
         </member>
-        <member name="F:Joker.Droid.AndroidFileSaver.RequestCode">
+        <member name="F:Joker.Android.AndroidFileSaver.RequestCode">
             <summary>
             Associated with the permission request to save files to local storage.
             </summary>
         </member>
-        <member name="F:Joker.Droid.AndroidFileSaver.Callback">
+        <member name="F:Joker.Android.AndroidFileSaver.Callback">
             <summary>
-            The callback value for the asynchronous task through which the storage access permission is requested.
+            The callback value for the asynchronous task through which the storage access permission
+            is requested.
             </summary>
         </member>
-        <member name="F:Joker.Droid.AndroidFileSaver.FilePath">
+        <member name="F:Joker.Android.AndroidFileSaver.FilePath">
             <summary>
             The picture whose image file should be saved.
             </summary>
         </member>
-        <member name="M:Joker.Droid.AndroidFileSaver.SaveToGallery(System.String)">
+        <member name="M:Joker.Android.AndroidFileSaver.SaveToGallery(System.String)">
             <summary>
             Requests permission to access phone storage, then begins the saving process.
             </summary>
             <param name="filePath">File path to the image resource.</param>
             <returns>Indicates whether storage access permission was granted.</returns>
         </member>
-        <member name="M:Joker.Droid.AndroidFileSaver.Finish(Android.Content.PM.Permission)">
+        <member name="M:Joker.Android.AndroidFileSaver.Finish(Android.Content.PM.Permission)">
             <summary>
             Saves the image file to the Android gallery in a "Joker" directory.
             </summary>
             <param name="grantResult">Result of the permission request to the user.</param>
         </member>
-        <member name="T:Joker.Droid.AndroidNotifier">
+        <member name="T:Joker.Android.AndroidNotifier">
             <summary>
             Contains Android-specific notification functionality.
             </summary>
         </member>
-        <member name="P:Joker.Droid.AndroidNotifier.Scheduler">
+        <member name="P:Joker.Android.AndroidNotifier.Scheduler">
             <summary>
             Gets the app-specific Android alarm manager to schedule broadcasts and notifications.
             </summary>
         </member>
-        <member name="P:Joker.Droid.AndroidNotifier.Notifier">
+        <member name="P:Joker.Android.AndroidNotifier.Notifier">
             <summary>
-            Gets the app-specific Android notification manager to create push notifications on the phone.
+            Gets the app-specific Android notification manager to create push notifications on the
+            phone.
             </summary>
         </member>
-        <member name="M:Joker.Droid.AndroidNotifier.ScheduleLimitExpired(System.DateTime)">
+        <member name="M:Joker.Android.AndroidNotifier.ScheduleLimitExpired(System.DateTime)">
             <summary>
             Android-specific implementation of an API method that schedules a notification
             indicating the current limit has expired and a new one should be set.
             </summary>
             <param name="timeSetting">The time at which the notification should appear.</param>
         </member>
-        <member name="M:Joker.Droid.AndroidNotifier.CancelLimitExpired">
+        <member name="M:Joker.Android.AndroidNotifier.CancelLimitExpired">
             <summary>
             Android-specific implementation of an API method that removes the notification that
             indicates that the current limit has expired.
             </summary>
         </member>
-        <member name="T:Joker.Droid.AndroidNotifier.LimitExpiredReceiver">
+        <member name="T:Joker.Android.AndroidNotifier.LimitExpiredReceiver">
             <summary>
             Handles the notification broadcast received from the Android OS at the scheduled time.
             </summary>
         </member>
-        <member name="M:Joker.Droid.AndroidNotifier.LimitExpiredReceiver.OnReceive(Android.Content.Context,Android.Content.Intent)">
+        <member name="M:Joker.Android.AndroidNotifier.LimitExpiredReceiver.OnReceive(Android.Content.Context,Android.Content.Intent)">
             <summary>
-            Receives the broadcast from Android and pushes an ongoing notification indicating that the
-            current limit has expired. Creates the respective notification channel if necessary.
+            Receives the broadcast from Android and pushes an ongoing notification indicating
+            that the current limit has expired. Creates the respective notification channel if
+            necessary.
             </summary>
             <param name="context">The context through which the broadcast is processed.</param>
             <param name="intent">Not used here.</param>
         </member>
-        <member name="M:Joker.Droid.AndroidNotifier.ScheduleNewPicture(System.DateTime)">
+        <member name="M:Joker.Android.AndroidNotifier.ScheduleNewPicture(System.DateTime)">
             <summary>
             Android-specific implementation of an API method that schedules a notification
             indicating that a new picture is available to see.
             </summary>
             <param name="timeSetting">The time at which the notification should appear.</param>
         </member>
-        <member name="T:Joker.Droid.AndroidNotifier.NewPictureReceiver">
+        <member name="T:Joker.Android.AndroidNotifier.NewPictureReceiver">
             <summary>
             Handles the notification broadcast received from the Android OS at the scheduled time.
             </summary>
         </member>
-        <member name="M:Joker.Droid.AndroidNotifier.NewPictureReceiver.OnReceive(Android.Content.Context,Android.Content.Intent)">
+        <member name="M:Joker.Android.AndroidNotifier.NewPictureReceiver.OnReceive(Android.Content.Context,Android.Content.Intent)">
             <summary>
-            Receives the broadcast from Android and pushes an ongoing notification indicating that a
-            new pictures is available to see. Creates the respective notification channel if necessary.
-            The notification is removed when it is opened.
+            Receives the broadcast from Android and pushes an ongoing notification indicating
+            that a new pictures is available to see. Creates the respective notification channel
+            if necessary. The notification is removed when it is opened.
             </summary>
             <param name="context">The context through which the broadcast is processed.</param>
             <param name="intent">Not used here.</param>
         </member>
-        <member name="M:Joker.Droid.AndroidNotifier.ScheduleGambleReminder(System.TimeSpan)">
+        <member name="M:Joker.Android.AndroidNotifier.ScheduleGambleReminder(System.TimeSpan)">
             <summary>
-            Android-specific implementation of an API method that schedules a notification
-            reminding the user to always record acts of gambling within the app.
+            Android-specific implementation of an API method that schedules a notification reminding
+            the user to always record acts of gambling within the app.
             </summary>
-            <param name="interval">The interval for the times the notification should appear.</param>
+            <param name="interval">The interval for the time the notification should appear.</param>
         </member>
-        <member name="T:Joker.Droid.AndroidNotifier.GambleReminderReceiver">
+        <member name="T:Joker.Android.AndroidNotifier.GambleReminderReceiver">
             <summary>
             Handles the notification broadcast received from the Android OS at the scheduled time.
             </summary>
         </member>
-        <member name="M:Joker.Droid.AndroidNotifier.GambleReminderReceiver.OnReceive(Android.Content.Context,Android.Content.Intent)">
+        <member name="M:Joker.Android.AndroidNotifier.GambleReminderReceiver.OnReceive(Android.Content.Context,Android.Content.Intent)">
             <summary>
-            Receives the broadcast from Android and pushes a notification reminding the user that
-            their acts of gambling should be recorded with the app. Creates the respective notification
-            channel if necessary.
+            Receives the broadcast from Android and pushes a notification reminding the user
+            that their acts of gambling should be recorded with the app. Creates the respective
+            notification channel if necessary.
             </summary>
             <param name="context">The context through which the broadcast is processed.</param>
             <param name="intent">Not used here.</param>
         </member>
-        <member name="M:Joker.Droid.AndroidNotifier.ScheduleLimitReminder(System.TimeSpan)">
+        <member name="M:Joker.Android.AndroidNotifier.ScheduleLimitReminder(System.TimeSpan)">
             <summary>
-            Android-specific implementation of an API method that schedules a notification
-            reminding the user about their current limit's state.
+            Android-specific implementation of an API method that schedules a notification reminding the user about
+            their current limit's state.
             </summary>
-            <param name="interval">The interval for the times the notification should appear.</param>
+            <param name="interval">The interval for the time the notification should appear.</param>
         </member>
-        <member name="T:Joker.Droid.AndroidNotifier.LimitReminderReceiver">
+        <member name="T:Joker.Android.AndroidNotifier.LimitReminderReceiver">
             <summary>
             Handles the notification broadcast received from the Android OS at the scheduled time.
             </summary>
         </member>
-        <member name="M:Joker.Droid.AndroidNotifier.LimitReminderReceiver.OnReceive(Android.Content.Context,Android.Content.Intent)">
+        <member name="M:Joker.Android.AndroidNotifier.LimitReminderReceiver.OnReceive(Android.Content.Context,Android.Content.Intent)">
             <summary>
             Receives the broadcast from Android and pushes a notification reminding the user about their current
             limit's state. Creates the respective notification channel if necessary.
@@ -168,85 +143,73 @@
             <param name="context">The context through which the broadcast is processed.</param>
             <param name="intent">Not used here.</param>
         </member>
-        <member name="T:Joker.Droid.AndroidNotifier.BootReceiver">
+        <member name="T:Joker.Android.AndroidNotifier.BootReceiver">
             <summary>
             Handles the broadcast received from the Android OS when the phone has been turned on.
             </summary>
         </member>
-        <member name="M:Joker.Droid.AndroidNotifier.BootReceiver.OnReceive(Android.Content.Context,Android.Content.Intent)">
+        <member name="M:Joker.Android.AndroidNotifier.BootReceiver.OnReceive(Android.Content.Context,Android.Content.Intent)">
             <summary>
             Re-schedules all notifications after the phone has been turned on.
             </summary>
             <param name="context">Not used here.</param>
             <param name="intent">Not used here.</param>
         </member>
-        <member name="M:Joker.Droid.AndroidNotifier.GetSystemTime(System.DateTime)">
+        <member name="M:Joker.Android.AndroidNotifier.GetSystemTime(System.DateTime)">
             <summary>
-            Converts a C# DateTime object into an Android-specific time format as represented by
-            a 64-bit integer.
+            Converts a C# DateTime object into an Android-specific time format as represented by a 64-bit integer.
             </summary>
             <param name="time">The DateTime object to be converted.</param>
             <returns>A 64-bit integer representing a point in time.</returns>
         </member>
-        <member name="T:Joker.Droid.InputCorrectedEntry">
+        <member name="T:Joker.Android.InputCorrectedEntry">
             <summary>
             Custom renderer to enable use of dots in numeric entries on Samsung devices.
             </summary>
         </member>
-        <member name="M:Joker.Droid.InputCorrectedEntry.#ctor(Android.Content.Context)">
+        <member name="M:Joker.Android.InputCorrectedEntry.#ctor(Android.Content.Context)">
             <summary>
             Renders the custom entry.
             </summary>
             <param name="context">Context in which to render the entry.</param>
         </member>
-        <member name="M:Joker.Droid.InputCorrectedEntry.OnElementChanged(Xamarin.Forms.Platform.Android.ElementChangedEventArgs{Xamarin.Forms.Entry})">
+        <member name="M:Joker.Android.InputCorrectedEntry.OnElementChanged(Xamarin.Forms.Platform.Android.ElementChangedEventArgs{Xamarin.Forms.Entry})">
             <summary>
             Changes the entry's keyboard so dots can be used as decimal separators when keyboard is supposed to appear.
             </summary>
             <param name="e">Event arguments for when a property of the entry has changed.</param>
         </member>
-        <member name="T:Joker.Droid.MainActivity">
+        <member name="T:Joker.Android.MainActivity">
             <summary>
-            The entry point for the Android app after preliminary launching has finished behind the splash screen.
+            The entry point for the Android app after preliminary launching has finished behind the
+            splash screen.
             </summary>
         </member>
-        <member name="F:Joker.Droid.MainActivity.Instance">
+        <member name="F:Joker.Android.MainActivity.Instance">
             <summary>
             Provides a reference to the main application context for result-based activities.
             </summary>
         </member>
-        <member name="M:Joker.Droid.MainActivity.OnCreate(Android.OS.Bundle)">
+        <member name="M:Joker.Android.MainActivity.OnCreate(Android.OS.Bundle)">
             <summary>
             Creates the main activity and provides the entry point for the shared code.
             </summary>
             <param name="bundle">Parameters supplied for this activity.</param>
         </member>
-        <member name="M:Joker.Droid.MainActivity.OnActivityResult(System.Int32,Android.App.Result,Android.Content.Intent)">
-            <summary>
-            Handles the return of results of result-based activities started during runtime.
-            </summary>
-            <param name="requestCode">Request code of a result-based activity.</param>
-            <param name="resultCode">Code of the result supplied by Android.</param>
-            <param name="intent">Callback data contained by the result-based activity.</param>
-            <exception cref="T:System.ArgumentException">Thrown if the request code does not correspond to
-            an intended activity.</exception>
-        </member>
-        <member name="M:Joker.Droid.MainActivity.OnRequestPermissionsResult(System.Int32,System.String[],Android.Content.PM.Permission[])">
+        <member name="M:Joker.Android.MainActivity.OnRequestPermissionsResult(System.Int32,System.String[],Android.Content.PM.Permission[])">
             <summary>
             Handles the return of permission requests to the user during runtime.
             </summary>
             <param name="requestCode">Request code of the permission request.</param>
             <param name="permissions">Requested permissions.</param>
             <param name="grantResults">Results of the request as determined by the user.</param>
-            <exception cref="T:System.ArgumentException">Thrown if the request code does not correspond to
-            an intended activity.</exception>
         </member>
-        <member name="T:Joker.Droid.LaunchActivity">
+        <member name="T:Joker.Android.LaunchActivity">
             <summary>
             Main entry point of the Android app for the main launching process.
             </summary>
         </member>
-        <member name="M:Joker.Droid.LaunchActivity.OnCreate(Android.OS.Bundle)">
+        <member name="M:Joker.Android.LaunchActivity.OnCreate(Android.OS.Bundle)">
             <summary>
             Presents a splash screen to the user and performs the main launching process.
             </summary>

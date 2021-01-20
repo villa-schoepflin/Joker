@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:da="clr-namespace:Joker.DataAccess"
@@ -14,13 +14,18 @@
 				   Padding="{StaticResource PagePadding}"
 				   BackgroundColor="{StaticResource Primary1}">
 				<StackLayout>
-					<Label Text="{Static da:UserSettings.FirstSecurityQuestion}"
+					<Label x:Name="SecurityQuestion1"
 						   TextColor="{StaticResource TextContrast}"
 						   FontSize="Large" />
-					<Entry TextChanged="CheckFirstSecurityQuestion"
+					<Entry x:Name="FirstSecurityAnswerEntry"
+						   TextChanged="CheckSecurityAnswer"
 						   HorizontalOptions="FillAndExpand">
 						<Entry.TextColor>
-							<OnPlatform Android="{StaticResource TextContrast}" />
+							<OnPlatform x:TypeArguments="Color">
+								<OnPlatform.Platforms>
+									<On Platform="Android" Value="{StaticResource TextContrast}" />
+								</OnPlatform.Platforms>
+							</OnPlatform>
 						</Entry.TextColor>
 					</Entry>
 				</StackLayout>
@@ -29,13 +34,17 @@
 				   Padding="{StaticResource PagePadding}"
 				   BackgroundColor="{StaticResource Primary1}">
 				<StackLayout>
-					<Label Text="{Static da:UserSettings.SecondSecurityQuestion}"
+					<Label x:Name="SecurityQuestion2"
 						   TextColor="{StaticResource TextContrast}"
 						   FontSize="Large" />
-					<Entry TextChanged="CheckSecondSecurityQuestion"
+					<Entry TextChanged="CheckSecurityAnswer"
 						   HorizontalOptions="FillAndExpand">
 						<Entry.TextColor>
-							<OnPlatform Android="{StaticResource TextContrast}" />
+							<OnPlatform x:TypeArguments="Color">
+								<OnPlatform.Platforms>
+									<On Platform="Android" Value="{StaticResource TextContrast}" />
+								</OnPlatform.Platforms>
+							</OnPlatform>
 						</Entry.TextColor>
 					</Entry>
 				</StackLayout>

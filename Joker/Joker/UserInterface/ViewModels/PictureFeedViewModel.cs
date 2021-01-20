@@ -1,11 +1,9 @@
-﻿using System;
+using System;
 using System.Windows.Input;
-
-using Xamarin.Forms;
-
 using Joker.AppInterface;
 using Joker.BusinessLogic;
 using Joker.DataAccess;
+using Xamarin.Forms;
 
 namespace Joker.UserInterface
 {
@@ -24,8 +22,8 @@ namespace Joker.UserInterface
 			{
 				_model = value;
 				OnPropertyChanged(nameof(PresentedImage));
-				OnPropertyChanged(nameof(LikeButtonBackgroundColor));
 				OnPropertyChanged(nameof(LikeButtonImage));
+				OnPropertyChanged(nameof(LikeButtonBackgroundColor));
 				OnPropertyChanged(nameof(LikeButtonText));
 			}
 		}
@@ -34,12 +32,13 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// Creates a Xamarin.Forms image from the embedded resource file path.
 		/// </summary>
-		public ImageSource PresentedImage => ImageSource.FromResource($"Joker.Resources.PictureFeed.{Model.FilePath}");
+		public ImageSource PresentedImage => ImageSource.FromResource($"Joker.Assets.PictureFeed.{Model.FilePath}");
 
 		/// <summary>
 		/// Determines the image to display on the Like button based on the current Liked status.
 		/// </summary>
-		public ImageSource LikeButtonImage => ImageSource.FromFile(Model.Liked ? "ui_heart.png" : "ui_heartoutline.png");
+		public ImageSource LikeButtonImage
+			=> ImageSource.FromFile(Model.Liked ? "ui_heart.png" : "ui_heartoutline.png");
 
 		/// <summary>
 		/// Determines the background color of the Like button based on the current Liked status.
@@ -52,8 +51,8 @@ namespace Joker.UserInterface
 		public string LikeButtonText => Model.Liked ? "Gefällt mir nicht mehr" : "Gefällt mir";
 
 		/// <summary>
-		/// Re-binds the view to a randomly selected picture from the database, preferring the liked
-		/// pictures with a ratio of 3:1.
+		/// Re-binds the view to a randomly selected picture from the database, preferring the liked pictures with a
+		/// ratio of 3:1.
 		/// </summary>
 		public ICommand SetNextPicture => new Command(() =>
 		{
@@ -69,6 +68,7 @@ namespace Joker.UserInterface
 			do
 				nextPic = pics[random.Next(0, pics.Count)];
 			while(nextPic.FilePath == Model.FilePath);
+
 			Model = nextPic;
 		});
 
@@ -88,10 +88,13 @@ namespace Joker.UserInterface
 		/// </summary>
 		public ICommand SavePictureToGallery => new Command(async () =>
 		{
+			string msg;
 			if(await DependencyService.Get<IPlatformFileSaver>().SaveToGallery(Model.FilePath))
-				await View.DisplayAlert("In der Galerie gespeichert.", null, "Ok");
+				msg = Alerts.SavedToGallery;
 			else
-				await View.DisplayAlert("Die App ist nicht berechtigt auf den Speicher zuzugreifen.", null, "Ok");
+				msg = Alerts.StoragePermissionDenied;
+
+			await View.DisplayAlert(msg, null, Alerts.Ok);
 		});
 
 		/// <summary>

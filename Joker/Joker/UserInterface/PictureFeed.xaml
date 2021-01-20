@@ -1,11 +1,15 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:ui="clr-namespace:Joker.UserInterface"
 			 x:Class="Joker.UserInterface.PictureFeed"
 			 Icon="ui_pictures.png">
 	<ContentPage.Title>
-		<OnPlatform iOS="{Static ui:PictureFeed.Headline}" />
+		<OnPlatform x:TypeArguments="x:String">
+			<OnPlatform.Platforms>
+				<On Platform="iOS" Value="{Static ui:PictureFeed.Headline}" />
+			</OnPlatform.Platforms>
+		</OnPlatform>
 	</ContentPage.Title>
 	<Grid RowSpacing="0"
 		  ColumnSpacing="0"
@@ -19,16 +23,15 @@
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="Auto" />
 		</Grid.ColumnDefinitions>
-		<Frame Grid.Row="0"
+		<Frame x:Name="Frame"
+			   Grid.Row="0"
 			   Grid.Column="0"
 			   Grid.ColumnSpan="2"
-			   BackgroundColor="#333333"
 			   HorizontalOptions="FillAndExpand"
 			   VerticalOptions="FillAndExpand"
 			   CornerRadius="0"
 			   Padding="0">
-			<Image x:Name="Picture"
-				   Source="{Binding PresentedImage}">
+			<Image Source="{Binding PresentedImage}">
 				<Image.GestureRecognizers>
 					<TapGestureRecognizer Command="{Binding SetNextPicture}"
 										  NumberOfTapsRequired="2" />
@@ -41,7 +44,6 @@
 				Image="{Binding LikeButtonImage}"
 				Text="{Binding LikeButtonText}"
 				BackgroundColor="{Binding LikeButtonBackgroundColor}"
-				TextColor="{StaticResource Text1}"
 				ContentLayout="Left,30"
 				CornerRadius="0" />
 		<Button Command="{Binding SavePictureToGallery}"
@@ -51,8 +53,12 @@
 				BackgroundColor="{StaticResource Bgr4}"
 				CornerRadius="0">
 			<Button.Padding>
-				<OnPlatform Android="{StaticResource PagePadding}"
-							iOS="25" />
+				<OnPlatform x:TypeArguments="Thickness">
+					<OnPlatform.Platforms>
+						<On Platform="Android" Value="{StaticResource PagePadding}" />
+						<On Platform="iOS" Value="25" />
+					</OnPlatform.Platforms>
+				</OnPlatform>
 			</Button.Padding>
 		</Button>
 	</Grid>

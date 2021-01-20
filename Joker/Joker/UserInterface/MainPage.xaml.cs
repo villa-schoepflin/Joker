@@ -1,16 +1,13 @@
-﻿using System;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
+using System;
 using Joker.AppInterface;
+using Joker.BusinessLogic;
+using Xamarin.Forms;
 
 namespace Joker.UserInterface
 {
 	/// <summary>
 	/// Main view of the app, usually presented after launching is finished.
 	/// </summary>
-	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MainPage : TabbedPage
 	{
 		/// <summary>
@@ -37,18 +34,19 @@ namespace Joker.UserInterface
 		}
 
 		/// <summary>
-		/// Toolbar item event handler that shows the user a message concerning the current tab's functionality.
+		/// Toolbar item event handler that shows the user a message concerning the current tab's
+		/// functionality.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
 		/// <param name="e">Contains event data.</param>
 		private async void OnInfoButton(object sender, EventArgs e)
 		{
 			if(CurrentPage is PictureFeed)
-				await DisplayAlert(PictureFeed.Headline, FileResourceReader.Get("Info_PictureFeed.txt"), "Ok");
+				await DisplayAlert(PictureFeed.Headline, TextAssetReader.Get("Info_PictureFeed.txt"), Alerts.Ok);
 			else if(CurrentPage is TimelineFeed)
-				await DisplayAlert(TimelineFeed.Headline, FileResourceReader.Get("Info_TimelineFeed.txt"), "Ok");
+				await DisplayAlert(TimelineFeed.Headline, TextAssetReader.Get("Info_TimelineFeed.txt"), Alerts.Ok);
 			else if(CurrentPage is ContactPage)
-				await DisplayAlert(ContactPage.Headline, FileResourceReader.Get("Info_ContactPage.txt"), "Ok");
+				await DisplayAlert(ContactPage.Headline, TextAssetReader.Get("Info_ContactPage.txt"), Alerts.Ok);
 		}
 
 		/// <summary>

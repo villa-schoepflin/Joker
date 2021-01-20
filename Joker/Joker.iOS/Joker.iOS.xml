@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <doc>
     <assembly>
         <name>Joker.iOS</name>
@@ -27,47 +27,6 @@
             <param name="reusableCell">Contains styling information about a native iOS cell.</param>
             <param name="tv">Contains information about the table view containing the cell.</param>
             <returns>The customized native iOS cell with the corrected color scheme.</returns>
-        </member>
-        <member name="T:Joker.iOS.IosContactPicker">
-            <summary>
-            Contains iOS-specific functionality to interact with the contact list.
-            </summary>
-        </member>
-        <member name="F:Joker.iOS.IosContactPicker.Callback">
-            <summary>
-            The callback handler for the asynchronous task through which the contact is picked.
-            </summary>
-        </member>
-        <member name="M:Joker.iOS.IosContactPicker.#ctor">
-            <summary>
-            Implicit constructor which instantiates this interface implementation as an iOS delegate.
-            </summary>
-        </member>
-        <member name="M:Joker.iOS.IosContactPicker.#ctor(System.IntPtr)">
-            <summary>
-            Constructor used by the runtime only to create managed representations of unmanaged objects.
-            </summary>
-            <param name="handle">Pointer to this object.</param>
-        </member>
-        <member name="M:Joker.iOS.IosContactPicker.PickContact">
-            <summary>
-            Opens a view to the iOS contact list allowing the user to pick a single contact with name
-            and phone number.
-            </summary>
-            <returns>The contact contained in an asynchronous task result.</returns>
-        </member>
-        <member name="M:Joker.iOS.IosContactPicker.ContactPickerDidCancel(ContactsUI.CNContactPickerViewController)">
-            <summary>
-            Handles the callback for when the contact list view is cancelled.
-            </summary>
-            <param name="picker">The view controller that was cancelled.</param>
-        </member>
-        <member name="M:Joker.iOS.IosContactPicker.DidSelectContact(ContactsUI.CNContactPickerViewController,Contacts.CNContact)">
-            <summary>
-            Handles the callback for when a contact was picked from the contact list.
-            </summary>
-            <param name="picker">The view controller where the contact was picked.</param>
-            <param name="contact">The iOS-specific contact object that was picked.</param>
         </member>
         <member name="T:Joker.iOS.IosFileSaver">
             <summary>
@@ -111,14 +70,14 @@
             iOS-specific implementation of an API method that schedules a notification
             reminding the user to always record acts of gambling within the app.
             </summary>
-            <param name="interval">The interval for the times the notification should appear.</param>
+            <param name="interval">The interval for the time the notification should appear.</param>
         </member>
         <member name="M:Joker.iOS.IosNotifier.ScheduleLimitReminder(System.TimeSpan)">
             <summary>
             iOS-specific implementation of an API method that schedules a notification
             reminding the user about the state of their current limit.
             </summary> 
-            <param name="interval">The interval for the times the notification should appear.</param>
+            <param name="interval">The interval for the time the notification should appear.</param>
         </member>
         <member name="T:Joker.iOS.AppMain">
             <summary>
@@ -129,7 +88,7 @@
             <summary>
             Main entry point of the application.
             </summary>
-            <param name="args">Parameters given from the command line for application launch.</param>
+            <param name="args">Parameters given from the command line for the app launch.</param>
         </member>
         <member name="T:Joker.iOS.AppDelegate">
             <summary>
@@ -140,8 +99,8 @@
         <member name="M:Joker.iOS.AppDelegate.FinishedLaunching(UIKit.UIApplication,Foundation.NSDictionary)">
             <summary>
             Invoked when the application has loaded and is ready to run. Instantiates the window,
-            loads the UI into it and then makes the window visible. iOS will terminate the application
-            if if hasn't returned from there after 17 seconds.
+            loads the UI into it and then makes the window visible. iOS will terminate the
+            application if if hasn't returned from there after 17 seconds.
             </summary>
             <param name="app">Contains the main processing loop for a MonoTouch application.</param>
             <param name="options">A dictionary of launching options.</param>
@@ -149,7 +108,8 @@
         </member>
         <member name="M:Joker.iOS.AppDelegate.CorrectNavigationBarColors">
             <summary>
-            Workaround to fix the bug that makes Xamarin.iOS sometimes ignore the colors set in the shared code.
+            Workaround to fix the bug that makes Xamarin.iOS sometimes ignore the colors set in the
+            shared code.
             </summary>
         </member>
     </members>

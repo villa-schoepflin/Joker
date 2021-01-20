@@ -1,11 +1,11 @@
-﻿using Xamarin.Essentials;
-using Xamarin.Forms;
-
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.OS;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 
-namespace Joker.Droid
+namespace Joker.Android
 {
 	/// <summary>
 	/// Main entry point of the Android app for the main launching process.
@@ -14,7 +14,7 @@ namespace Joker.Droid
 			  MainLauncher = true,
 			  Theme = "@style/Splash",
 			  Icon = "@mipmap/ic_launcher",
-			  ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+			  ScreenOrientation = ScreenOrientation.Portrait)]
 	public class LaunchActivity : Activity
 	{
 		/// <summary>

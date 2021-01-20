@@ -1,29 +1,26 @@
-﻿using System;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
+using System;
+using Joker.BusinessLogic;
 using Joker.DataAccess;
+using Xamarin.Forms;
 
 namespace Joker.UserInterface
 {
 	/// <summary>
 	/// View where the user should enter their name.
 	/// </summary>
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class TourPage1 : ContentPage
+	public partial class NameTourPage : ContentPage
 	{
 		/// <summary>
 		/// Initializes XAML elements.
 		/// </summary>
-		public TourPage1()
+		public NameTourPage()
 		{
 			InitializeComponent();
 		}
 
 		/// <summary>
-		/// Button event handler that relays user input validation and navigates the user to
-		/// the next tour page.
+		/// Button event handler that relays user input validation and navigates the user to the
+		/// next tour page.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
 		/// <param name="e">Contains event data.</param>
@@ -32,11 +29,11 @@ namespace Joker.UserInterface
 			try
 			{
 				UserSettings.UserName = NameEntry.Text;
-				await Navigation.PushAsync(new TourPage2());
+				await Navigation.PushAsync(new ContactTourPage());
 			}
 			catch(ArgumentException error)
 			{
-				await DisplayAlert(null, error.Message, "Ok");
+				await DisplayAlert(null, error.Message, Alerts.Ok);
 			}
 		}
 	}

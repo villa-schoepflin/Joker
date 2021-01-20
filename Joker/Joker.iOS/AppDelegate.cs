@@ -1,11 +1,9 @@
-﻿using System;
+using System;
 using System.IO;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Platform.iOS;
-
 using Foundation;
 using UIKit;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
 
 namespace Joker.iOS
 {
@@ -18,8 +16,8 @@ namespace Joker.iOS
 	{
 		/// <summary>
 		/// Invoked when the application has loaded and is ready to run. Instantiates the window,
-		/// loads the UI into it and then makes the window visible. iOS will terminate the application
-		/// if if hasn't returned from there after 17 seconds.
+		/// loads the UI into it and then makes the window visible. iOS will terminate the
+		/// application if if hasn't returned from there after 17 seconds.
 		/// </summary>
 		/// <param name="app">Contains the main processing loop for a MonoTouch application.</param>
 		/// <param name="options">A dictionary of launching options.</param>
@@ -27,16 +25,17 @@ namespace Joker.iOS
 		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
 			Forms.Init();
-			LoadApplication(new App(Path.Combine(
-				Environment.GetFolderPath(Environment.SpecialFolder.Personal), "..", "Library"
-			)));
+
+			string personalFolder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+			LoadApplication(new App(Path.Combine(personalFolder, "..", "Library")));
 			CorrectNavigationBarColors();
 
 			return base.FinishedLaunching(app, options);
 		}
 
 		/// <summary>
-		/// Workaround to fix the bug that makes Xamarin.iOS sometimes ignore the colors set in the shared code.
+		/// Workaround to fix the bug that makes Xamarin.iOS sometimes ignore the colors set in the
+		/// shared code.
 		/// </summary>
 		internal static void CorrectNavigationBarColors()
 		{

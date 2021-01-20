@@ -1,5 +1,4 @@
-﻿using System;
-
+using System;
 using SQLite;
 
 namespace Joker.BusinessLogic
@@ -7,7 +6,7 @@ namespace Joker.BusinessLogic
 	/// <summary>
 	/// Represents a simplified phone contact with a name and one phone number.
 	/// </summary>
-	[Table("Contact")]
+	[Table(ContactTableName)]
 	public sealed class Contact
 	{
 		/// <summary>
@@ -33,23 +32,23 @@ namespace Joker.BusinessLogic
 		/// <summary>
 		/// The numeric identifier for a contact in the database.
 		/// </summary>
-		[PrimaryKey, AutoIncrement, Column("Id")] public long Id { get; set; }
+		[PrimaryKey, AutoIncrement, Column(IdColumnName)] public long Id { get; set; }
 
 		/// <summary>
 		/// The name associated with this contact.
 		/// </summary>
-		[Column("Name")] public string Name { get; set; }
+		[Column(NameColumnName)] public string Name { get; set; }
 
 		/// <summary>
 		/// The phone number associated with this contact.
 		/// </summary>
-		[Column("PhoneNumber")] public string PhoneNumber { get; set; }
+		[Column(PhoneNumberColumnName)] public string PhoneNumber { get; set; }
 
 		/// <summary>
-		/// Indicates whether this contact is marked by the user as a professional or expert such as the
-		/// number of a counseling center.
+		/// Indicates whether this contact is marked by the user as a professional or expert such as
+		/// the number of a counseling center.
 		/// </summary>
-		[Column("MarkedAsExpert")] public bool MarkedAsExpert { get; set; }
+		[Column(MarkedAsExpertColumnName)] public bool MarkedAsExpert { get; set; }
 
 		/// <summary>
 		/// The constructor that should be used when a contact is created from user input.
@@ -62,10 +61,10 @@ namespace Joker.BusinessLogic
 		public Contact(string name, string phoneNumber, bool markedAsExpert)
 		{
 			if(name.Length > MaxNameLength || string.IsNullOrEmpty(name))
-				throw new ArgumentException($"Der Name sollte zwischen 1 und {MaxNameLength} Zeichen lang sein.");
+				throw new ArgumentException(string.Format(Alerts.ContactNameTooLong, MaxNameLength));
+
 			if(phoneNumber.Length > MaxPhoneNumberLength || string.IsNullOrEmpty(phoneNumber))
-				throw new ArgumentException("Der Eintrag der Telefonnummer sollte zwischen 1 und "
-					+ MaxPhoneNumberLength + " Zeichen lang sein.");
+				throw new ArgumentException(string.Format(Alerts.ContactPhoneNumberTooLong, MaxPhoneNumberLength));
 
 			Name = name.Trim();
 			PhoneNumber = phoneNumber.Trim();
@@ -78,7 +77,8 @@ namespace Joker.BusinessLogic
 		public Contact() { }
 
 		/// <summary>
-		/// Compares two contacts on whether their phone numbers are the same, eliminating whitespace for comparison.
+		/// Compares two contacts on whether their phone numbers are the same, eliminating
+		/// whitespace for comparison.
 		/// </summary>
 		/// <param name="left">The left operand on comparing equality.</param>
 		/// <param name="right">The right operand on comparing equality.</param>
@@ -89,14 +89,15 @@ namespace Joker.BusinessLogic
 		}
 
 		/// <summary>
-		/// Compares two contacts on whether their phone numbers are different, eliminating whitespace for comparison.
+		/// Compares two contacts on whether their phone numbers are different, eliminating
+		/// whitespace for comparison.
 		/// </summary>
 		/// <param name="left">The left operand on comparing inequality.</param>
 		/// <param name="right">The right operand on comparing inequality.</param>
 		/// <returns>Whether the contacts are different by their phone number.</returns>
 		public static bool operator !=(Contact left, Contact right)
 		{
-			return left.PhoneNumber.Replace(" ", "") != right.PhoneNumber.Replace(" ", "");
+			return !(left == right);
 		}
 
 		/// <summary>
@@ -105,7 +106,13 @@ namespace Joker.BusinessLogic
 		/// <returns>A deep copy of the contact.</returns>
 		public Contact Copy()
 		{
-			return new Contact { Id = Id, Name = Name, PhoneNumber = PhoneNumber, MarkedAsExpert = MarkedAsExpert };
+			return new Contact
+			{
+				Id = Id,
+				Name = Name,
+				PhoneNumber = PhoneNumber,
+				MarkedAsExpert = MarkedAsExpert
+			};
 		}
 
 		/// <summary> 
@@ -114,14 +121,14 @@ namespace Joker.BusinessLogic
 		/// <returns>A one-line string that represents this contact.</returns>
 		public override string ToString()
 		{
-			return $"Name: {Name}  |  Phone number: {PhoneNumber}";
+			return $"Name: {Name} | Phone number: {PhoneNumber}";
 		}
 
 		/// <summary>
 		/// Determines whether the specified object is equal to the current object.
 		/// </summary>
 		/// <param name="obj">The object to compare with the current object.</param>
-		/// <returns>True if the specified object is equal to the current object, otherwise false.</returns>
+		/// <returns>True if the given object equals the current one, otherwise false.</returns>
 		public override bool Equals(object obj)
 		{
 			return base.Equals(obj);
@@ -135,5 +142,13 @@ namespace Joker.BusinessLogic
 		{
 			return base.GetHashCode();
 		}
+
+		#region Identifiers for the database schema (DO NOT CHANGE!)
+		private const string ContactTableName = "Contact";
+		private const string IdColumnName = "Id";
+		private const string NameColumnName = "Name";
+		private const string PhoneNumberColumnName = "PhoneNumber";
+		private const string MarkedAsExpertColumnName = "MarkedAsExpert";
+		#endregion
 	}
 }

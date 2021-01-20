@@ -1,9 +1,9 @@
-﻿using Joker.DataAccess;
+using Joker.DataAccess;
 
 namespace Joker.AppInterface
 {
 	/// <summary>
-	/// Container class for constructing the text shown in the different kinds of push notifications (PN).
+	/// Container class for constructing the text shown in different kinds of push notifications.
 	/// </summary>
 	public static class Notifications
 	{
@@ -15,22 +15,22 @@ namespace Joker.AppInterface
 			/// <summary>
 			/// Title of the notification indicating that the current has limit has expired.
 			/// </summary>
-			public static string LimitExpired => FileResourceReader.Get("Notification_Title_LimitExpired.txt");
+			public static string LimitExpired => TextAssetReader.Get("Notification_Title_LimitExpired.txt");
 
 			/// <summary>
 			/// Title of the notification indicating that a new picture is available to see.
 			/// </summary>
-			public static string NewPicture => FileResourceReader.Get("Notification_Title_NewPicture.txt");
+			public static string NewPicture => TextAssetReader.Get("Notification_Title_NewPicture.txt");
 
 			/// <summary>
 			/// Title of the notification reminding the user to always record his acts of gambling.
 			/// </summary>
-			public static string GambleReminder => FileResourceReader.Get("Notification_Title_GambleReminder.txt");
+			public static string GambleReminder => TextAssetReader.Get("Notification_Title_GambleReminder.txt");
 
 			/// <summary>
 			/// Title of the notification reminding the user about their limit's current state.
 			/// </summary>
-			public static string LimitReminder => FileResourceReader.Get("Notification_Title_LimitReminder.txt");
+			public static string LimitReminder => TextAssetReader.Get("Notification_Title_LimitReminder.txt");
 		}
 
 		/// <summary>
@@ -46,21 +46,21 @@ namespace Joker.AppInterface
 				get
 				{
 					if(Database.CalcBalance(Database.MostRecentLimit()) >= 0)
-						return FileResourceReader.Get("Notification_Body_LimitExpired_Success.txt");
+						return TextAssetReader.Get("Notification_Body_LimitExpired_Success.txt");
 					else
-						return FileResourceReader.Get("Notification_Body_LimitExpired_Failure.txt");
+						return TextAssetReader.Get("Notification_Body_LimitExpired_Failure.txt");
 				}
 			}
 
 			/// <summary>
 			/// Main text of the notification indicating that a new picture is available to see.
 			/// </summary>
-			public static string NewPicture => FileResourceReader.Get("Notification_Body_NewPicture.txt");
+			public static string NewPicture => TextAssetReader.Get("Notification_Body_NewPicture.txt");
 
 			/// <summary>
-			/// Main text of the notification reminding the user to always record his acts of gambling.
+			/// Main text of the notification reminding the user to record his acts of gambling.
 			/// </summary>
-			public static string GambleReminder => FileResourceReader.Get("Notification_Body_GambleReminder.txt");
+			public static string GambleReminder => TextAssetReader.Get("Notification_Body_GambleReminder.txt");
 
 			/// <summary>
 			/// Main text of the notification reminding the user about their limit's current state.
@@ -70,9 +70,9 @@ namespace Joker.AppInterface
 				get
 				{
 					if(Database.CalcBalance(Database.MostRecentLimit()) >= 0)
-						return FileResourceReader.Get("Notification_Body_LimitReminder_Success.txt");
+						return TextAssetReader.Get("Notification_Body_LimitReminder_Success.txt");
 					else
-						return FileResourceReader.Get("Notification_Body_LimitReminder_Failure.txt");
+						return TextAssetReader.Get("Notification_Body_LimitReminder_Failure.txt");
 				}
 			}
 		}

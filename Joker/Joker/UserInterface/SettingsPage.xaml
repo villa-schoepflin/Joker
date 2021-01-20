@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:da="clr-namespace:Joker.DataAccess"
@@ -39,30 +39,6 @@
 								WidthRequest="40"
 								HeightRequest="40"
 								Image="ui_save.png" />
-					</StackLayout>
-				</StackLayout>
-			</Frame>
-			<Frame Margin="{StaticResource StripMargin}"
-				   Padding="{StaticResource PagePadding}"
-				   BackgroundColor="{StaticResource Bgr2}"
-				   HasShadow="False"
-				   CornerRadius="0">
-				<StackLayout>
-					<StackLayout Orientation="Horizontal"
-								 Spacing="5">
-						<Label VerticalTextAlignment="Center"
-							   TextColor="{StaticResource Text2}"
-							   FontSize="Small">Seitenverhältnis der Bilder:</Label>
-						<BoxView HeightRequest="1"
-								 HorizontalOptions="FillAndExpand"
-								 VerticalOptions="Center"
-								 Color="{StaticResource Text2}" />
-					</StackLayout>
-					<StackLayout Orientation="Horizontal"
-								 Spacing="5">
-						<Picker x:Name="AspectPicker"
-								SelectedIndexChanged="SavePictureAspect"
-								HorizontalOptions="FillAndExpand" />
 					</StackLayout>
 				</StackLayout>
 			</Frame>
@@ -125,9 +101,8 @@
 					</StackLayout>
 					<StackLayout Orientation="Horizontal"
 								 Spacing="5">
-						<Entry x:Name="FirstSecurityQuestion"
-							   Text="{Static da:UserSettings.FirstSecurityQuestion}"
-							   MaxLength="{Static da:UserSettings.MaxSecurityEntryLength}"
+						<Entry x:Name="SecurityQuestion1"
+							   MaxLength="{Static da:UserSettings.MaxSecurityAttributeLength}"
 							   HorizontalOptions="FillAndExpand"
 							   FontSize="Small"
 							   Placeholder="Frage" />
@@ -141,9 +116,8 @@
 					</StackLayout>
 					<StackLayout Orientation="Horizontal"
 								 Spacing="5">
-						<Entry x:Name="FirstSecurityAnswer"
-							   Text="{Static da:UserSettings.FirstSecurityAnswer}"
-							   MaxLength="{Static da:UserSettings.MaxSecurityEntryLength}"
+						<Entry x:Name="SecurityAnswer1"
+							   MaxLength="{Static da:UserSettings.MaxSecurityAttributeLength}"
 							   Placeholder="Antwort"
 							   HorizontalOptions="FillAndExpand"
 							   IsPassword="True" />
@@ -153,7 +127,8 @@
 								WidthRequest="40"
 								HeightRequest="40"
 								Image="ui_show.png" />
-						<Button Clicked="SaveFirstSecurityQuestion"
+						<Button x:Name="FirstSecurityAttributeSaver"
+								Clicked="SaveSecurityAttribute"
 								BackgroundColor="{StaticResource Bgr3}"
 								WidthRequest="40"
 								HeightRequest="40"
@@ -179,9 +154,8 @@
 					</StackLayout>
 					<StackLayout Orientation="Horizontal"
 								 Spacing="5">
-						<Entry x:Name="SecondSecurityQuestion"
-							   Text="{Static da:UserSettings.SecondSecurityQuestion}"
-							   MaxLength="{Static da:UserSettings.MaxSecurityEntryLength}"
+						<Entry x:Name="SecurityQuestion2"
+							   MaxLength="{Static da:UserSettings.MaxSecurityAttributeLength}"
 							   HorizontalOptions="FillAndExpand"
 							   FontSize="Small"
 							   Placeholder="Frage" />
@@ -194,9 +168,8 @@
 					</StackLayout>
 					<StackLayout Orientation="Horizontal"
 								 Spacing="5">
-						<Entry x:Name="SecondSecurityAnswer"
-							   Text="{Static da:UserSettings.SecondSecurityAnswer}"
-							   MaxLength="{Static da:UserSettings.MaxSecurityEntryLength}"
+						<Entry x:Name="SecurityAnswer2"
+							   MaxLength="{Static da:UserSettings.MaxSecurityAttributeLength}"
 							   Placeholder="Antwort"
 							   HorizontalOptions="FillAndExpand"
 							   IsPassword="True" />
@@ -206,7 +179,7 @@
 								WidthRequest="40"
 								HeightRequest="40"
 								Image="ui_show.png" />
-						<Button Clicked="SaveSecondSecurityQuestion"
+						<Button Clicked="SaveSecurityAttribute"
 								BackgroundColor="{StaticResource Bgr3}"
 								WidthRequest="40"
 								HeightRequest="40"

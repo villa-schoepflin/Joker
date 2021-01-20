@@ -1,9 +1,7 @@
-﻿using System;
-
+using System;
 using Foundation;
-using UserNotifications;
-
 using Joker.AppInterface;
+using UserNotifications;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Joker.iOS.IosNotifier))]
 namespace Joker.iOS
@@ -20,8 +18,7 @@ namespace Joker.iOS
 		/// <param name="timeSetting">The time at which the notification should appear.</param>
 		public void ScheduleLimitExpired(DateTime timeSetting)
 		{
-			UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert,
-				(approved, e) => { });
+			UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert, (approved, e) => { });
 
 			var content = new UNMutableNotificationContent
 			{
@@ -91,7 +88,7 @@ namespace Joker.iOS
 		/// iOS-specific implementation of an API method that schedules a notification
 		/// reminding the user to always record acts of gambling within the app.
 		/// </summary>
-		/// <param name="interval">The interval for the times the notification should appear.</param>
+		/// <param name="interval">The interval for the time the notification should appear.</param>
 		public void ScheduleGambleReminder(TimeSpan interval)
 		{
 			var content = new UNMutableNotificationContent
@@ -111,7 +108,7 @@ namespace Joker.iOS
 		/// iOS-specific implementation of an API method that schedules a notification
 		/// reminding the user about the state of their current limit.
 		/// </summary> 
-		/// <param name="interval">The interval for the times the notification should appear.</param>
+		/// <param name="interval">The interval for the time the notification should appear.</param>
 		public void ScheduleLimitReminder(TimeSpan interval)
 		{
 			var content = new UNMutableNotificationContent

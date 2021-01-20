@@ -1,5 +1,4 @@
-﻿using System;
-
+using System;
 using SQLite;
 
 namespace Joker.BusinessLogic
@@ -7,9 +6,14 @@ namespace Joker.BusinessLogic
 	/// <summary>
 	/// Determines how much the user is allowed to spend for gambling in the given duration.
 	/// </summary>
-	[Table("Limit")]
+	[Table(LimitTableName)]
 	public sealed class Limit : TimelineRecord
 	{
+		/// <summary>
+		/// The duration applied to the first limit set in the welcome tour.
+		/// </summary>
+		public static readonly TimeSpan InitialLimitDuration = TimeSpan.FromDays(7);
+
 		/// <summary>
 		/// The minimum allowed duration of a limit.
 		/// </summary>
@@ -23,7 +27,7 @@ namespace Joker.BusinessLogic
 		/// <summary>
 		/// The time span after which this limit should have been replaced with a new one.
 		/// </summary>
-		[Column("Duration")] public TimeSpan Duration { get; set; }
+		[Column(DurationColumnName)] public TimeSpan Duration { get; set; }
 
 		/// <summary>
 		/// The standard constructor that should be used every time a new limit must be set.
@@ -35,17 +39,21 @@ namespace Joker.BusinessLogic
 		public Limit(string amount, string durationInDays) : base(amount)
 		{
 			if(!uint.TryParse(durationInDays, out uint result))
-				throw new ArgumentException("Das ist keine erkennbare Dauer.");
+				throw new ArgumentException(Alerts.TimeSpanInvalid);
+
 			var duration = TimeSpan.FromDays(result);
 			if(duration < MinLimitDuration || duration > MaxLimitDuration)
-				throw new ArgumentException($"Die Dauer eines Limits sollte zwischen {MinLimitDuration.Days} " +
-					$"und {MaxLimitDuration.Days} Tagen liegen.");
+			{
+				string msg = string.Format(Alerts.LimitDurationBounds, MinLimitDuration.Days, MaxLimitDuration.Days);
+				throw new ArgumentException(msg);
+			}
 			Duration = duration;
 		}
 
 		/// <summary>
 		/// This constructor only exists for SQLite to be able to return collections of
-		/// Limits from the database. It should never be used to instantiate a Limit directly within the app.
+		/// Limits from the database. It should never be used to instantiate a Limit directly within
+		/// the app.
 		/// </summary>
 		public Limit() : base() { }
 
@@ -55,7 +63,12 @@ namespace Joker.BusinessLogic
 		/// <returns>A one-line string that represents this limit.</returns>
 		public override string ToString()
 		{
-			return $"Time: {Time}  |  Amount: {Amount}  |  Duration: {Duration}";
+			return $"Time: {Time} | Amount: {Amount} | Duration: {Duration}";
 		}
+
+		#region Identifiers for the database schema (DO NOT CHANGE!)
+		private const string LimitTableName = "Limit";
+		private const string DurationColumnName = "Duration";
+		#endregion
 	}
 }

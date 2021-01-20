@@ -1,16 +1,13 @@
-﻿using System.IO;
+using System.IO;
 using System.Threading.Tasks;
-
 using Android;
 using Android.App;
 using Android.Content.PM;
 using Android.Media;
-using Android.OS;
-
 using Joker.AppInterface;
 
-[assembly: Xamarin.Forms.Dependency(typeof(Joker.Droid.AndroidFileSaver))]
-namespace Joker.Droid
+[assembly: Xamarin.Forms.Dependency(typeof(Joker.Android.AndroidFileSaver))]
+namespace Joker.Android
 {
 	/// <summary>
 	/// Contains Android-specific file IO functionality.
@@ -23,7 +20,8 @@ namespace Joker.Droid
 		internal const int RequestCode = 1;
 
 		/// <summary>
-		/// The callback value for the asynchronous task through which the storage access permission is requested.
+		/// The callback value for the asynchronous task through which the storage access permission
+		/// is requested.
 		/// </summary>
 		private static TaskCompletionSource<bool> Callback;
 
@@ -58,24 +56,26 @@ namespace Joker.Droid
 		internal static void Finish(Permission grantResult)
 		{
 			Callback.SetResult(grantResult == Permission.Granted);
-			if(grantResult == Permission.Denied)
+			if(grantResult != Permission.Granted)
 				return;
 
-			string dir = Path.Combine(Environment.ExternalStorageDirectory.Path, "Joker");
-			using(var folder = new Java.IO.File(dir))
+			string mediaDir = Application.Context.GetExternalMediaDirs()[0].AbsolutePath;
+			string targetDir = Path.Combine(mediaDir, "Joker");
+			using(var folder = new Java.IO.File(targetDir))
 			{
 				if(!folder.Exists())
 					folder.Mkdir();
 			}
 
 			byte[] fileData;
-			using(var stream = typeof(App).Assembly.GetManifestResourceStream($"Joker.Resources.PictureFeed.{FilePath}"))
+			string pictureFilePath = $"Joker.Assets.PictureFeed.{FilePath}";
+			using(var stream = typeof(App).Assembly.GetManifestResourceStream(pictureFilePath))
 			{
 				fileData = new byte[stream.Length];
 				stream.Read(fileData, 0, (int)stream.Length);
 			}
 
-			string file = Path.Combine(dir, FilePath);
+			string file = Path.Combine(targetDir, FilePath);
 			File.WriteAllBytes(file, fileData);
 			MediaScannerConnection.ScanFile(Application.Context, new[] { file }, null, null);
 		}
