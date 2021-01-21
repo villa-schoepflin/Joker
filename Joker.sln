@@ -2,11 +2,11 @@
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joker.Android", "Joker\Joker.Android\Joker.Android.csproj", "{409E3F52-B7BE-4336-BFAE-01FAE37DFCC9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joker.Android", "Joker.Android\Joker.Android.csproj", "{409E3F52-B7BE-4336-BFAE-01FAE37DFCC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joker.iOS", "Joker\Joker.iOS\Joker.iOS.csproj", "{43456ED3-6DD0-4333-BD25-31C7EBBB4132}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joker.iOS", "Joker.iOS\Joker.iOS.csproj", "{43456ED3-6DD0-4333-BD25-31C7EBBB4132}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Joker", "Joker\Joker\Joker.csproj", "{06D37BDD-BC1A-4229-883C-2C84B22BA019}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Joker", "Joker\Joker.csproj", "{06D37BDD-BC1A-4229-883C-2C84B22BA019}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
