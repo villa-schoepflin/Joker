@@ -6,14 +6,12 @@ using Xamarin.Forms;
 namespace Joker.UserInterface
 {
 	/// <summary>
-	/// View model for a gamble in the gamble inspector. Uses many properties of the timeline record
-	/// view model.
+	/// View model for a gamble in the gamble inspector. Uses many properties of the timeline record view model.
 	/// </summary>
 	public class GambleViewModel : TimelineRecordViewModel
 	{
 		/// <summary>
-		/// Wrapper in order to treat the model as a gamble because of inheritance from
-		/// TimelineRecordViewModel.
+		/// Wrapper in order to treat the model as a gamble because of inheritance from TimelineRecordViewModel.
 		/// </summary>
 		private Gamble Gamble
 		{
@@ -55,7 +53,7 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// Determines the text of the button that toggles the editing status.
 		/// </summary>
-		public string EditButtonText => DescriptionEditable ? "Speichern" : "Bearbeiten";
+		public string EditButtonText => DescriptionEditable ? Text.Save : Text.Edit;
 
 		/// <summary>
 		/// Determines the background color of the button that toggles the editing status.
@@ -68,8 +66,7 @@ namespace Joker.UserInterface
 		public Color EditButtonTextColor => App.Color(DescriptionEditable ? "TextContrast" : "Text1");
 
 		/// <summary>
-		/// Toggles the editability of the gamble's description, saving the changes when
-		/// deactivating editing.
+		/// Toggles the editability of the gamble's description, saving the changes when deactivating editing.
 		/// </summary>
 		public ICommand ToggleDescriptionEditing => new Command(() =>
 		{

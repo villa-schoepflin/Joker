@@ -1,27 +1,29 @@
 {
   "images": [
     {
+      "appearances": [],
       "scale": "1x",
       "idiom": "universal",
-      "filename": "expert1.png"
+      "filename": "ui_expert1.png"
     },
     {
+      "appearances": [],
       "scale": "2x",
       "idiom": "universal",
-      "filename": "expert2.png"
+      "filename": "ui_expert2.png"
     },
     {
+      "appearances": [],
       "scale": "3x",
       "idiom": "universal",
-      "filename": "expert3.png"
+      "filename": "ui_expert3.png"
     },
     {
+      "appearances": [],
       "idiom": "universal"
     }
   ],
-  "properties": {
-    "template-rendering-intent": ""
-  },
+  "properties": {},
   "info": {
     "version": 1,
     "author": ""

@@ -24,8 +24,8 @@ namespace Joker.UserInterface
 		/// correct, the user gets navigated to the main page.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private void CheckSecurityAnswer(object sender, TextChangedEventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private void CheckSecurityAnswer(object sender, TextChangedEventArgs eventArgs)
 		{
 			string correctAnswer;
 			if(sender == FirstSecurityAnswerEntry)
@@ -33,7 +33,7 @@ namespace Joker.UserInterface
 			else
 				correctAnswer = UserSettings.SecondSecurityAttribute.Item2;
 
-			if(e.NewTextValue == correctAnswer)
+			if(eventArgs.NewTextValue == correctAnswer)
 			{
 				Indicator.IsRunning = true;
 				((Entry)sender).Unfocus();

@@ -33,7 +33,7 @@ namespace Joker.Android
 		/// <summary>
 		/// Requests permission to access phone storage, then begins the saving process.
 		/// </summary>
-		/// <param name="filePath">File path to the image resource.</param>
+		/// <param name="filePath">File path to the image asset.</param>
 		/// <returns>Indicates whether storage access permission was granted.</returns>
 		public Task<bool> SaveToGallery(string filePath)
 		{
@@ -60,7 +60,7 @@ namespace Joker.Android
 				return;
 
 			string mediaDir = Application.Context.GetExternalMediaDirs()[0].AbsolutePath;
-			string targetDir = Path.Combine(mediaDir, "Joker");
+			string targetDir = Path.Combine(mediaDir, Folders.GalleryFolderName);
 			using(var folder = new Java.IO.File(targetDir))
 			{
 				if(!folder.Exists())
@@ -68,8 +68,8 @@ namespace Joker.Android
 			}
 
 			byte[] fileData;
-			string pictureFilePath = $"Joker.Assets.PictureFeed.{FilePath}";
-			using(var stream = typeof(App).Assembly.GetManifestResourceStream(pictureFilePath))
+			string assetPath = Folders.PictureAssets + FilePath;
+			using(var stream = typeof(App).Assembly.GetManifestResourceStream(assetPath))
 			{
 				fileData = new byte[stream.Length];
 				stream.Read(fileData, 0, (int)stream.Length);

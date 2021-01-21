@@ -341,13 +341,13 @@
     <ImageAsset Include="Assets.xcassets\ui_heart.png.imageset\ui_heart3.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\ui_heartoutline.png.imageset\ui_heartoutline1.png">
+    <ImageAsset Include="Assets.xcassets\ui_heartsketch.png.imageset\ui_heartoutline1.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\ui_heartoutline.png.imageset\ui_heartoutline2.png">
+    <ImageAsset Include="Assets.xcassets\ui_heartsketch.png.imageset\ui_heartoutline2.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\ui_heartoutline.png.imageset\ui_heartoutline3.png">
+    <ImageAsset Include="Assets.xcassets\ui_heartsketch.png.imageset\ui_heartoutline3.png">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\ui_menu.png.imageset\Contents.json">
@@ -455,7 +455,7 @@
     <ImageAsset Include="Assets.xcassets\ui_save.png.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\ui_heartoutline.png.imageset\Contents.json">
+    <ImageAsset Include="Assets.xcassets\ui_heartsketch.png.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\ui_heart.png.imageset\Contents.json">

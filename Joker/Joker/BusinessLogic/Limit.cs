@@ -34,26 +34,25 @@ namespace Joker.BusinessLogic
 		/// </summary>
 		/// <param name="amount">The amount as put in by the user.</param>
 		/// <param name="durationInDays">The duration in days as put in by the user.</param>
-		/// <exception cref="ArgumentException">Thrown if the duration parameter couldn't be parsed
-		/// or the parsed duration isn't within the allowed bounds.</exception>
+		/// <exception cref="ArgumentException">Thrown if the duration parameter couldn't be parsed or the parsed
+		/// duration isn't within the allowed bounds.</exception>
 		public Limit(string amount, string durationInDays) : base(amount)
 		{
 			if(!uint.TryParse(durationInDays, out uint result))
-				throw new ArgumentException(Alerts.TimeSpanInvalid);
+				throw new ArgumentException(Text.TimeSpanInvalid);
 
 			var duration = TimeSpan.FromDays(result);
 			if(duration < MinLimitDuration || duration > MaxLimitDuration)
 			{
-				string msg = string.Format(Alerts.LimitDurationBounds, MinLimitDuration.Days, MaxLimitDuration.Days);
+				string msg = string.Format(Text.LimitDurationBounds, MinLimitDuration.Days, MaxLimitDuration.Days);
 				throw new ArgumentException(msg);
 			}
 			Duration = duration;
 		}
 
 		/// <summary>
-		/// This constructor only exists for SQLite to be able to return collections of
-		/// Limits from the database. It should never be used to instantiate a Limit directly within
-		/// the app.
+		/// This constructor only exists for SQLite to be able to return collections of limits from the database. It
+		/// should never be used to instantiate a limit directly within the app.
 		/// </summary>
 		public Limit() : base() { }
 

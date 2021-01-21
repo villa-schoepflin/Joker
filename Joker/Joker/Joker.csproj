@@ -203,13 +203,13 @@
 			<DependentUpon>TimelineFeed.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="UserInterface\WelcomeTour\NameTourPage.xaml.cs">
-		  <DependentUpon>NameTourPage.xaml</DependentUpon>
+			<DependentUpon>NameTourPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="UserInterface\WelcomeTour\ContactTourPage.xaml.cs">
-		  <DependentUpon>ContactTourPage.xaml</DependentUpon>
+			<DependentUpon>ContactTourPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="UserInterface\WelcomeTour\LimitTourPage.xaml.cs">
-		  <DependentUpon>LimitTourPage.xaml</DependentUpon>
+			<DependentUpon>LimitTourPage.xaml</DependentUpon>
 		</Compile>
 	</ItemGroup>
 

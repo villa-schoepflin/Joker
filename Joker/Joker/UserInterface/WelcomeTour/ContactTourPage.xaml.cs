@@ -14,8 +14,7 @@ namespace Joker.UserInterface
 	public partial class ContactTourPage : ContentPage
 	{
 		/// <summary>
-		/// The contact that can be selected here and will be inserted upon completing the welcome
-		/// tour.
+		/// The contact that can be selected here and will be inserted upon completing the welcome tour.
 		/// </summary>
 		public static Contact FirstContact;
 
@@ -28,12 +27,11 @@ namespace Joker.UserInterface
 		}
 
 		/// <summary>
-		/// Entry event handler that opens the contact-picking dialog to the user,
-		/// relays data to this view and saves the selected contact.
+		/// Entry event handler that opens the contact-picking dialog to the user and saves the selected contact.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private async void PickContact(object sender, EventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private async void PickContact(object sender, EventArgs eventArgs)
 		{
 			ContactEntry.Unfocus();
 			try
@@ -41,7 +39,7 @@ namespace Joker.UserInterface
 				var contact = await Contacts.PickContactAsync();
 
 				if(contact.Phones.Count == 0)
-					await DisplayAlert(null, Alerts.ContactWithoutPhoneNumber, Alerts.Ok);
+					await DisplayAlert(null, Text.ContactWithoutPhoneNumber, Text.Ok);
 				else
 				{
 					FirstContact = new Contact(contact.DisplayName, contact.Phones[0].PhoneNumber, false);
@@ -50,7 +48,7 @@ namespace Joker.UserInterface
 			}
 			catch(PermissionException)
 			{
-				await DisplayAlert(null, Alerts.ContactPermissionDenied, Alerts.Ok);
+				await DisplayAlert(null, Text.ContactPermissionDenied, Text.Ok);
 			}
 			catch(TaskCanceledException)
 			{
@@ -62,11 +60,11 @@ namespace Joker.UserInterface
 		/// Button event handler that navigates the user to the next tour page.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private async void OnContinueButton(object sender, EventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private async void OnContinueButton(object sender, EventArgs eventArgs)
 		{
 			if(FirstContact is object && FirstContact == Contact.Bzga)
-				await DisplayAlert(null, Alerts.ContactAlreadyExists, Alerts.Ok);
+				await DisplayAlert(null, Text.ContactAlreadyExists, Text.Ok);
 			else
 				await Navigation.PushAsync(new LimitTourPage());
 		}

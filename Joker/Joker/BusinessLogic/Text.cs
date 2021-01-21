@@ -1,9 +1,9 @@
 namespace Joker.BusinessLogic
 {
 	/// <summary>
-	/// This class lists short string constants that are displayed to the user in various parts of the app.
+	/// Contains one-liner string constants that are displayed to the user in various parts of the app.
 	/// </summary>
-	internal static class Alerts
+	internal static class Text
 	{
 		public const string Cancel
 			= "Abbrechen";
@@ -29,6 +29,9 @@ namespace Joker.BusinessLogic
 		public const string ContactWithoutPhoneNumber
 			= "Dieser Kontakt hat keine Telefonnummer.";
 
+		public const string Edit
+			= "Bearbeiten";
+
 		public const string GambleMustBeAfterFirstLimit
 			= "Ausgaben dürfen zeitlich nicht vor dem ersten Limit liegen.";
 
@@ -40,6 +43,9 @@ namespace Joker.BusinessLogic
 
 		public const string InputTooLong
 			= "Deine Angabe hier darf nicht länger als {0} sein.";
+
+		public const string Like
+			= "Gefällt mir";
 
 		public const string LimitDurationBounds
 			= "Die Dauer eines Limits sollte zwischen {0} und {1} Tagen liegen.";
@@ -95,6 +101,9 @@ namespace Joker.BusinessLogic
 		public const string ReminderIntervalSaved
 			= "Die nächste Erinnerung kommt in circa {0} Stunden.";
 
+		public const string Save
+			= "Speichern";
+
 		public const string SavedToGallery
 			= "In der Galerie gespeichert.";
 
@@ -121,6 +130,9 @@ namespace Joker.BusinessLogic
 
 		public const string TitleOnSecurityProposals
 			= "Vorschläge für Sicherheitsfragen:";
+
+		public const string Unlike
+			= "Gefällt mir nicht mehr";
 
 		public const string Yes
 			= "Ja";

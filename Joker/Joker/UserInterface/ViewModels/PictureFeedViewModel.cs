@@ -3,6 +3,8 @@ using System.Windows.Input;
 using Joker.AppInterface;
 using Joker.BusinessLogic;
 using Joker.DataAccess;
+using SkiaSharp;
+using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 
 namespace Joker.UserInterface
@@ -21,7 +23,6 @@ namespace Joker.UserInterface
 			set
 			{
 				_model = value;
-				OnPropertyChanged(nameof(PresentedImage));
 				OnPropertyChanged(nameof(LikeButtonImage));
 				OnPropertyChanged(nameof(LikeButtonBackgroundColor));
 				OnPropertyChanged(nameof(LikeButtonText));
@@ -30,15 +31,9 @@ namespace Joker.UserInterface
 		private Picture _model;
 
 		/// <summary>
-		/// Creates a Xamarin.Forms image from the embedded resource file path.
-		/// </summary>
-		public ImageSource PresentedImage => ImageSource.FromResource($"Joker.Assets.PictureFeed.{Model.FilePath}");
-
-		/// <summary>
 		/// Determines the image to display on the Like button based on the current Liked status.
 		/// </summary>
-		public ImageSource LikeButtonImage
-			=> ImageSource.FromFile(Model.Liked ? "ui_heart.png" : "ui_heartoutline.png");
+		public ImageSource LikeButtonImage => ImageSource.FromFile(Model.Liked ? "ui_heart.png" : "ui_heartsketch.png");
 
 		/// <summary>
 		/// Determines the background color of the Like button based on the current Liked status.
@@ -48,7 +43,7 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// Determines the text of the Like button based on the current Liked status.
 		/// </summary>
-		public string LikeButtonText => Model.Liked ? "Gefällt mir nicht mehr" : "Gefällt mir";
+		public string LikeButtonText => Model.Liked ? Text.Unlike : Text.Like;
 
 		/// <summary>
 		/// Re-binds the view to a randomly selected picture from the database, preferring the liked pictures with a
@@ -58,10 +53,7 @@ namespace Joker.UserInterface
 		{
 			var pics = Database.AllPictures();
 			foreach(var pic in Database.LikedPictures())
-			{
-				pics.Add(pic);
-				pics.Add(pic);
-			}
+				pics.AddRange(new[] { pic, pic }); // A liked picture will be shown 3x as often by adding it twice.
 
 			var random = new Random();
 			Picture nextPic;
@@ -70,7 +62,24 @@ namespace Joker.UserInterface
 			while(nextPic.FilePath == Model.FilePath);
 
 			Model = nextPic;
+			App.CurrentPictureFeed.RefreshPresentedPicture();
 		});
+
+		/// <summary>
+		/// Loads the bitmap corresponding to the picture that should be presented and draws a blur around it.
+		/// </summary>
+		public ICommand DrawImage => new Command<SKPaintSurfaceEventArgs>(eventArgs =>
+		{
+			string assetPath = Folders.PictureAssets + Model.FilePath;
+			using var stream = typeof(App).Assembly.GetManifestResourceStream(assetPath);
+			var pic = SKBitmap.Decode(stream);
+			var canvas = eventArgs.Surface.Canvas;
+
+			canvas.DrawBitmap(pic, new SKRect(0, 0, eventArgs.Info.Width, eventArgs.Info.Height), Blur);
+
+			canvas.DrawBitmap(pic, new SKRect());
+		});
+		private static readonly SKPaint Blur = new SKPaint() { ImageFilter = SKImageFilter.CreateBlur(25, 25) };
 
 		/// <summary>
 		/// Updates the picture with the changed Liked status in the database and notifies the change of property.
@@ -90,11 +99,11 @@ namespace Joker.UserInterface
 		{
 			string msg;
 			if(await DependencyService.Get<IPlatformFileSaver>().SaveToGallery(Model.FilePath))
-				msg = Alerts.SavedToGallery;
+				msg = Text.SavedToGallery;
 			else
-				msg = Alerts.StoragePermissionDenied;
+				msg = Text.StoragePermissionDenied;
 
-			await View.DisplayAlert(msg, null, Alerts.Ok);
+			await View.DisplayAlert(msg, null, Text.Ok);
 		});
 
 		/// <summary>

@@ -51,16 +51,17 @@ namespace Joker
 			// Deletes a picture from the database if it was removed in an update.
 			string[] picFiles = typeof(App).Assembly.GetManifestResourceNames();
 			foreach(var pic in Database.AllPictures())
-				if(!picFiles.Contains($"Joker.Assets.PictureFeed.{pic.FilePath}"))
+				if(!picFiles.Contains(Folders.PictureAssets + pic.FilePath))
 					Database.Delete(pic);
 
-			/* If the app was opened when there is a new picture to display, insert it and
-			 * re-schedule the time  and notification for when to insert the next one. */
-			if(DateTime.UtcNow >= AppSettings.NewPictureTime && Database.InsertPictureFromRandomAsset())
-			{
-				AppSettings.NewPictureTime = DateTime.UtcNow + UserSettings.NewPictureInterval;
-				DependencyService.Get<IPlatformNotifier>().ScheduleNewPicture(AppSettings.NewPictureTime);
-			}
+			/* If the app was opened when there is a new picture to display, insert it and re-schedule the time and
+			 * notification for when to insert the next one. */
+			if(DateTime.UtcNow >= AppSettings.NewPictureTime)
+				if(Database.InsertPictureFromRandomAsset())
+				{
+					AppSettings.NewPictureTime = DateTime.UtcNow + UserSettings.NewPictureInterval;
+					DependencyService.Get<IPlatformNotifier>().ScheduleNewPicture(AppSettings.NewPictureTime);
+				}
 
 			if(AppSettings.UserPasswordIsSet)
 				MainPage = new NavigationPage(new PasswordPage());
@@ -69,8 +70,8 @@ namespace Joker
 		}
 
 		/// <summary>
-		/// Directs the user to the regular main page if the most recent limit hasn't expired yet,
-		/// otherwise directs them to the page where they can add a new limit.
+		/// Directs the user to the regular main page if the most recent limit hasn't expired yet, otherwise directs
+		/// them to the page where they can add a new limit.
 		/// </summary>
 		internal static void SetMainPageToDefault()
 		{

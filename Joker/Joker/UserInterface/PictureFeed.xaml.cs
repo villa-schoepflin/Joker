@@ -4,8 +4,8 @@ using Xamarin.Forms;
 namespace Joker.UserInterface
 {
 	/// <summary>
-	/// The main page's left tab. A view where the user can shuffle through the different
-	/// motivating or informing pictures in the database.
+	/// The main page's left tab. A view where the user can shuffle through the different motivating or informing
+	/// pictures in the database.
 	/// </summary>
 	public partial class PictureFeed : ContentPage
 	{
@@ -26,6 +26,14 @@ namespace Joker.UserInterface
 		{
 			InitializeComponent();
 			BindingContext = new PictureFeedViewModel(this, Database.MostRecentPicture());
+		}
+
+		/// <summary>
+		/// Draws the next image to be presented in the picture feed.
+		/// </summary>
+		public void RefreshPresentedPicture()
+		{
+			CanvasView.InvalidateSurface();
 		}
 	}
 }

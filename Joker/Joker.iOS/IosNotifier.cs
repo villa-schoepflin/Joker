@@ -18,7 +18,7 @@ namespace Joker.iOS
 		/// <param name="timeSetting">The time at which the notification should appear.</param>
 		public void ScheduleLimitExpired(DateTime timeSetting)
 		{
-			UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert, (approved, e) => { });
+			UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert, (approved, err) => { });
 
 			var content = new UNMutableNotificationContent
 			{

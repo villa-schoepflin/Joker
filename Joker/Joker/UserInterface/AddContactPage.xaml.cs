@@ -26,8 +26,8 @@ namespace Joker.UserInterface
 		/// Button event handler that copies clipboard content to the name entry.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private async void OnNameClipboardButton(object sender, EventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private async void OnNameClipboardButton(object sender, EventArgs eventArgs)
 		{
 			string text = await Clipboard.GetTextAsync();
 
@@ -43,8 +43,8 @@ namespace Joker.UserInterface
 		/// Button event handler that copies clipboard content to the phone number entry.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private async void OnPhoneNumberClipboardButton(object sender, EventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private async void OnPhoneNumberClipboardButton(object sender, EventArgs eventArgs)
 		{
 			string text = await Clipboard.GetTextAsync();
 
@@ -57,19 +57,19 @@ namespace Joker.UserInterface
 		}
 
 		/// <summary>
-		/// Button event handler that opens the contact-picking dialog to the user and enters the
-		/// results into the entries in the view.
+		/// Button event handler that opens the contact-picking dialog to the user and enters the results into the
+		/// entries in the view.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private async void OnSearchDeviceContactsButton(object sender, EventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private async void OnSearchDeviceContactsButton(object sender, EventArgs eventArgs)
 		{
 			try
 			{
 				var contact = await Contacts.PickContactAsync();
 
 				if(contact.Phones.Count == 0)
-					await DisplayAlert(null, Alerts.ContactWithoutPhoneNumber, Alerts.Ok);
+					await DisplayAlert(null, Text.ContactWithoutPhoneNumber, Text.Ok);
 				else
 				{
 					NameEntry.Text = contact.DisplayName;
@@ -78,7 +78,7 @@ namespace Joker.UserInterface
 			}
 			catch(PermissionException)
 			{
-				await DisplayAlert(null, Alerts.ContactPermissionDenied, Alerts.Ok);
+				await DisplayAlert(null, Text.ContactPermissionDenied, Text.Ok);
 			}
 			catch(TaskCanceledException)
 			{
@@ -87,12 +87,12 @@ namespace Joker.UserInterface
 		}
 
 		/// <summary>
-		/// Button event handler that inserts the contact into the database, performs necessary
-		/// refresh actions and navigates the user back to the main page.
+		/// Button event handler that inserts the contact into the database, performs necessary refresh actions and
+		/// navigates the user back to the main page.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private async void OnSubmitButton(object sender, EventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private async void OnSubmitButton(object sender, EventArgs eventArgs)
 		{
 			try
 			{
@@ -103,7 +103,7 @@ namespace Joker.UserInterface
 			}
 			catch(ArgumentException error)
 			{
-				await DisplayAlert(null, error.Message, Alerts.Ok);
+				await DisplayAlert(null, error.Message, Text.Ok);
 			}
 		}
 	}

@@ -1,27 +1,29 @@
 {
   "images": [
     {
+      "appearances": [],
       "scale": "1x",
       "idiom": "universal",
       "filename": "ui_phone1.png"
     },
     {
+      "appearances": [],
       "scale": "2x",
       "idiom": "universal",
       "filename": "ui_phone2.png"
     },
     {
+      "appearances": [],
       "scale": "3x",
       "idiom": "universal",
       "filename": "ui_phone3.png"
     },
     {
+      "appearances": [],
       "idiom": "universal"
     }
   ],
-  "properties": {
-    "template-rendering-intent": ""
-  },
+  "properties": {},
   "info": {
     "version": 1,
     "author": ""

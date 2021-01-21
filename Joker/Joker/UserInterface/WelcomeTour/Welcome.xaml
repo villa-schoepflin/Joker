@@ -7,7 +7,8 @@
 	<ContentPage.Title>
 		<OnPlatform x:TypeArguments="x:String">
 			<OnPlatform.Platforms>
-				<On Platform="iOS" Value="Willkommen" />
+				<On Platform="iOS"
+					Value="Willkommen" />
 			</OnPlatform.Platforms>
 		</OnPlatform>
 	</ContentPage.Title>

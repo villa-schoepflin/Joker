@@ -7,7 +7,8 @@
 	<ContentPage.Title>
 		<OnPlatform x:TypeArguments="x:String">
 			<OnPlatform.Platforms>
-				<On Platform="iOS" Value="Name" />
+				<On Platform="iOS"
+					Value="Name" />
 			</OnPlatform.Platforms>
 		</OnPlatform>
 	</ContentPage.Title>
@@ -40,7 +41,8 @@
 				<Entry.TextColor>
 					<OnPlatform x:TypeArguments="Color">
 						<OnPlatform.Platforms>
-							<On Platform="Android" Value="{StaticResource TextContrast}" />
+							<On Platform="Android"
+								Value="{StaticResource TextContrast}" />
 						</OnPlatform.Platforms>
 					</OnPlatform>
 				</Entry.TextColor>

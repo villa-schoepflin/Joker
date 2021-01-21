@@ -29,7 +29,7 @@
             <summary>
             Requests permission to access phone storage, then begins the saving process.
             </summary>
-            <param name="filePath">File path to the image resource.</param>
+            <param name="filePath">File path to the image asset.</param>
             <returns>Indicates whether storage access permission was granted.</returns>
         </member>
         <member name="M:Joker.Android.AndroidFileSaver.Finish(Android.Content.PM.Permission)">
@@ -177,7 +177,7 @@
             <summary>
             Changes the entry's keyboard so dots can be used as decimal separators when keyboard is supposed to appear.
             </summary>
-            <param name="e">Event arguments for when a property of the entry has changed.</param>
+            <param name="eventArgs">Event arguments for when a property of the entry has changed.</param>
         </member>
         <member name="T:Joker.Android.MainActivity">
             <summary>

@@ -12057,7 +12057,7 @@ namespace Joker.Android
 			public const int ui_heart = 2131165549;
 			
 			// aapt resource value: 0x7F07016E
-			public const int ui_heartoutline = 2131165550;
+			public const int ui_heartsketch = 2131165550;
 			
 			// aapt resource value: 0x7F07016F
 			public const int ui_icon = 2131165551;

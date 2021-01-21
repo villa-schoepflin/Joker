@@ -48,7 +48,6 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// Navigates the user to a detailed view of the selected limit or gamble item.
 		/// </summary>
-
 		public ICommand OpenDetailPage => new Command(async () =>
 		{
 			if(Model is Gamble gamble)
@@ -58,8 +57,7 @@ namespace Joker.UserInterface
 		});
 
 		/// <summary>
-		/// Constructs a row view model based on whether the corresponding timeline record is a
-		/// Gamble or a Limit.
+		/// Constructs a row view model based on whether the corresponding timeline record is a Gamble or a Limit.
 		/// </summary>
 		/// <param name="view">The view for this view model.</param>
 		/// <param name="model">The model for this view model.</param>

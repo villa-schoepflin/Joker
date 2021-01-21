@@ -27,23 +27,22 @@ namespace Joker.UserInterface
 		}
 
 		/// <summary>
-		/// Editor event handler that indicates how many characters can still be inserted into the
-		/// editor.
+		/// Editor event handler that indicates how many characters can still be inserted into the editor.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private void UpdateLengthCounter(object sender, TextChangedEventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private void UpdateLengthCounter(object sender, TextChangedEventArgs eventArgs)
 		{
 			int remaining = Gamble.MaxDescriptionLength - Description.Text.Length;
-			LengthCounter.Text = string.Format(Alerts.CharsRemaining, remaining);
+			LengthCounter.Text = string.Format(Text.CharsRemaining, remaining);
 		}
 
 		/// <summary>
 		/// DatePicker event handler that indicates that the user set the date of the gamble.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private void DateSelected(object sender, DateChangedEventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private void OnDateSelected(object sender, DateChangedEventArgs eventArgs)
 		{
 			userChangedDateOrTime = true;
 		}
@@ -52,20 +51,19 @@ namespace Joker.UserInterface
 		/// TimePicker event handler that indicates that the user set the time of the gamble.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private void TimeSelected(object sender, PropertyChangedEventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private void OnTimeSelected(object sender, PropertyChangedEventArgs eventArgs)
 		{
-			if(e.PropertyName == TimePicker.TimeProperty.PropertyName)
+			if(eventArgs.PropertyName == TimePicker.TimeProperty.PropertyName)
 				userChangedDateOrTime = true;
 		}
 
 		/// <summary>
-		/// Button event handler that resets the date and time of the gamble to the present date and
-		/// time.
+		/// Button event handler that resets the date and time of the gamble to the present date and time.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private void OnTimeResetButton(object sender, EventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private void OnTimeResetButton(object sender, EventArgs eventArgs)
 		{
 			var now = DateTime.Now;
 			DatePicker.Date = now.Date;
@@ -74,18 +72,21 @@ namespace Joker.UserInterface
 		}
 
 		/// <summary>
-		/// Button event handler that relays input validation, inserts the gamble into the database,
-		/// performs necessary refresh actions and navigates the user back to the main page.
+		/// Button event handler that relays input validation, inserts the gamble into the database, performs necessary
+		/// refresh actions and navigates the user back to the main page.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private async void OnSubmitButton(object sender, EventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private async void OnSubmitButton(object sender, EventArgs eventArgs)
 		{
 			try
 			{
 				var type = GambleTypes.GetGambleType(GambleTypePicker.SelectedItem.ToString());
 				if(userChangedDateOrTime)
-					Database.Insert(new Gamble(DatePicker.Date + TimePicker.Time, Amount.Text, type, Description.Text));
+				{
+					var time = DatePicker.Date + TimePicker.Time;
+					Database.Insert(new Gamble(time, Amount.Text, type, Description.Text));
+				}
 				else
 					Database.Insert(new Gamble(Amount.Text, type, Description.Text));
 
@@ -98,7 +99,7 @@ namespace Joker.UserInterface
 			}
 			catch(ArgumentException error)
 			{
-				await DisplayAlert(null, error.Message, Alerts.Ok);
+				await DisplayAlert(null, error.Message, Text.Ok);
 			}
 		}
 	}

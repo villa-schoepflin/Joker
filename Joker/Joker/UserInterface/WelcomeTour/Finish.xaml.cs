@@ -19,12 +19,11 @@ namespace Joker.UserInterface
 		}
 
 		/// <summary>
-		/// Button event handler that finalizes the setup for the app and navigates the user to the
-		/// main page.
+		/// Button event handler that finalizes the setup for the app and navigates the user to the main page.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private void OnContinueButton(object sender, EventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private void OnContinueButton(object sender, EventArgs eventArgs)
 		{
 			Indicator.IsRunning = true;
 			Database.Initialize();

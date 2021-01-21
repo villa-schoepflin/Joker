@@ -7,8 +7,7 @@ using Xamarin.Forms;
 namespace Joker.UserInterface
 {
 	/// <summary>
-	/// Inescapable view presented only when opening up the app after a limit has expired, forcing
-	/// the user to set a new one.
+	/// Unclosable view shown only when opening the app after a limit has expired, forcing the user to set a new one.
 	/// </summary>
 	public partial class AddLimitPage : ContentPage
 	{
@@ -36,12 +35,12 @@ namespace Joker.UserInterface
 		}
 
 		/// <summary>
-		/// Button event handler that relays input validation, inserts the new limit into the
-		/// database, schedules the corresponding notifications and gets the user to the main page.
+		/// Button event handler that relays input validation, inserts the new limit into the database, schedules the
+		/// corresponding notifications and gets the user to the main page.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private async void OnContinueButton(object sender, EventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private async void OnContinueButton(object sender, EventArgs eventArgs)
 		{
 			try
 			{
@@ -53,12 +52,12 @@ namespace Joker.UserInterface
 				AppSettings.LimitExpiredTime = limit.Time + limit.Duration;
 				DependencyService.Get<IPlatformNotifier>().ScheduleLimitExpired(AppSettings.LimitExpiredTime);
 
-				Application.Current.MainPage = new NavigationPage(new MainPage());
+				App.SetMainPageToDefault();
 			}
 			catch(ArgumentException error)
 			{
 				Indicator.IsRunning = false;
-				await DisplayAlert(null, error.Message, Alerts.Ok);
+				await DisplayAlert(null, error.Message, Text.Ok);
 			}
 		}
 	}

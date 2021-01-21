@@ -3,14 +3,13 @@ using System;
 namespace Joker.AppInterface
 {
 	/// <summary>
-	/// A custom API for the shared code that abstracts away the platform-specific push notification
-	/// services of the target systems specifically for use in this app.
+	/// A custom API for the shared code that abstracts away the platform-specific push notification services of the
+	/// target systems specifically for use in this app.
 	/// </summary>
 	public interface IPlatformNotifier
 	{
 		/// <summary>
-		/// Schedules a notification indicating the current limit has expired and a new one should
-		/// be set.
+		/// Schedules a notification indicating the current limit has expired and a new one should be set.
 		/// </summary>
 		/// <param name="timeSetting">The time at which the notification should appear.</param>
 		void ScheduleLimitExpired(DateTime timeSetting);
@@ -27,8 +26,7 @@ namespace Joker.AppInterface
 		void ScheduleNewPicture(DateTime timeSetting);
 
 		/// <summary>
-		/// Schedules a notification reminding the user to always record acts of gambling within the
-		/// app.
+		/// Schedules a notification reminding the user to always record acts of gambling within the app.
 		/// </summary>
 		/// <param name="interval">The interval for the time the notification should appear.</param>
 		void ScheduleGambleReminder(TimeSpan interval);

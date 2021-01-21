@@ -8,7 +8,8 @@
 	<ContentPage.Title>
 		<OnPlatform x:TypeArguments="x:String">
 			<OnPlatform.Platforms>
-				<On Platform="iOS" Value="{Static ui:TimelineFeed.Headline}" />
+				<On Platform="iOS"
+					Value="{Static ui:TimelineFeed.Headline}" />
 			</OnPlatform.Platforms>
 		</OnPlatform>
 	</ContentPage.Title>

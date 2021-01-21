@@ -21,10 +21,10 @@ namespace Joker.Android
 		/// <summary>
 		/// Changes the entry's keyboard so dots can be used as decimal separators when keyboard is supposed to appear.
 		/// </summary>
-		/// <param name="e">Event arguments for when a property of the entry has changed.</param>
-		protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
+		/// <param name="eventArgs">Event arguments for when a property of the entry has changed.</param>
+		protected override void OnElementChanged(ElementChangedEventArgs<Entry> eventArgs)
 		{
-			base.OnElementChanged(e);
+			base.OnElementChanged(eventArgs);
 
 			if(DeviceInfo.Manufacturer == "samsung"
 				&& Control != null

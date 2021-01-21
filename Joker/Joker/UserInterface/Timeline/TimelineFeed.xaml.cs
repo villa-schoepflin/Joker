@@ -6,8 +6,7 @@ using Xamarin.Forms;
 namespace Joker.UserInterface
 {
 	/// <summary>
-	/// The main page's middle tab. A listing of all gambling-related spendings and the limits that
-	/// the user sets for themself.
+	/// The main page's middle tab. A list of gambling-related spendings and the limits that the user sets for themself.
 	/// </summary>
 	public partial class TimelineFeed : ContentPage
 	{
@@ -130,20 +129,19 @@ namespace Joker.UserInterface
 		/// Button event handler that toggles the visibility of the limit feedback text.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private void OnToggleFeedbackButton(object sender, EventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private void OnToggleFeedbackButton(object sender, EventArgs eventArgs)
 		{
 			FeedbackHeader.IsVisible ^= true;
 			OnPropertyChanged(nameof(FeedbackTogglerIcon));
 		}
 
 		/// <summary>
-		/// Button event handler that navigates the user to a view where they can add a new gamble
-		/// to the database.
+		/// Button event handler that navigates the user to a view where they can add a new gamble to the database.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private async void OnSubmitButton(object sender, EventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private async void OnSubmitButton(object sender, EventArgs eventArgs)
 		{
 			await Navigation.PushAsync(new AddGamblePage());
 		}

@@ -1,27 +1,29 @@
 {
   "images": [
     {
+      "appearances": [],
       "scale": "1x",
       "idiom": "universal",
-      "filename": "contact1.png"
+      "filename": "ui_contact1.png"
     },
     {
+      "appearances": [],
       "scale": "2x",
       "idiom": "universal",
-      "filename": "contact2.png"
+      "filename": "ui_contact2.png"
     },
     {
+      "appearances": [],
       "scale": "3x",
       "idiom": "universal",
-      "filename": "contact3.png"
+      "filename": "ui_contact3.png"
     },
     {
+      "appearances": [],
       "idiom": "universal"
     }
   ],
-  "properties": {
-    "template-rendering-intent": ""
-  },
+  "properties": {},
   "info": {
     "version": 1,
     "author": ""

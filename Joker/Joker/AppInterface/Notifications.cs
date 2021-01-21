@@ -79,8 +79,8 @@ namespace Joker.AppInterface
 	}
 
 	/// <summary>
-	/// The different kinds of push notifications (PN) sent by the application.
-	/// Also used to supply IDs to each notification and related properties.
+	/// The different kinds of push notifications (PN) sent by the application. Also used to supply IDs to each
+	/// notification and related properties.
 	/// </summary>
 	public enum PNType
 	{

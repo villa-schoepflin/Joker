@@ -298,25 +298,25 @@
     <AndroidResource Include="Resources\drawable-hdpi\ui_heart.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ui_heartoutline.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ui_heartsketch.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xhdpi\ui_heart.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ui_heartoutline.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ui_heartsketch.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxhdpi\ui_heart.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\ui_heartoutline.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ui_heartsketch.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\ui_heart.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_heartoutline.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_heartsketch.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\ui_save.png" />

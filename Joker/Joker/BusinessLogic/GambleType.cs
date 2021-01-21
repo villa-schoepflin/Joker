@@ -4,8 +4,7 @@ using System.Linq;
 namespace Joker.BusinessLogic
 {
 	/// <summary>
-	/// Contains the different types a gamble can be classified as, usually the kind of institution where the money was
-	/// spent.
+	/// Contains the different types a gamble can be classified as, usually the kind of place where the money was spent.
 	/// </summary>
 	public enum GambleType
 	{
@@ -70,8 +69,7 @@ namespace Joker.BusinessLogic
 		/// <summary>
 		/// Finds the first key in the dictionary whose name equals the parameter.
 		/// </summary>
-		/// <param name="name">Translated name of the gamble type for which the type should be
-		/// returned.</param>
+		/// <param name="name">Translated name of the gamble type for which the type should be returned.</param>
 		/// <returns>The gamble type belonging to the supplied translated name.</returns>
 		internal static GambleType GetGambleType(string name)
 		{

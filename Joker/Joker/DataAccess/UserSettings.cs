@@ -28,9 +28,9 @@ namespace Joker.DataAccess
 			{
 				value = value?.Trim();
 				if(string.IsNullOrEmpty(value))
-					throw new ArgumentException(Alerts.InputEmpty);
+					throw new ArgumentException(Text.InputEmpty);
 				if(value.Length > MaxNameLength)
-					throw new ArgumentException(string.Format(Alerts.InputTooLong, MaxNameLength));
+					throw new ArgumentException(string.Format(Text.InputTooLong, MaxNameLength));
 
 				Preferences.Set(UserNameKey, value);
 			}
@@ -52,13 +52,13 @@ namespace Joker.DataAccess
 			set
 			{
 				if(value.Length > MaxPasswordLength)
-					throw new ArgumentException(string.Format(Alerts.PasswordTooLong, MaxPasswordLength));
+					throw new ArgumentException(string.Format(Text.PasswordTooLong, MaxPasswordLength));
 
 				if(value.Contains(" "))
-					throw new ArgumentException(Alerts.PasswordContainsSpaces);
+					throw new ArgumentException(Text.PasswordContainsSpaces);
 
 				if(!Regex.IsMatch(value, @"[a-zA-Z0-9]*"))
-					throw new ArgumentException(Alerts.PasswordContainsSpecialChars);
+					throw new ArgumentException(Text.PasswordContainsSpecialChars);
 
 				Preferences.Set(UserPasswordKey, value);
 			}
@@ -106,7 +106,7 @@ namespace Joker.DataAccess
 			pair.Item1 = pair.Item1?.Trim();
 			pair.Item2 = pair.Item2?.Trim();
 			if(pair.Item1.Length > MaxSecurityAttributeLength || pair.Item2.Length > MaxSecurityAttributeLength)
-				throw new ArgumentException(string.Format(Alerts.InputTooLong, MaxSecurityAttributeLength));
+				throw new ArgumentException(string.Format(Text.InputTooLong, MaxSecurityAttributeLength));
 		}
 
 		/// <summary>
@@ -133,12 +133,12 @@ namespace Joker.DataAccess
 		/// Sets the time span between two new pictures from a user-supplied text string.
 		/// </summary>
 		/// <param name="input">User input from an entry to be parsed.</param>
-		/// <exception cref="ArgumentException">Thrown if the argument couldn't be parsed or isn't
-		/// within the allowed TimeSpan bounds.</exception>
+		/// <exception cref="ArgumentException">Thrown if the argument couldn't be parsed or isn't within the allowed
+		/// TimeSpan bounds.</exception>
 		internal static void SetNewPictureInterval(string input)
 		{
 			if(!uint.TryParse(input, out uint result))
-				throw new ArgumentException(Alerts.NumberInvalid);
+				throw new ArgumentException(Text.NumberInvalid);
 
 			var interval = TimeSpan.Zero;
 			bool overflowed = false;
@@ -155,7 +155,7 @@ namespace Joker.DataAccess
 			{
 				double min = MinNewPictureInterval.TotalDays;
 				double max = MaxNewPictureInterval.TotalDays;
-				throw new ArgumentException(string.Format(Alerts.PictureIntervalBounds, min, max));
+				throw new ArgumentException(string.Format(Text.PictureIntervalBounds, min, max));
 			}
 			NewPictureInterval = interval;
 		}
@@ -171,8 +171,8 @@ namespace Joker.DataAccess
 		internal static readonly TimeSpan MaxReminderInterval = TimeSpan.FromHours(200);
 
 		/// <summary>
-		/// The time span between two push notifications, that remind the user that he should always
-		/// record his acts of gambling in the app.
+		/// The time span between two notifications, that remind the user that they should always record their
+		/// gambling-related spendings in the app.
 		/// </summary>
 		public static TimeSpan GambleReminderInterval
 		{
@@ -191,8 +191,7 @@ namespace Joker.DataAccess
 		}
 
 		/// <summary>
-		/// The time span between two push notifications, that remind the user about the current
-		/// state of their limit.
+		/// The time span between two push notifications, that remind the user about the current state of their limit.
 		/// </summary>
 		public static TimeSpan LimitReminderInterval
 		{
@@ -211,24 +210,23 @@ namespace Joker.DataAccess
 		}
 
 		/// <summary>
-		/// Parses a user input string from the settings page according the bounds of reminder
-		/// notifications.
+		/// Parses a user input string from the settings page according the bounds of reminder notifications.
 		/// </summary>
 		/// <param name="input">String to be parsed.</param>
 		/// <returns>The parsed time span.</returns>
-		/// <exception cref="ArgumentException">Thrown if the argument couldn't be parsed or isn't
-		/// within the allowed TimeSpan bounds.</exception>
+		/// <exception cref="ArgumentException">Thrown if the argument couldn't be parsed or isn't within the allowed
+		/// TimeSpan bounds.</exception>
 		private static TimeSpan ParseReminderInterval(string input)
 		{
 			if(!uint.TryParse(input, out uint result))
-				throw new ArgumentException(Alerts.NumberInvalid);
+				throw new ArgumentException(Text.NumberInvalid);
 
 			var interval = TimeSpan.FromHours(result);
 			if(interval < MinReminderInterval || interval > MaxReminderInterval)
 			{
 				double min = MinReminderInterval.TotalHours;
 				double max = MaxReminderInterval.TotalHours;
-				throw new ArgumentException(string.Format(Alerts.ReminderIntervalBounds, min, max));
+				throw new ArgumentException(string.Format(Text.ReminderIntervalBounds, min, max));
 			}
 			return interval;
 		}

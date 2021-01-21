@@ -45,8 +45,8 @@ namespace Joker.BusinessLogic
 		[Column(PhoneNumberColumnName)] public string PhoneNumber { get; set; }
 
 		/// <summary>
-		/// Indicates whether this contact is marked by the user as a professional or expert such as
-		/// the number of a counseling center.
+		/// Indicates whether this contact is marked by the user as a professional or expert such as the number of a
+		/// counseling center.
 		/// </summary>
 		[Column(MarkedAsExpertColumnName)] public bool MarkedAsExpert { get; set; }
 
@@ -55,16 +55,15 @@ namespace Joker.BusinessLogic
 		/// </summary>
 		/// <param name="name">The name as supplied from the user.</param>
 		/// <param name="phoneNumber">The phone number as supplied from the user.</param>
-		/// <param name="markedAsExpert">Indicates whether the user has marked this contact as a professional
-		/// contact.</param>
+		/// <param name="markedAsExpert">Indicates whether the user has marked this contact as a professional.</param>
 		/// <exception cref="ArgumentException">Thrown if name or phone number aren't within allowed bounds.</exception>
 		public Contact(string name, string phoneNumber, bool markedAsExpert)
 		{
 			if(name.Length > MaxNameLength || string.IsNullOrEmpty(name))
-				throw new ArgumentException(string.Format(Alerts.ContactNameTooLong, MaxNameLength));
+				throw new ArgumentException(string.Format(Text.ContactNameTooLong, MaxNameLength));
 
 			if(phoneNumber.Length > MaxPhoneNumberLength || string.IsNullOrEmpty(phoneNumber))
-				throw new ArgumentException(string.Format(Alerts.ContactPhoneNumberTooLong, MaxPhoneNumberLength));
+				throw new ArgumentException(string.Format(Text.ContactPhoneNumberTooLong, MaxPhoneNumberLength));
 
 			Name = name.Trim();
 			PhoneNumber = phoneNumber.Trim();
@@ -77,8 +76,7 @@ namespace Joker.BusinessLogic
 		public Contact() { }
 
 		/// <summary>
-		/// Compares two contacts on whether their phone numbers are the same, eliminating
-		/// whitespace for comparison.
+		/// Compares two contacts on whether their phone numbers are the same, eliminating whitespace for comparison.
 		/// </summary>
 		/// <param name="left">The left operand on comparing equality.</param>
 		/// <param name="right">The right operand on comparing equality.</param>
@@ -89,8 +87,7 @@ namespace Joker.BusinessLogic
 		}
 
 		/// <summary>
-		/// Compares two contacts on whether their phone numbers are different, eliminating
-		/// whitespace for comparison.
+		/// Compares two contacts on whether their phone numbers are different, eliminating whitespace for comparison.
 		/// </summary>
 		/// <param name="left">The left operand on comparing inequality.</param>
 		/// <param name="right">The right operand on comparing inequality.</param>

@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Joker.AppInterface;
 using Joker.BusinessLogic;
 using SQLite;
 
@@ -16,6 +17,9 @@ namespace Joker.DataAccess
 		/// </summary>
 		internal static void Initialize()
 		{
+			if(AppSettings.WelcomeTourCompleted)
+				return;
+
 			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
 			db.CreateTable<Limit>();
 			db.CreateTable<Gamble>();
@@ -27,8 +31,8 @@ namespace Joker.DataAccess
 		/// Inserts the specified Limit object into the database.
 		/// </summary>
 		/// <param name="limit">The limit to be inserted.</param>
-		/// <exception cref="SQLiteException">Thrown if a limit with the parameter's time property
-		/// already exists in the database.</exception>
+		/// <exception cref="SQLiteException">Thrown if a limit with the parameter's time property already exists in the
+		/// database.</exception>
 		internal static void Insert(Limit limit)
 		{
 			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
@@ -39,8 +43,8 @@ namespace Joker.DataAccess
 		/// Safely inserts a Gamble object into the database. Contains input validation.
 		/// </summary>
 		/// <param name="gamble">The gamble to be inserted.</param>
-		/// <exception cref="ArgumentException">Thrown if the parameter's time property is earlier
-		/// than the first limit's time.</exception>
+		/// <exception cref="ArgumentException">Thrown if the parameter's time property is earlier than the first
+		/// limit's time.</exception>
 		internal static void Insert(Gamble gamble)
 		{
 			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
@@ -48,7 +52,7 @@ namespace Joker.DataAccess
 			/* Prevents the insertion of Gamble objects when there is no limit set before the gamble's time property as
 			 * this wouldn't make sense for the app's use cases. */
 			if(!db.Table<Limit>().Any(l => l.Time < gamble.Time))
-				throw new ArgumentException(Alerts.GambleMustBeAfterFirstLimit);
+				throw new ArgumentException(Text.GambleMustBeAfterFirstLimit);
 
 			/* If there already exists an entry in the database with the same time as the argument, the milliseconds of
 			 * the timestamp will continually be incremented. This is to keep the Time property (primary key) unique
@@ -60,41 +64,40 @@ namespace Joker.DataAccess
 		}
 
 		/// <summary>
-		/// Inserts a contact into the database when there is no other contact with the same phone
-		/// number.
+		/// Inserts a contact into the database when there is no other contact with the same phone number.
 		/// </summary>
 		/// <param name="contact">The contact to be inserted.</param>
-		/// <exception cref="ArgumentException">Thrown if a contact with the same phone number
-		/// already exists in the database.</exception>
+		/// <exception cref="ArgumentException">Thrown if a contact with the same phone number already exists in the
+		/// database.</exception>
 		internal static void Insert(Contact contact)
 		{
 			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
 
 			if(db.Table<Contact>().Any(c => c == contact) || contact == Contact.Bzga)
-				throw new ArgumentException(Alerts.ContactAlreadyExists);
+				throw new ArgumentException(Text.ContactAlreadyExists);
 			db.Insert(contact);
 		}
 
 		/// <summary>
-		/// Selects a random image asset from the PictureFeed folder and inserts it as a Picture
-		/// object into the database. Prevents duplicate images.
+		/// Selects a random image asset from the PictureFeed folder and inserts it as a Picture object into the
+		/// database. Prevents duplicate images.
 		/// </summary>
 		/// <returns>Returns whether a random picture could be inserted.</returns>
 		internal static bool InsertPictureFromRandomAsset()
 		{
 			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
 
-			// All resource paths in the PictureFeed folder are put into an array.
-			string[] files = typeof(App).Assembly.GetManifestResourceNames()
-				.Where(name => name.StartsWith("Joker.Assets.PictureFeed.")).ToArray();
+			// All asset paths in the PictureFeed folder are put into an array.
+			string[] files = typeof(App).Assembly.GetManifestResourceNames();
+			files = files.Where(name => name.StartsWith(Folders.PictureAssets)).ToArray();
 
-			/* If the count of pictures in the Picture table is not less than the number of resource paths, the method
+			/* If the count of pictures in the Picture table is not less than the number of asset paths, the method
 			 * returns false because there would be no more new pictures to add. */
 			if(db.Table<Picture>().Count() >= files.Length)
 				return false;
 
-			/* If there are still image resources available, select a random resource path that isn't in the database
-			 * yet, wrap it in a Picture instance, insert it and return true if a row was added. */
+			/* If there are still image resources available, select a random asset path that isn't in the database yet,
+			 * wrap it in a Picture instance, insert it and return true if a row was added. */
 			var random = new Random();
 			Picture pic;
 			do
@@ -115,8 +118,8 @@ namespace Joker.DataAccess
 		}
 
 		/// <summary>
-		/// Joins the Gamble and Limit tables, copying them as an array of timeline records sorted
-		/// by their Time property from newest to oldest.
+		/// Joins the Gamble and Limit tables, copying them as an array of timeline records sorted by their Time
+		/// property from newest to oldest.
 		/// </summary>
 		/// <returns>An array of all gambles and limits, unbound to the database.</returns>
 		internal static TimelineRecord[] AllGamblesAndLimits()
@@ -226,8 +229,7 @@ namespace Joker.DataAccess
 		}
 
 		/// <summary>
-		/// Returns how much of a limit's amount has been consumed by the gambles within its
-		/// duration.
+		/// Returns how much of a limit's amount has been consumed by the gambles within its duration.
 		/// </summary>
 		/// <param name="limit">The limit whose balance should be calculated.</param>
 		/// <returns>How much of the limit remains as a decimal number.</returns>
@@ -238,8 +240,7 @@ namespace Joker.DataAccess
 		}
 
 		/// <summary>
-		/// Returns how much of the second most recent limit's amount has been depleted by the
-		/// user's gambling records.
+		/// Returns how much of the second most recent limit's amount has been depleted by the user's gambling records.
 		/// </summary>
 		/// <returns>The current balance of the limit as a decimal.</returns>
 		internal static decimal CalcPreviousLimitBalance()
@@ -294,8 +295,8 @@ namespace Joker.DataAccess
 		/// Updates the specified contact in the database.
 		/// </summary>
 		/// <param name="contact">The contact to be updated.</param>
-		/// <exception cref="ArgumentException">Thrown if another contact with the parameter
-		/// contact's phone number already exists in the database.</exception>
+		/// <exception cref="ArgumentException">Thrown if another contact with the parameter contact's phone number
+		/// already exists in the database.</exception>
 		internal static void Update(Contact contact)
 		{
 			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
@@ -303,7 +304,7 @@ namespace Joker.DataAccess
 			if(db.Table<Contact>().Where(c => c.Id == contact.Id).Single() == contact)
 				db.Update(contact);
 			else if(db.Table<Contact>().Any(c => c == contact) || contact == Contact.Bzga)
-				throw new ArgumentException(Alerts.ContactAlreadyExists);
+				throw new ArgumentException(Text.ContactAlreadyExists);
 			else
 				db.Update(contact);
 		}

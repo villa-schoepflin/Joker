@@ -67,7 +67,7 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// Determines the text of the button that toggles the editing status.
 		/// </summary>
-		public string EditButtonText => EditingEnabled ? "Änderungen speichern" : "Kontakt bearbeiten";
+		public string EditButtonText => EditingEnabled ? Text.Save : Text.Edit;
 
 		/// <summary>
 		/// The color used to paint the background of the icon frame.
@@ -121,8 +121,7 @@ namespace Joker.UserInterface
 		public ICommand CallContact => new Command(() => PhoneDialer.Open(Model.PhoneNumber));
 
 		/// <summary>
-		/// Toggles the editing status for the contact detail page, saving the changes on
-		/// deactivating editing.
+		/// Toggles the editing status for the contact detail page, saving the changes on deactivating editing.
 		/// </summary>
 		public ICommand ToggleEditingStatus => new Command(async () =>
 		{
@@ -130,7 +129,7 @@ namespace Joker.UserInterface
 			{
 				if(Model == Contact.Bzga)
 				{
-					await View.DisplayAlert(null, Alerts.ContactNotDeletable, Alerts.Ok);
+					await View.DisplayAlert(null, Text.ContactNotDeletable, Text.Ok);
 					return;
 				}
 				if(EditingEnabled)
@@ -142,7 +141,7 @@ namespace Joker.UserInterface
 			}
 			catch(ArgumentException error)
 			{
-				await View.DisplayAlert(null, error.Message, Alerts.Ok);
+				await View.DisplayAlert(null, error.Message, Text.Ok);
 			}
 		});
 
@@ -153,10 +152,10 @@ namespace Joker.UserInterface
 		{
 			if(Model == Contact.Bzga)
 			{
-				await View.DisplayAlert(null, Alerts.ContactNotDeletable, Alerts.Ok);
+				await View.DisplayAlert(null, Text.ContactNotDeletable, Text.Ok);
 				return;
 			}
-			if(await View.DisplayAlert(null, Alerts.ContactAboutToBeDeleted, Alerts.Yes, Alerts.No))
+			if(await View.DisplayAlert(null, Text.ContactAboutToBeDeleted, Text.Yes, Text.No))
 			{
 				Database.Delete(Model);
 				await View.Navigation.PopAsync();

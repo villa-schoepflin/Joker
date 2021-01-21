@@ -19,12 +19,11 @@ namespace Joker.UserInterface
 		}
 
 		/// <summary>
-		/// Button event handler that relays user input validation and navigates the user to the
-		/// next tour page.
+		/// Button event handler that relays user input validation and navigates the user to the next tour page.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private async void OnContinueButton(object sender, EventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private async void OnContinueButton(object sender, EventArgs eventArgs)
 		{
 			try
 			{
@@ -33,7 +32,7 @@ namespace Joker.UserInterface
 			}
 			catch(ArgumentException error)
 			{
-				await DisplayAlert(null, error.Message, Alerts.Ok);
+				await DisplayAlert(null, error.Message, Text.Ok);
 			}
 		}
 	}

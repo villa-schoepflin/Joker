@@ -4,8 +4,8 @@ using SQLite;
 namespace Joker.BusinessLogic
 {
 	/// <summary>
-	/// Base class for gambles and limits, as they are recordings of gambling or self-imposed limits
-	/// by the user that can be ordered chronologically.
+	/// Base class for gambles and limits, as they are recordings of gambling or self-imposed limits by the user that
+	/// can be ordered chronologically.
 	/// </summary>
 	public abstract class TimelineRecord
 	{
@@ -40,8 +40,7 @@ namespace Joker.BusinessLogic
 		}
 
 		/// <summary>
-		/// This constructor is necessary for the subclasses to be instantiated by SQLite in
-		/// database queries.
+		/// This constructor is necessary for the subclasses to be instantiated by SQLite in database queries.
 		/// </summary>
 		protected TimelineRecord() { }
 
@@ -50,8 +49,8 @@ namespace Joker.BusinessLogic
 		/// </summary>
 		/// <param name="amount">The amount to be parsed as put in by the user.</param>
 		/// <returns>A monetary value in decimal form.</returns>
-		/// <exception cref="ArgumentException">Thrown if the amount parameter couldn't be parsed or
-		/// isn't within the allowed bounds.</exception>
+		/// <exception cref="ArgumentException">Thrown if the amount parameter couldn't be parsed or isn't within the
+		/// allowed bounds.</exception>
 		private static decimal Parse(string amount)
 		{
 			amount = amount.Replace('.', ',');
@@ -61,9 +60,9 @@ namespace Joker.BusinessLogic
 			{
 				if(result >= MinAmount && result <= MaxAmount)
 					return result;
-				throw new ArgumentException(string.Format(Alerts.MonetaryValueBounds, MinAmount, MaxAmount));
+				throw new ArgumentException(string.Format(Text.MonetaryValueBounds, MinAmount, MaxAmount));
 			}
-			throw new ArgumentException(Alerts.MonetaryValueInvalid);
+			throw new ArgumentException(Text.MonetaryValueInvalid);
 		}
 
 		#region Identifiers for the database schema (DO NOT CHANGE!)

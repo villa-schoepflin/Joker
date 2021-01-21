@@ -11,14 +11,12 @@ using Entry = Microcharts.Entry;
 namespace Joker.UserInterface
 {
 	/// <summary>
-	/// View model for a limit in the limit inspector. Uses many properties of the timeline record
-	/// view model.
+	/// View model for a limit in the limit inspector. Uses many properties of the timeline record view model.
 	/// </summary>
 	public class LimitViewModel : TimelineRecordViewModel
 	{
 		/// <summary>
-		/// Wrapper in order to treat the model as a limit because of inheritance from
-		/// TimelineRecordViewModel.
+		/// Wrapper in order to treat the model as a limit because of inheritance from TimelineRecordViewModel.
 		/// </summary>
 		private Limit Limit
 		{
@@ -112,8 +110,8 @@ namespace Joker.UserInterface
 					n++;
 
 				// Adds the captions for the points which correspond roughly to the beginning of new days.
-				int hour = Limit.Time.ToLocalTime().Hour + (Limit.Time.Minute < 30 ? 0 : 1);
-				int not12am = hour == 0 ? 0 : 1;
+				int hour = Limit.Time.ToLocalTime().Hour + (Limit.Time.Minute >= 30 ? 1 : 0);
+				int not12am = hour != 0 ? 1 : 0;
 				if(i % ((int)span.TotalDays / 5 * 24) == 24 * not12am - hour)
 				{
 					var date = Limit.Time + TimeSpan.FromDays(not12am + i / 24);

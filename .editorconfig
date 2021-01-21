@@ -1,8 +1,7 @@
 # Remove the line below if you want to inherit .editorconfig settings from higher directories
 root = true
 
-# C# files
-[*.cs]
+[*]
 charset = utf-8
 guidelines = 120
 guidelines_style = 1px dotted green
@@ -20,6 +19,9 @@ end_of_line = crlf
 insert_final_newline = false
 
 #### .NET Coding Conventions ####
+
+# C# files
+[*.cs]
 
 # Organize usings
 dotnet_separate_import_directive_groups = false

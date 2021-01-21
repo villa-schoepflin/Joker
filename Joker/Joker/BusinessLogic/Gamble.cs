@@ -4,8 +4,7 @@ using SQLite;
 namespace Joker.BusinessLogic
 {
 	/// <summary>
-	/// A gamble is an act of spending for gambling purposes, used
-	/// to calculate how much of each limit has been depleted.
+	/// A gamble is a gambling-related act of spending, used to calculate how much of each limit has been depleted.
 	/// </summary>
 	[Table(GambleTableName)]
 	public sealed class Gamble : TimelineRecord
@@ -48,14 +47,13 @@ namespace Joker.BusinessLogic
 			: this(amount, type, description)
 		{
 			if(time > DateTime.Now)
-				throw new ArgumentException(Alerts.GambleTimeInFuture);
+				throw new ArgumentException(Text.GambleTimeInFuture);
 			Time = time.ToUniversalTime();
 		}
 
 		/// <summary>
-		/// This constructor only exists for cloning and for SQLite to be able to return collections
-		/// of Gambles from the database. It should never be used to instantiate a Gamble directly
-		/// within the app.
+		/// This constructor only exists for cloning and for SQLite to be able to return collections of gambles from the
+		/// database. It should never be used to instantiate a gamble directly within the app.
 		/// </summary>
 		public Gamble() : base() { }
 

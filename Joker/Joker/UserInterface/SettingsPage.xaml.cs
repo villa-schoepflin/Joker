@@ -37,42 +37,40 @@ namespace Joker.UserInterface
 		/// Toolbar item event handler that shows the user a message concerning this page.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private async void OnInfoButton(object sender, EventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private async void OnInfoButton(object sender, EventArgs eventArgs)
 		{
-			await DisplayAlert(Headline, TextAssetReader.Get("Info_SettingsPage.txt"), Alerts.Ok);
+			await DisplayAlert(Headline, TextAssetReader.Get("Info_SettingsPage.txt"), Text.Ok);
 		}
 
 		/// <summary>
-		/// Button event handler that relays input validation for the user name setting and saves it
-		/// if applicable.
+		/// Button event handler that relays input validation for the user name setting and saves it if possible.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private async void SaveUserName(object sender, EventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private async void SaveUserName(object sender, EventArgs eventArgs)
 		{
 			try
 			{
 				UserSettings.UserName = UserNameEntry.Text;
 
-				string msg = string.Format(Alerts.NameSaved, UserSettings.UserName);
-				await DisplayAlert(Alerts.TitleOnSaved, msg, Alerts.Ok);
+				string msg = string.Format(Text.NameSaved, UserSettings.UserName);
+				await DisplayAlert(Text.TitleOnSaved, msg, Text.Ok);
 
 				App.CurrentTimelineFeed.RefreshInfo();
 			}
 			catch(ArgumentException error)
 			{
-				await DisplayAlert(null, error.Message, Alerts.Ok);
+				await DisplayAlert(null, error.Message, Text.Ok);
 			}
 		}
 
 		/// <summary>
-		/// Button event handler that toggles whether the password and security answers should be
-		/// hidden.
+		/// Button event handler that toggles whether the password and security answers should be hidden.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private void ToggleObfuscation(object sender, EventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private void ToggleObfuscation(object sender, EventArgs eventArgs)
 		{
 			if(sender == FirstAnswerObfuscator)
 				SecurityAnswer1.IsPassword ^= true;
@@ -86,11 +84,11 @@ namespace Joker.UserInterface
 		/// Button event handler that removes the password and its text.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private async void RemovePassword(object sender, EventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private async void RemovePassword(object sender, EventArgs eventArgs)
 		{
 			if(AppSettings.UserPasswordIsSet)
-				if(await DisplayAlert(null, Alerts.PasswordAboutToBeDeleted, Alerts.Yes, Alerts.No))
+				if(await DisplayAlert(null, Text.PasswordAboutToBeDeleted, Text.Yes, Text.No))
 				{
 					UserSettings.UserPassword = "";
 					AppSettings.UserPasswordIsSet = false;
@@ -106,7 +104,7 @@ namespace Joker.UserInterface
 					SecurityQuestion2.Text = UserSettings.SecondSecurityAttribute.Item1;
 					SecurityAnswer2.Text = UserSettings.SecondSecurityAttribute.Item2;
 
-					await DisplayAlert(Alerts.TitleOnPasswordDeleted, Alerts.PasswordDeleted, Alerts.Ok);
+					await DisplayAlert(Text.TitleOnPasswordDeleted, Text.PasswordDeleted, Text.Ok);
 				}
 		}
 
@@ -114,41 +112,40 @@ namespace Joker.UserInterface
 		/// Button event handler that saves the text in the password entry as password if valid.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private async void SavePassword(object sender, EventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private async void SavePassword(object sender, EventArgs eventArgs)
 		{
 			try
 			{
 				if(!AppSettings.FirstSecurityQuestionIsSet || !AppSettings.SecondSecurityQuestionIsSet)
-					throw new ArgumentException(Alerts.SecurityAttributesNotSaved);
+					throw new ArgumentException(Text.SecurityAttributesNotSaved);
 
 				if(string.IsNullOrWhiteSpace(UserPasswordEntry.Text))
-					throw new ArgumentException(Alerts.InputEmpty);
+					throw new ArgumentException(Text.InputEmpty);
 
 				UserSettings.UserPassword = UserPasswordEntry.Text;
 				AppSettings.UserPasswordIsSet = true;
-				await DisplayAlert(Alerts.TitleOnPasswordSaved, Alerts.PasswordSaved, Alerts.Ok);
+				await DisplayAlert(Text.TitleOnPasswordSaved, Text.PasswordSaved, Text.Ok);
 			}
 			catch(ArgumentException error)
 			{
-				await DisplayAlert(null, error.Message, Alerts.Ok);
+				await DisplayAlert(null, error.Message, Text.Ok);
 				UserPasswordEntry.Text = UserSettings.UserPassword;
 			}
 		}
 
 		/// <summary>
-		/// Button event handler that opens an input dialog for selecting one of several predefined
-		/// security questions.
+		/// Button event handler that opens an input dialog for selecting one of several security question proposals.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private async void ShowSecurityQuestionProposals(object sender, EventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private async void ShowSecurityQuestionProposals(object sender, EventArgs eventArgs)
 		{
 			string proposalsAsset = TextAssetReader.Get("SecurityQuestions.txt");
 			string[] proposals = proposalsAsset.Replace("\r", "").Split('\n');
-			string question = await DisplayActionSheet(Alerts.TitleOnSecurityProposals, Alerts.Cancel, null, proposals);
+			string question = await DisplayActionSheet(Text.TitleOnSecurityProposals, Text.Cancel, null, proposals);
 
-			if(!string.IsNullOrWhiteSpace(question) && question != Alerts.Cancel)
+			if(!string.IsNullOrWhiteSpace(question) && question != Text.Cancel)
 			{
 				if(sender == FirstQuestionMenuButton)
 					SecurityQuestion1.Text = question;
@@ -162,60 +159,60 @@ namespace Joker.UserInterface
 		/// input errors to the user.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private async void SaveSecurityAttribute(object sender, EventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private async void SaveSecurityAttribute(object sender, EventArgs eventArgs)
 		{
 			try
 			{
 				if(sender == FirstSecurityAttributeSaver)
 				{
 					if(string.IsNullOrEmpty(SecurityQuestion1.Text) || string.IsNullOrEmpty(SecurityAnswer1.Text))
-						throw new ArgumentException(Alerts.InputEmpty);
+						throw new ArgumentException(Text.InputEmpty);
 					UserSettings.FirstSecurityAttribute = (SecurityQuestion1.Text, SecurityAnswer1.Text);
 					AppSettings.FirstSecurityQuestionIsSet = true;
 				}
 				else
 				{
 					if(string.IsNullOrEmpty(SecurityQuestion2.Text) || string.IsNullOrEmpty(SecurityAnswer2.Text))
-						throw new ArgumentException(Alerts.InputEmpty);
+						throw new ArgumentException(Text.InputEmpty);
 					UserSettings.SecondSecurityAttribute = (SecurityQuestion2.Text, SecurityAnswer2.Text);
 					AppSettings.SecondSecurityQuestionIsSet = true;
 				}
-				await DisplayAlert(Alerts.TitleOnSaved, Alerts.SecurityAttributeSaved, Alerts.Ok);
+				await DisplayAlert(Text.TitleOnSaved, Text.SecurityAttributeSaved, Text.Ok);
 			}
 			catch(ArgumentException error)
 			{
-				await DisplayAlert(null, error.Message, Alerts.Ok);
+				await DisplayAlert(null, error.Message, Text.Ok);
 			}
 		}
 
 		/// <summary>
-		/// Button event handler that relays input validation for saving the interval between the
-		/// insertion of new pictures into the database and saves the setting if applicable.
+		/// Button event handler that relays input validation for saving the interval between the insertion of new
+		/// pictures into the database and saves the setting if possible.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private async void SaveNewPictureInterval(object sender, EventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private async void SaveNewPictureInterval(object sender, EventArgs eventArgs)
 		{
 			try
 			{
 				UserSettings.SetNewPictureInterval(NewPictureEntry.Text);
-				await DisplayAlert(Alerts.TitleOnSaved, Alerts.PictureIntervalSaved, Alerts.Ok);
+				await DisplayAlert(Text.TitleOnSaved, Text.PictureIntervalSaved, Text.Ok);
 			}
 			catch(ArgumentException error)
 			{
-				await DisplayAlert(null, error.Message, Alerts.Ok);
+				await DisplayAlert(null, error.Message, Text.Ok);
 				NewPictureEntry.Text = UserSettings.NewPictureInterval.TotalDays.ToString();
 			}
 		}
 
 		/// <summary>
-		/// Button event handler that relays input validation for saving the interval between
-		/// gambling reminders and saves the setting if applicable.
+		/// Button event handler that relays input validation for saving the interval between gambling reminders and
+		/// saves the setting if possible.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private async void SaveGambleReminderInterval(object sender, EventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private async void SaveGambleReminderInterval(object sender, EventArgs eventArgs)
 		{
 			try
 			{
@@ -223,23 +220,23 @@ namespace Joker.UserInterface
 				DependencyService.Get<IPlatformNotifier>().ScheduleGambleReminder(UserSettings.GambleReminderInterval);
 
 				double hours = UserSettings.GambleReminderInterval.TotalHours;
-				string msg = string.Format(Alerts.ReminderIntervalSaved, hours);
-				await DisplayAlert(Alerts.TitleOnSaved, msg, Alerts.Ok);
+				string msg = string.Format(Text.ReminderIntervalSaved, hours);
+				await DisplayAlert(Text.TitleOnSaved, msg, Text.Ok);
 			}
 			catch(ArgumentException error)
 			{
-				await DisplayAlert(null, error.Message, Alerts.Ok);
+				await DisplayAlert(null, error.Message, Text.Ok);
 				GambleReminderEntry.Text = UserSettings.GambleReminderInterval.TotalHours.ToString();
 			}
 		}
 
 		/// <summary>
-		/// Button event handler that relays input validation for saving the interval between limit
-		/// reminders and saves the setting if applicable.
+		/// Button event handler that relays input validation for saving the interval between limit reminders and saves
+		/// the setting if possible.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private async void SaveLimitReminderInterval(object sender, EventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private async void SaveLimitReminderInterval(object sender, EventArgs eventArgs)
 		{
 			try
 			{
@@ -247,12 +244,12 @@ namespace Joker.UserInterface
 				DependencyService.Get<IPlatformNotifier>().ScheduleLimitReminder(UserSettings.LimitReminderInterval);
 
 				double hours = UserSettings.LimitReminderInterval.TotalHours;
-				string msg = string.Format(Alerts.ReminderIntervalSaved, hours);
-				await DisplayAlert(Alerts.TitleOnSaved, msg, Alerts.Ok);
+				string msg = string.Format(Text.ReminderIntervalSaved, hours);
+				await DisplayAlert(Text.TitleOnSaved, msg, Text.Ok);
 			}
 			catch(ArgumentException error)
 			{
-				await DisplayAlert(null, error.Message, Alerts.Ok);
+				await DisplayAlert(null, error.Message, Text.Ok);
 				LimitReminderEntry.Text = UserSettings.LimitReminderInterval.TotalHours.ToString();
 			}
 		}
@@ -261,8 +258,8 @@ namespace Joker.UserInterface
 		/// Button event handler that navigates the user to the impressum.
 		/// </summary>
 		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="e">Contains event data.</param>
-		private async void OnImpressumButton(object sender, EventArgs e)
+		/// <param name="eventArgs">Contains event data.</param>
+		private async void OnImpressumButton(object sender, EventArgs eventArgs)
 		{
 			await Navigation.PushAsync(new Impressum());
 		}
