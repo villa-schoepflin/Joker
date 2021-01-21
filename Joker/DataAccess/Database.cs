@@ -21,10 +21,10 @@ namespace Joker.DataAccess
 				return;
 
 			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
-			db.CreateTable<Limit>();
-			db.CreateTable<Gamble>();
-			db.CreateTable<Contact>();
-			db.CreateTable<Picture>();
+			_ = db.CreateTable<Limit>();
+			_ = db.CreateTable<Gamble>();
+			_ = db.CreateTable<Contact>();
+			_ = db.CreateTable<Picture>();
 		}
 
 		/// <summary>
@@ -36,7 +36,7 @@ namespace Joker.DataAccess
 		internal static void Insert(Limit limit)
 		{
 			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
-			db.Insert(limit);
+			_ = db.Insert(limit);
 		}
 
 		/// <summary>
@@ -60,7 +60,7 @@ namespace Joker.DataAccess
 			while(db.Table<Gamble>().Any(g => g.Time == gamble.Time))
 				gamble.Time = gamble.Time.AddMilliseconds(1);
 
-			db.Insert(gamble);
+			_ = db.Insert(gamble);
 		}
 
 		/// <summary>
@@ -75,7 +75,7 @@ namespace Joker.DataAccess
 
 			if(db.Table<Contact>().Any(c => c == contact) || contact == Contact.Bzga)
 				throw new ArgumentException(Text.ContactAlreadyExists);
-			db.Insert(contact);
+			_ = db.Insert(contact);
 		}
 
 		/// <summary>
@@ -278,7 +278,7 @@ namespace Joker.DataAccess
 			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
 
 			pic.Liked ^= true;
-			db.Update(pic);
+			_ = db.Update(pic);
 		}
 
 		/// <summary>
@@ -288,7 +288,7 @@ namespace Joker.DataAccess
 		internal static void Update(Gamble gamble)
 		{
 			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
-			db.Update(gamble);
+			_ = db.Update(gamble);
 		}
 
 		/// <summary>
@@ -302,11 +302,11 @@ namespace Joker.DataAccess
 			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
 
 			if(db.Table<Contact>().Where(c => c.Id == contact.Id).Single() == contact)
-				db.Update(contact);
+				_ = db.Update(contact);
 			else if(db.Table<Contact>().Any(c => c == contact) || contact == Contact.Bzga)
 				throw new ArgumentException(Text.ContactAlreadyExists);
 			else
-				db.Update(contact);
+				_ = db.Update(contact);
 		}
 
 		/// <summary>
@@ -316,7 +316,7 @@ namespace Joker.DataAccess
 		internal static void Delete(Contact contact)
 		{
 			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
-			db.Delete(contact);
+			_ = db.Delete(contact);
 		}
 
 		/// <summary>
@@ -326,7 +326,7 @@ namespace Joker.DataAccess
 		internal static void Delete(Picture pic)
 		{
 			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
-			db.Delete(pic);
+			_ = db.Delete(pic);
 		}
 	}
 }

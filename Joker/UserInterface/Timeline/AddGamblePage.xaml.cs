@@ -92,7 +92,7 @@ namespace Joker.UserInterface
 
 				App.CurrentTimelineFeed.RefreshRecords();
 				App.CurrentTimelineFeed.RefreshInfo();
-				await Navigation.PopAsync();
+				_ = await Navigation.PopAsync();
 
 				if(Database.CalcBalance(Database.MostRecentLimit()) < 0)
 					App.CurrentTimelineFeed.BlinkLimitFeedback();

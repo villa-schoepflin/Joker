@@ -26,16 +26,13 @@ namespace Joker.AppInterface
 			string assetPath = Folders.TextAssets + fileName;
 			using var stream = typeof(App).Assembly.GetManifestResourceStream(assetPath);
 			using var fileReader = new StreamReader(stream);
-			return Pattern.Replace(fileReader.ReadToEnd(), match =>
+			return Pattern.Replace(fileReader.ReadToEnd(), match => match.Value switch
 			{
-				return match.Value switch
-				{
-					UserName => UserSettings.UserName,
-					RemainingLimit => Database.CalcBalance(Database.MostRecentLimit()).ToString("C", App.Locale),
-					LastLimitAmount => Database.MostRecentLimit().Amount.ToString("C", App.Locale),
-					Version => $"{Device.RuntimePlatform} Version {VersionTracking.CurrentVersion}",
-					_ => match.Value
-				};
+				UserName => UserSettings.UserName,
+				RemainingLimit => Database.CalcBalance(Database.MostRecentLimit()).ToString("C", App.Locale),
+				LastLimitAmount => Database.MostRecentLimit().Amount.ToString("C", App.Locale),
+				Version => $"{Device.RuntimePlatform} Version {VersionTracking.CurrentVersion}",
+				_ => match.Value
 			});
 		}
 

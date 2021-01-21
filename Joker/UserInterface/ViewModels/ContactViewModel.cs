@@ -158,7 +158,7 @@ namespace Joker.UserInterface
 			if(await View.DisplayAlert(null, Text.ContactAboutToBeDeleted, Text.Yes, Text.No))
 			{
 				Database.Delete(Model);
-				await View.Navigation.PopAsync();
+				_ = await View.Navigation.PopAsync();
 				App.CurrentContactPage.RefreshContacts();
 			}
 		});

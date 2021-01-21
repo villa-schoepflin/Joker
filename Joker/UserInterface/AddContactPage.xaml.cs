@@ -98,7 +98,7 @@ namespace Joker.UserInterface
 			{
 				var contact = new Contact(NameEntry.Text, PhoneNumberEntry.Text, ExpertMarker.IsToggled);
 				Database.Insert(contact);
-				await Navigation.PopAsync();
+				_ = await Navigation.PopAsync();
 				App.CurrentContactPage.RefreshContacts();
 			}
 			catch(ArgumentException error)
