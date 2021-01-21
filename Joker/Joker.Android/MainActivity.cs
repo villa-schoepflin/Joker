@@ -48,8 +48,8 @@ namespace Joker.Android
 			Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 			base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
-			if(requestCode == AndroidFileSaver.RequestCode)
-				AndroidFileSaver.Finish(grantResults[0]);
+			if(requestCode == FileSaver.RequestCode)
+				FileSaver.Finish(grantResults[0]);
 		}
 	}
 }

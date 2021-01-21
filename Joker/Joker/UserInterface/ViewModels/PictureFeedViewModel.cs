@@ -66,20 +66,34 @@ namespace Joker.UserInterface
 		});
 
 		/// <summary>
-		/// Loads the bitmap corresponding to the picture that should be presented and draws a blur around it.
+		/// Loads and draws the bitmap corresponding to the picture that should be presented and draws a blur around it.
 		/// </summary>
 		public ICommand DrawImage => new Command<SKPaintSurfaceEventArgs>(eventArgs =>
 		{
 			string assetPath = Folders.PictureAssets + Model.FilePath;
 			using var stream = typeof(App).Assembly.GetManifestResourceStream(assetPath);
-			var pic = SKBitmap.Decode(stream);
+			var bitmap = SKBitmap.Decode(stream);
+
+			SKRect computeRect(float scale)
+			{
+				float width = scale * bitmap.Width;
+				float height = scale * bitmap.Height;
+				float left = 0.5f * (eventArgs.Info.Width - width);
+				float top = 0.5f * (eventArgs.Info.Height - height);
+				return new SKRect(left, top, left + width, top + height);
+			}
+
 			var canvas = eventArgs.Surface.Canvas;
+			float widthRatio = (float)eventArgs.Info.Width / bitmap.Width;
+			float heightRatio = (float)eventArgs.Info.Height / bitmap.Height;
 
-			canvas.DrawBitmap(pic, new SKRect(0, 0, eventArgs.Info.Width, eventArgs.Info.Height), Blur);
+			float scale = Math.Max(widthRatio, heightRatio) * 1.1f; // Overscale to avoid background bleed when blurring
+			canvas.DrawBitmap(bitmap, computeRect(scale), Blur);
 
-			canvas.DrawBitmap(pic, new SKRect());
+			scale = Math.Min(widthRatio, heightRatio);
+			canvas.DrawBitmap(bitmap, computeRect(scale));
 		});
-		private static readonly SKPaint Blur = new SKPaint() { ImageFilter = SKImageFilter.CreateBlur(25, 25) };
+		private static readonly SKPaint Blur = new SKPaint() { ImageFilter = SKImageFilter.CreateBlur(50, 50) };
 
 		/// <summary>
 		/// Updates the picture with the changed Liked status in the database and notifies the change of property.

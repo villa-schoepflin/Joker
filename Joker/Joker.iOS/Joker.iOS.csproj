@@ -129,8 +129,8 @@
   <ItemGroup>
     <Compile Include="ColorCorrectedTabbedPage.cs" />
     <Compile Include="ColorCorrectedViewCell.cs" />
-    <Compile Include="IosFileSaver.cs" />
-    <Compile Include="IosNotifier.cs" />
+    <Compile Include="iOS.FileSaver.cs" />
+    <Compile Include="iOS.Notifier.cs" />
     <Compile Include="AppMain.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />

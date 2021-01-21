@@ -8,9 +8,35 @@ namespace Joker.AppInterface
 	public static class Notifications
 	{
 		/// <summary>
-		/// Struct holding the titles of each kind of notification.
+		/// Holds the names of each notification channel.
 		/// </summary>
-		public struct Title
+		public static class Channel
+		{
+			/// <summary>
+			/// Notification channel for when the current limit expires.
+			/// </summary>
+			public const string LimitExpired = "Limit-Benachrichtigungen";
+
+			/// <summary>
+			/// Notification channel for when a new picture is available.
+			/// </summary>
+			public const string NewPicture = "Bilderbenachrichtigungen";
+
+			/// <summary>
+			/// Notification channel for reminders about recording gambling-related spendings.
+			/// </summary>
+			public const string GambleReminder = "Spieleinsatz-Erinnerungen";
+
+			/// <summary>
+			/// Notification channel for reminders about the current limit state.
+			/// </summary>
+			public const string LimitReminder = "Limit-Erinnerungen";
+		}
+
+		/// <summary>
+		/// Holds the titles of each kind of notification.
+		/// </summary>
+		public static class Title
 		{
 			/// <summary>
 			/// Title of the notification indicating that the current has limit has expired.
@@ -34,9 +60,9 @@ namespace Joker.AppInterface
 		}
 
 		/// <summary>
-		/// Struct holding the main texts of each kind of notification.
+		/// Holds the main texts of each kind of notification.
 		/// </summary>
-		public struct Body
+		public static class Body
 		{
 			/// <summary>
 			/// Main text of the notification indicating that the current has limit has expired.
@@ -79,10 +105,10 @@ namespace Joker.AppInterface
 	}
 
 	/// <summary>
-	/// The different kinds of push notifications (PN) sent by the application. Also used to supply IDs to each
-	/// notification and related properties.
+	/// The different kinds of notifications sent by the application. Also used to supply IDs to each notification and
+	/// related properties.
 	/// </summary>
-	public enum PNType
+	public enum NotificationType
 	{
 		/// <summary>
 		/// Notifies the user that his limit has expired and a new one must be set.

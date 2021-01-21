@@ -152,9 +152,34 @@
             Container class for constructing the text shown in different kinds of push notifications.
             </summary>
         </member>
+        <member name="T:Joker.AppInterface.Notifications.Channel">
+            <summary>
+            Holds the names of each notification channel.
+            </summary>
+        </member>
+        <member name="F:Joker.AppInterface.Notifications.Channel.LimitExpired">
+            <summary>
+            Notification channel for when the current limit expires.
+            </summary>
+        </member>
+        <member name="F:Joker.AppInterface.Notifications.Channel.NewPicture">
+            <summary>
+            Notification channel for when a new picture is available.
+            </summary>
+        </member>
+        <member name="F:Joker.AppInterface.Notifications.Channel.GambleReminder">
+            <summary>
+            Notification channel for reminders about recording gambling-related spendings.
+            </summary>
+        </member>
+        <member name="F:Joker.AppInterface.Notifications.Channel.LimitReminder">
+            <summary>
+            Notification channel for reminders about the current limit state.
+            </summary>
+        </member>
         <member name="T:Joker.AppInterface.Notifications.Title">
             <summary>
-            Struct holding the titles of each kind of notification.
+            Holds the titles of each kind of notification.
             </summary>
         </member>
         <member name="P:Joker.AppInterface.Notifications.Title.LimitExpired">
@@ -179,7 +204,7 @@
         </member>
         <member name="T:Joker.AppInterface.Notifications.Body">
             <summary>
-            Struct holding the main texts of each kind of notification.
+            Holds the main texts of each kind of notification.
             </summary>
         </member>
         <member name="P:Joker.AppInterface.Notifications.Body.LimitExpired">
@@ -202,28 +227,28 @@
             Main text of the notification reminding the user about their limit's current state.
             </summary>
         </member>
-        <member name="T:Joker.AppInterface.PNType">
+        <member name="T:Joker.AppInterface.NotificationType">
             <summary>
-            The different kinds of push notifications (PN) sent by the application. Also used to supply IDs to each
-            notification and related properties.
+            The different kinds of notifications sent by the application. Also used to supply IDs to each notification and
+            related properties.
             </summary>
         </member>
-        <member name="F:Joker.AppInterface.PNType.LimitExpired">
+        <member name="F:Joker.AppInterface.NotificationType.LimitExpired">
             <summary>
             Notifies the user that his limit has expired and a new one must be set.
             </summary>
         </member>
-        <member name="F:Joker.AppInterface.PNType.NewPicture">
+        <member name="F:Joker.AppInterface.NotificationType.NewPicture">
             <summary>
             Notifies the user that a new motivating picture has been added to the database.
             </summary>
         </member>
-        <member name="F:Joker.AppInterface.PNType.GambleReminder">
+        <member name="F:Joker.AppInterface.NotificationType.GambleReminder">
             <summary>
             Notifies the user to always record his spendings for gambling.
             </summary>
         </member>
-        <member name="F:Joker.AppInterface.PNType.LimitReminder">
+        <member name="F:Joker.AppInterface.NotificationType.LimitReminder">
             <summary>
             Notifies the user about the current state of their limit.
             </summary>
@@ -1615,7 +1640,7 @@
         </member>
         <member name="P:Joker.UserInterface.PictureFeedViewModel.DrawImage">
             <summary>
-            Loads the bitmap corresponding to the picture that should be presented and draws a blur around it.
+            Loads and draws the bitmap corresponding to the picture that should be presented and draws a blur around it.
             </summary>
         </member>
         <member name="P:Joker.UserInterface.PictureFeedViewModel.ToggleLikedStatus">

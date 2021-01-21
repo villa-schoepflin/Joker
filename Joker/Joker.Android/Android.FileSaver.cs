@@ -6,13 +6,13 @@ using Android.Content.PM;
 using Android.Media;
 using Joker.AppInterface;
 
-[assembly: Xamarin.Forms.Dependency(typeof(Joker.Android.AndroidFileSaver))]
+[assembly: Xamarin.Forms.Dependency(typeof(Joker.Android.FileSaver))]
 namespace Joker.Android
 {
 	/// <summary>
 	/// Contains Android-specific file IO functionality.
 	/// </summary>
-	public class AndroidFileSaver : IPlatformFileSaver
+	public class FileSaver : IPlatformFileSaver
 	{
 		/// <summary>
 		/// Associated with the permission request to save files to local storage.

@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
-		<Version>1.0.11</Version>
+		<Version>1.0.15</Version>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -13,92 +13,6 @@
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 		<DocumentationFile>Joker.xml</DocumentationFile>
 	</PropertyGroup>
-
-	<ItemGroup>
-		<None Remove="Assets\Icons\bar.png" />
-		<None Remove="Assets\Icons\bar_completed.png" />
-		<None Remove="Assets\Icons\circle.png" />
-		<None Remove="Assets\Icons\circle_completed.png" />
-		<None Remove="Assets\Icons\contacts.png" />
-		<None Remove="Assets\Icons\filledbar.png" />
-		<None Remove="Assets\Icons\filledcircle.png" />
-		<None Remove="Assets\Icons\image.png" />
-		<None Remove="Assets\Icons\impressum.png" />
-		<None Remove="Assets\Icons\joker.png" />
-		<None Remove="Assets\Icons\money.png" />
-		<None Remove="Assets\Icons\motivation.png" />
-		<None Remove="Assets\Icons\search.png" />
-		<None Remove="Assets\Icons\settings.png" />
-		<None Remove="Assets\PictureFeed\abendrot.jpg" />
-		<None Remove="Assets\PictureFeed\abfluss.jpg" />
-		<None Remove="Assets\PictureFeed\andreaskreuz.jpg" />
-		<None Remove="Assets\PictureFeed\asphalt.jpg" />
-		<None Remove="Assets\PictureFeed\aufgeben.jpg" />
-		<None Remove="Assets\PictureFeed\brunnen.jpg" />
-		<None Remove="Assets\PictureFeed\container.jpg" />
-		<None Remove="Assets\PictureFeed\duerre.jpg" />
-		<None Remove="Assets\PictureFeed\eis.jpg" />
-		<None Remove="Assets\PictureFeed\fernsehturm.jpg" />
-		<None Remove="Assets\PictureFeed\fliege.jpg" />
-		<None Remove="Assets\PictureFeed\freunde1.jpg" />
-		<None Remove="Assets\PictureFeed\freunde2.jpg" />
-		<None Remove="Assets\PictureFeed\gasse1.jpg" />
-		<None Remove="Assets\PictureFeed\gasse2.jpg" />
-		<None Remove="Assets\PictureFeed\gleis.jpg" />
-		<None Remove="Assets\PictureFeed\graffiti.jpg" />
-		<None Remove="Assets\PictureFeed\haufen.jpg" />
-		<None Remove="Assets\PictureFeed\hortensie.jpg" />
-		<None Remove="Assets\PictureFeed\hund.jpg" />
-		<None Remove="Assets\PictureFeed\kirmes.jpg" />
-		<None Remove="Assets\PictureFeed\k_M_V_Grillfleisch.jpg" />
-		<None Remove="Assets\PictureFeed\k_M_V_rettungswesten.jpg" />
-		<None Remove="Assets\PictureFeed\k_M_V_Strasse.jpg" />
-		<None Remove="Assets\PictureFeed\meer.jpg" />
-		<None Remove="Assets\PictureFeed\mineralwasser.jpg" />
-		<None Remove="Assets\PictureFeed\palme.jpg" />
-		<None Remove="Assets\PictureFeed\pflanzen.jpg" />
-		<None Remove="Assets\PictureFeed\regentanz.jpg" />
-		<None Remove="Assets\PictureFeed\sackgasse.jpg" />
-		<None Remove="Assets\PictureFeed\schild.jpg" />
-		<None Remove="Assets\PictureFeed\sonnenstrahl.jpg" />
-		<None Remove="Assets\PictureFeed\sonnenuntergang.jpg" />
-		<None Remove="Assets\PictureFeed\stadt1.jpg" />
-		<None Remove="Assets\PictureFeed\sterne.jpg" />
-		<None Remove="Assets\PictureFeed\strasse.jpg" />
-		<None Remove="Assets\PictureFeed\stromkasten.jpg" />
-		<None Remove="Assets\PictureFeed\tastatur.jpg" />
-		<None Remove="Assets\PictureFeed\truemmer.jpg" />
-		<None Remove="Assets\PictureFeed\wand1.jpg" />
-		<None Remove="Assets\PictureFeed\wand2.jpg" />
-		<None Remove="Assets\PictureFeed\zaun.jpg" />
-		<None Remove="Assets\Text\AddNewLimit_Failure.txt" />
-		<None Remove="Assets\Text\AddNewLimit_Success.txt" />
-		<None Remove="Assets\Text\Feedback_Current_Failure.txt" />
-		<None Remove="Assets\Text\Feedback_Current_New.txt" />
-		<None Remove="Assets\Text\Feedback_Current_Success.txt" />
-		<None Remove="Assets\Text\Feedback_Previous_Failure.txt" />
-		<None Remove="Assets\Text\Feedback_Previous_Success.txt" />
-		<None Remove="Assets\Text\Impressum_ContactInfo.txt" />
-		<None Remove="Assets\Text\Impressum_PrivacyPolicy.txt" />
-		<None Remove="Assets\Text\Impressum_Version.txt" />
-		<None Remove="Assets\Text\Info_ContactPage.txt" />
-		<None Remove="Assets\Text\Info_PictureFeed.txt" />
-		<None Remove="Assets\Text\Info_SettingsPage.txt" />
-		<None Remove="Assets\Text\Info_TimelineFeed.txt" />
-		<None Remove="Assets\Text\Notification_Body_GambleReminder.txt" />
-		<None Remove="Assets\Text\Notification_Body_LimitExpired_Failure.txt" />
-		<None Remove="Assets\Text\Notification_Body_LimitExpired_Success.txt" />
-		<None Remove="Assets\Text\Notification_Body_LimitReminder_Failure.txt" />
-		<None Remove="Assets\Text\Notification_Body_LimitReminder_Success.txt" />
-		<None Remove="Assets\Text\Notification_Body_NewPicture.txt" />
-		<None Remove="Assets\Text\Notification_Title_GambleReminder.txt" />
-		<None Remove="Assets\Text\Notification_Title_LimitExpired.txt" />
-		<None Remove="Assets\Text\Notification_Title_LimitReminder.txt" />
-		<None Remove="Assets\Text\Notification_Title_NewPicture.txt" />
-		<None Remove="Assets\Text\PushNotification_Title_LimitExpired.txt" />
-		<None Remove="Assets\Text\PushNotification_Title_NewPicture.txt" />
-		<None Remove="Assets\Text\SecurityQuestions.txt" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<EmbeddedResource Include="Assets\Icons\bar.png" />

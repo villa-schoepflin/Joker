@@ -4,49 +4,41 @@ using Android.Content;
 using Joker.AppInterface;
 using Joker.DataAccess;
 
-[assembly: Xamarin.Forms.Dependency(typeof(Joker.Android.AndroidNotifier))]
+[assembly: Xamarin.Forms.Dependency(typeof(Joker.Android.Notifier))]
 namespace Joker.Android
 {
 	/// <summary>
 	/// Contains Android-specific notification functionality.
 	/// </summary>
-	public class AndroidNotifier : IPlatformNotifier
+	public class Notifier : IPlatformNotifier
 	{
-		/// <summary>
-		/// Gets the app-specific Android alarm manager to schedule broadcasts and notifications.
-		/// </summary>
-		private static AlarmManager Scheduler
+		private static AlarmManager AlarmService
 			=> (AlarmManager)Application.Context.GetSystemService(Context.AlarmService);
 
-		/// <summary>
-		/// Gets the app-specific Android notification manager to create push notifications on the
-		/// phone.
-		/// </summary>
-		private static NotificationManager Notifier
+		private static NotificationManager NotifService
 			=> (NotificationManager)Application.Context.GetSystemService(Context.NotificationService);
 
 		/// <summary>
-		/// Android-specific implementation of an API method that schedules a notification
-		/// indicating the current limit has expired and a new one should be set.
+		/// Android-specific implementation of an API method that schedules a notification indicating the current limit
+		/// has expired and a new one should be set.
 		/// </summary>
 		/// <param name="timeSetting">The time at which the notification should appear.</param>
 		public void ScheduleLimitExpired(DateTime timeSetting)
 		{
-			var broadcast = PendingIntent.GetBroadcast(Application.Context,
-				(int)PNType.LimitExpired,
-				new Intent(Application.Context, typeof(LimitExpiredReceiver)),
+			var intent = new Intent(Application.Context, typeof(LimitExpiredReceiver));
+			var broadcast = PendingIntent.GetBroadcast(Application.Context, (int)NotificationType.LimitExpired, intent,
 				PendingIntentFlags.UpdateCurrent);
 
-			Scheduler.Set(AlarmType.RtcWakeup, GetSystemTime(timeSetting), broadcast);
+			AlarmService.Set(AlarmType.RtcWakeup, GetSystemTime(timeSetting), broadcast);
 		}
 
 		/// <summary>
-		/// Android-specific implementation of an API method that removes the notification that
-		/// indicates that the current limit has expired.
+		/// Android-specific implementation of an API method that removes the notification that indicates that the
+		/// current limit has expired.
 		/// </summary>
 		public void CancelLimitExpired()
 		{
-			Notifier.Cancel((int)PNType.LimitExpired);
+			NotifService.Cancel((int)NotificationType.LimitExpired);
 		}
 
 		/// <summary>
@@ -56,23 +48,22 @@ namespace Joker.Android
 		internal class LimitExpiredReceiver : BroadcastReceiver
 		{
 			/// <summary>
-			/// Receives the broadcast from Android and pushes an ongoing notification indicating
-			/// that the current limit has expired. Creates the respective notification channel if
-			/// necessary.
+			/// Receives the broadcast from Android and pushes an ongoing notification indicating that the current limit
+			/// has expired. Creates the respective notification channel if necessary.
 			/// </summary>
 			/// <param name="context">The context through which the broadcast is processed.</param>
 			/// <param name="intent">Not used here.</param>
 			public override void OnReceive(Context context, Intent intent)
 			{
-				var channel = new NotificationChannel(PNType.LimitExpired.ToString(),
-					"Limit-Benachrichtigungen", NotificationImportance.Max)
-				{
-					LockscreenVisibility = NotificationVisibility.Public
-				};
-				Notifier.CreateNotificationChannel(channel);
+				string channelId = NotificationType.LimitExpired.ToString();
+				var channel = new NotificationChannel(channelId, Notifications.Channel.LimitExpired,
+					NotificationImportance.Max);
+				channel.LockscreenVisibility = NotificationVisibility.Public;
+				NotifService.CreateNotificationChannel(channel);
 
-				var launch = PendingIntent.GetActivity(context, 0, new Intent(context, typeof(LaunchActivity)), 0);
-				var notifBuilder = new Notification.Builder(context, PNType.LimitExpired.ToString())
+				intent = new Intent(context, typeof(LaunchActivity));
+				var launch = PendingIntent.GetActivity(context, 0, intent, 0);
+				var notifBuilder = new Notification.Builder(context, channelId)
 					.SetContentTitle(Notifications.Title.LimitExpired)
 					.SetContentText(Notifications.Body.LimitExpired)
 					.SetSmallIcon(Resource.Drawable.ui_icon)
@@ -81,23 +72,22 @@ namespace Joker.Android
 					.SetOngoing(true)
 					.SetAutoCancel(false)
 					.SetContentIntent(launch);
-				Notifier.Notify((int)PNType.LimitExpired, notifBuilder.Build());
+				NotifService.Notify((int)NotificationType.LimitExpired, notifBuilder.Build());
 			}
 		}
 
 		/// <summary>
-		/// Android-specific implementation of an API method that schedules a notification
-		/// indicating that a new picture is available to see.
+		/// Android-specific implementation of an API method that schedules a notification indicating that a new picture
+		/// is available to see.
 		/// </summary>
 		/// <param name="timeSetting">The time at which the notification should appear.</param>
 		public void ScheduleNewPicture(DateTime timeSetting)
 		{
-			var broadcast = PendingIntent.GetBroadcast(Application.Context,
-				(int)PNType.NewPicture,
-				new Intent(Application.Context, typeof(NewPictureReceiver)),
+			var intent = new Intent(Application.Context, typeof(NewPictureReceiver));
+			var broadcast = PendingIntent.GetBroadcast(Application.Context, (int)NotificationType.NewPicture, intent,
 				PendingIntentFlags.UpdateCurrent);
 
-			Scheduler.Set(AlarmType.RtcWakeup, GetSystemTime(timeSetting), broadcast);
+			AlarmService.Set(AlarmType.RtcWakeup, GetSystemTime(timeSetting), broadcast);
 		}
 
 		/// <summary>
@@ -107,23 +97,23 @@ namespace Joker.Android
 		internal class NewPictureReceiver : BroadcastReceiver
 		{
 			/// <summary>
-			/// Receives the broadcast from Android and pushes an ongoing notification indicating
-			/// that a new pictures is available to see. Creates the respective notification channel
-			/// if necessary. The notification is removed when it is opened.
+			/// Receives the broadcast from Android and pushes an ongoing notification indicating that a new pictures is
+			/// available to see. Creates the respective notification channel if necessary. The notification is removed
+			/// when it is opened.
 			/// </summary>
 			/// <param name="context">The context through which the broadcast is processed.</param>
 			/// <param name="intent">Not used here.</param>
 			public override void OnReceive(Context context, Intent intent)
 			{
-				var channel = new NotificationChannel(PNType.NewPicture.ToString(),
-					"Bilderbenachrichtigungen", NotificationImportance.High)
-				{
-					LockscreenVisibility = NotificationVisibility.Public
-				};
-				Notifier.CreateNotificationChannel(channel);
+				string channelId = NotificationType.NewPicture.ToString();
+				var channel = new NotificationChannel(channelId, Notifications.Channel.NewPicture,
+					NotificationImportance.High);
+				channel.LockscreenVisibility = NotificationVisibility.Public;
+				NotifService.CreateNotificationChannel(channel);
 
-				var launch = PendingIntent.GetActivity(context, 0, new Intent(context, typeof(LaunchActivity)), 0);
-				var notifBuilder = new Notification.Builder(context, PNType.NewPicture.ToString())
+				intent = new Intent(context, typeof(LaunchActivity));
+				var launch = PendingIntent.GetActivity(context, 0, intent, 0);
+				var notifBuilder = new Notification.Builder(context, channelId)
 					.SetContentTitle(Notifications.Title.NewPicture)
 					.SetContentText(Notifications.Body.NewPicture)
 					.SetSmallIcon(Resource.Drawable.ui_icon)
@@ -132,24 +122,23 @@ namespace Joker.Android
 					.SetAutoCancel(true)
 					.SetOngoing(true)
 					.SetContentIntent(launch);
-				Notifier.Notify((int)PNType.NewPicture, notifBuilder.Build());
+				NotifService.Notify((int)NotificationType.NewPicture, notifBuilder.Build());
 			}
 		}
 
 		/// <summary>
-		/// Android-specific implementation of an API method that schedules a notification reminding
-		/// the user to always record acts of gambling within the app.
+		/// Android-specific implementation of an API method that schedules a notification reminding the user to always
+		/// record acts of gambling within the app.
 		/// </summary>
 		/// <param name="interval">The interval for the time the notification should appear.</param>
 		public void ScheduleGambleReminder(TimeSpan interval)
 		{
-			var broadcast = PendingIntent.GetBroadcast(Application.Context,
-				(int)PNType.GambleReminder,
-				new Intent(Application.Context, typeof(GambleReminderReceiver)),
-				PendingIntentFlags.UpdateCurrent);
+			var intent = new Intent(Application.Context, typeof(GambleReminderReceiver));
+			var broadcast = PendingIntent.GetBroadcast(Application.Context, (int)NotificationType.GambleReminder,
+				intent, PendingIntentFlags.UpdateCurrent);
 
 			long time = GetSystemTime(DateTime.UtcNow + interval);
-			Scheduler.SetRepeating(AlarmType.RtcWakeup, time, (long)interval.TotalMilliseconds, broadcast);
+			AlarmService.SetRepeating(AlarmType.RtcWakeup, time, (long)interval.TotalMilliseconds, broadcast);
 		}
 
 		/// <summary>
@@ -159,24 +148,22 @@ namespace Joker.Android
 		internal class GambleReminderReceiver : BroadcastReceiver
 		{
 			/// <summary>
-			/// Receives the broadcast from Android and pushes a notification reminding the user
-			/// that their acts of gambling should be recorded with the app. Creates the respective
-			/// notification channel if necessary.
+			/// Receives the broadcast from Android and pushes a notification reminding the user that their acts of
+			/// gambling should be recorded with the app. Creates the respective notification channel if necessary.
 			/// </summary>
 			/// <param name="context">The context through which the broadcast is processed.</param>
 			/// <param name="intent">Not used here.</param>
 			public override void OnReceive(Context context, Intent intent)
 			{
-				var channel = new NotificationChannel(PNType.GambleReminder.ToString(),
-					"Spieleinsatz-Erinnerungen", NotificationImportance.Default)
-				{
-					LockscreenVisibility = NotificationVisibility.Public
-				};
-				Notifier.CreateNotificationChannel(channel);
+				string channelId = NotificationType.GambleReminder.ToString();
+				var channel = new NotificationChannel(channelId, Notifications.Channel.GambleReminder,
+					NotificationImportance.Default);
+				channel.LockscreenVisibility = NotificationVisibility.Public;
+				NotifService.CreateNotificationChannel(channel);
 
-				var launch = PendingIntent.GetActivity(context, 0, new Intent(context, typeof(LaunchActivity)), 0);
-				var notifBuilder = new Notification.Builder(context,
-					PNType.GambleReminder.ToString())
+				intent = new Intent(context, typeof(LaunchActivity));
+				var launch = PendingIntent.GetActivity(context, 0, intent, 0);
+				var notifBuilder = new Notification.Builder(context, channelId)
 					.SetContentTitle(Notifications.Title.GambleReminder)
 					.SetContentText(Notifications.Body.GambleReminder)
 					.SetSmallIcon(Resource.Drawable.ui_icon)
@@ -184,7 +171,7 @@ namespace Joker.Android
 					.BigText(Notifications.Body.GambleReminder))
 					.SetAutoCancel(true)
 					.SetContentIntent(launch);
-				Notifier.Notify((int)PNType.GambleReminder, notifBuilder.Build());
+				NotifService.Notify((int)NotificationType.GambleReminder, notifBuilder.Build());
 			}
 		}
 
@@ -195,13 +182,12 @@ namespace Joker.Android
 		/// <param name="interval">The interval for the time the notification should appear.</param>
 		public void ScheduleLimitReminder(TimeSpan interval)
 		{
-			var broadcast = PendingIntent.GetBroadcast(Application.Context,
-				(int)PNType.LimitReminder,
-				new Intent(Application.Context, typeof(LimitReminderReceiver)),
+			var intent = new Intent(Application.Context, typeof(LimitReminderReceiver));
+			var broadcast = PendingIntent.GetBroadcast(Application.Context, (int)NotificationType.LimitReminder, intent,
 				PendingIntentFlags.UpdateCurrent);
 
 			long time = GetSystemTime(DateTime.UtcNow + interval);
-			Scheduler.SetRepeating(AlarmType.RtcWakeup, time, (long)interval.TotalMilliseconds, broadcast);
+			AlarmService.SetRepeating(AlarmType.RtcWakeup, time, (long)interval.TotalMilliseconds, broadcast);
 		}
 
 		/// <summary>
@@ -218,15 +204,15 @@ namespace Joker.Android
 			/// <param name="intent">Not used here.</param>
 			public override void OnReceive(Context context, Intent intent)
 			{
-				var channel = new NotificationChannel(PNType.LimitReminder.ToString(),
-					"Limit-Erinnerungen", NotificationImportance.Default)
-				{
-					LockscreenVisibility = NotificationVisibility.Public
-				};
-				Notifier.CreateNotificationChannel(channel);
+				string channelId = NotificationType.LimitReminder.ToString();
+				var channel = new NotificationChannel(channelId, Notifications.Channel.LimitReminder,
+					NotificationImportance.Default);
+				channel.LockscreenVisibility = NotificationVisibility.Public;
+				NotifService.CreateNotificationChannel(channel);
 
-				var launch = PendingIntent.GetActivity(context, 0, new Intent(context, typeof(LaunchActivity)), 0);
-				var notifBuilder = new Notification.Builder(context, PNType.LimitReminder.ToString())
+				intent = new Intent(context, typeof(LaunchActivity));
+				var launch = PendingIntent.GetActivity(context, 0, intent, 0);
+				var notifBuilder = new Notification.Builder(context, channelId)
 					.SetContentTitle(Notifications.Title.LimitReminder)
 					.SetContentText(Notifications.Body.LimitReminder)
 					.SetSmallIcon(Resource.Drawable.ui_icon)
@@ -234,7 +220,7 @@ namespace Joker.Android
 					.BigText(Notifications.Body.LimitReminder))
 					.SetAutoCancel(true)
 					.SetContentIntent(launch);
-				Notifier.Notify((int)PNType.LimitReminder, notifBuilder.Build());
+				NotifService.Notify((int)NotificationType.LimitReminder, notifBuilder.Build());
 			}
 		}
 
@@ -254,7 +240,7 @@ namespace Joker.Android
 			{
 				if(AppSettings.WelcomeTourCompleted)
 				{
-					var notifier = new AndroidNotifier();
+					var notifier = new Notifier();
 					notifier.ScheduleLimitExpired(AppSettings.LimitExpiredTime);
 					notifier.ScheduleNewPicture(AppSettings.NewPictureTime);
 					notifier.ScheduleGambleReminder(UserSettings.GambleReminderInterval);

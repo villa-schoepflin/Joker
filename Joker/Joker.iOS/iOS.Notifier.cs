@@ -3,23 +3,31 @@ using Foundation;
 using Joker.AppInterface;
 using UserNotifications;
 
-[assembly: Xamarin.Forms.Dependency(typeof(Joker.iOS.IosNotifier))]
+[assembly: Xamarin.Forms.Dependency(typeof(Joker.iOS.Notifier))]
 namespace Joker.iOS
 {
 	/// <summary>
 	/// Contains iOS-specific notification functionality.
 	/// </summary>
-	public class IosNotifier : IPlatformNotifier
+	public class Notifier : IPlatformNotifier
 	{
 		/// <summary>
-		/// iOS-specific implementation of an API method that schedules a notification
-		/// indicating the current limit has expired and a new one should be set.
+		/// Requests permission from the user to send notifications.
+		/// </summary>
+		public Notifier()
+		{
+			Action<bool, NSError> handler = (granted, error) => { };
+			UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert, handler);
+		}
+
+		/// <summary>
+		/// iOS-specific implementation of an API method that schedules a notification indicating the current limit has
+		/// expired and a new one should be set.
 		/// </summary>
 		/// <param name="timeSetting">The time at which the notification should appear.</param>
 		public void ScheduleLimitExpired(DateTime timeSetting)
 		{
-			UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert, (approved, err) => { });
-
+			string id = NotificationType.LimitExpired.ToString();
 			var content = new UNMutableNotificationContent
 			{
 				Title = Notifications.Title.LimitExpired,
@@ -40,26 +48,28 @@ namespace Joker.iOS
 			};
 			var trigger = UNCalendarNotificationTrigger.CreateTrigger(time, false);
 
-			var req = UNNotificationRequest.FromIdentifier(PNType.LimitExpired.ToString(), content, trigger);
+			var req = UNNotificationRequest.FromIdentifier(id, content, trigger);
 			UNUserNotificationCenter.Current.AddNotificationRequest(req, null);
 		}
 
 		/// <summary>
-		/// iOS-specific implementation of an API method that removes the notification that
-		/// indicates that the current limit has expired.
+		/// iOS-specific implementation of an API method that removes the notification that indicates that the current
+		/// limit has expired.
 		/// </summary>
 		public void CancelLimitExpired()
 		{
-			UNUserNotificationCenter.Current.RemoveDeliveredNotifications(new[] { PNType.LimitExpired.ToString() });
+			string[] id = new[] { NotificationType.LimitExpired.ToString() };
+			UNUserNotificationCenter.Current.RemoveDeliveredNotifications(id);
 		}
 
 		/// <summary>
-		/// iOS-specific implementation of an API method that schedules a notification
-		/// indicating that a new picture is available to see.
+		/// iOS-specific implementation of an API method that schedules a notification indicating that a new picture is
+		/// available to see.
 		/// </summary>
 		/// <param name="timeSetting">The time at which the notification should appear.</param>
 		public void ScheduleNewPicture(DateTime timeSetting)
 		{
+			string id = NotificationType.NewPicture.ToString();
 			var content = new UNMutableNotificationContent
 			{
 				Title = Notifications.Title.NewPicture,
@@ -80,17 +90,18 @@ namespace Joker.iOS
 			};
 			var trigger = UNCalendarNotificationTrigger.CreateTrigger(time, false);
 
-			var req = UNNotificationRequest.FromIdentifier(PNType.NewPicture.ToString(), content, trigger);
+			var req = UNNotificationRequest.FromIdentifier(id, content, trigger);
 			UNUserNotificationCenter.Current.AddNotificationRequest(req, null);
 		}
 
 		/// <summary>
-		/// iOS-specific implementation of an API method that schedules a notification
-		/// reminding the user to always record acts of gambling within the app.
+		/// iOS-specific implementation of an API method that schedules a notification reminding the user to always
+		/// record acts of gambling within the app.
 		/// </summary>
 		/// <param name="interval">The interval for the time the notification should appear.</param>
 		public void ScheduleGambleReminder(TimeSpan interval)
 		{
+			string id = NotificationType.GambleReminder.ToString();
 			var content = new UNMutableNotificationContent
 			{
 				Title = Notifications.Title.GambleReminder,
@@ -98,9 +109,8 @@ namespace Joker.iOS
 				Body = Notifications.Body.GambleReminder,
 				Badge = 0,
 			};
-
 			var trigger = UNTimeIntervalNotificationTrigger.CreateTrigger(interval.TotalSeconds, true);
-			var req = UNNotificationRequest.FromIdentifier(PNType.GambleReminder.ToString(), content, trigger);
+			var req = UNNotificationRequest.FromIdentifier(id, content, trigger);
 			UNUserNotificationCenter.Current.AddNotificationRequest(req, null);
 		}
 
@@ -111,6 +121,7 @@ namespace Joker.iOS
 		/// <param name="interval">The interval for the time the notification should appear.</param>
 		public void ScheduleLimitReminder(TimeSpan interval)
 		{
+			string id = NotificationType.LimitReminder.ToString();
 			var content = new UNMutableNotificationContent
 			{
 				Title = Notifications.Title.LimitReminder,
@@ -118,9 +129,8 @@ namespace Joker.iOS
 				Body = Notifications.Body.LimitReminder,
 				Badge = 0,
 			};
-
 			var trigger = UNTimeIntervalNotificationTrigger.CreateTrigger(interval.TotalSeconds, true);
-			var req = UNNotificationRequest.FromIdentifier(PNType.LimitReminder.ToString(), content, trigger);
+			var req = UNNotificationRequest.FromIdentifier(id, content, trigger);
 			UNUserNotificationCenter.Current.AddNotificationRequest(req, null);
 		}
 	}

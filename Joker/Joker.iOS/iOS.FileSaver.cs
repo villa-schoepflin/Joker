@@ -4,13 +4,13 @@ using Joker.AppInterface;
 using Photos;
 using UIKit;
 
-[assembly: Xamarin.Forms.Dependency(typeof(Joker.iOS.IosFileSaver))]
+[assembly: Xamarin.Forms.Dependency(typeof(Joker.iOS.FileSaver))]
 namespace Joker.iOS
 {
 	/// <summary>
 	/// Contains iOS-specific file IO functionality.
 	/// </summary>
-	public class IosFileSaver : IPlatformFileSaver
+	public class FileSaver : IPlatformFileSaver
 	{
 		/// <summary>
 		/// Saves the image file contained by the parameter to the iOS photos app,

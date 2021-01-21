@@ -4,138 +4,125 @@
         <name>Joker.Android</name>
     </assembly>
     <members>
-        <member name="T:Joker.Android.AndroidFileSaver">
+        <member name="T:Joker.Android.FileSaver">
             <summary>
             Contains Android-specific file IO functionality.
             </summary>
         </member>
-        <member name="F:Joker.Android.AndroidFileSaver.RequestCode">
+        <member name="F:Joker.Android.FileSaver.RequestCode">
             <summary>
             Associated with the permission request to save files to local storage.
             </summary>
         </member>
-        <member name="F:Joker.Android.AndroidFileSaver.Callback">
+        <member name="F:Joker.Android.FileSaver.Callback">
             <summary>
             The callback value for the asynchronous task through which the storage access permission
             is requested.
             </summary>
         </member>
-        <member name="F:Joker.Android.AndroidFileSaver.FilePath">
+        <member name="F:Joker.Android.FileSaver.FilePath">
             <summary>
             The picture whose image file should be saved.
             </summary>
         </member>
-        <member name="M:Joker.Android.AndroidFileSaver.SaveToGallery(System.String)">
+        <member name="M:Joker.Android.FileSaver.SaveToGallery(System.String)">
             <summary>
             Requests permission to access phone storage, then begins the saving process.
             </summary>
             <param name="filePath">File path to the image asset.</param>
             <returns>Indicates whether storage access permission was granted.</returns>
         </member>
-        <member name="M:Joker.Android.AndroidFileSaver.Finish(Android.Content.PM.Permission)">
+        <member name="M:Joker.Android.FileSaver.Finish(Android.Content.PM.Permission)">
             <summary>
             Saves the image file to the Android gallery in a "Joker" directory.
             </summary>
             <param name="grantResult">Result of the permission request to the user.</param>
         </member>
-        <member name="T:Joker.Android.AndroidNotifier">
+        <member name="T:Joker.Android.Notifier">
             <summary>
             Contains Android-specific notification functionality.
             </summary>
         </member>
-        <member name="P:Joker.Android.AndroidNotifier.Scheduler">
+        <member name="M:Joker.Android.Notifier.ScheduleLimitExpired(System.DateTime)">
             <summary>
-            Gets the app-specific Android alarm manager to schedule broadcasts and notifications.
-            </summary>
-        </member>
-        <member name="P:Joker.Android.AndroidNotifier.Notifier">
-            <summary>
-            Gets the app-specific Android notification manager to create push notifications on the
-            phone.
-            </summary>
-        </member>
-        <member name="M:Joker.Android.AndroidNotifier.ScheduleLimitExpired(System.DateTime)">
-            <summary>
-            Android-specific implementation of an API method that schedules a notification
-            indicating the current limit has expired and a new one should be set.
+            Android-specific implementation of an API method that schedules a notification indicating the current limit
+            has expired and a new one should be set.
             </summary>
             <param name="timeSetting">The time at which the notification should appear.</param>
         </member>
-        <member name="M:Joker.Android.AndroidNotifier.CancelLimitExpired">
+        <member name="M:Joker.Android.Notifier.CancelLimitExpired">
             <summary>
-            Android-specific implementation of an API method that removes the notification that
-            indicates that the current limit has expired.
+            Android-specific implementation of an API method that removes the notification that indicates that the
+            current limit has expired.
             </summary>
         </member>
-        <member name="T:Joker.Android.AndroidNotifier.LimitExpiredReceiver">
+        <member name="T:Joker.Android.Notifier.LimitExpiredReceiver">
             <summary>
             Handles the notification broadcast received from the Android OS at the scheduled time.
             </summary>
         </member>
-        <member name="M:Joker.Android.AndroidNotifier.LimitExpiredReceiver.OnReceive(Android.Content.Context,Android.Content.Intent)">
+        <member name="M:Joker.Android.Notifier.LimitExpiredReceiver.OnReceive(Android.Content.Context,Android.Content.Intent)">
             <summary>
-            Receives the broadcast from Android and pushes an ongoing notification indicating
-            that the current limit has expired. Creates the respective notification channel if
-            necessary.
+            Receives the broadcast from Android and pushes an ongoing notification indicating that the current limit
+            has expired. Creates the respective notification channel if necessary.
             </summary>
             <param name="context">The context through which the broadcast is processed.</param>
             <param name="intent">Not used here.</param>
         </member>
-        <member name="M:Joker.Android.AndroidNotifier.ScheduleNewPicture(System.DateTime)">
+        <member name="M:Joker.Android.Notifier.ScheduleNewPicture(System.DateTime)">
             <summary>
-            Android-specific implementation of an API method that schedules a notification
-            indicating that a new picture is available to see.
+            Android-specific implementation of an API method that schedules a notification indicating that a new picture
+            is available to see.
             </summary>
             <param name="timeSetting">The time at which the notification should appear.</param>
         </member>
-        <member name="T:Joker.Android.AndroidNotifier.NewPictureReceiver">
+        <member name="T:Joker.Android.Notifier.NewPictureReceiver">
             <summary>
             Handles the notification broadcast received from the Android OS at the scheduled time.
             </summary>
         </member>
-        <member name="M:Joker.Android.AndroidNotifier.NewPictureReceiver.OnReceive(Android.Content.Context,Android.Content.Intent)">
+        <member name="M:Joker.Android.Notifier.NewPictureReceiver.OnReceive(Android.Content.Context,Android.Content.Intent)">
             <summary>
-            Receives the broadcast from Android and pushes an ongoing notification indicating
-            that a new pictures is available to see. Creates the respective notification channel
-            if necessary. The notification is removed when it is opened.
+            Receives the broadcast from Android and pushes an ongoing notification indicating that a new pictures is
+            available to see. Creates the respective notification channel if necessary. The notification is removed
+            when it is opened.
             </summary>
             <param name="context">The context through which the broadcast is processed.</param>
             <param name="intent">Not used here.</param>
         </member>
-        <member name="M:Joker.Android.AndroidNotifier.ScheduleGambleReminder(System.TimeSpan)">
+        <member name="M:Joker.Android.Notifier.ScheduleGambleReminder(System.TimeSpan)">
             <summary>
-            Android-specific implementation of an API method that schedules a notification reminding
-            the user to always record acts of gambling within the app.
+            Android-specific implementation of an API method that schedules a notification reminding the user to always
+            record acts of gambling within the app.
             </summary>
             <param name="interval">The interval for the time the notification should appear.</param>
         </member>
-        <member name="T:Joker.Android.AndroidNotifier.GambleReminderReceiver">
+        <member name="T:Joker.Android.Notifier.GambleReminderReceiver">
             <summary>
             Handles the notification broadcast received from the Android OS at the scheduled time.
             </summary>
         </member>
-        <member name="M:Joker.Android.AndroidNotifier.GambleReminderReceiver.OnReceive(Android.Content.Context,Android.Content.Intent)">
+        <member name="M:Joker.Android.Notifier.GambleReminderReceiver.OnReceive(Android.Content.Context,Android.Content.Intent)">
             <summary>
-            Receives the broadcast from Android and pushes a notification reminding the user
-            that their acts of gambling should be recorded with the app. Creates the respective
-            notification channel if necessary.
+            Receives the broadcast from Android and pushes a notification reminding the user that their acts of
+            gambling should be recorded with the app. Creates the respective notification channel if necessary.
             </summary>
             <param name="context">The context through which the broadcast is processed.</param>
             <param name="intent">Not used here.</param>
         </member>
-        <member name="M:Joker.Android.AndroidNotifier.ScheduleLimitReminder(System.TimeSpan)">
+        <member name="M:Joker.Android.Notifier.ScheduleLimitReminder(System.TimeSpan)">
             <summary>
             Android-specific implementation of an API method that schedules a notification reminding the user about
             their current limit's state.
             </summary>
             <param name="interval">The interval for the time the notification should appear.</param>
         </member>
-        <member name="T:Joker.Android.AndroidNotifier.LimitReminderReceiver">
+        <member name="T:Joker.Android.Notifier.LimitReminderReceiver">
             <summary>
             Handles the notification broadcast received from the Android OS at the scheduled time.
             </summary>
         </member>
-        <member name="M:Joker.Android.AndroidNotifier.LimitReminderReceiver.OnReceive(Android.Content.Context,Android.Content.Intent)">
+        <member name="M:Joker.Android.Notifier.LimitReminderReceiver.OnReceive(Android.Content.Context,Android.Content.Intent)">
             <summary>
             Receives the broadcast from Android and pushes a notification reminding the user about their current
             limit's state. Creates the respective notification channel if necessary.
@@ -143,19 +130,19 @@
             <param name="context">The context through which the broadcast is processed.</param>
             <param name="intent">Not used here.</param>
         </member>
-        <member name="T:Joker.Android.AndroidNotifier.BootReceiver">
+        <member name="T:Joker.Android.Notifier.BootReceiver">
             <summary>
             Handles the broadcast received from the Android OS when the phone has been turned on.
             </summary>
         </member>
-        <member name="M:Joker.Android.AndroidNotifier.BootReceiver.OnReceive(Android.Content.Context,Android.Content.Intent)">
+        <member name="M:Joker.Android.Notifier.BootReceiver.OnReceive(Android.Content.Context,Android.Content.Intent)">
             <summary>
             Re-schedules all notifications after the phone has been turned on.
             </summary>
             <param name="context">Not used here.</param>
             <param name="intent">Not used here.</param>
         </member>
-        <member name="M:Joker.Android.AndroidNotifier.GetSystemTime(System.DateTime)">
+        <member name="M:Joker.Android.Notifier.GetSystemTime(System.DateTime)">
             <summary>
             Converts a C# DateTime object into an Android-specific time format as represented by a 64-bit integer.
             </summary>
