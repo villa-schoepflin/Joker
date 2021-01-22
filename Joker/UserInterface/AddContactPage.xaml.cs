@@ -96,7 +96,7 @@ namespace Joker.UserInterface
 		{
 			try
 			{
-				var contact = new Contact(NameEntry.Text, PhoneNumberEntry.Text, ExpertMarker.IsToggled);
+				Contact contact = new(NameEntry.Text, PhoneNumberEntry.Text, ExpertMarker.IsToggled);
 				Database.Insert(contact);
 				_ = await Navigation.PopAsync();
 				App.CurrentContactPage.RefreshContacts();

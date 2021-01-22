@@ -41,7 +41,7 @@ namespace Joker.UserInterface
 		/// <param name="propertyName">Name of the property that has changed.</param>
 		protected void OnPropertyChanged(string propertyName)
 		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+			PropertyChanged?.Invoke(this, new(propertyName));
 		}
 	}
 }

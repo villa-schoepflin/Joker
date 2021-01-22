@@ -25,7 +25,7 @@ namespace Joker.Android
 		/// <param name="timeSetting">The time at which the notification should appear.</param>
 		public void ScheduleLimitExpired(DateTime timeSetting)
 		{
-			var intent = new Intent(Application.Context, typeof(LimitExpiredReceiver));
+			Intent intent = new(Application.Context, typeof(LimitExpiredReceiver));
 			var broadcast = PendingIntent.GetBroadcast(Application.Context, (int)NotificationType.LimitExpired, intent,
 				PendingIntentFlags.UpdateCurrent);
 
@@ -55,20 +55,18 @@ namespace Joker.Android
 			/// <param name="intent">Not used here.</param>
 			public override void OnReceive(Context context, Intent intent)
 			{
-				string channelId = NotificationType.LimitExpired.ToString();
-				var channel = new NotificationChannel(channelId, Notifications.Channel.LimitExpired,
-					NotificationImportance.Max);
+				string id = NotificationType.LimitExpired.ToString();
+				NotificationChannel channel = new(id, Notifications.Channel.LimitExpired, NotificationImportance.Max);
 				channel.LockscreenVisibility = NotificationVisibility.Public;
 				NotifService.CreateNotificationChannel(channel);
 
-				intent = new Intent(context, typeof(LaunchActivity));
-				var launch = PendingIntent.GetActivity(context, 0, intent, 0);
-				var notifBuilder = new Notification.Builder(context, channelId)
+				Intent launchIntent = new(context, typeof(LaunchActivity));
+				var launch = PendingIntent.GetActivity(context, 0, launchIntent, 0);
+				var notifBuilder = new Notification.Builder(context, id)
 					.SetContentTitle(Notifications.Title.LimitExpired)
 					.SetContentText(Notifications.Body.LimitExpired)
 					.SetSmallIcon(Resource.Drawable.ui_icon)
-					.SetStyle(new Notification.BigTextStyle()
-					.BigText(Notifications.Body.LimitExpired))
+					.SetStyle(new Notification.BigTextStyle().BigText(Notifications.Body.LimitExpired))
 					.SetOngoing(true)
 					.SetAutoCancel(false)
 					.SetContentIntent(launch);
@@ -83,7 +81,7 @@ namespace Joker.Android
 		/// <param name="timeSetting">The time at which the notification should appear.</param>
 		public void ScheduleNewPicture(DateTime timeSetting)
 		{
-			var intent = new Intent(Application.Context, typeof(NewPictureReceiver));
+			Intent intent = new(Application.Context, typeof(NewPictureReceiver));
 			var broadcast = PendingIntent.GetBroadcast(Application.Context, (int)NotificationType.NewPicture, intent,
 				PendingIntentFlags.UpdateCurrent);
 
@@ -105,20 +103,18 @@ namespace Joker.Android
 			/// <param name="intent">Not used here.</param>
 			public override void OnReceive(Context context, Intent intent)
 			{
-				string channelId = NotificationType.NewPicture.ToString();
-				var channel = new NotificationChannel(channelId, Notifications.Channel.NewPicture,
-					NotificationImportance.High);
+				string id = NotificationType.NewPicture.ToString();
+				NotificationChannel channel = new(id, Notifications.Channel.NewPicture, NotificationImportance.Max);
 				channel.LockscreenVisibility = NotificationVisibility.Public;
 				NotifService.CreateNotificationChannel(channel);
 
-				intent = new Intent(context, typeof(LaunchActivity));
-				var launch = PendingIntent.GetActivity(context, 0, intent, 0);
-				var notifBuilder = new Notification.Builder(context, channelId)
+				Intent launchIntent = new(context, typeof(LaunchActivity));
+				var launch = PendingIntent.GetActivity(context, 0, launchIntent, 0);
+				var notifBuilder = new Notification.Builder(context, id)
 					.SetContentTitle(Notifications.Title.NewPicture)
 					.SetContentText(Notifications.Body.NewPicture)
 					.SetSmallIcon(Resource.Drawable.ui_icon)
-					.SetStyle(new Notification.BigTextStyle()
-					.BigText(Notifications.Body.NewPicture))
+					.SetStyle(new Notification.BigTextStyle().BigText(Notifications.Body.NewPicture))
 					.SetAutoCancel(true)
 					.SetOngoing(true)
 					.SetContentIntent(launch);
@@ -133,7 +129,7 @@ namespace Joker.Android
 		/// <param name="interval">The interval for the time the notification should appear.</param>
 		public void ScheduleGambleReminder(TimeSpan interval)
 		{
-			var intent = new Intent(Application.Context, typeof(GambleReminderReceiver));
+			Intent intent = new(Application.Context, typeof(GambleReminderReceiver));
 			var broadcast = PendingIntent.GetBroadcast(Application.Context, (int)NotificationType.GambleReminder,
 				intent, PendingIntentFlags.UpdateCurrent);
 
@@ -155,20 +151,18 @@ namespace Joker.Android
 			/// <param name="intent">Not used here.</param>
 			public override void OnReceive(Context context, Intent intent)
 			{
-				string channelId = NotificationType.GambleReminder.ToString();
-				var channel = new NotificationChannel(channelId, Notifications.Channel.GambleReminder,
-					NotificationImportance.Default);
+				string id = NotificationType.GambleReminder.ToString();
+				NotificationChannel channel = new(id, Notifications.Channel.GambleReminder, NotificationImportance.Max);
 				channel.LockscreenVisibility = NotificationVisibility.Public;
 				NotifService.CreateNotificationChannel(channel);
 
-				intent = new Intent(context, typeof(LaunchActivity));
-				var launch = PendingIntent.GetActivity(context, 0, intent, 0);
-				var notifBuilder = new Notification.Builder(context, channelId)
+				Intent launchIntent = new(context, typeof(LaunchActivity));
+				var launch = PendingIntent.GetActivity(context, 0, launchIntent, 0);
+				var notifBuilder = new Notification.Builder(context, id)
 					.SetContentTitle(Notifications.Title.GambleReminder)
 					.SetContentText(Notifications.Body.GambleReminder)
 					.SetSmallIcon(Resource.Drawable.ui_icon)
-					.SetStyle(new Notification.BigTextStyle()
-					.BigText(Notifications.Body.GambleReminder))
+					.SetStyle(new Notification.BigTextStyle().BigText(Notifications.Body.GambleReminder))
 					.SetAutoCancel(true)
 					.SetContentIntent(launch);
 				NotifService.Notify((int)NotificationType.GambleReminder, notifBuilder.Build());
@@ -182,7 +176,7 @@ namespace Joker.Android
 		/// <param name="interval">The interval for the time the notification should appear.</param>
 		public void ScheduleLimitReminder(TimeSpan interval)
 		{
-			var intent = new Intent(Application.Context, typeof(LimitReminderReceiver));
+			Intent intent = new(Application.Context, typeof(LimitReminderReceiver));
 			var broadcast = PendingIntent.GetBroadcast(Application.Context, (int)NotificationType.LimitReminder, intent,
 				PendingIntentFlags.UpdateCurrent);
 
@@ -204,20 +198,18 @@ namespace Joker.Android
 			/// <param name="intent">Not used here.</param>
 			public override void OnReceive(Context context, Intent intent)
 			{
-				string channelId = NotificationType.LimitReminder.ToString();
-				var channel = new NotificationChannel(channelId, Notifications.Channel.LimitReminder,
-					NotificationImportance.Default);
+				string id = NotificationType.LimitReminder.ToString();
+				NotificationChannel channel = new(id, Notifications.Channel.LimitReminder, NotificationImportance.Max);
 				channel.LockscreenVisibility = NotificationVisibility.Public;
 				NotifService.CreateNotificationChannel(channel);
 
-				intent = new Intent(context, typeof(LaunchActivity));
-				var launch = PendingIntent.GetActivity(context, 0, intent, 0);
-				var notifBuilder = new Notification.Builder(context, channelId)
+				Intent launchIntent = new(context, typeof(LaunchActivity));
+				var launch = PendingIntent.GetActivity(context, 0, launchIntent, 0);
+				var notifBuilder = new Notification.Builder(context, id)
 					.SetContentTitle(Notifications.Title.LimitReminder)
 					.SetContentText(Notifications.Body.LimitReminder)
 					.SetSmallIcon(Resource.Drawable.ui_icon)
-					.SetStyle(new Notification.BigTextStyle()
-					.BigText(Notifications.Body.LimitReminder))
+					.SetStyle(new Notification.BigTextStyle().BigText(Notifications.Body.LimitReminder))
 					.SetAutoCancel(true)
 					.SetContentIntent(launch);
 				NotifService.Notify((int)NotificationType.LimitReminder, notifBuilder.Build());
@@ -240,7 +232,7 @@ namespace Joker.Android
 			{
 				if(AppSettings.WelcomeTourCompleted)
 				{
-					var notifier = new Notifier();
+					Notifier notifier = new();
 					notifier.ScheduleLimitExpired(AppSettings.LimitExpiredTime);
 					notifier.ScheduleNewPicture(AppSettings.NewPictureTime);
 					notifier.ScheduleGambleReminder(UserSettings.GambleReminderInterval);

@@ -32,27 +32,27 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// The duration in days.
 		/// </summary>
-		public string DurationInDays => $"{Limit.Duration.TotalDays} Tage";
+		public string DurationInDays => string.Format(Text.TimeInDays, Limit.Duration.TotalDays);
 
 		/// <summary>
 		/// A text indicating the state of the limit.
 		/// </summary>
-		public string LimitState => Balance.StartsWith("-") ? "Limit überschritten" : "Limit eingehalten";
+		public string LimitState => Database.CalcBalance(Limit) < 0 ? Text.LimitExceeded : Text.LimitKept;
 
 		/// <summary>
 		/// The color marking the state of the limit.
 		/// </summary>
-		public Color LimitStateBackground => Color.FromHex(Balance.StartsWith("-") ? "#ffc0cb" : "#90ee90");
+		public Color LimitStateBackground => Color.FromHex(Database.CalcBalance(Limit) < 0 ? "#ffc0cb" : "#90ee90");
 
 		/// <summary>
 		/// The color for the text that indicates the limit state.
 		/// </summary>
-		public Color LimitStateTextColor => Color.FromHex(Balance.StartsWith("-") ? "#75585d" : "#406e40");
+		public Color LimitStateTextColor => Color.FromHex(Database.CalcBalance(Limit) < 0 ? "#75585d" : "#406e40");
 
 		/// <summary>
 		/// Returns the chart associated with how the limit was depleted over time.
 		/// </summary>
-		public LineChart HistoryChart => new LineChart()
+		public LineChart HistoryChart => new()
 		{
 			Entries = CalculateChartEntries(SKColors.White, SKColors.Red),
 			PointMode = PointMode.None,
@@ -81,9 +81,9 @@ namespace Joker.UserInterface
 			indices[0] = 0;
 			indices[^1] = entries.Length - 1;
 
-			entries[0] = new Entry((float)Limit.Amount) { Color = goodColor };
+			entries[0] = new((float)Limit.Amount) { Color = goodColor };
 			float lastValue = (float)Database.CalcBalance(Limit);
-			entries[^1] = new Entry(lastValue) { Color = lastValue < 0 ? badColor : goodColor };
+			entries[^1] = new(lastValue) { Color = lastValue < 0 ? badColor : goodColor };
 
 			// Enters the remaining limit values after each gamble at appropriate places in the graph.
 			for(int i = 0; i < gambles.Length; i++)
@@ -91,7 +91,7 @@ namespace Joker.UserInterface
 				long gambleTimeOffset = (gambles[i].Time - Limit.Time).Ticks;
 				indices[i + 1] = (int)(gambleTimeOffset / (float)span.Ticks * (entries.Length - 1));
 				float value = (float)Database.CalcRemainingLimit(gambles[i]);
-				entries[indices[i + 1]] = new Entry(value) { Color = value < 0 ? badColor : goodColor };
+				entries[indices[i + 1]] = new(value) { Color = value < 0 ? badColor : goodColor };
 			}
 
 			// Enters all remaining points in the graph by linearly interpolating values.
@@ -104,13 +104,14 @@ namespace Joker.UserInterface
 					int next = indices[n + 1];
 					float lastEntry = entries[last].Value;
 					float value = lastEntry - (lastEntry - entries[next].Value) / (next - last) * (i - last);
-					entries[i] = new Entry(value) { Color = value < 0 ? badColor : goodColor };
+					entries[i] = new(value) { Color = value < 0 ? badColor : goodColor };
 				}
 				else
 					n++;
 
 				// Adds the captions for the points which correspond roughly to the beginning of new days.
-				int hour = Limit.Time.ToLocalTime().Hour + (Limit.Time.Minute >= 30 ? 1 : 0);
+				int roundUp = Limit.Time.Minute >= 30 ? 1 : 0;
+				int hour = Limit.Time.ToLocalTime().Hour + roundUp;
 				int not12am = hour != 0 ? 1 : 0;
 				if(i % ((int)span.TotalDays / 5 * 24) == 24 * not12am - hour)
 				{

@@ -38,7 +38,7 @@ namespace Joker.Android
 		public Task<bool> SaveToGallery(string filePath)
 		{
 			FilePath = filePath;
-			Callback = new TaskCompletionSource<bool>();
+			Callback = new();
 
 			string storagePermission = Manifest.Permission.WriteExternalStorage;
 			if(Application.Context.CheckSelfPermission(storagePermission) == Permission.Granted)
@@ -61,10 +61,10 @@ namespace Joker.Android
 
 			string mediaDir = Application.Context.GetExternalMediaDirs()[0].AbsolutePath;
 			string targetDir = Path.Combine(mediaDir, Folders.GalleryFolderName);
-			using(var folder = new Java.IO.File(targetDir))
+			using(Java.IO.File folder = new(targetDir))
 			{
 				if(!folder.Exists())
-					folder.Mkdir();
+					_ = folder.Mkdir();
 			}
 
 			byte[] fileData;
@@ -72,7 +72,7 @@ namespace Joker.Android
 			using(var stream = typeof(App).Assembly.GetManifestResourceStream(assetPath))
 			{
 				fileData = new byte[stream.Length];
-				stream.Read(fileData, 0, (int)stream.Length);
+				_ = stream.Read(fileData, 0, (int)stream.Length);
 			}
 
 			string file = Path.Combine(targetDir, FilePath);

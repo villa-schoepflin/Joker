@@ -84,7 +84,7 @@ namespace Joker
 		/// <summary>
 		/// The locale or culture setting to use for this app.
 		/// </summary>
-		internal static readonly CultureInfo Locale = new CultureInfo("de-DE");
+		internal static readonly CultureInfo Locale = new("de-DE");
 
 		/// <summary>
 		/// References the current main page's timeline feed page.

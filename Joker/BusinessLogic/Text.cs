@@ -50,6 +50,12 @@ namespace Joker.BusinessLogic
 		public const string LimitDurationBounds
 			= "Die Dauer eines Limits sollte zwischen {0} und {1} Tagen liegen.";
 
+		public const string LimitExceeded
+			= "Limit überschritten";
+
+		public const string LimitKept
+			= "Limit eingehalten";
+
 		public const string MonetaryValueBounds
 			= "Der Betrag muss zwischen {0:C} und {1:C} liegen.";
 
@@ -115,6 +121,9 @@ namespace Joker.BusinessLogic
 
 		public const string StoragePermissionDenied
 			= "Die App ist nicht berechtigt auf den Speicher zuzugreifen.";
+
+		public const string TimeInDays
+			= "{0} Tage";
 
 		public const string TimeSpanInvalid
 			= "Das ist keine erkennbare Dauer.";

@@ -16,8 +16,8 @@ namespace Joker.iOS
 		/// </summary>
 		public Notifier()
 		{
-			Action<bool, NSError> handler = (granted, error) => { };
-			UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert, handler);
+			var notifier = UNUserNotificationCenter.Current;
+			notifier.RequestAuthorization(UNAuthorizationOptions.Alert, (granted, error) => { });
 		}
 
 		/// <summary>

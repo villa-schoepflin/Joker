@@ -55,7 +55,7 @@ namespace Joker.UserInterface
 			foreach(var pic in Database.LikedPictures())
 				pics.AddRange(new[] { pic, pic }); // A liked picture will be shown 3x as often by adding it twice.
 
-			var random = new Random();
+			Random random = new();
 			Picture nextPic;
 			do
 				nextPic = pics[random.Next(0, pics.Count)];
@@ -80,20 +80,20 @@ namespace Joker.UserInterface
 				float height = scale * bitmap.Height;
 				float left = 0.5f * (eventArgs.Info.Width - width);
 				float top = 0.5f * (eventArgs.Info.Height - height);
-				return new SKRect(left, top, left + width, top + height);
+				return new(left, top, left + width, top + height);
 			}
 
 			var canvas = eventArgs.Surface.Canvas;
 			float widthRatio = (float)eventArgs.Info.Width / bitmap.Width;
 			float heightRatio = (float)eventArgs.Info.Height / bitmap.Height;
 
-			float scale = Math.Max(widthRatio, heightRatio) * 1.1f; // Overscale to avoid background bleed when blurring
+			float scale = Math.Max(widthRatio, heightRatio) * 1.2f; // Overscale to avoid background bleed when blurring
 			canvas.DrawBitmap(bitmap, computeRect(scale), Blur);
 
 			scale = Math.Min(widthRatio, heightRatio);
 			canvas.DrawBitmap(bitmap, computeRect(scale));
 		});
-		private static readonly SKPaint Blur = new SKPaint() { ImageFilter = SKImageFilter.CreateBlur(50, 50) };
+		private static readonly SKPaint Blur = new() { ImageFilter = SKImageFilter.CreateBlur(50, 50) };
 
 		/// <summary>
 		/// Updates the picture with the changed Liked status in the database and notifies the change of property.

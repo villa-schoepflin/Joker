@@ -14,7 +14,7 @@ namespace Joker.AppInterface
 		/// <summary>
 		/// Regex pattern for detecting uses of placeholder keywords in a text asset.
 		/// </summary>
-		private static readonly Regex Pattern = new Regex($"({UserName}|{RemainingLimit}|{LastLimitAmount}|{Version})");
+		private static readonly Regex Pattern = new($"({UserName}|{RemainingLimit}|{LastLimitAmount}|{Version})");
 
 		/// <summary>
 		/// Extracts the plaintext from a specified text asset and fills placeholders with the appropriate text.
@@ -25,7 +25,7 @@ namespace Joker.AppInterface
 		{
 			string assetPath = Folders.TextAssets + fileName;
 			using var stream = typeof(App).Assembly.GetManifestResourceStream(assetPath);
-			using var fileReader = new StreamReader(stream);
+			using StreamReader fileReader = new(stream);
 			return Pattern.Replace(fileReader.ReadToEnd(), match => match.Value switch
 			{
 				UserName => UserSettings.UserName,

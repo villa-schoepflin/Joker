@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Joker.BusinessLogic;
 using Xamarin.Forms;
 
@@ -31,7 +31,7 @@ namespace Joker.UserInterface
 		{
 			try
 			{
-				FirstLimit = new Limit(LimitEntry.Text, Limit.InitialLimitDuration.TotalDays.ToString());
+				FirstLimit = new(LimitEntry.Text, Limit.InitialLimitDuration.TotalDays.ToString());
 				await Navigation.PushAsync(new Finish());
 			}
 			catch(ArgumentException error)

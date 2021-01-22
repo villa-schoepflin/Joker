@@ -130,7 +130,6 @@ namespace Joker.UserInterface
 			catch(ArgumentException error)
 			{
 				await DisplayAlert(null, error.Message, Text.Ok);
-				UserPasswordEntry.Text = UserSettings.UserPassword;
 			}
 		}
 

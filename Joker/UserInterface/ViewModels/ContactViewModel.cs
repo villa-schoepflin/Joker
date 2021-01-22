@@ -84,7 +84,7 @@ namespace Joker.UserInterface
 		/// </summary>
 		public ICommand OpenDetailPage => new Command(async () =>
 		{
-			var contactInspector = new ContactInspector(Model);
+			ContactInspector contactInspector = new(Model);
 			await View.Navigation.PushAsync(contactInspector);
 		});
 

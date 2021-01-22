@@ -39,7 +39,7 @@ namespace Joker.UserInterface
 		/// </summary>
 		public ICommand OpenEmail => new Command<string>(async recipient =>
 		{
-			var email = new EmailMessage("", "", recipient);
+			EmailMessage email = new("", "", recipient);
 			await Email.ComposeAsync(email);
 		});
 

@@ -91,21 +91,14 @@ namespace Joker.UserInterface
 			FeedbackHeader.IsVisible = true;
 			OnPropertyChanged(nameof(FeedbackTogglerIcon));
 
-			const uint colorCount = 2;
 			const uint blinkCount = 3;
 			const double blinkFrequency = 0.25;
 
 			int cycle = 0;
 			Device.StartTimer(TimeSpan.FromSeconds(blinkFrequency), () =>
 			{
-				string color = (cycle % colorCount) switch
-				{
-					0 => "Bgr5",
-					1 => "Bgr3",
-					_ => throw new NotImplementedException(),
-				};
-				Frame.BackgroundColor = App.Color(color);
-				return ++cycle < colorCount * blinkCount;
+				Frame.BackgroundColor = App.Color(cycle % 2 == 0 ? "Bgr5" : "Bgr3");
+				return ++cycle < blinkCount * 2;
 			});
 		}
 

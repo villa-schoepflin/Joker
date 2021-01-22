@@ -19,16 +19,20 @@ namespace Joker.iOS
 		/// <param name="filePath">File path to the image asset.</param>
 		public Task<bool> SaveToGallery(string filePath)
 		{
-			var callback = new TaskCompletionSource<bool>();
+			TaskCompletionSource<bool> callback = new();
 
-			PHPhotoLibrary.RequestAuthorization(grant => callback.SetResult(grant == PHAuthorizationStatus.Authorized));
+			void handler(PHAuthorizationStatus status)
+			{
+				callback.SetResult(status == PHAuthorizationStatus.Authorized);
+			}
+			PHPhotoLibrary.RequestAuthorization(handler);
+
 			if(PHPhotoLibrary.AuthorizationStatus == PHAuthorizationStatus.Authorized)
 			{
 				string assetPath = Folders.PictureAssets + filePath;
 				var stream = typeof(App).Assembly.GetManifestResourceStream(assetPath);
 				new UIImage(NSData.FromStream(stream)).SaveToPhotosAlbum(null);
 			}
-
 			return callback.Task;
 		}
 	}

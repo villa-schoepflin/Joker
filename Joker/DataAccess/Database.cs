@@ -20,7 +20,7 @@ namespace Joker.DataAccess
 			if(AppSettings.WelcomeTourCompleted)
 				return;
 
-			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
+			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 			_ = db.CreateTable<Limit>();
 			_ = db.CreateTable<Gamble>();
 			_ = db.CreateTable<Contact>();
@@ -35,7 +35,7 @@ namespace Joker.DataAccess
 		/// database.</exception>
 		internal static void Insert(Limit limit)
 		{
-			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
+			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 			_ = db.Insert(limit);
 		}
 
@@ -47,7 +47,7 @@ namespace Joker.DataAccess
 		/// limit's time.</exception>
 		internal static void Insert(Gamble gamble)
 		{
-			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
+			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 
 			/* Prevents the insertion of Gamble objects when there is no limit set before the gamble's time property as
 			 * this wouldn't make sense for the app's use cases. */
@@ -71,7 +71,7 @@ namespace Joker.DataAccess
 		/// database.</exception>
 		internal static void Insert(Contact contact)
 		{
-			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
+			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 
 			if(db.Table<Contact>().Any(c => c == contact) || contact == Contact.Bzga)
 				throw new ArgumentException(Text.ContactAlreadyExists);
@@ -85,7 +85,7 @@ namespace Joker.DataAccess
 		/// <returns>Returns whether a random picture could be inserted.</returns>
 		internal static bool InsertPictureFromRandomAsset()
 		{
-			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
+			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 
 			// All asset paths in the PictureFeed folder are put into an array.
 			string[] files = typeof(App).Assembly.GetManifestResourceNames();
@@ -98,10 +98,10 @@ namespace Joker.DataAccess
 
 			/* If there are still image resources available, select a random asset path that isn't in the database yet,
 			 * wrap it in a Picture instance, insert it and return true if a row was added. */
-			var random = new Random();
+			Random random = new();
 			Picture pic;
 			do
-				pic = new Picture(files[random.Next(0, files.Length)]);
+				pic = new(files[random.Next(0, files.Length)]);
 			while(db.Table<Picture>().Any(p => p.FilePath == pic.FilePath));
 
 			return db.Insert(pic) > 0;
@@ -113,7 +113,7 @@ namespace Joker.DataAccess
 		/// <returns>Number of rows of the Limit table.</returns>
 		internal static int CountLimits()
 		{
-			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
+			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 			return db.Table<Limit>().Count();
 		}
 
@@ -124,8 +124,8 @@ namespace Joker.DataAccess
 		/// <returns>An array of all gambles and limits, unbound to the database.</returns>
 		internal static TimelineRecord[] AllGamblesAndLimits()
 		{
-			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
-			var list = new List<TimelineRecord>();
+			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
+			List<TimelineRecord> list = new();
 			list.AddRange(db.Table<Gamble>());
 			list.AddRange(db.Table<Limit>());
 			return list.OrderByDescending(tr => tr.Time).ToArray();
@@ -137,7 +137,7 @@ namespace Joker.DataAccess
 		/// <returns>An array of contacts, unbound to the database.</returns>
 		internal static Contact[] AllContacts()
 		{
-			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
+			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 			return db.Table<Contact>().Reverse().ToArray();
 		}
 
@@ -147,7 +147,7 @@ namespace Joker.DataAccess
 		/// <returns>A list of pictures, unbound to the database.</returns>
 		internal static List<Picture> AllPictures()
 		{
-			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
+			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 			return db.Table<Picture>().ToList();
 		}
 
@@ -157,7 +157,7 @@ namespace Joker.DataAccess
 		/// <returns>An array of pictures marked as liked, unbound to the database.</returns>
 		internal static Picture[] LikedPictures()
 		{
-			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
+			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 			return db.Table<Picture>().Where(p => p.Liked).ToArray();
 		}
 
@@ -167,7 +167,7 @@ namespace Joker.DataAccess
 		/// <returns>A single Limit instance, unbound to the database.</returns>
 		internal static Limit MostRecentLimit()
 		{
-			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
+			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 			return db.Table<Limit>().OrderByDescending(l => l.Time).First();
 		}
 
@@ -177,7 +177,7 @@ namespace Joker.DataAccess
 		/// <returns>A single Picture instance, unbound to the database.</returns>
 		internal static Picture MostRecentPicture()
 		{
-			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
+			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 			return db.Table<Picture>().OrderByDescending(p => p.TimeAdded).First();
 		}
 
@@ -187,7 +187,7 @@ namespace Joker.DataAccess
 		/// <returns>Indicates if there are no gambles after the most recent limit.</returns>
 		internal static bool NoGambleAfterMostRecentLimit()
 		{
-			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
+			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 			return !db.Table<Gamble>().Any(g => g.Time > MostRecentLimit().Time);
 		}
 
@@ -198,7 +198,7 @@ namespace Joker.DataAccess
 		/// <returns>The limit directly after the argument or null.</returns>
 		internal static Limit NextLimitAfter(Limit limit)
 		{
-			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
+			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 			return db.Table<Limit>().Where(l => l.Time > limit.Time).FirstOrDefault();
 		}
 
@@ -209,7 +209,7 @@ namespace Joker.DataAccess
 		/// <returns>All gambles within the duration of the limit in an array.</returns>
 		internal static Gamble[] AllGamblesWithinLimit(Limit limit)
 		{
-			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
+			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 			TableQuery<Gamble> query;
 
 			// Finds the next limits after this one, chronologically.
@@ -245,7 +245,7 @@ namespace Joker.DataAccess
 		/// <returns>The current balance of the limit as a decimal.</returns>
 		internal static decimal CalcPreviousLimitBalance()
 		{
-			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
+			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 			return CalcBalance(db.Table<Limit>().OrderByDescending(l => l.Time).ElementAt(1));
 		}
 
@@ -256,7 +256,7 @@ namespace Joker.DataAccess
 		/// <returns>The decimal amount of the limit minus all relevant gambles' amounts.</returns>
 		internal static decimal CalcRemainingLimit(Gamble gamble)
 		{
-			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
+			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 
 			/* First, the most recent limit before the argument is selected by querying all limits whose times are
 			 * earlier than the argument's time, then ordering them descending by time and selecting the first element.
@@ -275,7 +275,7 @@ namespace Joker.DataAccess
 		/// <param name="pic">The picture whose Liked status should be toggled.</param>
 		internal static void ToggleLikedStatus(Picture pic)
 		{
-			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
+			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 
 			pic.Liked ^= true;
 			_ = db.Update(pic);
@@ -287,7 +287,7 @@ namespace Joker.DataAccess
 		/// <param name="gamble">The gamble to be updated.</param>
 		internal static void Update(Gamble gamble)
 		{
-			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
+			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 			_ = db.Update(gamble);
 		}
 
@@ -299,7 +299,7 @@ namespace Joker.DataAccess
 		/// already exists in the database.</exception>
 		internal static void Update(Contact contact)
 		{
-			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
+			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 
 			if(db.Table<Contact>().Where(c => c.Id == contact.Id).Single() == contact)
 				_ = db.Update(contact);
@@ -315,7 +315,7 @@ namespace Joker.DataAccess
 		/// <param name="contact">The contact to be deleted.</param>
 		internal static void Delete(Contact contact)
 		{
-			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
+			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 			_ = db.Delete(contact);
 		}
 
@@ -325,7 +325,7 @@ namespace Joker.DataAccess
 		/// <param name="pic">The picture to be deleted.</param>
 		internal static void Delete(Picture pic)
 		{
-			using var db = new SQLiteConnection(AppSettings.DatabaseFilePath);
+			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 			_ = db.Delete(pic);
 		}
 	}

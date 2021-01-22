@@ -38,7 +38,7 @@ namespace Joker.BusinessLogic
 		/// <summary>
 		/// Holds the translated German terms for each type of gamble.
 		/// </summary>
-		private static readonly Dictionary<GambleType, string> names = new Dictionary<GambleType, string>()
+		private static readonly Dictionary<GambleType, string> names = new()
 		{
 			[GambleType.Other] = "Sonstige",
 			[GambleType.Lottery] = "Lotterie",

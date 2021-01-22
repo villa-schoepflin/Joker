@@ -42,7 +42,7 @@ namespace Joker.UserInterface
 					await DisplayAlert(null, Text.ContactWithoutPhoneNumber, Text.Ok);
 				else
 				{
-					FirstContact = new Contact(contact.DisplayName, contact.Phones[0].PhoneNumber, false);
+					FirstContact = new(contact.DisplayName, contact.Phones[0].PhoneNumber, false);
 					ContactEntry.Text = FirstContact.Name;
 				}
 			}
