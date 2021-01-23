@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:bl="clr-namespace:Joker.BusinessLogic"
+			 xmlns:ui="clr-namespace:Joker.UserInterface"
+			 x:Class="Joker.UserInterface.ContactInspector"
+			 Title="Kontaktdetails">
+	<ScrollView>
+		<StackLayout Padding="{Static ui:Styles.PagePadding}"
+					 Spacing="30">
+			<StackLayout Orientation="Horizontal">
+				<Button Command="{Binding DeleteContact}"
+						Padding="{Static ui:Styles.PagePadding}"
+						BackgroundColor="Red"
+						TextColor="{Static ui:Styles.TextContrast}"
+						Text="Löschen" />
+				<Button Command="{Binding ToggleEditingStatus}"
+						HorizontalOptions="FillAndExpand"
+						Padding="{Static ui:Styles.PagePadding}"
+						BackgroundColor="{Static ui:Styles.Bgr5}"
+						TextColor="{Static ui:Styles.Text1}"
+						Text="{Binding EditButtonText}" />
+			</StackLayout>
+			<StackLayout>
+				<Label>Name:</Label>
+				<Frame BackgroundColor="{Static ui:Styles.Bgr3}"
+					   VerticalOptions="Center"
+					   Padding="10,5,5,5">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="Auto" />
+						</Grid.ColumnDefinitions>
+						<Editor Text="{Binding ContactName}"
+								IsEnabled="{Binding EditingEnabled}"
+								Grid.Row="0"
+								Grid.Column="0"
+								BackgroundColor="{Static ui:Styles.Bgr3}"
+								FontSize="{Static ui:Styles.CustomMedium}"
+								TextColor="{Static ui:Styles.Text1}"
+								MaxLength="{Static bl:Contact.MaxNameLength}" />
+						<Button Command="{Binding InsertNameFromClipboard}"
+								IsVisible="{Binding EditingEnabled}"
+								Grid.Row="0"
+								Grid.Column="1"
+								BackgroundColor="{Static ui:Styles.Bgr4}"
+								WidthRequest="40"
+								HeightRequest="40"
+								Image="ui_clipboard.png" />
+					</Grid>
+				</Frame>
+			</StackLayout>
+			<StackLayout>
+				<Label>Telefonnummer:</Label>
+				<Frame BackgroundColor="{Static ui:Styles.Bgr3}"
+					   VerticalOptions="Center"
+					   Padding="10,5,5,5">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="Auto" />
+						</Grid.ColumnDefinitions>
+						<Editor Text="{Binding PhoneNumber}"
+								IsEnabled="{Binding EditingEnabled}"
+								Grid.Row="0"
+								Grid.Column="0"
+								BackgroundColor="{Static ui:Styles.Bgr3}"
+								FontSize="{Static ui:Styles.CustomMedium}"
+								TextColor="{Static ui:Styles.Text1}"
+								MaxLength="{Static bl:Contact.MaxPhoneNumberLength}"
+								Keyboard="Telephone" />
+						<Button Command="{Binding InsertPhoneNumberFromClipboard}"
+								IsVisible="{Binding EditingEnabled}"
+								Grid.Row="0"
+								Grid.Column="1"
+								BackgroundColor="{Static ui:Styles.Bgr4}"
+								WidthRequest="40"
+								HeightRequest="40"
+								Image="ui_clipboard.png" />
+					</Grid>
+				</Frame>
+			</StackLayout>
+			<StackLayout Orientation="Horizontal">
+				<Label HorizontalOptions="StartAndExpand"
+					   TextColor="{Static ui:Styles.Text1}"
+					   FontSize="Small">Als Beratungsstelle oder Expertenkontakt markieren</Label>
+				<Switch IsToggled="{Binding MarkedAsExpert}"
+						IsEnabled="{Binding EditingEnabled}" />
+			</StackLayout>
+			<Button Command="{Binding CallContact}"
+					HorizontalOptions="FillAndExpand"
+					Padding="{Static ui:Styles.PagePadding}"
+					BackgroundColor="{Static ui:Styles.Bgr4}"
+					TextColor="{Static ui:Styles.Text1}"
+					Text="Kontakt anrufen"
+					Image="ui_phone.png" />
+		</StackLayout>
+	</ScrollView>
+</ContentPage>

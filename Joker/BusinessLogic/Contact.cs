@@ -98,30 +98,6 @@ namespace Joker.BusinessLogic
 		}
 
 		/// <summary>
-		/// Creates an identical clone of a contact.
-		/// </summary>
-		/// <returns>A deep copy of the contact.</returns>
-		public Contact Copy()
-		{
-			return new Contact
-			{
-				Id = Id,
-				Name = Name,
-				PhoneNumber = PhoneNumber,
-				MarkedAsExpert = MarkedAsExpert
-			};
-		}
-
-		/// <summary> 
-		/// Contains the properties of a contact.
-		/// </summary>
-		/// <returns>A one-line string that represents this contact.</returns>
-		public override string ToString()
-		{
-			return $"Name: {Name} | Phone number: {PhoneNumber}";
-		}
-
-		/// <summary>
 		/// Determines whether the specified object is equal to the current object.
 		/// </summary>
 		/// <param name="obj">The object to compare with the current object.</param>

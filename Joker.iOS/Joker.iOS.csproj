@@ -52,7 +52,7 @@
     <MtouchUseLlvm>true</MtouchUseLlvm>
     <MtouchSdkVersion>12.1</MtouchSdkVersion>
     <OptimizePNGs>true</OptimizePNGs>
-    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchLink>Full</MtouchLink>
     <DocumentationFile>Joker.iOS.xml</DocumentationFile>
     <BuildIpa>true</BuildIpa>
     <IpaIncludeArtwork>false</IpaIncludeArtwork>

@@ -46,6 +46,7 @@
     <AndroidSigningStorePass>J0K3rApp</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>villaschoepflin</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>J0K3rApp</AndroidSigningKeyPass>
+    <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -72,7 +73,8 @@
     <AndroidSigningKeyPass>J0K3rApp</AndroidSigningKeyPass>
     <AndroidSigningKeyAlias>villaschoepflin</AndroidSigningKeyAlias>
     <AndroidLinkTool>r8</AndroidLinkTool>
-    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <AndroidLinkMode>Full</AndroidLinkMode>
+    <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />

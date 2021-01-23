@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:ui="clr-namespace:Joker.UserInterface"
+			 x:Class="Joker.UserInterface.AddLimitPage"
+			 BackgroundColor="{Static ui:Styles.Primary1}">
+	<ScrollView>
+		<StackLayout Padding="30"
+					 Spacing="20">
+			<Label HorizontalOptions="CenterAndExpand"
+				   VerticalOptions="CenterAndExpand"
+				   FontSize="30"
+				   TextColor="{Static ui:Styles.TextContrast}"
+				   Margin="0,15,0,0"
+				   HorizontalTextAlignment="Center">Zeit für das nächste Limit</Label>
+			<Label Text="{Binding LimitInfo}"
+				   HorizontalOptions="Center"
+				   VerticalOptions="FillAndExpand"
+				   FontSize="{Static ui:Styles.CustomMedium}"
+				   TextColor="{Static ui:Styles.TextContrast}"
+				   HorizontalTextAlignment="Start" />
+			<Grid>
+				<Grid.RowSpacing>
+					<OnPlatform x:TypeArguments="x:Double">
+						<OnPlatform.Platforms>
+							<On Platform="Android"
+								Value="10" />
+							<On Platform="iOS"
+								Value="30" />
+						</OnPlatform.Platforms>
+					</OnPlatform>
+				</Grid.RowSpacing>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="2*" />
+					<ColumnDefinition Width="3*" />
+				</Grid.ColumnDefinitions>
+				<Label Grid.Row="0"
+					   Grid.Column="0"
+					   TextColor="{Static ui:Styles.TextContrast}"
+					   VerticalTextAlignment="Center">Geldbetrag:</Label>
+				<Entry x:Name="AmountEntry"
+					   Grid.Row="0"
+					   Grid.Column="1"
+					   FontSize="Large"
+					   Placeholder="0,00 €"
+					   Keyboard="Numeric"
+					   Text="">
+					<Entry.TextColor>
+						<OnPlatform x:TypeArguments="Color">
+							<OnPlatform.Platforms>
+								<On Platform="Android"
+									Value="{Static ui:Styles.TextContrast}" />
+							</OnPlatform.Platforms>
+						</OnPlatform>
+					</Entry.TextColor>
+				</Entry>
+				<Label Grid.Row="1"
+					   Grid.Column="0"
+					   TextColor="{Static ui:Styles.TextContrast}"
+					   VerticalTextAlignment="Center">Dauer in Tagen:</Label>
+				<Grid Grid.Row="1"
+					  Grid.Column="1">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<Entry Grid.Column="0"
+						   x:Name="DurationEntry"
+						   Keyboard="Numeric"
+						   FontSize="Large"
+						   Text="7"
+						   HorizontalTextAlignment="End">
+						<Entry.TextColor>
+							<OnPlatform x:TypeArguments="Color">
+								<OnPlatform.Platforms>
+									<On Platform="Android"
+										Value="{Static ui:Styles.TextContrast}" />
+								</OnPlatform.Platforms>
+							</OnPlatform>
+						</Entry.TextColor>
+					</Entry>
+					<Label Grid.Column="1"
+						   TextColor="{Static ui:Styles.TextContrast}"
+						   FontSize="Large"
+						   Margin="0,9.5,0,0">Tage</Label>
+				</Grid>
+			</Grid>
+			<ActivityIndicator x:Name="Indicator"
+							   Color="{Static ui:Styles.TextContrast}" />
+			<Button Clicked="OnContinueButton"
+					HorizontalOptions="CenterAndExpand"
+					VerticalOptions="CenterAndExpand"
+					Padding="{Static ui:Styles.PagePadding}"
+					BackgroundColor="{Static ui:Styles.Bgr1}"
+					TextColor="{Static ui:Styles.Text1}"
+					Text="Bestätigen" />
+		</StackLayout>
+	</ScrollView>
+</ContentPage>

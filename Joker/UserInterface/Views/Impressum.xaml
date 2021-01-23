@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:ui="clr-namespace:Joker.UserInterface"
+			 x:Class="Joker.UserInterface.Impressum"
+			 Title="Impressum"
+			 BackgroundColor="{Static ui:Styles.Bgr1}">
+	<ScrollView>
+		<StackLayout Padding="{Static ui:Styles.PagePadding}">
+			<Label Text="{Binding Version}"
+				   TextColor="{Static ui:Styles.Text1}"
+				   HorizontalTextAlignment="Center"
+				   FontSize="Medium" />
+			<Image Source="{ui:ImageAsset Joker.Assets.Icons.impressum.png}"
+				   HorizontalOptions="FillAndExpand"
+				   VerticalOptions="FillAndExpand" />
+			<Label TextColor="{Static ui:Styles.Text2}"
+				   FontSize="Small">
+				<Label.FormattedText>
+					<FormattedString>
+						<Span Text="{Binding ContactInfo}" />
+						<Span Text="info@villa-schoepflin.de"
+							  TextColor="{Static ui:Styles.Link}">
+							<Span.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding OpenEmail}"
+													  CommandParameter="info@villa-schoepflin.de" />
+							</Span.GestureRecognizers>
+						</Span>
+						<Span Text="&#10;Web: " />
+						<Span Text="www.villa-schoepflin.de"
+							  TextColor="{Static ui:Styles.Link}">
+							<Span.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding OpenWebsite}"
+													  CommandParameter="https://www.villa-schoepflin.de" />
+							</Span.GestureRecognizers>
+						</Span>
+						<Span Text="{Binding PrivacyPolicy}" />
+						<Span>Icons entworfen von:
+Flaticon (</Span>
+						<Span Text="flaticon.com"
+							  TextColor="{Static ui:Styles.Link}">
+							<Span.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding OpenWebsite}"
+													  CommandParameter="https://www.flaticon.com" />
+							</Span.GestureRecognizers>
+						</Span>
+						<Span>)
+Freepik (</Span>
+						<Span Text="freepik.com"
+							  TextColor="{Static ui:Styles.Link}">
+							<Span.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding OpenWebsite}"
+													  CommandParameter="https://www.freepik.com" />
+							</Span.GestureRecognizers>
+						</Span>
+						<Span>)
+Smashicons (</Span>
+						<Span Text="flaticon.com/smashicons"
+							  TextColor="{Static ui:Styles.Link}">
+							<Span.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding OpenWebsite}"
+													  CommandParameter="https://www.flaticon.com/authors/smashicons" />
+							</Span.GestureRecognizers>
+						</Span>
+						<Span>)
+Google (</Span>
+						<Span Text="flaticon.com/google"
+							  TextColor="{Static ui:Styles.Link}">
+							<Span.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding OpenWebsite}"
+													  CommandParameter="https://www.flaticon.com/authors/google" />
+							</Span.GestureRecognizers>
+						</Span>
+						<Span>)
+Gregor Cresnar (</Span>
+						<Span Text="flaticon.com/gregor-cresnar"
+							  TextColor="{Static ui:Styles.Link}">
+							<Span.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding OpenWebsite}"
+													  CommandParameter="https://www.flaticon.com/authors/gregor-cresnar" />
+							</Span.GestureRecognizers>
+						</Span>
+						<Span>)
+Zlatko Najdenovski (</Span>
+						<Span Text="flaticon.com/zlatko-najdenovski"
+							  TextColor="{Static ui:Styles.Link}">
+							<Span.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding OpenWebsite}"
+													  CommandParameter="https://www.flaticon.com/authors/zlatko-najdenovski" />
+							</Span.GestureRecognizers>
+						</Span>
+						<Span>)
+Chanut (</Span>
+						<Span Text="flaticon.com/chanut"
+							  TextColor="{Static ui:Styles.Link}">
+							<Span.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding OpenWebsite}"
+													  CommandParameter="https://www.flaticon.com/authors/chanut" />
+							</Span.GestureRecognizers>
+						</Span>
+						<Span>)
+lizenziert über Creative Commons BY 3.0</Span>
+					</FormattedString>
+				</Label.FormattedText>
+			</Label>
+			<!-- Prevents visual bug on Google phones where the scroll view is cut off -->
+			<AbsoluteLayout HeightRequest="55" />
+		</StackLayout>
+	</ScrollView>
+</ContentPage>

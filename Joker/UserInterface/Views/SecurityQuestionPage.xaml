@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:ui="clr-namespace:Joker.UserInterface"
+			 x:Class="Joker.UserInterface.SecurityQuestionPage"
+			 Title="Sicherheitsfragen"
+			 BackgroundColor="{Static ui:Styles.Primary1}">
+	<ScrollView>
+		<StackLayout Padding="30"
+					 Spacing="20">
+			<ActivityIndicator x:Name="Indicator"
+							   Color="{Static ui:Styles.TextContrast}" />
+			<Frame Margin="{Static ui:Styles.StripMargin}"
+				   Padding="{Static ui:Styles.PagePadding}"
+				   BackgroundColor="{Static ui:Styles.Primary1}">
+				<StackLayout>
+					<Label x:Name="SecurityQuestion1"
+						   TextColor="{Static ui:Styles.TextContrast}"
+						   FontSize="Large" />
+					<Entry x:Name="FirstSecurityAnswerEntry"
+						   TextChanged="CheckSecurityAnswer"
+						   HorizontalOptions="FillAndExpand">
+						<Entry.TextColor>
+							<OnPlatform x:TypeArguments="Color">
+								<OnPlatform.Platforms>
+									<On Platform="Android"
+										Value="{Static ui:Styles.TextContrast}" />
+								</OnPlatform.Platforms>
+							</OnPlatform>
+						</Entry.TextColor>
+					</Entry>
+				</StackLayout>
+			</Frame>
+			<Frame Margin="{Static ui:Styles.StripMargin}"
+				   Padding="{Static ui:Styles.PagePadding}"
+				   BackgroundColor="{Static ui:Styles.Primary1}">
+				<StackLayout>
+					<Label x:Name="SecurityQuestion2"
+						   TextColor="{Static ui:Styles.TextContrast}"
+						   FontSize="Large" />
+					<Entry TextChanged="CheckSecurityAnswer"
+						   HorizontalOptions="FillAndExpand">
+						<Entry.TextColor>
+							<OnPlatform x:TypeArguments="Color">
+								<OnPlatform.Platforms>
+									<On Platform="Android"
+										Value="{Static ui:Styles.TextContrast}" />
+								</OnPlatform.Platforms>
+							</OnPlatform>
+						</Entry.TextColor>
+					</Entry>
+				</StackLayout>
+			</Frame>
+		</StackLayout>
+	</ScrollView>
+</ContentPage>

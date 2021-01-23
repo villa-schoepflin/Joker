@@ -13,7 +13,7 @@ namespace Joker.iOS
 		/// <param name="args">Parameters given from the command line for the app launch.</param>
 		public static void Main(string[] args)
 		{
-			UIApplication.Main(args, null, "AppDelegate");
+			UIApplication.Main(args, null, nameof(AppDelegate));
 		}
 	}
 }

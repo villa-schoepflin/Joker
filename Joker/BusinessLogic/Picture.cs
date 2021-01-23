@@ -44,15 +44,6 @@ namespace Joker.BusinessLogic
 		/// </summary>
 		public Picture() { }
 
-		/// <summary>
-		/// Contains the database-relevant properties of this picture.
-		/// </summary>
-		/// <returns>A one-line string that represents this picture.</returns>
-		public override string ToString()
-		{
-			return $"File path: {FilePath} | Time added: {TimeAdded} | Liked: {Liked}";
-		}
-
 		#region Identifiers for the database schema (DO NOT CHANGE!)
 		private const string PictureTableName = "Picture";
 		private const string FilePathColumnName = "FilePath";

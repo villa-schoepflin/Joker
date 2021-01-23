@@ -230,14 +230,14 @@ namespace Joker.Android
 			/// <param name="intent">Not used here.</param>
 			public override void OnReceive(Context context, Intent intent)
 			{
-				if(AppSettings.WelcomeTourCompleted)
-				{
-					Notifier notifier = new();
-					notifier.ScheduleLimitExpired(AppSettings.LimitExpiredTime);
-					notifier.ScheduleNewPicture(AppSettings.NewPictureTime);
-					notifier.ScheduleGambleReminder(UserSettings.GambleReminderInterval);
-					notifier.ScheduleLimitReminder(UserSettings.LimitReminderInterval);
-				}
+				if(!AppSettings.WelcomeTourCompleted)
+					return;
+
+				Notifier notifier = new();
+				notifier.ScheduleLimitExpired(AppSettings.LimitExpiredTime);
+				notifier.ScheduleNewPicture(AppSettings.NewPictureTime);
+				notifier.ScheduleGambleReminder(UserSettings.GambleReminderInterval);
+				notifier.ScheduleLimitReminder(UserSettings.LimitReminderInterval);
 			}
 		}
 

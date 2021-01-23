@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:sk="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+			 xmlns:ui="clr-namespace:Joker.UserInterface"
+			 x:Class="Joker.UserInterface.PictureFeed"
+			 Icon="ui_pictures.png">
+	<ContentPage.Title>
+		<OnPlatform x:TypeArguments="x:String">
+			<OnPlatform.Platforms>
+				<On Platform="iOS"
+					Value="{Static ui:PictureFeed.Headline}" />
+			</OnPlatform.Platforms>
+		</OnPlatform>
+	</ContentPage.Title>
+	<Grid RowSpacing="0"
+		  ColumnSpacing="0"
+		  HorizontalOptions="FillAndExpand"
+		  VerticalOptions="FillAndExpand">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="Auto" />
+		</Grid.ColumnDefinitions>
+		<Frame Grid.Row="0"
+			   Grid.Column="0"
+			   Grid.ColumnSpan="2"
+			   HorizontalOptions="FillAndExpand"
+			   VerticalOptions="FillAndExpand"
+			   CornerRadius="0"
+			   Padding="0">
+			<sk:SKCanvasView x:Name="CanvasView">
+				<sk:SKCanvasView.GestureRecognizers>
+					<TapGestureRecognizer Command="{Binding SetNextPicture}"
+										  NumberOfTapsRequired="2" />
+				</sk:SKCanvasView.GestureRecognizers>
+				<sk:SKCanvasView.Behaviors>
+					<ui:PaintSurfaceBehavior Command="{Binding DrawImage}" />
+				</sk:SKCanvasView.Behaviors>
+			</sk:SKCanvasView>
+		</Frame>
+		<Button Command="{Binding ToggleLikedStatus}"
+				Grid.Row="1"
+				Grid.Column="0"
+				Image="{Binding LikeButtonImage}"
+				Text="{Binding LikeButtonText}"
+				BackgroundColor="{Binding LikeButtonBackgroundColor}"
+				ContentLayout="Left,30"
+				CornerRadius="0" />
+		<Button Command="{Binding SavePictureToGallery}"
+				Grid.Row="1"
+				Grid.Column="1"
+				Image="ui_save.png"
+				BackgroundColor="{Static ui:Styles.Bgr4}"
+				CornerRadius="0">
+			<Button.Padding>
+				<OnPlatform x:TypeArguments="Thickness">
+					<OnPlatform.Platforms>
+						<On Platform="Android"
+							Value="{Static ui:Styles.PagePadding}" />
+						<On Platform="iOS"
+							Value="25" />
+					</OnPlatform.Platforms>
+				</OnPlatform>
+			</Button.Padding>
+		</Button>
+	</Grid>
+</ContentPage>

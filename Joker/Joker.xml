@@ -4,65 +4,6 @@
         <name>Joker</name>
     </assembly>
     <members>
-        <member name="T:Joker.App">
-            <summary>
-            Main class for the shared code application.
-            </summary>
-        </member>
-        <member name="M:Joker.App.#ctor(System.String)">
-            <summary>
-            Entry point for the shared code application.
-            </summary>
-            <param name="baseDirectory">The directory for files concerning the app directly.</param>
-        </member>
-        <member name="M:Joker.App.OnStart">
-            <summary>
-            Entry point from the user's perspective.
-            </summary>
-        </member>
-        <member name="M:Joker.App.DefaultStart">
-            <summary>
-            Entry point if the welcome tour has been completed.
-            </summary>
-        </member>
-        <member name="M:Joker.App.SetMainPageToDefault">
-            <summary>
-            Directs the user to the regular main page if the most recent limit hasn't expired yet, otherwise directs
-            them to the page where they can add a new limit.
-            </summary>
-        </member>
-        <member name="F:Joker.App.Locale">
-            <summary>
-            The locale or culture setting to use for this app.
-            </summary>
-        </member>
-        <member name="P:Joker.App.CurrentPictureFeed">
-            <summary>
-            References the current main page's timeline feed page.
-            </summary>
-        </member>
-        <member name="P:Joker.App.CurrentTimelineFeed">
-            <summary>
-            References the current main page's timeline feed page.
-            </summary>
-        </member>
-        <member name="P:Joker.App.CurrentContactPage">
-            <summary>
-            References the current main page's contact page.
-            </summary>
-        </member>
-        <member name="P:Joker.App.CurrentMainPageFromStack">
-            <summary>
-            References the current main page as an instance of the app-specific MainPage class.
-            </summary>
-        </member>
-        <member name="M:Joker.App.Color(System.String)">
-            <summary>
-            Wrapper function to return a color from the application resource dictionary.
-            </summary>
-            <param name="key">The key for the dictionary resource.</param>
-            <returns>A Xamarin.Forms color from the dictionary.</returns>
-        </member>
         <member name="T:Joker.AppInterface.Folders">
             <summary>
             Contains string constants that are used multiple times to identify various asset paths or folder names.
@@ -82,23 +23,6 @@
             <summary>
             Path root of embedded text assets.
             </summary>
-        </member>
-        <member name="T:Joker.AppInterface.ImageAssetExtension">
-            <summary>
-            Necessary for images to be embedded in XAML.
-            </summary>
-        </member>
-        <member name="P:Joker.AppInterface.ImageAssetExtension.Source">
-            <summary>
-            The source path for the embedded resource image.
-            </summary>
-        </member>
-        <member name="M:Joker.AppInterface.ImageAssetExtension.ProvideValue(System.IServiceProvider)">
-            <summary>
-            Converts the source path to a Xamarin.Forms image source.
-            </summary>
-            <param name="serviceProvider">Provides a service object for this extension.</param>
-            <returns>A Xamarin.Forms image source as a generic object.</returns>
         </member>
         <member name="T:Joker.AppInterface.IPlatformFileSaver">
             <summary>
@@ -253,6 +177,21 @@
             Notifies the user about the current state of their limit.
             </summary>
         </member>
+        <member name="T:Joker.AppInterface.PreserveAttribute">
+            <summary>
+            Necessary so that the linker doesn't strip out properties that are read only in XAML.
+            </summary>
+        </member>
+        <member name="F:Joker.AppInterface.PreserveAttribute.AllMembers">
+            <summary>
+            Ensures that all members of this type are preserved.
+            </summary>
+        </member>
+        <member name="F:Joker.AppInterface.PreserveAttribute.Conditional">
+            <summary>
+            Flags the method as a method to preserve during linking if the container class is pulled in.
+            </summary>
+        </member>
         <member name="T:Joker.AppInterface.TextAssetReader">
             <summary>
             Utility class that handles interaction with embedded text assets.
@@ -341,18 +280,6 @@
             <param name="right">The right operand on comparing inequality.</param>
             <returns>Whether the contacts are different by their phone number.</returns>
         </member>
-        <member name="M:Joker.BusinessLogic.Contact.Copy">
-            <summary>
-            Creates an identical clone of a contact.
-            </summary>
-            <returns>A deep copy of the contact.</returns>
-        </member>
-        <member name="M:Joker.BusinessLogic.Contact.ToString">
-            <summary> 
-            Contains the properties of a contact.
-            </summary>
-            <returns>A one-line string that represents this contact.</returns>
-        </member>
         <member name="M:Joker.BusinessLogic.Contact.Equals(System.Object)">
             <summary>
             Determines whether the specified object is equal to the current object.
@@ -408,18 +335,6 @@
             This constructor only exists for cloning and for SQLite to be able to return collections of gambles from the
             database. It should never be used to instantiate a gamble directly within the app.
             </summary>
-        </member>
-        <member name="M:Joker.BusinessLogic.Gamble.Copy">
-            <summary>
-            Creates an identical clone of a gamble.
-            </summary>
-            <returns>A deep copy of the gamble.</returns>
-        </member>
-        <member name="M:Joker.BusinessLogic.Gamble.ToString">
-            <summary>
-            Contains the database-relevant properties of this gamble.
-            </summary>
-            <returns>A one-line string that represents this gamble.</returns>
         </member>
         <member name="T:Joker.BusinessLogic.GambleType">
             <summary>
@@ -521,12 +436,6 @@
             should never be used to instantiate a limit directly within the app.
             </summary>
         </member>
-        <member name="M:Joker.BusinessLogic.Limit.ToString">
-            <summary>
-            Contains the database-relevant properties of this limit.
-            </summary>
-            <returns>A one-line string that represents this limit.</returns>
-        </member>
         <member name="T:Joker.BusinessLogic.Picture">
             <summary>
             Represents a motivating or informing picture in the database and in the app view.
@@ -560,12 +469,6 @@
             This constructor only exists for SQLite to be able to return collections of pictures from the database. It
             should never be used to instantiate a picture directly within the app.
             </summary>
-        </member>
-        <member name="M:Joker.BusinessLogic.Picture.ToString">
-            <summary>
-            Contains the database-relevant properties of this picture.
-            </summary>
-            <returns>A one-line string that represents this picture.</returns>
         </member>
         <member name="T:Joker.BusinessLogic.Text">
             <summary>
@@ -824,6 +727,36 @@
             The maximum string length of the user name.
             </summary>
         </member>
+        <member name="F:Joker.DataAccess.UserSettings.MaxPasswordLength">
+            <summary>
+            The maximum string length of the user password.
+            </summary>
+        </member>
+        <member name="F:Joker.DataAccess.UserSettings.MaxSecurityAttributeLength">
+            <summary>
+            The maximum string length for either a security question or answer.
+            </summary>
+        </member>
+        <member name="F:Joker.DataAccess.UserSettings.MinNewPictureInterval">
+            <summary>
+            The minimum allowed time span between two new pictures, which is 2 days.
+            </summary>
+        </member>
+        <member name="F:Joker.DataAccess.UserSettings.MaxNewPictureInterval">
+            <summary>
+            The maximum allowed time span between two new pictures, which is 28 days.
+            </summary>
+        </member>
+        <member name="F:Joker.DataAccess.UserSettings.MinReminderInterval">
+            <summary>
+            The minimum allowed time span between two reminders, which is 2 hours.
+            </summary>
+        </member>
+        <member name="F:Joker.DataAccess.UserSettings.MaxReminderInterval">
+            <summary>
+            The maximum allowed time span between two reminders, which is 200 hours.
+            </summary>
+        </member>
         <member name="P:Joker.DataAccess.UserSettings.UserName">
             <summary>
             The name used to address the user in personalized texts or push notifications.
@@ -831,22 +764,12 @@
             <exception cref="T:System.ArgumentException">Thrown if the user tries to set this property to a text that is longer
             than the maximum allowed length or is a null or empty string.</exception>
         </member>
-        <member name="F:Joker.DataAccess.UserSettings.MaxPasswordLength">
-            <summary>
-            The maximum string length of the user password.
-            </summary>
-        </member>
         <member name="P:Joker.DataAccess.UserSettings.UserPassword">
             <summary>
             The optional password with which the user can protect access to the app's content.
             </summary>
             <exception cref="T:System.ArgumentException">Thrown if the user tries to set this property to a text that is longer
             than the maximum allowed length or is a null or empty string.</exception>
-        </member>
-        <member name="F:Joker.DataAccess.UserSettings.MaxSecurityAttributeLength">
-            <summary>
-            The maximum string length for either a security question or answer.
-            </summary>
         </member>
         <member name="P:Joker.DataAccess.UserSettings.FirstSecurityAttribute">
             <summary>
@@ -862,19 +785,20 @@
             <exception cref="T:System.ArgumentException">Thrown if the user tries to set this property to a text that is longer
             than the maximum allowed length or is a null or empty string.</exception>
         </member>
-        <member name="F:Joker.DataAccess.UserSettings.MinNewPictureInterval">
-            <summary>
-            The minimum allowed time span between two new pictures, which is 2 days.
-            </summary>
-        </member>
-        <member name="F:Joker.DataAccess.UserSettings.MaxNewPictureInterval">
-            <summary>
-            The maximum allowed time span between two new pictures, which is 28 days.
-            </summary>
-        </member>
         <member name="P:Joker.DataAccess.UserSettings.NewPictureInterval">
             <summary>
             The time span between two new pictures. The default value is 2 days.
+            </summary>
+        </member>
+        <member name="P:Joker.DataAccess.UserSettings.GambleReminderInterval">
+            <summary>
+            The time span between two notifications, that remind the user that they should always record their
+            gambling-related spendings in the app.
+            </summary>
+        </member>
+        <member name="P:Joker.DataAccess.UserSettings.LimitReminderInterval">
+            <summary>
+            The time span between two push notifications, that remind the user about the current state of their limit.
             </summary>
         </member>
         <member name="M:Joker.DataAccess.UserSettings.SetNewPictureInterval(System.String)">
@@ -885,32 +809,11 @@
             <exception cref="T:System.ArgumentException">Thrown if the argument couldn't be parsed or isn't within the allowed
             TimeSpan bounds.</exception>
         </member>
-        <member name="F:Joker.DataAccess.UserSettings.MinReminderInterval">
-            <summary>
-            The minimum allowed time span between two reminders, which is 2 hours.
-            </summary>
-        </member>
-        <member name="F:Joker.DataAccess.UserSettings.MaxReminderInterval">
-            <summary>
-            The maximum allowed time span between two reminders, which is 200 hours.
-            </summary>
-        </member>
-        <member name="P:Joker.DataAccess.UserSettings.GambleReminderInterval">
-            <summary>
-            The time span between two notifications, that remind the user that they should always record their
-            gambling-related spendings in the app.
-            </summary>
-        </member>
         <member name="M:Joker.DataAccess.UserSettings.SetGambleReminderInterval(System.String)">
             <summary>
             Sets the time span between two gambling reminders from a user-supplied text string.
             </summary>
             <param name="input">User input from an entry to be parsed.</param>
-        </member>
-        <member name="P:Joker.DataAccess.UserSettings.LimitReminderInterval">
-            <summary>
-            The time span between two push notifications, that remind the user about the current state of their limit.
-            </summary>
         </member>
         <member name="M:Joker.DataAccess.UserSettings.SetLimitReminderInterval(System.String)">
             <summary>
@@ -927,15 +830,499 @@
             <exception cref="T:System.ArgumentException">Thrown if the argument couldn't be parsed or isn't within the allowed
             TimeSpan bounds.</exception>
         </member>
+        <member name="T:Joker.JokerApp">
+            <summary>
+            Main class for the shared code application.
+            </summary>
+        </member>
+        <member name="F:Joker.JokerApp.Assembly">
+            <summary>
+            Gets the app assembly for reflecting on embedded assets.
+            </summary>
+        </member>
+        <member name="F:Joker.JokerApp.Locale">
+            <summary>
+            The locale or culture setting to use for this app.
+            </summary>
+        </member>
+        <member name="M:Joker.JokerApp.#ctor(System.String)">
+            <summary>
+            Entry point for the shared code application.
+            </summary>
+            <param name="baseDirectory">The directory for files concerning the app directly.</param>
+        </member>
+        <member name="M:Joker.JokerApp.SetMainPageToDefault">
+            <summary>
+            Directs the user to the regular main page if the most recent limit hasn't expired yet, otherwise directs
+            them to the page where they can add a new limit.
+            </summary>
+        </member>
+        <member name="M:Joker.JokerApp.OnStart">
+            <summary>
+            Entry point from the user's perspective.
+            </summary>
+        </member>
+        <member name="M:Joker.JokerApp.DefaultStart">
+            <summary>
+            Entry point if the welcome tour has been completed.
+            </summary>
+        </member>
+        <member name="T:Joker.UserInterface.ContactViewModel">
+            <summary>
+            Represents a single contact for display in contact-related pages.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.ContactViewModel.ContactName">
+            <summary>
+            The name derived from the contact model.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.ContactViewModel.PhoneNumber">
+            <summary>
+            The phone number derived from the contact model.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.ContactViewModel.MarkedAsExpert">
+            <summary>
+            The status whether a contact is marked as professional, derived from the contact model.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.ContactViewModel.EditingEnabled">
+            <summary>
+            Indicates whether editing of the contact model is currently enabled.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.ContactViewModel.EditButtonText">
+            <summary>
+            Determines the text of the button that toggles the editing status.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.ContactViewModel.IconBackgroundColor">
+            <summary>
+            The color used to paint the background of the icon frame.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.ContactViewModel.TypeIcon">
+            <summary>
+            The icon used to differentiate expert contacts from regular contacts.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.ContactViewModel.OpenDetailPage">
+            <summary>
+            Navigates the user to a detailed view of the view model's contact.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.ContactViewModel.InsertNameFromClipboard">
+            <summary>
+            Sets the contact name in the view model from clipboard content.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.ContactViewModel.InsertPhoneNumberFromClipboard">
+            <summary>
+            Sets the phone number in the view model from clipboard content.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.ContactViewModel.CallContact">
+            <summary>
+            Opens the platform's telephone app with the corresponding contact's phone number.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.ContactViewModel.ToggleEditingStatus">
+            <summary>
+            Toggles the editing status for the contact detail page, saving the changes on deactivating editing.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.ContactViewModel.DeleteContact">
+            <summary>
+            The command by which the model contact will be deleted in the database.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.ContactViewModel.#ctor(Xamarin.Forms.Page,Joker.BusinessLogic.Contact,System.Action)">
+            <summary>
+            Constructs a contact view model for the given view.
+            </summary>
+            <param name="view">The view for this view model.</param>
+            <param name="model">The model for this view model.</param>
+            <param name="refresh">Callback for refreshing the contact page.</param>
+        </member>
+        <member name="T:Joker.UserInterface.GambleViewModel">
+            <summary>
+            View model for a gamble in the gamble inspector. Uses many properties of the timeline record view model.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.GambleViewModel.Gamble">
+            <summary>
+            Wrapper in order to treat the model as a gamble because of inheritance from TimelineRecordViewModel.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.GambleViewModel.Description">
+            <summary>
+            The description of this gamble as supplied from a model object.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.GambleViewModel.DescriptionEditable">
+            <summary>
+            Indicates whether the description of the gamble can currently be edited by the user.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.GambleViewModel.GambleType">
+            <summary>
+            The type of this gamble as the proper translation.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.GambleViewModel.EditButtonText">
+            <summary>
+            Determines the text of the button that toggles the editing status.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.GambleViewModel.EditButtonBgrColor">
+            <summary>
+            Determines the background color of the button that toggles the editing status.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.GambleViewModel.EditButtonTextColor">
+            <summary>
+            Determines the text color of the button that toggles the editing status.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.GambleViewModel.ToggleDescriptionEditing">
+            <summary>
+            Toggles the editability of the gamble's description, saving the changes when deactivating editing.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.GambleViewModel.#ctor(Xamarin.Forms.Page,Joker.BusinessLogic.Gamble)">
+            <summary>
+            Constructs the view model for a gamble.
+            </summary>
+            <param name="view">The page for this view model.</param>
+            <param name="model">The gamble around which to construct the view model.</param>
+        </member>
+        <member name="T:Joker.UserInterface.Icons">
+            <summary>
+            Holds fields that preload commonly used icons for performance.
+            </summary>
+        </member>
+        <member name="T:Joker.UserInterface.ImageAssetExtension">
+            <summary>
+            Necessary for images to be embedded in XAML.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.ImageAssetExtension.Source">
+            <summary>
+            The source path for the embedded resource image.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.ImageAssetExtension.ProvideValue(System.IServiceProvider)">
+            <summary>
+            Converts the source path to a Xamarin.Forms image source.
+            </summary>
+            <param name="serviceProvider">Provides a service object for this extension.</param>
+            <returns>A Xamarin.Forms image source as a generic object.</returns>
+        </member>
+        <member name="T:Joker.UserInterface.LimitViewModel">
+            <summary>
+            View model for a limit in the limit inspector. Uses many properties of the timeline record view model.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.LimitViewModel.Balance">
+            <summary>
+            The currently remaining balance of the limit.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.LimitViewModel.DurationInDays">
+            <summary>
+            The duration in days.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.LimitViewModel.LimitState">
+            <summary>
+            A text indicating the state of the limit.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.LimitViewModel.LimitStateBackground">
+            <summary>
+            The color marking the state of the limit.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.LimitViewModel.LimitStateTextColor">
+            <summary>
+            The color for the text that indicates the limit state.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.LimitViewModel.HistoryChart">
+            <summary>
+            Returns the chart associated with how the limit was depleted over time.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.LimitViewModel.Limit">
+            <summary>
+            Wrapper in order to treat the model as a limit because of inheritance from TimelineRecordViewModel.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.LimitViewModel.#ctor(Xamarin.Forms.Page,Joker.BusinessLogic.Limit)">
+            <summary>
+            Constructs the view model for a limit.
+            </summary>
+            <param name="view">The page for this view model.</param>
+            <param name="model">The limit around which to construct the view model.</param>
+        </member>
+        <member name="T:Joker.UserInterface.PaintSurfaceBehavior">
+            <summary>
+            Helper class for converting SKCanvasView's paint surface events to commands.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.PaintSurfaceBehavior.CommandProperty">
+            <summary>
+            Bindable property required for the command.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.PaintSurfaceBehavior.Command">
+            <summary>
+            Holds the command invoked instead of a paint surface event handler.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.PaintSurfaceBehavior.OnAttachedTo(SkiaSharp.Views.Forms.SKCanvasView)">
+            <summary>
+            Invoked immediately after the behavior is attached to a control.
+            </summary>
+            <param name="bindable">The bindable canvas view to which the behavior was attached.</param>
+        </member>
+        <member name="M:Joker.UserInterface.PaintSurfaceBehavior.OnDetachingFrom(SkiaSharp.Views.Forms.SKCanvasView)">
+            <summary>
+            Invoked when the behavior is removed from the control.
+            </summary>
+            <param name="bindable">The bindable canvas view to which the behavior was attached.</param>
+        </member>
+        <member name="T:Joker.UserInterface.PictureFeedViewModel">
+            <summary>
+            View model containing properties derived from a picture for the purpose of presentation.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.PictureFeedViewModel.LikeButtonImage">
+            <summary>
+            Determines the image to display on the Like button based on the current Liked status.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.PictureFeedViewModel.LikeButtonBackgroundColor">
+            <summary>
+            Determines the background color of the Like button based on the current Liked status.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.PictureFeedViewModel.LikeButtonText">
+            <summary>
+            Determines the text of the Like button based on the current Liked status.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.PictureFeedViewModel.SetNextPicture">
+            <summary>
+            Re-binds the view to a randomly selected picture from the database, preferring the liked pictures with a
+            ratio of 3:1.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.PictureFeedViewModel.DrawImage">
+            <summary>
+            Loads and draws the bitmap corresponding to the picture that should be presented and draws a blur around it.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.PictureFeedViewModel.ToggleLikedStatus">
+            <summary>
+            Updates the picture with the changed Liked status in the database and notifies the change of property.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.PictureFeedViewModel.SavePictureToGallery">
+            <summary>
+            Copies the current picture's image file to the user's personal phone storage.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.PictureFeedViewModel.Model">
+            <summary>
+            The picture from which the values of bindable properties are derived.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.PictureFeedViewModel.#ctor(Joker.UserInterface.PictureFeed,Joker.BusinessLogic.Picture)">
+            <summary>
+            Constructs a picture feed view model for the given view.
+            </summary>
+            <param name="view">The view for this view model.</param>
+            <param name="model">The model for this view model.</param>
+        </member>
+        <member name="T:Joker.UserInterface.Styles">
+            <summary>
+            Holds commonly used style values for XAML pages.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.Styles.PagePadding">
+            <summary>
+            Regular padding for pages.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.Styles.StripMargin">
+            <summary>
+            Padding for the light-gray sections used in several pages.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.Styles.Bgr1">
+            <summary>
+            Used mainly as background color for most pages.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.Styles.Bgr2">
+            <summary>
+            Used mainly as background color for small page sections.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.Styles.Bgr3">
+            <summary>
+            Used mainly as background color for most buttons and highlighted sections.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.Styles.Bgr4">
+            <summary>
+            Used mainly as background color for buttons in highlighted sections.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.Styles.Bgr5">
+            <summary>
+            Used mainly as background color for important buttons.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.Styles.Primary1">
+            <summary>
+            The primary blue for the Joker design.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.Styles.Primary2">
+            <summary>
+            A darker blue used with the primary blue for shading.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.Styles.Text1">
+            <summary>
+            Primary text color.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.Styles.Text2">
+            <summary>
+            Secondary text color for less visible text.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.Styles.TextContrast">
+            <summary>
+            Text color for dark backgrounds.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.Styles.Link">
+            <summary>
+            Text color for hyperlinks.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.Styles.CustomSmall">
+            <summary>
+            Small text size.
+            </summary>
+        </member>
+        <member name="F:Joker.UserInterface.Styles.CustomMedium">
+            <summary>
+            Medium text size.
+            </summary>
+        </member>
+        <member name="T:Joker.UserInterface.TimelineRecordViewModel">
+            <summary>
+            Represents a single timeline record for display in timeline-related pages.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.TimelineRecordViewModel.RemainingLimit">
+            <summary>
+            The text to be displayed in the remaining limit column in the timeline.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.TimelineRecordViewModel.TypeIcon">
+            <summary>
+            The icon to be displayed in the timeline based on what type of record it is.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.TimelineRecordViewModel.CellBgrColor">
+            <summary>
+            The primary tinting color used in the timeline.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.TimelineRecordViewModel.IconBgrColor">
+            <summary>
+            The secondary tinting color used in the timeline.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.TimelineRecordViewModel.CellTextColor">
+            <summary>
+            The primary text color used in the timeline.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.TimelineRecordViewModel.LocalizedTime">
+            <summary>
+            Converts the record's time property to the system's time zone in the 24-hour format.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.TimelineRecordViewModel.AmountInEuro">
+            <summary>
+            Converts the amount to a Euro monetary value.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.TimelineRecordViewModel.OpenDetailPage">
+            <summary>
+            Navigates the user to a detailed view of the selected limit or gamble item.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.TimelineRecordViewModel.#ctor(Xamarin.Forms.Page,Joker.BusinessLogic.TimelineRecord)">
+            <summary>
+            Constructs a view model for a row based on whether the corresponding timeline record is a gamble or a limit.
+            </summary>
+            <param name="view">The view for this view model.</param>
+            <param name="model">The model for this view model.</param>
+        </member>
+        <member name="T:Joker.UserInterface.ViewModel`2">
+            <summary>
+            An abstract base class for all view models with required interfaces and constraints.
+            </summary>
+            <typeparam name="TView">Type of the view where the model's properties are presented.</typeparam>
+            <typeparam name="TModel">Type of the model object whose properties are accessed for presentation.</typeparam>
+        </member>
+        <member name="P:Joker.UserInterface.ViewModel`2.View">
+            <summary>
+            The object to which changes in the view model are communicated.
+            </summary>
+        </member>
+        <member name="P:Joker.UserInterface.ViewModel`2.Model">
+            <summary>
+            The object from which view model properties are derived.
+            </summary>
+        </member>
+        <member name="E:Joker.UserInterface.ViewModel`2.PropertyChanged">
+            <summary>
+            Event for when a property has changed in the view model.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.ViewModel`2.#ctor(`0,`1)">
+            <summary>
+            Constructs a view model with the given view and model references.
+            </summary>
+            <param name="view">The view for this view model.</param>
+            <param name="model">The model for this view model.</param>
+        </member>
+        <member name="M:Joker.UserInterface.ViewModel`2.OnPropertyChanged(System.String)">
+            <summary>
+            Invokes subscribers of the PropertyChanged event.
+            </summary>
+            <param name="propertyName">Name of the property that has changed.</param>
+        </member>
         <member name="T:Joker.UserInterface.AddContactPage">
             <summary>
             View where the user defines the data for a new contact and can insert it into the database.
             </summary>
         </member>
-        <member name="M:Joker.UserInterface.AddContactPage.#ctor">
+        <member name="M:Joker.UserInterface.AddContactPage.#ctor(System.Action)">
             <summary>
             Initializes XAML elements.
             </summary>
+            <param name="refresh">Callback for refreshing the contact page.</param>
         </member>
         <member name="M:Joker.UserInterface.AddContactPage.OnNameClipboardButton(System.Object,System.EventArgs)">
             <summary>
@@ -972,11 +1359,11 @@
             A view containing the database-supplied details and properties of a selected contact.
             </summary>
         </member>
-        <member name="M:Joker.UserInterface.ContactInspector.#ctor(Joker.BusinessLogic.Contact)">
+        <member name="M:Joker.UserInterface.ContactInspector.#ctor(Joker.UserInterface.ContactViewModel)">
             <summary>
             Initializes XAML elements and provides the data to be bound in the view.
             </summary>
-            <param name="contact">Contact whose details should be exposed.</param>
+            <param name="contactViewModel">View model through which the contact details will be exposed.</param>
         </member>
         <member name="T:Joker.UserInterface.ContactPage">
             <summary>
@@ -998,7 +1385,7 @@
             Initializes XAML elements and binds the view data.
             </summary>
         </member>
-        <member name="M:Joker.UserInterface.ContactPage.RefreshContacts">
+        <member name="M:Joker.UserInterface.ContactPage.Refresh">
             <summary>
             Refreshes the contacts data binding in this view.
             </summary>
@@ -1037,11 +1424,6 @@
             Contains the privacy policy.
             </summary>
         </member>
-        <member name="M:Joker.UserInterface.Impressum.#ctor">
-            <summary>
-            Initializes XAML elements.
-            </summary>
-        </member>
         <member name="P:Joker.UserInterface.Impressum.OpenEmail">
             <summary>
             Event command that opens the platform-specific email app.
@@ -1050,6 +1432,11 @@
         <member name="P:Joker.UserInterface.Impressum.OpenWebsite">
             <summary>
             Event command that opens the platform-specific browser.
+            </summary>
+        </member>
+        <member name="M:Joker.UserInterface.Impressum.#ctor">
+            <summary>
+            Initializes XAML elements.
             </summary>
         </member>
         <member name="T:Joker.UserInterface.MainPage">
@@ -1168,10 +1555,11 @@
             The title of this page, provided here to be accessible from anywhere.
             </summary>
         </member>
-        <member name="M:Joker.UserInterface.SettingsPage.#ctor">
+        <member name="M:Joker.UserInterface.SettingsPage.#ctor(System.Action)">
             <summary>
             Initializes XAML elements.
             </summary>
+            <param name="refreshFeedback">Callback for refreshing the timeline feedback text.</param>
         </member>
         <member name="M:Joker.UserInterface.SettingsPage.OnInfoButton(System.Object,System.EventArgs)">
             <summary>
@@ -1259,10 +1647,11 @@
             View where the user defines the data for a new gamble and can insert it into the database.
             </summary>
         </member>
-        <member name="M:Joker.UserInterface.AddGamblePage.#ctor">
+        <member name="M:Joker.UserInterface.AddGamblePage.#ctor(System.Action)">
             <summary>
             Initializes XAML elements and sets the necessary view elements to their default values.
             </summary>
+            <param name="refresh">Callback for refreshing the timeline feed.</param>
         </member>
         <member name="M:Joker.UserInterface.AddGamblePage.UpdateLengthCounter(System.Object,Xamarin.Forms.TextChangedEventArgs)">
             <summary>
@@ -1380,19 +1769,14 @@
             Initializes XAML elements.
             </summary>
         </member>
-        <member name="M:Joker.UserInterface.TimelineFeed.BlinkLimitFeedback">
+        <member name="M:Joker.UserInterface.TimelineFeed.RefreshFeedback">
             <summary>
-            Performs a flashing animation on the frame containing the limit feedback.
-            </summary>
-        </member>
-        <member name="M:Joker.UserInterface.TimelineFeed.RefreshInfo">
-            <summary>
-            Refreshes the info text in this page.
+            Refreshes the limit feedback text in this page.
             </summary> 
         </member>
         <member name="M:Joker.UserInterface.TimelineFeed.RefreshRecords">
             <summary>
-            Refreshes the list view's data bindings from a database-supplied collection.
+            Refreshes the list view's data bindings and blinks the limit feedback if the limit has been exceeded.
             </summary>
         </member>
         <member name="M:Joker.UserInterface.TimelineFeed.OnToggleFeedbackButton(System.Object,System.EventArgs)">
@@ -1408,344 +1792,6 @@
             </summary>
             <param name="sender">Reference to the event's source object.</param>
             <param name="eventArgs">Contains event data.</param>
-        </member>
-        <member name="T:Joker.UserInterface.ContactViewModel">
-            <summary>
-            Represents a single contact for display in contact-related pages.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.ContactViewModel.ContactName">
-            <summary>
-            The name derived from the contact model.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.ContactViewModel.PhoneNumber">
-            <summary>
-            The phone number derived from the contact model.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.ContactViewModel.MarkedAsExpert">
-            <summary>
-            The status whether a contact is marked as professional, derived from the contact model.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.ContactViewModel.EditingEnabled">
-            <summary>
-            Indicates whether editing of the contact model is currently enabled.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.ContactViewModel.EditButtonText">
-            <summary>
-            Determines the text of the button that toggles the editing status.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.ContactViewModel.IconBackgroundColor">
-            <summary>
-            The color used to paint the background of the icon frame.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.ContactViewModel.TypeIcon">
-            <summary>
-            The icon used to differentiate expert contacts from regular contacts.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.ContactViewModel.OpenDetailPage">
-            <summary>
-            Navigates the user to a detailed view of the view model's contact.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.ContactViewModel.InsertFromClipboard">
-            <summary>
-            Inserts text from the clipboard to the property specified by the parameter.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.ContactViewModel.CallContact">
-            <summary>
-            Opens the platform's telephone app with the corresponding contact's phone number.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.ContactViewModel.ToggleEditingStatus">
-            <summary>
-            Toggles the editing status for the contact detail page, saving the changes on deactivating editing.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.ContactViewModel.DeleteContact">
-            <summary>
-            The command by which the model contact will be deleted in the database.
-            </summary>
-        </member>
-        <member name="M:Joker.UserInterface.ContactViewModel.#ctor(Xamarin.Forms.Page,Joker.BusinessLogic.Contact)">
-            <summary>
-            Constructs a contact view model for the given view.
-            </summary>
-            <param name="view">The view for this view model.</param>
-            <param name="model">The model for this view model.</param>
-        </member>
-        <member name="T:Joker.UserInterface.GambleViewModel">
-            <summary>
-            View model for a gamble in the gamble inspector. Uses many properties of the timeline record view model.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.GambleViewModel.Gamble">
-            <summary>
-            Wrapper in order to treat the model as a gamble because of inheritance from TimelineRecordViewModel.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.GambleViewModel.GambleType">
-            <summary>
-            The type of this gamble as the proper translation.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.GambleViewModel.Description">
-            <summary>
-            The description of this gamble as supplied from a model object.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.GambleViewModel.DescriptionEditable">
-            <summary>
-            Indicates whether the description of the gamble can currently be edited by the user.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.GambleViewModel.EditButtonText">
-            <summary>
-            Determines the text of the button that toggles the editing status.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.GambleViewModel.EditButtonBgrColor">
-            <summary>
-            Determines the background color of the button that toggles the editing status.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.GambleViewModel.EditButtonTextColor">
-            <summary>
-            Determines the text color of the button that toggles the editing status.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.GambleViewModel.ToggleDescriptionEditing">
-            <summary>
-            Toggles the editability of the gamble's description, saving the changes when deactivating editing.
-            </summary>
-        </member>
-        <member name="M:Joker.UserInterface.GambleViewModel.#ctor(Xamarin.Forms.Page,Joker.BusinessLogic.Gamble)">
-            <summary>
-            Constructs the view model for a gamble.
-            </summary>
-            <param name="view">The page for this view model.</param>
-            <param name="model">The gamble around which to construct the view model.</param>
-        </member>
-        <member name="T:Joker.UserInterface.LimitViewModel">
-            <summary>
-            View model for a limit in the limit inspector. Uses many properties of the timeline record view model.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.LimitViewModel.Limit">
-            <summary>
-            Wrapper in order to treat the model as a limit because of inheritance from TimelineRecordViewModel.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.LimitViewModel.Balance">
-            <summary>
-            The currently remaining balance of the limit.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.LimitViewModel.DurationInDays">
-            <summary>
-            The duration in days.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.LimitViewModel.LimitState">
-            <summary>
-            A text indicating the state of the limit.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.LimitViewModel.LimitStateBackground">
-            <summary>
-            The color marking the state of the limit.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.LimitViewModel.LimitStateTextColor">
-            <summary>
-            The color for the text that indicates the limit state.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.LimitViewModel.HistoryChart">
-            <summary>
-            Returns the chart associated with how the limit was depleted over time.
-            </summary>
-        </member>
-        <member name="M:Joker.UserInterface.LimitViewModel.#ctor(Xamarin.Forms.Page,Joker.BusinessLogic.Limit)">
-            <summary>
-            Constructs the view model for a limit.
-            </summary>
-            <param name="view">The page for this view model.</param>
-            <param name="model">The limit around which to construct the view model.</param>
-        </member>
-        <member name="T:Joker.UserInterface.PaintSurfaceBehavior">
-            <summary>
-            Helper class for converting SKCanvasView's paint surface events to commands.
-            </summary>
-        </member>
-        <member name="F:Joker.UserInterface.PaintSurfaceBehavior.CommandProperty">
-            <summary>
-            Bindable property required for the command.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.PaintSurfaceBehavior.Command">
-            <summary>
-            Holds the command invoked instead of a paint surface event handler.
-            </summary>
-        </member>
-        <member name="M:Joker.UserInterface.PaintSurfaceBehavior.OnAttachedTo(SkiaSharp.Views.Forms.SKCanvasView)">
-            <summary>
-            Invoked immediately after the behavior is attached to a control.
-            </summary>
-            <param name="bindable">The bindable canvas view to which the behavior was attached.</param>
-        </member>
-        <member name="M:Joker.UserInterface.PaintSurfaceBehavior.OnDetachingFrom(SkiaSharp.Views.Forms.SKCanvasView)">
-            <summary>
-            Invoked when the behavior is removed from the control.
-            </summary>
-            <param name="bindable">The bindable canvas view to which the behavior was attached.</param>
-        </member>
-        <member name="T:Joker.UserInterface.PictureFeedViewModel">
-            <summary>
-            View model containing properties derived from a picture for the purpose of presentation.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.PictureFeedViewModel.Model">
-            <summary>
-            The picture from which the values of bindable properties are derived.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.PictureFeedViewModel.LikeButtonImage">
-            <summary>
-            Determines the image to display on the Like button based on the current Liked status.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.PictureFeedViewModel.LikeButtonBackgroundColor">
-            <summary>
-            Determines the background color of the Like button based on the current Liked status.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.PictureFeedViewModel.LikeButtonText">
-            <summary>
-            Determines the text of the Like button based on the current Liked status.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.PictureFeedViewModel.SetNextPicture">
-            <summary>
-            Re-binds the view to a randomly selected picture from the database, preferring the liked pictures with a
-            ratio of 3:1.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.PictureFeedViewModel.DrawImage">
-            <summary>
-            Loads and draws the bitmap corresponding to the picture that should be presented and draws a blur around it.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.PictureFeedViewModel.ToggleLikedStatus">
-            <summary>
-            Updates the picture with the changed Liked status in the database and notifies the change of property.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.PictureFeedViewModel.SavePictureToGallery">
-            <summary>
-            Copies the current picture's image file to the user's personal phone storage.
-            </summary>
-        </member>
-        <member name="M:Joker.UserInterface.PictureFeedViewModel.#ctor(Xamarin.Forms.Page,Joker.BusinessLogic.Picture)">
-            <summary>
-            Constructs a picture feed view model for the given view.
-            </summary>
-            <param name="view">The view for this view model.</param>
-            <param name="model">The model for this view model.</param>
-        </member>
-        <member name="T:Joker.UserInterface.TimelineRecordViewModel">
-            <summary>
-            Represents a single timeline record for display in timeline-related pages.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.TimelineRecordViewModel.LocalizedTime">
-            <summary>
-            Converts the record's time property to the system's time zone in the 24-hour format.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.TimelineRecordViewModel.AmountInEuro">
-            <summary>
-            Converts the amount to a Euro monetary value.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.TimelineRecordViewModel.RemainingLimit">
-            <summary>
-            The text to be displayed in the remaining limit column in the timeline.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.TimelineRecordViewModel.TypeIcon">
-            <summary>
-            The icon to be displayed in the timeline based on what type of record it is.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.TimelineRecordViewModel.CellBgrColor">
-            <summary>
-            The primary tinting color used in the timeline.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.TimelineRecordViewModel.IconBgrColor">
-            <summary>
-            The secondary tinting color used in the timeline.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.TimelineRecordViewModel.CellTextColor">
-            <summary>
-            The primary text color used in the timeline.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.TimelineRecordViewModel.OpenDetailPage">
-            <summary>
-            Navigates the user to a detailed view of the selected limit or gamble item.
-            </summary>
-        </member>
-        <member name="M:Joker.UserInterface.TimelineRecordViewModel.#ctor(Xamarin.Forms.Page,Joker.BusinessLogic.TimelineRecord)">
-            <summary>
-            Constructs a row view model based on whether the corresponding timeline record is a Gamble or a Limit.
-            </summary>
-            <param name="view">The view for this view model.</param>
-            <param name="model">The model for this view model.</param>
-        </member>
-        <member name="T:Joker.UserInterface.ViewModel`2">
-            <summary>
-            An abstract base class for all view models with required interfaces and constraints.
-            </summary>
-            <typeparam name="TView">Type of the view where the model's properties are presented.</typeparam>
-            <typeparam name="TModel">Type of the model object whose properties are accessed for presentation.</typeparam>
-        </member>
-        <member name="P:Joker.UserInterface.ViewModel`2.View">
-            <summary>
-            The object to which changes in the view model are communicated.
-            </summary>
-        </member>
-        <member name="P:Joker.UserInterface.ViewModel`2.Model">
-            <summary>
-            The object from which view model properties are derived.
-            </summary>
-        </member>
-        <member name="E:Joker.UserInterface.ViewModel`2.PropertyChanged">
-            <summary>
-            Event for when a property has changed in the view model.
-            </summary>
-        </member>
-        <member name="M:Joker.UserInterface.ViewModel`2.#ctor(`0,`1)">
-            <summary>
-            Constructs a view model with the given view and model references.
-            </summary>
-            <param name="view">The view for this view model.</param>
-            <param name="model">The model for this view model.</param>
-        </member>
-        <member name="M:Joker.UserInterface.ViewModel`2.OnPropertyChanged(System.String)">
-            <summary>
-            Invokes subscribers of the PropertyChanged event.
-            </summary>
-            <param name="propertyName">Name of the property that has changed.</param>
         </member>
         <member name="T:Joker.UserInterface.ContactTourPage">
             <summary>

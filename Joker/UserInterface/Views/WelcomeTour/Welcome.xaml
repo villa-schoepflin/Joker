@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:ui="clr-namespace:Joker.UserInterface"
+			 x:Class="Joker.UserInterface.Welcome"
+			 BackgroundColor="{Static ui:Styles.Primary1}">
+	<ContentPage.Title>
+		<OnPlatform x:TypeArguments="x:String">
+			<OnPlatform.Platforms>
+				<On Platform="iOS"
+					Value="Willkommen" />
+			</OnPlatform.Platforms>
+		</OnPlatform>
+	</ContentPage.Title>
+	<ScrollView>
+		<StackLayout Padding="30"
+					 Spacing="20">
+			<Image Source="{ui:ImageAsset Joker.Assets.Icons.joker.png}"
+				   HorizontalOptions="CenterAndExpand"
+				   VerticalOptions="CenterAndExpand" />
+			<Label HorizontalOptions="Center"
+				   VerticalOptions="CenterAndExpand"
+				   FontSize="55"
+				   TextColor="{Static ui:Styles.TextContrast}"
+				   HorizontalTextAlignment="Center">Hallo!</Label>
+			<Label HorizontalOptions="Center"
+				   VerticalOptions="CenterAndExpand"
+				   FontSize="20"
+				   TextColor="{Static ui:Styles.TextContrast}"
+				   HorizontalTextAlignment="Center">Das ist die Joker-App.&#10;&#10;Sie hilft Dir dabei, die Kontrolle zu behalten.</Label>
+			<Button Clicked="OnContinueButton"
+					VerticalOptions="CenterAndExpand"
+					BackgroundColor="{Static ui:Styles.Bgr1}"
+					TextColor="{Static ui:Styles.Text1}"
+					Text="Weiter" />
+		</StackLayout>
+	</ScrollView>
+</ContentPage>

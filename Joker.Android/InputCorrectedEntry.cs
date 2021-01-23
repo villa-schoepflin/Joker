@@ -26,8 +26,7 @@ namespace Joker.Android
 		{
 			base.OnElementChanged(eventArgs);
 
-			if(DeviceInfo.Manufacturer == "samsung"
-				&& Control != null
+			if(DeviceInfo.Manufacturer == "samsung" && Control != null
 				&& !Control.InputType.HasFlag(InputTypes.ClassText))
 			{
 				Control.InputType = InputTypes.ClassNumber | InputTypes.NumberFlagDecimal;

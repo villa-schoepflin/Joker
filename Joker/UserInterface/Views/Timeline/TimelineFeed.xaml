@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:ui="clr-namespace:Joker.UserInterface"
+			 x:Class="Joker.UserInterface.TimelineFeed"
+			 Icon="ui_timeline.png"
+			 BackgroundColor="{Static ui:Styles.Bgr1}">
+	<ContentPage.Title>
+		<OnPlatform x:TypeArguments="x:String">
+			<OnPlatform.Platforms>
+				<On Platform="iOS"
+					Value="{Static ui:TimelineFeed.Headline}" />
+			</OnPlatform.Platforms>
+		</OnPlatform>
+	</ContentPage.Title>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="Auto" />
+		</Grid.ColumnDefinitions>
+		<ListView ItemsSource="{Binding Records}"
+				  Grid.Row="0"
+				  Grid.Column="0"
+				  Grid.RowSpan="2"
+				  Grid.ColumnSpan="2"
+				  SeparatorColor="Transparent"
+				  HasUnevenRows="True">
+			<ListView.Header>
+				<StackLayout>
+					<Frame x:Name="Frame"
+						   BackgroundColor="{Static ui:Styles.Bgr3}"
+						   Margin="10,10,10,5"
+						   Padding="15"
+						   CornerRadius="5">
+						<StackLayout Spacing="0">
+							<Frame HorizontalOptions="End"
+								   BackgroundColor="{Static ui:Styles.Bgr4}"
+								   Padding="2">
+								<Frame.GestureRecognizers>
+									<TapGestureRecognizer Tapped="OnToggleFeedbackButton" />
+								</Frame.GestureRecognizers>
+								<Image Source="{Binding FeedbackTogglerIcon}"
+									   HeightRequest="20" />
+							</Frame>
+							<StackLayout x:Name="FeedbackHeader">
+								<Label FontSize="Small"
+									   Text="{Binding CurrentLimitFeedback}"
+									   TextColor="{Static ui:Styles.Text1}" />
+								<Label x:Name="PreviousLimitFeedbackLabel"
+									   FontSize="Small"
+									   Text="{Binding PreviousLimitFeedback}"
+									   TextColor="{Static ui:Styles.Text2}" />
+							</StackLayout>
+						</StackLayout>
+					</Frame>
+				</StackLayout>
+			</ListView.Header>
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<StackLayout Padding="10,5,10,5">
+							<StackLayout.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding OpenDetailPage}" />
+							</StackLayout.GestureRecognizers>
+							<Frame BackgroundColor="{Binding CellBgrColor}"
+								   Padding="5"
+								   CornerRadius="5">
+								<StackLayout Orientation="Horizontal">
+									<Frame BackgroundColor="{Binding IconBgrColor}"
+										   Padding="3"
+										   CornerRadius="5">
+										<Image Source="{Binding TypeIcon}"
+											   HeightRequest="25" />
+									</Frame>
+									<Label HorizontalOptions="FillAndExpand"
+										   Margin="5,0,0,0"
+										   Text="{Binding AmountInEuro}"
+										   FontSize="{Static ui:Styles.CustomMedium}"
+										   TextColor="{Binding CellTextColor}"
+										   VerticalTextAlignment="Center" />
+									<Label HorizontalOptions="Center"
+										   Text="{Binding RemainingLimit}"
+										   FontSize="{Static ui:Styles.CustomMedium}"
+										   TextColor="{Static ui:Styles.Text2}"
+										   HorizontalTextAlignment="End"
+										   VerticalTextAlignment="Center" />
+									<Label HorizontalOptions="End"
+										   Margin="10,0,10,0"
+										   Text="{Binding LocalizedTime}"
+										   FontSize="{Static ui:Styles.CustomSmall}"
+										   TextColor="{Binding CellTextColor}"
+										   VerticalTextAlignment="Center" />
+								</StackLayout>
+							</Frame>
+						</StackLayout>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+		<Frame Grid.Row="1"
+			   Grid.Column="1"
+			   Margin="0,0,15,15"
+			   Padding="0"
+			   WidthRequest="56"
+			   HeightRequest="56"
+			   CornerRadius="28">
+			<Button Clicked="OnSubmitButton"
+					BackgroundColor="{Static ui:Styles.Bgr4}"
+					Image="ui_submit.png"
+					CornerRadius="28" />
+		</Frame>
+	</Grid>
+</ContentPage>

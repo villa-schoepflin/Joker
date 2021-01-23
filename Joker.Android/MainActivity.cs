@@ -33,8 +33,8 @@ namespace Joker.Android
 			base.OnCreate(bundle);
 			Instance = this;
 
-			string personalFolder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-			LoadApplication(new App(personalFolder));
+			string baseDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+			LoadApplication(new JokerApp(baseDirectory));
 		}
 
 		/// <summary>

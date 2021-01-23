@@ -56,15 +56,6 @@ namespace Joker.BusinessLogic
 		/// </summary>
 		public Limit() : base() { }
 
-		/// <summary>
-		/// Contains the database-relevant properties of this limit.
-		/// </summary>
-		/// <returns>A one-line string that represents this limit.</returns>
-		public override string ToString()
-		{
-			return $"Time: {Time} | Amount: {Amount} | Duration: {Duration}";
-		}
-
 		#region Identifiers for the database schema (DO NOT CHANGE!)
 		private const string LimitTableName = "Limit";
 		private const string DurationColumnName = "Duration";

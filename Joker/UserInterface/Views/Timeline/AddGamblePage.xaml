@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:bl="clr-namespace:Joker.BusinessLogic"
+			 xmlns:ui="clr-namespace:Joker.UserInterface"
+			 x:Class="Joker.UserInterface.AddGamblePage"
+			 Title="Neue Ausgabe"
+			 BackgroundColor="{Static ui:Styles.Bgr1}">
+	<ScrollView>
+		<StackLayout>
+			<Frame Margin="{Static ui:Styles.StripMargin}"
+				   Padding="{Static ui:Styles.PagePadding}"
+				   BackgroundColor="{Static ui:Styles.Bgr2}"
+				   HasShadow="False"
+				   CornerRadius="0">
+				<Grid>
+					<Grid.RowSpacing>
+						<OnPlatform x:TypeArguments="x:Double">
+							<OnPlatform.Platforms>
+								<On Platform="iOS"
+									Value="30" />
+							</OnPlatform.Platforms>
+						</OnPlatform>
+					</Grid.RowSpacing>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="2*" />
+						<ColumnDefinition Width="3*" />
+					</Grid.ColumnDefinitions>
+					<Label Grid.Row="0"
+						   Grid.Column="0"
+						   VerticalOptions="Center"
+						   TextColor="{Static ui:Styles.Text1}">Geldbetrag:</Label>
+					<Entry x:Name="Amount"
+						   Grid.Row="0"
+						   Grid.Column="1"
+						   VerticalOptions="Center"
+						   Placeholder="0,00 €"
+						   TextColor="{Static ui:Styles.Text1}"
+						   FontSize="{Static ui:Styles.CustomMedium}"
+						   Keyboard="Numeric"
+						   Text="">
+					</Entry>
+					<Label Grid.Row="1"
+						   Grid.Column="0"
+						   VerticalOptions="Center"
+						   TextColor="{Static ui:Styles.Text1}">Art der Ausgabe:</Label>
+					<Picker x:Name="GambleTypePicker"
+							Grid.Row="1"
+							Grid.Column="1"
+							VerticalOptions="Center"
+							FontSize="{Static ui:Styles.CustomMedium}"
+							TextColor="{Static ui:Styles.Text1}"
+							Title="Wähle die Art der Ausgabe:" />
+				</Grid>
+			</Frame>
+			<Frame Margin="{Static ui:Styles.StripMargin}"
+				   Padding="{Static ui:Styles.PagePadding}"
+				   BackgroundColor="{Static ui:Styles.Bgr2}"
+				   HasShadow="False"
+				   CornerRadius="0">
+				<StackLayout Spacing="0">
+					<Label x:Name="LengthCounter"
+						   VerticalOptions="Center"
+						   HorizontalTextAlignment="End"
+						   TextColor="{Static ui:Styles.Text2}"
+						   FontSize="Small" />
+					<Editor x:Name="Description"
+							TextChanged="UpdateLengthCounter"
+							HeightRequest="100"
+							MaxLength="{Static bl:Gamble.MaxDescriptionLength}"
+							Placeholder="Beschreibung (optional)"
+							FontSize="{Static ui:Styles.CustomMedium}" />
+				</StackLayout>
+			</Frame>
+			<Frame Margin="{Static ui:Styles.StripMargin}"
+				   Padding="{Static ui:Styles.PagePadding}"
+				   BackgroundColor="{Static ui:Styles.Bgr2}"
+				   HasShadow="False"
+				   CornerRadius="0">
+				<Grid>
+					<Grid.RowSpacing>
+						<OnPlatform x:TypeArguments="x:Double">
+							<OnPlatform.Platforms>
+								<On Platform="iOS"
+									Value="30" />
+							</OnPlatform.Platforms>
+						</OnPlatform>
+					</Grid.RowSpacing>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="2*" />
+						<ColumnDefinition Width="3*" />
+					</Grid.ColumnDefinitions>
+					<Label Grid.Row="0"
+						   Grid.Column="0"
+						   VerticalOptions="Center"
+						   TextColor="{Static ui:Styles.Text1}">Datum:</Label>
+					<DatePicker x:Name="DatePicker"
+								DateSelected="OnDateSelected"
+								Grid.Row="0"
+								Grid.Column="1"
+								VerticalOptions="Center"
+								FontSize="{Static ui:Styles.CustomMedium}"
+								TextColor="{Static ui:Styles.Text1}" />
+					<Label Grid.Row="1"
+						   Grid.Column="0"
+						   VerticalOptions="Center"
+						   TextColor="{Static ui:Styles.Text1}">Uhrzeit:</Label>
+					<TimePicker x:Name="TimePicker"
+								PropertyChanged="OnTimeSelected"
+								Grid.Row="1"
+								Grid.Column="1"
+								VerticalOptions="Center"
+								FontSize="{Static ui:Styles.CustomMedium}"
+								TextColor="{Static ui:Styles.Text1}" />
+				</Grid>
+			</Frame>
+			<StackLayout Orientation="Horizontal"
+						 Margin="{Static ui:Styles.StripMargin}"
+						 Padding="{Static ui:Styles.PagePadding}">
+				<Button Clicked="OnTimeResetButton"
+						BackgroundColor="{Static ui:Styles.Bgr3}"
+						Padding="{Static ui:Styles.PagePadding}"
+						TextColor="{Static ui:Styles.Text1}"
+						Text="Zeit zurücksetzen" />
+				<Button Clicked="OnSubmitButton"
+						HorizontalOptions="FillAndExpand"
+						Padding="{Static ui:Styles.PagePadding}"
+						BackgroundColor="{Static ui:Styles.Bgr5}"
+						TextColor="{Static ui:Styles.Text1}"
+						Text="Hinzufügen" />
+			</StackLayout>
+		</StackLayout>
+	</ScrollView>
+</ContentPage>

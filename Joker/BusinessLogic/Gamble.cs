@@ -57,30 +57,6 @@ namespace Joker.BusinessLogic
 		/// </summary>
 		public Gamble() : base() { }
 
-		/// <summary>
-		/// Creates an identical clone of a gamble.
-		/// </summary>
-		/// <returns>A deep copy of the gamble.</returns>
-		public Gamble Copy()
-		{
-			return new Gamble
-			{
-				Time = Time,
-				Amount = Amount,
-				Type = Type,
-				Description = Description
-			};
-		}
-
-		/// <summary>
-		/// Contains the database-relevant properties of this gamble.
-		/// </summary>
-		/// <returns>A one-line string that represents this gamble.</returns>
-		public override string ToString()
-		{
-			return $"Time: {Time} | Amount: {Amount} | Type: {Type} | Description: {Description}";
-		}
-
 		#region Identifiers for the database schema (DO NOT CHANGE!)
 		private const string GambleTableName = "Gamble";
 		private const string TypeColumnName = "Type";

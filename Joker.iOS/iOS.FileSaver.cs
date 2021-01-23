@@ -30,7 +30,7 @@ namespace Joker.iOS
 			if(PHPhotoLibrary.AuthorizationStatus == PHAuthorizationStatus.Authorized)
 			{
 				string assetPath = Folders.PictureAssets + filePath;
-				var stream = typeof(App).Assembly.GetManifestResourceStream(assetPath);
+				var stream = JokerApp.Assembly.GetManifestResourceStream(assetPath);
 				new UIImage(NSData.FromStream(stream)).SaveToPhotosAlbum(null);
 			}
 			return callback.Task;

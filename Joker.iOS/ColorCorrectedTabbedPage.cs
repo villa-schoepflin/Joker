@@ -1,3 +1,4 @@
+using Joker.UserInterface;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
@@ -14,7 +15,7 @@ namespace Joker.iOS
 		/// </summary>
 		public ColorCorrectedTabbedPage()
 		{
-			TabBar.UnselectedItemTintColor = App.Color("Primary2").ToUIColor();
+			TabBar.UnselectedItemTintColor = Styles.Primary2.ToUIColor();
 			TabBar.Translucent = false;
 		}
 	}

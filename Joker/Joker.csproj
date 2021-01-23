@@ -96,85 +96,85 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Update="UserInterface\Timeline\GambleInspector.xaml.cs">
+		<Compile Update="UserInterface\Views\Timeline\GambleInspector.xaml.cs">
 			<DependentUpon>GambleInspector.xaml</DependentUpon>
 		</Compile>
-		<Compile Update="UserInterface\Timeline\LimitInspector.xaml.cs">
+		<Compile Update="UserInterface\Views\Timeline\LimitInspector.xaml.cs">
 			<DependentUpon>LimitInspector.xaml</DependentUpon>
 		</Compile>
-		<Compile Update="UserInterface\Timeline\AddGamblePage.xaml.cs">
+		<Compile Update="UserInterface\Views\Timeline\AddGamblePage.xaml.cs">
 			<DependentUpon>AddGamblePage.xaml</DependentUpon>
 		</Compile>
-		<Compile Update="UserInterface\ContactPage.xaml.cs">
+		<Compile Update="UserInterface\Views\ContactPage.xaml.cs">
 			<DependentUpon>ContactPage.xaml</DependentUpon>
 		</Compile>
-		<Compile Update="UserInterface\PictureFeed.xaml.cs">
+		<Compile Update="UserInterface\Views\PictureFeed.xaml.cs">
 			<DependentUpon>PictureFeed.xaml</DependentUpon>
 		</Compile>
-		<Compile Update="UserInterface\Timeline\AddLimitPage.xaml.cs">
+		<Compile Update="UserInterface\Views\Timeline\AddLimitPage.xaml.cs">
 			<DependentUpon>AddLimitPage.xaml</DependentUpon>
 		</Compile>
-		<Compile Update="UserInterface\Timeline\TimelineFeed.xaml.cs">
+		<Compile Update="UserInterface\Views\Timeline\TimelineFeed.xaml.cs">
 			<DependentUpon>TimelineFeed.xaml</DependentUpon>
 		</Compile>
-		<Compile Update="UserInterface\WelcomeTour\NameTourPage.xaml.cs">
+		<Compile Update="UserInterface\Views\WelcomeTour\NameTourPage.xaml.cs">
 			<DependentUpon>NameTourPage.xaml</DependentUpon>
 		</Compile>
-		<Compile Update="UserInterface\WelcomeTour\ContactTourPage.xaml.cs">
+		<Compile Update="UserInterface\Views\WelcomeTour\ContactTourPage.xaml.cs">
 			<DependentUpon>ContactTourPage.xaml</DependentUpon>
 		</Compile>
-		<Compile Update="UserInterface\WelcomeTour\LimitTourPage.xaml.cs">
+		<Compile Update="UserInterface\Views\WelcomeTour\LimitTourPage.xaml.cs">
 			<DependentUpon>LimitTourPage.xaml</DependentUpon>
 		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Update="UserInterface\AddContactPage.xaml">
+		<EmbeddedResource Update="UserInterface\Views\AddContactPage.xaml">
 			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\ContactInspector.xaml">
+		<EmbeddedResource Update="UserInterface\Views\ContactInspector.xaml">
 			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\Impressum.xaml">
+		<EmbeddedResource Update="UserInterface\Views\Impressum.xaml">
 			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\PasswordPage.xaml">
+		<EmbeddedResource Update="UserInterface\Views\PasswordPage.xaml">
 			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\SecurityQuestionPage.xaml">
+		<EmbeddedResource Update="UserInterface\Views\SecurityQuestionPage.xaml">
 			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\Timeline\AddLimitPage.xaml">
+		<EmbeddedResource Update="UserInterface\Views\Timeline\AddLimitPage.xaml">
 			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\Timeline\GambleInspector.xaml">
+		<EmbeddedResource Update="UserInterface\Views\Timeline\GambleInspector.xaml">
 			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\Timeline\LimitInspector.xaml">
+		<EmbeddedResource Update="UserInterface\Views\Timeline\LimitInspector.xaml">
 			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\Timeline\AddGamblePage.xaml">
+		<EmbeddedResource Update="UserInterface\Views\Timeline\AddGamblePage.xaml">
 			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\ContactPage.xaml">
+		<EmbeddedResource Update="UserInterface\Views\ContactPage.xaml">
 			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\MainPage.xaml">
+		<EmbeddedResource Update="UserInterface\Views\MainPage.xaml">
 			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\SettingsPage.xaml">
+		<EmbeddedResource Update="UserInterface\Views\SettingsPage.xaml">
 			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\Timeline\TimelineFeed.xaml">
+		<EmbeddedResource Update="UserInterface\Views\Timeline\TimelineFeed.xaml">
 			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\WelcomeTour\NameTourPage.xaml">
+		<EmbeddedResource Update="UserInterface\Views\WelcomeTour\NameTourPage.xaml">
 			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\WelcomeTour\ContactTourPage.xaml">
+		<EmbeddedResource Update="UserInterface\Views\WelcomeTour\ContactTourPage.xaml">
 			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\WelcomeTour\LimitTourPage.xaml">
+		<EmbeddedResource Update="UserInterface\Views\WelcomeTour\LimitTourPage.xaml">
 			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 		</EmbeddedResource>
 	</ItemGroup>

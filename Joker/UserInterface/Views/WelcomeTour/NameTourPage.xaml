@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:ui="clr-namespace:Joker.UserInterface"
+			 x:Class="Joker.UserInterface.NameTourPage"
+			 BackgroundColor="{Static ui:Styles.Primary1}">
+	<ContentPage.Title>
+		<OnPlatform x:TypeArguments="x:String">
+			<OnPlatform.Platforms>
+				<On Platform="iOS"
+					Value="Name" />
+			</OnPlatform.Platforms>
+		</OnPlatform>
+	</ContentPage.Title>
+	<ScrollView>
+		<StackLayout Padding="30"
+					 Spacing="20">
+			<StackLayout Orientation="Horizontal"
+						 Padding="50,10,50,70"
+						 Spacing="0"
+						 HorizontalOptions="CenterAndExpand">
+				<Image Source="{ui:ImageAsset Joker.Assets.Icons.filledcircle.png}" />
+				<Image Source="{ui:ImageAsset Joker.Assets.Icons.bar.png}" />
+				<Image Source="{ui:ImageAsset Joker.Assets.Icons.circle.png}" />
+				<Image Source="{ui:ImageAsset Joker.Assets.Icons.bar.png}" />
+				<Image Source="{ui:ImageAsset Joker.Assets.Icons.circle.png}" />
+			</StackLayout>
+			<Label HorizontalOptions="Center"
+				   VerticalOptions="Center"
+				   FontSize="25"
+				   TextColor="{Static ui:Styles.TextContrast}"
+				   HorizontalTextAlignment="Center">Wie heißt Du?</Label>
+			<Label HorizontalOptions="Center"
+				   VerticalOptions="CenterAndExpand"
+				   FontSize="16"
+				   TextColor="{Static ui:Styles.TextContrast}"
+				   HorizontalTextAlignment="Center">Gib deinen Namen ein, damit Dich die App persönlich ansprechen kann.</Label>
+			<Entry x:Name="NameEntry"
+				   Placeholder="Dein Name"
+				   Text="">
+				<Entry.TextColor>
+					<OnPlatform x:TypeArguments="Color">
+						<OnPlatform.Platforms>
+							<On Platform="Android"
+								Value="{Static ui:Styles.TextContrast}" />
+						</OnPlatform.Platforms>
+					</OnPlatform>
+				</Entry.TextColor>
+			</Entry>
+			<Button Clicked="OnContinueButton"
+					VerticalOptions="CenterAndExpand"
+					BackgroundColor="{Static ui:Styles.Bgr1}"
+					TextColor="{Static ui:Styles.Text1}"
+					Text="Weiter" />
+		</StackLayout>
+	</ScrollView>
+</ContentPage>

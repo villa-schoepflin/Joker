@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using Foundation;
+using Joker.UserInterface;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
@@ -11,7 +12,7 @@ namespace Joker.iOS
 	/// Class responsible for launching the user interface of the application, as well as
 	/// listening and responding to application events from iOS.
 	/// </summary>
-	[Register("AppDelegate")]
+	[Register(nameof(AppDelegate))]
 	public partial class AppDelegate : FormsApplicationDelegate
 	{
 		/// <summary>
@@ -26,8 +27,9 @@ namespace Joker.iOS
 		{
 			Forms.Init();
 
-			string personalFolder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-			LoadApplication(new App(Path.Combine(personalFolder, "..", "Library")));
+			string baseDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+			baseDirectory = Path.Combine(baseDirectory, "..", "Library");
+			LoadApplication(new JokerApp(baseDirectory));
 			CorrectNavigationBarColors();
 
 			return base.FinishedLaunching(app, options);
@@ -39,11 +41,11 @@ namespace Joker.iOS
 		/// </summary>
 		internal static void CorrectNavigationBarColors()
 		{
-			UINavigationBar.Appearance.BarTintColor = App.Color("Primary1").ToUIColor();
-			UINavigationBar.Appearance.TintColor = App.Color("TextContrast").ToUIColor();
+			UINavigationBar.Appearance.BarTintColor = Styles.Primary1.ToUIColor();
+			UINavigationBar.Appearance.TintColor = Styles.TextContrast.ToUIColor();
 			UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes
 			{
-				TextColor = App.Color("TextContrast").ToUIColor()
+				TextColor = Styles.TextContrast.ToUIColor()
 			});
 		}
 	}

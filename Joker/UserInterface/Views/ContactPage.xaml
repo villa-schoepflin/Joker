@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:ui="clr-namespace:Joker.UserInterface"
+			 x:Class="Joker.UserInterface.ContactPage"
+			 Icon="ui_support.png"
+			 BackgroundColor="{Static ui:Styles.Bgr1}">
+	<ContentPage.Title>
+		<OnPlatform x:TypeArguments="x:String">
+			<OnPlatform.Platforms>
+				<On Platform="iOS"
+					Value="{Static ui:ContactPage.Headline}" />
+			</OnPlatform.Platforms>
+		</OnPlatform>
+	</ContentPage.Title>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="Auto" />
+		</Grid.ColumnDefinitions>
+		<ListView ItemsSource="{Binding Contacts}"
+				  Grid.Row="0"
+				  Grid.Column="0"
+				  Grid.RowSpan="2"
+				  Grid.ColumnSpan="2"
+				  SelectionMode="None"
+				  HasUnevenRows="True"
+				  SeparatorColor="Transparent">
+			<ListView.Header>
+				<StackLayout>
+					<Frame BackgroundColor="{Static ui:Styles.Primary2}"
+						   Margin="10,10,10,5"
+						   Padding="15"
+						   CornerRadius="5">
+						<Frame.GestureRecognizers>
+							<TapGestureRecognizer Tapped="OnSearchCounselingCentersOnline" />
+						</Frame.GestureRecognizers>
+						<Label HorizontalTextAlignment="Center"
+							   TextColor="{Static ui:Styles.TextContrast}"
+							   FontAttributes="Bold"
+							   FontSize="Large">Beratungsstelle online suchen</Label>
+					</Frame>
+				</StackLayout>
+			</ListView.Header>
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<StackLayout Padding="10,5,10,5">
+							<StackLayout.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding OpenDetailPage}" />
+							</StackLayout.GestureRecognizers>
+							<Frame BackgroundColor="{Static ui:Styles.Bgr3}"
+								   Padding="5"
+								   CornerRadius="5">
+								<StackLayout Orientation="Horizontal">
+									<Frame BackgroundColor="{Binding IconBackgroundColor}"
+										   Padding="5"
+										   CornerRadius="5"
+										   VerticalOptions="Center">
+										<Image Source="{Binding TypeIcon}"
+											   HeightRequest="30" />
+									</Frame>
+									<StackLayout HorizontalOptions="FillAndExpand"
+												 Margin="5,0,0,0"
+												 Spacing="3">
+										<Label Text="{Binding ContactName}"
+											   VerticalOptions="CenterAndExpand"
+											   TextColor="{Static ui:Styles.Text1}" />
+										<Label Text="{Binding PhoneNumber}"
+											   VerticalOptions="CenterAndExpand"
+											   TextColor="{Static ui:Styles.Text2}" />
+									</StackLayout>
+									<Button Command="{Binding CallContact}"
+											VerticalOptions="Center"
+											BackgroundColor="{Static ui:Styles.Bgr4}"
+											WidthRequest="40"
+											HeightRequest="40"
+											CornerRadius="20"
+											Image="ui_phone.png" />
+								</StackLayout>
+							</Frame>
+						</StackLayout>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+		<Frame Grid.Row="1"
+			   Grid.Column="1"
+			   Margin="0,0,15,15"
+			   Padding="0"
+			   WidthRequest="56"
+			   HeightRequest="56"
+			   CornerRadius="28">
+			<Button Clicked="OnSubmitButton"
+					BackgroundColor="{Static ui:Styles.Bgr4}"
+					Image="ui_submit.png"
+					CornerRadius="28" />
+		</Frame>
+	</Grid>
+</ContentPage>

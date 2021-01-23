@@ -56,13 +56,13 @@ namespace Joker.BusinessLogic
 			amount = amount.Replace('.', ',');
 
 			// Checks if the parsed result has more than two digits after the comma
-			if(decimal.TryParse(amount, out decimal result) && result * 100 == Math.Floor(result * 100))
-			{
-				if(result is >= MinAmount and <= MaxAmount)
-					return result;
-				throw new ArgumentException(string.Format(Text.MonetaryValueBounds, MinAmount, MaxAmount));
-			}
-			throw new ArgumentException(Text.MonetaryValueInvalid);
+			if(!decimal.TryParse(amount, out decimal result) || result * 100 != Math.Floor(result * 100))
+				throw new ArgumentException(Text.MonetaryValueInvalid);
+
+			if(result is >= MinAmount and <= MaxAmount)
+				return result;
+
+			throw new ArgumentException(string.Format(Text.MonetaryValueBounds, MinAmount, MaxAmount));
 		}
 
 		#region Identifiers for the database schema (DO NOT CHANGE!)
