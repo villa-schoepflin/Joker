@@ -17,9 +17,6 @@ namespace Joker.DataAccess
 		/// </summary>
 		internal static void Initialize()
 		{
-			if(AppSettings.WelcomeTourCompleted)
-				return;
-
 			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 			_ = db.CreateTable<Limit>();
 			_ = db.CreateTable<Gamble>();

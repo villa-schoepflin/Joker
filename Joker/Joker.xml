@@ -376,11 +376,10 @@
             Holds the translated German terms for each type of gamble.
             </summary>
         </member>
-        <member name="M:Joker.BusinessLogic.GambleTypes.Names">
+        <member name="P:Joker.BusinessLogic.GambleTypes.Names">
             <summary>
             Returns the translated German terms of the gamble types in order.
             </summary>
-            <returns>An array of strings based on the values of a dictionary.</returns>
         </member>
         <member name="M:Joker.BusinessLogic.GambleTypes.GetName(Joker.BusinessLogic.GambleType)">
             <summary>
@@ -564,6 +563,12 @@
         <member name="T:Joker.DataAccess.Database">
             <summary>
             A utility class containing all methods that interact with the app's local database.
+            </summary>
+        </member>
+        <member name="M:Joker.DataAccess.Database.#cctor">
+            <summary>
+            This solves a severe data corruption bug probably caused by a new SQLite library version where TimeSpans are
+            parsed incorrectly.
             </summary>
         </member>
         <member name="M:Joker.DataAccess.Database.Initialize">

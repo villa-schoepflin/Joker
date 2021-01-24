@@ -45,12 +45,14 @@ namespace Joker.UserInterface
 			try
 			{
 				Indicator.IsRunning = true;
-				DependencyService.Get<IPlatformNotifier>().CancelLimitExpired();
+				var notifier = DependencyService.Get<IPlatformNotifier>();
+				notifier.CancelLimitExpired();
 
 				Limit limit = new(AmountEntry.Text, DurationEntry.Text);
 				Database.Insert(limit);
 				AppSettings.LimitExpiredTime = limit.Time + limit.Duration;
-				DependencyService.Get<IPlatformNotifier>().ScheduleLimitExpired(AppSettings.LimitExpiredTime);
+
+				notifier.ScheduleLimitExpired(AppSettings.LimitExpiredTime);
 
 				JokerApp.SetMainPageToDefault();
 			}

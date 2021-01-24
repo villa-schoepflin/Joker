@@ -50,8 +50,8 @@
     <AndroidUseAapt2>true</AndroidUseAapt2>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>portable</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -73,11 +73,13 @@
     <AndroidSigningStorePass>J0K3rApp</AndroidSigningStorePass>
     <AndroidSigningKeyPass>J0K3rApp</AndroidSigningKeyPass>
     <AndroidSigningKeyAlias>villaschoepflin</AndroidSigningKeyAlias>
-    <AndroidLinkTool>r8</AndroidLinkTool>
     <AndroidLinkMode>Full</AndroidLinkMode>
     <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
     <AndroidPackageFormat>aab</AndroidPackageFormat>
     <AndroidUseAapt2>true</AndroidUseAapt2>
+    <DefineConstants>
+    </DefineConstants>
+    <AndroidLinkTool>r8</AndroidLinkTool>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -480,7 +482,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties TriggeredFromHotReload="False" XamarinHotReloadWrongLinkerErrorInfoBarJokerAndroidHideInfoBar="True" />
+      <UserProperties XamarinHotReloadWrongLinkerErrorInfoBarJokerAndroidHideInfoBar="True" TriggeredFromHotReload="False" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

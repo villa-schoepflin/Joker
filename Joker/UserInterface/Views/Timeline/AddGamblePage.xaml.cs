@@ -22,10 +22,6 @@ namespace Joker.UserInterface
 		{
 			InitializeComponent();
 			Refresh = refresh;
-
-			GambleTypePicker.ItemsSource = GambleTypes.Names();
-			GambleTypePicker.SelectedIndex = 0;
-
 			TimePicker.Time = DateTime.Now.TimeOfDay;
 		}
 

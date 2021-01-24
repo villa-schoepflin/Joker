@@ -50,6 +50,8 @@
 							VerticalOptions="Center"
 							FontSize="{Static ui:Styles.CustomMedium}"
 							TextColor="{Static ui:Styles.Text1}"
+							ItemsSource="{Static bl:GambleTypes.Names}"
+							SelectedIndex="0"
 							Title="Wähle die Art der Ausgabe:" />
 				</Grid>
 			</Frame>

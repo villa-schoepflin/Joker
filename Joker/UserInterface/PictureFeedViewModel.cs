@@ -14,8 +14,6 @@ namespace Joker.UserInterface
 	/// </summary>
 	public sealed class PictureFeedViewModel : ViewModel<PictureFeed, Picture>
 	{
-		private static readonly SKPaint Blur = new() { ImageFilter = SKImageFilter.CreateBlur(50, 50) };
-
 		/// <summary>
 		/// Determines the image to display on the Like button based on the current Liked status.
 		/// </summary>
@@ -79,6 +77,7 @@ namespace Joker.UserInterface
 			scale = Math.Min(widthRatio, heightRatio);
 			canvas.DrawBitmap(bitmap, computeRect(scale));
 		});
+		private static readonly SKPaint Blur = new() { ImageFilter = SKImageFilter.CreateBlur(50, 50) };
 
 		/// <summary>
 		/// Updates the picture with the changed Liked status in the database and notifies the change of property.
@@ -96,13 +95,15 @@ namespace Joker.UserInterface
 		/// </summary>
 		public ICommand SavePictureToGallery => new Command(async () =>
 		{
-			string msg;
-			if(await DependencyService.Get<IPlatformFileSaver>().SaveToGallery(Model.FilePath))
-				msg = Text.SavedToGallery;
-			else
-				msg = Text.StoragePermissionDenied;
+			var fileSaver = DependencyService.Get<IPlatformFileSaver>();
 
-			await View.DisplayAlert(msg, null, Text.Ok);
+			string result;
+			if(await fileSaver.SaveToGallery(Model.FilePath))
+				result = Text.SavedToGallery;
+			else
+				result = Text.StoragePermissionDenied;
+
+			await View.DisplayAlert(result, null, Text.Ok);
 		});
 
 		/// <summary>

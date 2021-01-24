@@ -50,11 +50,7 @@ namespace Joker.BusinessLogic
 		/// <summary>
 		/// Returns the translated German terms of the gamble types in order.
 		/// </summary>
-		/// <returns>An array of strings based on the values of a dictionary.</returns>
-		internal static string[] Names()
-		{
-			return names.Values.ToArray();
-		}
+		internal static string[] Names => names.Values.ToArray();
 
 		/// <summary>
 		/// Gets the translated German term for the supplied gamble type.

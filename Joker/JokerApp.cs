@@ -84,7 +84,8 @@ namespace Joker
 				if(picsNotDepleted)
 				{
 					AppSettings.NewPictureTime = DateTime.UtcNow + UserSettings.NewPictureInterval;
-					DependencyService.Get<IPlatformNotifier>().ScheduleNewPicture(AppSettings.NewPictureTime);
+					var notifier = DependencyService.Get<IPlatformNotifier>();
+					notifier.ScheduleNewPicture(AppSettings.NewPictureTime);
 				}
 			}
 

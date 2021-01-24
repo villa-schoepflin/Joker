@@ -222,7 +222,8 @@ namespace Joker.UserInterface
 			try
 			{
 				UserSettings.SetGambleReminderInterval(GambleReminderEntry.Text);
-				DependencyService.Get<IPlatformNotifier>().ScheduleGambleReminder(UserSettings.GambleReminderInterval);
+				var notifier = DependencyService.Get<IPlatformNotifier>();
+				notifier.ScheduleGambleReminder(UserSettings.GambleReminderInterval);
 
 				double hours = UserSettings.GambleReminderInterval.TotalHours;
 				string msg = string.Format(Text.ReminderIntervalSaved, hours);
@@ -246,7 +247,8 @@ namespace Joker.UserInterface
 			try
 			{
 				UserSettings.SetLimitReminderInterval(LimitReminderEntry.Text);
-				DependencyService.Get<IPlatformNotifier>().ScheduleLimitReminder(UserSettings.LimitReminderInterval);
+				var notifier = DependencyService.Get<IPlatformNotifier>();
+				notifier.ScheduleLimitReminder(UserSettings.LimitReminderInterval);
 
 				double hours = UserSettings.LimitReminderInterval.TotalHours;
 				string msg = string.Format(Text.ReminderIntervalSaved, hours);
