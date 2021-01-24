@@ -59,7 +59,7 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// Determines the icon shown depending on whether the feedback text is visible.
 		/// </summary>
-		public ImageSource FeedbackTogglerIcon => FeedbackHeader.IsVisible ? Icons.Remove : Icons.Show;
+		public ImageSource FeedbackTogglerIcon => FeedbackText.IsVisible ? Icons.Remove : Icons.Show;
 
 		/// <summary>
 		/// The data to be displayed, wrapped in view models based on the Limit and Gamble tables of the database.
@@ -91,7 +91,7 @@ namespace Joker.UserInterface
 		}
 
 		/// <summary>
-		/// Refreshes the list view's data bindings and blinks the limit feedback if the limit has been exceeded.
+		/// Refreshes the list view's data bindings and blinks the limit feedback box if the limit has been crossed.
 		/// </summary>
 		private void RefreshRecords()
 		{
@@ -99,7 +99,7 @@ namespace Joker.UserInterface
 			if(Database.CalcBalance(Database.MostRecentLimit()) >= 0)
 				return;
 
-			FeedbackHeader.IsVisible = true;
+			FeedbackText.IsVisible = true;
 			OnPropertyChanged(nameof(FeedbackTogglerIcon));
 
 			const uint blinkCount = 3;
@@ -107,7 +107,7 @@ namespace Joker.UserInterface
 			int cycle = 0;
 			Device.StartTimer(TimeSpan.FromSeconds(blinkFrequency), () =>
 			{
-				Frame.BackgroundColor = cycle % 2 == 0 ? Styles.Bgr5 : Styles.Bgr3;
+				Header.BackgroundColor = cycle % 2 == 0 ? Styles.Bgr5 : Styles.Bgr3;
 				return ++cycle < blinkCount * 2;
 			});
 		}
@@ -119,7 +119,7 @@ namespace Joker.UserInterface
 		/// <param name="eventArgs">Contains event data.</param>
 		private void OnToggleFeedbackButton(object sender, EventArgs eventArgs)
 		{
-			FeedbackHeader.IsVisible ^= true;
+			FeedbackText.IsVisible ^= true;
 			OnPropertyChanged(nameof(FeedbackTogglerIcon));
 		}
 
@@ -130,6 +130,9 @@ namespace Joker.UserInterface
 		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnSubmitButton(object sender, EventArgs eventArgs)
 		{
+			if(Navigation.HasPage<AddGamblePage>())
+				return;
+
 			AddGamblePage page = new(() =>
 			{
 				RefreshRecords();

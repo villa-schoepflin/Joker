@@ -84,8 +84,11 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// Navigates the user to a detailed view of the view model's contact.
 		/// </summary>
-		public ICommand OpenDetailPage => new Command(async () =>
+		public ICommand OpenInspector => new Command(async () =>
 		{
+			if(View.Navigation.HasPage<ContactInspector>())
+				return;
+
 			ContactInspector inspector = new(this);
 			await View.Navigation.PushAsync(inspector);
 		});
@@ -153,6 +156,10 @@ namespace Joker.UserInterface
 		/// </summary>
 		public ICommand DeleteContact => new Command(async () =>
 		{
+			if(TransactionExecuting)
+				return;
+			TransactionExecuting = true;
+
 			if(Model == Contact.Bzga)
 			{
 				await View.DisplayAlert(null, Text.ContactNotDeletable, Text.Ok);
@@ -164,7 +171,10 @@ namespace Joker.UserInterface
 				_ = await View.Navigation.PopAsync();
 				Refresh.Invoke();
 			}
+
+			TransactionExecuting = false;
 		});
+		private bool TransactionExecuting = false;
 
 		/// <summary>
 		/// Constructs a contact view model for the given view.

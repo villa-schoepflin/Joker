@@ -13,6 +13,28 @@ namespace Joker.DataAccess
 	internal static class Database
 	{
 		/// <summary>
+		/// Necessary for a bugfix where limit duration values were corrupted after the update from 1.0.14 to 1.0.15 due
+		/// to some parsing error or other change in the SQLite library.
+		/// </summary>
+		static Database()
+		{
+			if(!AppSettings.WelcomeTourCompleted)
+				return;
+
+			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
+			bool corrupted = false;
+			var limits = db.Table<Limit>().ToArray();
+			foreach(var limit in limits)
+				if(limit.Duration.TotalDays < 1)
+				{
+					limit.Duration = TimeSpan.FromDays(limit.Duration.Ticks);
+					corrupted = true;
+				}
+			if(corrupted)
+				_ = db.UpdateAll(limits);
+		}
+
+		/// <summary>
 		/// Ensures all necessary tables for database operations exist before they are performed.
 		/// </summary>
 		internal static void Initialize()

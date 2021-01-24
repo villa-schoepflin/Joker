@@ -25,7 +25,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -37,7 +37,7 @@
     <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
-    <DocumentationFile>Joker.Android.xml</DocumentationFile>
+    <DocumentationFile>bin\Joker.Android.xml</DocumentationFile>
     <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     <AndroidSupportedAbis>armeabi-v7a;x86;x86_64;arm64-v8a</AndroidSupportedAbis>
     <AndroidPackageFormat>aab</AndroidPackageFormat>
@@ -53,7 +53,7 @@
     <DebugSymbols>false</DebugSymbols>
     <DebugType>portable</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
@@ -66,7 +66,7 @@
     <AndroidSupportedAbis>armeabi-v7a;x86;x86_64;arm64-v8a</AndroidSupportedAbis>
     <AndroidLinkSkip>
     </AndroidLinkSkip>
-    <DocumentationFile>Joker.Android.xml</DocumentationFile>
+    <DocumentationFile>bin\Joker.Android.xml</DocumentationFile>
     <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     <AndroidKeyStore>true</AndroidKeyStore>
     <AndroidSigningKeyStore>VillaSchoepflin.keystore</AndroidSigningKeyStore>
@@ -363,9 +363,6 @@
     <AndroidResource Include="Resources\drawable-hdpi\ui_info.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Joker.Android.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\tl_slotmachine.png" />
   </ItemGroup>
   <ItemGroup>
@@ -482,7 +479,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadWrongLinkerErrorInfoBarJokerAndroidHideInfoBar="True" TriggeredFromHotReload="False" />
+      <UserProperties TriggeredFromHotReload="False" XamarinHotReloadWrongLinkerErrorInfoBarJokerAndroidHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

@@ -51,7 +51,7 @@
 					<ViewCell>
 						<StackLayout Padding="10,5,10,5">
 							<StackLayout.GestureRecognizers>
-								<TapGestureRecognizer Command="{Binding OpenDetailPage}" />
+								<TapGestureRecognizer Command="{Binding OpenInspector}" />
 							</StackLayout.GestureRecognizers>
 							<Frame BackgroundColor="{Static ui:Styles.Bgr3}"
 								   Padding="5"

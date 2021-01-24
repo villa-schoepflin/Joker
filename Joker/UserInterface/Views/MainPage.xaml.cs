@@ -55,6 +55,9 @@ namespace Joker.UserInterface
 		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnSettingsButton(object sender, EventArgs eventArgs)
 		{
+			if(Navigation.HasPage<SettingsPage>())
+				return;
+
 			SettingsPage settings = new(TimelineFeed.RefreshFeedback);
 			await Navigation.PushAsync(settings);
 		}

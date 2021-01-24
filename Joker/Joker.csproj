@@ -7,13 +7,13 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<DocumentationFile>Joker.xml</DocumentationFile>
+		<DocumentationFile>bin\Joker.xml</DocumentationFile>
 		<WarningLevel>5</WarningLevel>
 		<DefineConstants>DEBUG;TRACE</DefineConstants>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<DocumentationFile>Joker.xml</DocumentationFile>
+		<DocumentationFile>bin\Joker.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>

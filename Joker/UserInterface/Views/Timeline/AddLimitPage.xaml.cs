@@ -12,7 +12,7 @@ namespace Joker.UserInterface
 	public partial class AddLimitPage : ContentPage
 	{
 		/// <summary>
-		/// Provides a feedback text concerning whether the previous limit was exceeded.
+		/// Provides a feedback text concerning whether the previous limit was crossed.
 		/// </summary>
 		public string LimitInfo
 		{
@@ -42,6 +42,10 @@ namespace Joker.UserInterface
 		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnContinueButton(object sender, EventArgs eventArgs)
 		{
+			if(TransactionExecuting)
+				return;
+			TransactionExecuting = true;
+
 			try
 			{
 				Indicator.IsRunning = true;
@@ -50,8 +54,8 @@ namespace Joker.UserInterface
 
 				Limit limit = new(AmountEntry.Text, DurationEntry.Text);
 				Database.Insert(limit);
-				AppSettings.LimitExpiredTime = limit.Time + limit.Duration;
 
+				AppSettings.LimitExpiredTime = limit.Time + limit.Duration;
 				notifier.ScheduleLimitExpired(AppSettings.LimitExpiredTime);
 
 				JokerApp.SetMainPageToDefault();
@@ -61,6 +65,9 @@ namespace Joker.UserInterface
 				Indicator.IsRunning = false;
 				await DisplayAlert(null, error.Message, Text.Ok);
 			}
+
+			TransactionExecuting = false;
 		}
+		private bool TransactionExecuting = false;
 	}
 }

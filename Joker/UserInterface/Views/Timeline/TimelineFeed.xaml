@@ -31,7 +31,7 @@
 				  HasUnevenRows="True">
 			<ListView.Header>
 				<StackLayout>
-					<Frame x:Name="Frame"
+					<Frame x:Name="Header"
 						   BackgroundColor="{Static ui:Styles.Bgr3}"
 						   Margin="10,10,10,5"
 						   Padding="15"
@@ -46,7 +46,7 @@
 								<Image Source="{Binding FeedbackTogglerIcon}"
 									   HeightRequest="20" />
 							</Frame>
-							<StackLayout x:Name="FeedbackHeader">
+							<StackLayout x:Name="FeedbackText">
 								<Label FontSize="Small"
 									   Text="{Binding CurrentLimitFeedback}"
 									   TextColor="{Static ui:Styles.Text1}" />
@@ -64,7 +64,7 @@
 					<ViewCell>
 						<StackLayout Padding="10,5,10,5">
 							<StackLayout.GestureRecognizers>
-								<TapGestureRecognizer Command="{Binding OpenDetailPage}" />
+								<TapGestureRecognizer Command="{Binding OpenInspector}" />
 							</StackLayout.GestureRecognizers>
 							<Frame BackgroundColor="{Binding CellBgrColor}"
 								   Padding="5"

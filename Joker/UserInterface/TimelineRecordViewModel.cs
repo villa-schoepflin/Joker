@@ -48,12 +48,18 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// Navigates the user to a detailed view of the selected limit or gamble item.
 		/// </summary>
-		public ICommand OpenDetailPage => new Command(async () =>
+		public ICommand OpenInspector => new Command(async () =>
 		{
+			if(View.Navigation.HasPage<GambleInspector>() || View.Navigation.HasPage<LimitInspector>())
+				return;
+
+			Page inspector;
 			if(Model is Gamble gamble)
-				await View.Navigation.PushAsync(new GambleInspector(gamble));
+				inspector = new GambleInspector(gamble);
 			else
-				await View.Navigation.PushAsync(new LimitInspector((Limit)Model));
+				inspector = new LimitInspector((Limit)Model);
+
+			await View.Navigation.PushAsync(inspector);
 		});
 
 		/// <summary>

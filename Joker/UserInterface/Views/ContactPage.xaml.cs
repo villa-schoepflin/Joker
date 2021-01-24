@@ -67,7 +67,11 @@ namespace Joker.UserInterface
 		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnSubmitButton(object sender, EventArgs eventArgs)
 		{
-			await Navigation.PushAsync(new AddContactPage(Refresh));
+			if(Navigation.HasPage<AddContactPage>())
+				return;
+
+			AddContactPage page = new(Refresh);
+			await Navigation.PushAsync(page);
 		}
 	}
 }

@@ -28,17 +28,17 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// A text indicating the state of the limit.
 		/// </summary>
-		public string LimitState => Database.CalcBalance(Limit) < 0 ? Text.LimitExceeded : Text.LimitKept;
+		public string LimitState => Database.CalcBalance(Limit) < 0 ? Text.LimitCrossed : Text.LimitKept;
 
 		/// <summary>
-		/// The color marking the state of the limit.
+		/// The background color marking the state of the limit.
 		/// </summary>
-		public Color LimitStateBackground => Color.FromHex(Database.CalcBalance(Limit) < 0 ? "#ffc0cb" : "#90ee90");
+		public Color StateBackground => Database.CalcBalance(Limit) < 0 ? Styles.LimitCrossedBgr : Styles.LimitKeptBgr;
 
 		/// <summary>
 		/// The color for the text that indicates the limit state.
 		/// </summary>
-		public Color LimitStateTextColor => Color.FromHex(Database.CalcBalance(Limit) < 0 ? "#75585d" : "#406e40");
+		public Color StateTextColor => Database.CalcBalance(Limit) < 0 ? Styles.LimitCrossedText : Styles.LimitKeptText;
 
 		/// <summary>
 		/// Returns the chart associated with how the limit was depleted over time.

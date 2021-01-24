@@ -50,7 +50,7 @@ namespace Joker.BusinessLogic
 		public const string LimitDurationBounds
 			= "Die Dauer eines Limits sollte zwischen {0} und {1} Tagen liegen.";
 
-		public const string LimitExceeded
+		public const string LimitCrossed
 			= "Limit überschritten";
 
 		public const string LimitKept

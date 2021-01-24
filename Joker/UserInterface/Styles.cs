@@ -73,6 +73,26 @@ namespace Joker.UserInterface
 		public static readonly Color Link = Color.FromHex("#4e96c2");
 
 		/// <summary>
+		/// Background color associated with crossed limits.
+		/// </summary>
+		public static readonly Color LimitCrossedBgr = Color.FromHex("#ffc0cb");
+
+		/// <summary>
+		/// Background color associated with kept limits.
+		/// </summary>
+		public static readonly Color LimitKeptBgr = Color.FromHex("#90ee90");
+
+		/// <summary>
+		/// Text color associated with crossed limits.
+		/// </summary>
+		public static readonly Color LimitCrossedText = Color.FromHex("#75585d");
+
+		/// <summary>
+		/// Text color associated with kept limits.
+		/// </summary>
+		public static readonly Color LimitKeptText = Color.FromHex("#406e40");
+
+		/// <summary>
 		/// Small text size.
 		/// </summary>
 		public const double CustomSmall = 11;

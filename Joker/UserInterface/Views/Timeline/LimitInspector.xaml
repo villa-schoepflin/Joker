@@ -53,7 +53,7 @@
 				<Frame Grid.Row="2"
 					   Grid.Column="1"
 					   Grid.RowSpan="2"
-					   BackgroundColor="{Binding LimitStateBackground}"
+					   BackgroundColor="{Binding StateBackground}"
 					   Padding="0">
 					<StackLayout Spacing="0"
 								 Padding="0">
@@ -67,7 +67,7 @@
 						</Frame>
 						<Label Text="{Binding LimitState}"
 							   FontSize="{Static ui:Styles.CustomMedium}"
-							   TextColor="{Binding LimitStateTextColor}"
+							   TextColor="{Binding StateTextColor}"
 							   Margin="10,5,5,5" />
 					</StackLayout>
 				</Frame>

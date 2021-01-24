@@ -268,6 +268,9 @@ namespace Joker.UserInterface
 		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnImpressumButton(object sender, EventArgs eventArgs)
 		{
+			if(Navigation.HasPage<Impressum>())
+				return;
+
 			await Navigation.PushAsync(new Impressum());
 		}
 	}

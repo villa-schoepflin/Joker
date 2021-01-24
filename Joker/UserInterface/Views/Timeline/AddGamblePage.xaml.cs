@@ -78,17 +78,24 @@ namespace Joker.UserInterface
 		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnSubmitButton(object sender, EventArgs eventArgs)
 		{
+			if(TransactionExecuting)
+				return;
+			TransactionExecuting = true;
+
 			try
 			{
 				var type = GambleTypes.GetGambleType(GambleTypePicker.SelectedItem.ToString());
+
+				Gamble gamble;
 				if(userChangedDateOrTime)
 				{
 					var time = DatePicker.Date + TimePicker.Time;
-					Database.Insert(new Gamble(time, Amount.Text, type, Description.Text));
+					gamble = new(time, Amount.Text, type, Description.Text);
 				}
 				else
-					Database.Insert(new Gamble(Amount.Text, type, Description.Text));
+					gamble = new(Amount.Text, type, Description.Text);
 
+				Database.Insert(gamble);
 				_ = await Navigation.PopAsync();
 				Refresh.Invoke();
 			}
@@ -96,6 +103,9 @@ namespace Joker.UserInterface
 			{
 				await DisplayAlert(null, error.Message, Text.Ok);
 			}
+
+			TransactionExecuting = false;
 		}
+		private bool TransactionExecuting = false;
 	}
 }
