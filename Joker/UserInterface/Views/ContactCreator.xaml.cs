@@ -12,15 +12,15 @@ namespace Joker.UserInterface
 	/// <summary>
 	/// View where the user defines the data for a new contact and can insert it into the database.
 	/// </summary>
-	public partial class AddContactPage : ContentPage
+	public partial class ContactCreator : ContentPage
 	{
 		private readonly Action Refresh;
 
 		/// <summary>
 		/// Initializes XAML elements.
 		/// </summary>
-		/// <param name="refresh">Callback for refreshing the contact page.</param>
-		public AddContactPage(Action refresh)
+		/// <param name="refresh">Callback for refreshing the contact feed.</param>
+		public ContactCreator(Action refresh)
 		{
 			InitializeComponent();
 			Refresh = refresh;
@@ -94,6 +94,17 @@ namespace Joker.UserInterface
 		/// <param name="sender">Reference to the event's source object.</param>
 		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnSubmitButton(object sender, EventArgs eventArgs)
+		{
+			if(IsExecuting)
+				return;
+
+			IsExecuting = true;
+			await CreateContact();
+			IsExecuting = false;
+		}
+		private bool IsExecuting = false;
+
+		private async Task CreateContact()
 		{
 			try
 			{

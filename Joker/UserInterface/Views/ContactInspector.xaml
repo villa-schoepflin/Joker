@@ -9,7 +9,7 @@
 		<StackLayout Padding="{Static ui:Styles.PagePadding}"
 					 Spacing="30">
 			<StackLayout Orientation="Horizontal">
-				<Button Command="{Binding DeleteContact}"
+				<Button Command="{Binding Delete}"
 						Padding="{Static ui:Styles.PagePadding}"
 						BackgroundColor="Red"
 						TextColor="{Static ui:Styles.TextContrast}"

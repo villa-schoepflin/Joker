@@ -1,3 +1,4 @@
+using Joker.AppInterface;
 using Joker.DataAccess;
 using Xamarin.Forms;
 
@@ -38,7 +39,7 @@ namespace Joker.UserInterface
 
 			Indicator.IsRunning = true;
 			((Entry)sender).Unfocus();
-			JokerApp.RequestMainPage();
+			App.RequestMainPage();
 		}
 	}
 }

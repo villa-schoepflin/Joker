@@ -1,15 +1,20 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<LangVersion>9.0</LangVersion>
-		<Version>1.0.16</Version>
+		<ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+		<Version>1.0.17</Version>
+		<Authors>Hannes Harnisch</Authors>
+		<Company>Villa Schöpflin gGmbH</Company>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<DocumentationFile>bin\Joker.xml</DocumentationFile>
 		<WarningLevel>5</WarningLevel>
 		<DefineConstants>DEBUG;TRACE</DefineConstants>
+		<DebugType>portable</DebugType>
+		<DebugSymbols>true</DebugSymbols>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -92,60 +97,75 @@
 		<PackageReference Include="Microcharts.Forms" Version="0.7.1" />
 		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
-		<PackageReference Include="Xamarin.Essentials" Version="1.6.0" />
-		<PackageReference Include="Xamarin.Forms" Version="5.0.0.1905" />
+		<PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+		<PackageReference Include="Xamarin.Forms" Version="5.0.0.1931" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<Compile Update="UserInterface\Views\Timeline\GambleCreator.xaml.cs">
+			<DependentUpon>GambleCreator.xaml</DependentUpon>
+		</Compile>
 		<Compile Update="UserInterface\Views\Timeline\GambleInspector.xaml.cs">
 			<DependentUpon>GambleInspector.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="UserInterface\Views\Timeline\LimitCreator.xaml.cs">
+			<DependentUpon>LimitCreator.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="UserInterface\Views\Timeline\LimitInspector.xaml.cs">
 			<DependentUpon>LimitInspector.xaml</DependentUpon>
 		</Compile>
-		<Compile Update="UserInterface\Views\Timeline\AddGamblePage.xaml.cs">
-			<DependentUpon>AddGamblePage.xaml</DependentUpon>
-		</Compile>
-		<Compile Update="UserInterface\Views\ContactPage.xaml.cs">
-			<DependentUpon>ContactPage.xaml</DependentUpon>
-		</Compile>
-		<Compile Update="UserInterface\Views\PictureFeed.xaml.cs">
-			<DependentUpon>PictureFeed.xaml</DependentUpon>
-		</Compile>
-		<Compile Update="UserInterface\Views\Timeline\AddLimitPage.xaml.cs">
-			<DependentUpon>AddLimitPage.xaml</DependentUpon>
-		</Compile>
 		<Compile Update="UserInterface\Views\Timeline\TimelineFeed.xaml.cs">
 			<DependentUpon>TimelineFeed.xaml</DependentUpon>
-		</Compile>
-		<Compile Update="UserInterface\Views\WelcomeTour\NameTourPage.xaml.cs">
-			<DependentUpon>NameTourPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="UserInterface\Views\WelcomeTour\ContactTourPage.xaml.cs">
 			<DependentUpon>ContactTourPage.xaml</DependentUpon>
 		</Compile>
+		<Compile Update="UserInterface\Views\WelcomeTour\Finish.xaml.cs">
+			<DependentUpon>Finish.xaml</DependentUpon>
+		</Compile>
 		<Compile Update="UserInterface\Views\WelcomeTour\LimitTourPage.xaml.cs">
 			<DependentUpon>LimitTourPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="UserInterface\Views\WelcomeTour\NameTourPage.xaml.cs">
+			<DependentUpon>NameTourPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="UserInterface\Views\WelcomeTour\Welcome.xaml.cs">
+			<DependentUpon>Welcome.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="UserInterface\Views\ContactCreator.xaml.cs">
+			<DependentUpon>ContactCreator.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="UserInterface\Views\ContactFeed.xaml.cs">
+			<DependentUpon>ContactFeed.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="UserInterface\Views\ContactInspector.xaml.cs">
+			<DependentUpon>ContactInspector.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="UserInterface\Views\Impressum.xaml.cs">
+			<DependentUpon>Impressum.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="UserInterface\Views\MainPage.xaml.cs">
+			<DependentUpon>MainPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="UserInterface\Views\PasswordPage.xaml.cs">
+			<DependentUpon>PasswordPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="UserInterface\Views\PictureFeed.xaml.cs">
+			<DependentUpon>PictureFeed.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="UserInterface\Views\SecurityQuestionPage.xaml.cs">
+			<DependentUpon>SecurityQuestionPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="UserInterface\Views\SettingsPage.xaml.cs">
+			<DependentUpon>SettingsPage.xaml</DependentUpon>
 		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Update="UserInterface\Views\AddContactPage.xaml">
+		<EmbeddedResource Update="UserInterface\Views\Timeline\GambleCreator.xaml">
 			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\Views\ContactInspector.xaml">
-			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\Views\Impressum.xaml">
-			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\Views\PasswordPage.xaml">
-			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\Views\SecurityQuestionPage.xaml">
-			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\Views\Timeline\AddLimitPage.xaml">
+		<EmbeddedResource Update="UserInterface\Views\Timeline\LimitCreator.xaml">
 			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 		</EmbeddedResource>
 		<EmbeddedResource Update="UserInterface\Views\Timeline\GambleInspector.xaml">
@@ -154,28 +174,49 @@
 		<EmbeddedResource Update="UserInterface\Views\Timeline\LimitInspector.xaml">
 			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\Views\Timeline\AddGamblePage.xaml">
-			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\Views\ContactPage.xaml">
-			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\Views\MainPage.xaml">
-			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\Views\SettingsPage.xaml">
-			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-		</EmbeddedResource>
 		<EmbeddedResource Update="UserInterface\Views\Timeline\TimelineFeed.xaml">
-			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-		</EmbeddedResource>
-		<EmbeddedResource Update="UserInterface\Views\WelcomeTour\NameTourPage.xaml">
 			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 		</EmbeddedResource>
 		<EmbeddedResource Update="UserInterface\Views\WelcomeTour\ContactTourPage.xaml">
 			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\Views\WelcomeTour\Finish.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
 		<EmbeddedResource Update="UserInterface\Views\WelcomeTour\LimitTourPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\Views\WelcomeTour\NameTourPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\Views\WelcomeTour\Welcome.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\Views\ContactCreator.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\Views\ContactInspector.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\Views\ContactFeed.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\Views\Impressum.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\Views\MainPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\Views\PasswordPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\Views\PictureFeed.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\Views\SecurityQuestionPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserInterface\Views\SettingsPage.xaml">
 			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 		</EmbeddedResource>
 	</ItemGroup>

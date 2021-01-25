@@ -1,5 +1,6 @@
 using System;
 using System.Text.RegularExpressions;
+using Joker.AppInterface;
 using Joker.DataAccess;
 using Xamarin.Forms;
 
@@ -32,7 +33,7 @@ namespace Joker.UserInterface
 
 			Indicator.IsRunning = true;
 			PasswordEntry.Unfocus();
-			JokerApp.RequestMainPage();
+			App.RequestMainPage();
 		}
 
 		/// <summary>

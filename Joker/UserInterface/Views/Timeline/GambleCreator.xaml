@@ -3,7 +3,7 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:bl="clr-namespace:Joker.BusinessLogic"
 			 xmlns:ui="clr-namespace:Joker.UserInterface"
-			 x:Class="Joker.UserInterface.AddGamblePage"
+			 x:Class="Joker.UserInterface.GambleCreator"
 			 Title="Neue Ausgabe"
 			 BackgroundColor="{Static ui:Styles.Bgr1}">
 	<ScrollView>

@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Joker.BusinessLogic;
 using Joker.DataAccess;
@@ -152,14 +153,32 @@ namespace Joker.UserInterface
 		});
 
 		/// <summary>
-		/// The command by which the model contact will be deleted in the database.
+		/// Attempts to delete the contact in the database.
 		/// </summary>
-		public ICommand DeleteContact => new Command(async () =>
+		public ICommand Delete => new Command(async () =>
 		{
-			if(TransactionExecuting)
+			if(IsExecuting)
 				return;
-			TransactionExecuting = true;
 
+			IsExecuting = true;
+			await DeleteContact();
+			IsExecuting = false;
+		});
+		private bool IsExecuting = false;
+
+		/// <summary>
+		/// Constructs a contact view model for the given view.
+		/// </summary>
+		/// <param name="view">The view for this view model.</param>
+		/// <param name="model">The model for this view model.</param>
+		/// <param name="refresh">Callback for refreshing the contact feed.</param>
+		public ContactViewModel(Page view, Contact model, Action refresh) : base(view, model)
+		{
+			Refresh = refresh;
+		}
+
+		private async Task DeleteContact()
+		{
 			if(Model == Contact.Bzga)
 			{
 				await View.DisplayAlert(null, Text.ContactNotDeletable, Text.Ok);
@@ -171,20 +190,6 @@ namespace Joker.UserInterface
 				_ = await View.Navigation.PopAsync();
 				Refresh.Invoke();
 			}
-
-			TransactionExecuting = false;
-		});
-		private bool TransactionExecuting = false;
-
-		/// <summary>
-		/// Constructs a contact view model for the given view.
-		/// </summary>
-		/// <param name="view">The view for this view model.</param>
-		/// <param name="model">The model for this view model.</param>
-		/// <param name="refresh">Callback for refreshing the contact page.</param>
-		public ContactViewModel(Page view, Contact model, Action refresh) : base(view, model)
-		{
-			Refresh = refresh;
 		}
 	}
 }

@@ -16,7 +16,7 @@ namespace Joker.UserInterface
 		/// <returns>True if the navigation stack contains a page of this type, false otherwise.</returns>
 		public static bool HasPage<T>(this INavigation navigation)
 		{
-			return navigation.NavigationStack.Any(page => page.GetType() == typeof(T));
+			return navigation.NavigationStack.Any(page => page is T);
 		}
 	}
 }

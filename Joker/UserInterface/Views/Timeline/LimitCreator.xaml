@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:ui="clr-namespace:Joker.UserInterface"
-			 x:Class="Joker.UserInterface.AddLimitPage"
+			 x:Class="Joker.UserInterface.LimitCreator"
 			 BackgroundColor="{Static ui:Styles.Primary1}">
 	<ScrollView>
 		<StackLayout Padding="30"

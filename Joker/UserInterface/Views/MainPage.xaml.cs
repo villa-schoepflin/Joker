@@ -29,8 +29,8 @@ namespace Joker.UserInterface
 				Title = PictureFeed.Headline;
 			else if(CurrentPage is TimelineFeed)
 				Title = TimelineFeed.Headline;
-			else if(CurrentPage is ContactPage)
-				Title = ContactPage.Headline;
+			else if(CurrentPage is ContactFeed)
+				Title = ContactFeed.Headline;
 		}
 
 		/// <summary>
@@ -44,8 +44,8 @@ namespace Joker.UserInterface
 				await DisplayAlert(PictureFeed.Headline, TextAssetReader.Get("Info_PictureFeed.txt"), Text.Ok);
 			else if(CurrentPage is TimelineFeed)
 				await DisplayAlert(TimelineFeed.Headline, TextAssetReader.Get("Info_TimelineFeed.txt"), Text.Ok);
-			else if(CurrentPage is ContactPage)
-				await DisplayAlert(ContactPage.Headline, TextAssetReader.Get("Info_ContactPage.txt"), Text.Ok);
+			else if(CurrentPage is ContactFeed)
+				await DisplayAlert(ContactFeed.Headline, TextAssetReader.Get("Info_ContactPage.txt"), Text.Ok);
 		}
 
 		/// <summary>

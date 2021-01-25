@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using Joker.BusinessLogic;
 using Joker.DataAccess;
 using Xamarin.Forms;
@@ -9,7 +10,7 @@ namespace Joker.UserInterface
 	/// <summary>
 	/// View where the user defines the data for a new gamble and can insert it into the database.
 	/// </summary>
-	public partial class AddGamblePage : ContentPage
+	public partial class GambleCreator : ContentPage
 	{
 		private readonly Action Refresh;
 		private bool userChangedDateOrTime = false;
@@ -18,7 +19,7 @@ namespace Joker.UserInterface
 		/// Initializes XAML elements and sets the necessary view elements to their default values.
 		/// </summary>
 		/// <param name="refresh">Callback for refreshing the timeline feed.</param>
-		public AddGamblePage(Action refresh)
+		public GambleCreator(Action refresh)
 		{
 			InitializeComponent();
 			Refresh = refresh;
@@ -78,15 +79,21 @@ namespace Joker.UserInterface
 		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnSubmitButton(object sender, EventArgs eventArgs)
 		{
-			if(TransactionExecuting)
+			if(IsExecuting)
 				return;
-			TransactionExecuting = true;
 
+			IsExecuting = true;
+			await CreateGamble();
+			IsExecuting = false;
+		}
+		private bool IsExecuting = false;
+
+		private async Task CreateGamble()
+		{
 			try
 			{
-				var type = GambleTypes.GetGambleType(GambleTypePicker.SelectedItem.ToString());
-
 				Gamble gamble;
+				var type = GambleTypes.GetGambleType(GambleTypePicker.SelectedItem.ToString());
 				if(userChangedDateOrTime)
 				{
 					var time = DatePicker.Date + TimePicker.Time;
@@ -103,9 +110,6 @@ namespace Joker.UserInterface
 			{
 				await DisplayAlert(null, error.Message, Text.Ok);
 			}
-
-			TransactionExecuting = false;
 		}
-		private bool TransactionExecuting = false;
 	}
 }

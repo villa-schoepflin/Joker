@@ -1,4 +1,5 @@
 using System.Windows.Input;
+using Joker.AppInterface;
 using Joker.BusinessLogic;
 using Joker.DataAccess;
 using Xamarin.Forms;
@@ -6,21 +7,57 @@ using Xamarin.Forms;
 namespace Joker.UserInterface
 {
 	/// <summary>
-	/// View model for a gamble in the gamble inspector. Uses many properties of the timeline record view model.
+	/// View model for a gamble in the gamble inspector.
 	/// </summary>
 	public sealed class GambleViewModel : TimelineRecordViewModel
 	{
 		/// <summary>
-		/// Wrapper in order to treat the model as a gamble because of inheritance from TimelineRecordViewModel.
+		/// The icon to be displayed in the timeline for the gamble, depends on the type of the gamble.
 		/// </summary>
-		private Gamble Gamble
+		public override ImageSource TypeIcon => Gamble.Type switch
 		{
-			get => (Gamble)Model;
-			set => Model = value;
-		}
+			GambleType.Other => Icons.GambleOther,
+			GambleType.Lottery => Icons.GambleLottery,
+			GambleType.SportsBet => Icons.GambleSportsBet,
+			GambleType.Casino => Icons.GambleCasino,
+			GambleType.SlotMachine => Icons.GambleSlotMachine,
+			_ => null
+		};
 
 		/// <summary>
-		/// The description of this gamble as supplied from a model object.
+		/// The primary tinting color used in the timeline for gambles.
+		/// </summary>
+		public override Color CellBackground => Styles.Bgr3;
+
+		/// <summary>
+		/// The secondary tinting color used in the timeline for gambles.
+		/// </summary>
+		public override Color IconBackground => Styles.Bgr4;
+
+		/// <summary>
+		/// The primary text color used in the timeline for gambles.
+		/// </summary>
+		public override Color CellTextColor => Styles.Text1;
+
+		/// <summary>
+		/// The remaining value of the associated limit, after this gamble was deducted.
+		/// </summary>
+		public override string RemainingLimit => Database.CalcRemainingLimit(Gamble).ToString("C", App.Locale);
+
+		/// <summary>
+		/// Navigates the user to a detailed view of the selected gamble.
+		/// </summary>
+		public override ICommand OpenInspector => new Command(async () =>
+		{
+			if(View.Navigation.HasPage<GambleInspector>())
+				return;
+
+			GambleInspector inspector = new(Gamble);
+			await View.Navigation.PushAsync(inspector);
+		});
+
+		/// <summary>
+		/// Differs from the saved description in the database during editing unless saved by the user.
 		/// </summary>
 		public string Description { get; set; }
 
@@ -75,27 +112,21 @@ namespace Joker.UserInterface
 		});
 
 		/// <summary>
+		/// Wrapper in order to treat the model as a gamble because of inheritance from TimelineRecordViewModel.
+		/// </summary>
+		private Gamble Gamble
+		{
+			get => (Gamble)Model;
+			set => Model = value;
+		}
+
+		/// <summary>
 		/// Constructs the view model for a gamble.
 		/// </summary>
 		/// <param name="view">The page for this view model.</param>
 		/// <param name="model">The gamble around which to construct the view model.</param>
 		public GambleViewModel(Page view, Gamble model) : base(view, model)
 		{
-			TypeIcon = model.Type switch
-			{
-				GambleType.Other => Icons.GambleOther,
-				GambleType.Lottery => Icons.GambleLottery,
-				GambleType.SportsBet => Icons.GambleSportsBet,
-				GambleType.Casino => Icons.GambleCasino,
-				GambleType.SlotMachine => Icons.GambleSlotMachine,
-				_ => null
-			};
-
-			CellBackground = Styles.Bgr3;
-			IconBackground = Styles.Bgr4;
-			CellTextColor = Styles.Text1;
-			RemainingLimit = Database.CalcRemainingLimit(model).ToString("C", JokerApp.Locale);
-
 			Description = model.Description;
 		}
 	}

@@ -12,17 +12,17 @@ using Xamarin.Forms.Xaml;
 
 [assembly: Preserve]
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
-namespace Joker
+namespace Joker.AppInterface
 {
 	/// <summary>
 	/// Main class for the shared code application.
 	/// </summary>
-	public class JokerApp : Application
+	public class App : Application
 	{
 		/// <summary>
 		/// For reflecting on embedded assets.
 		/// </summary>
-		public static readonly Assembly Assembly = typeof(JokerApp).Assembly;
+		public static readonly Assembly Assembly = typeof(App).Assembly;
 
 		/// <summary>
 		/// The locale or culture setting to use for this app.
@@ -33,7 +33,7 @@ namespace Joker
 		/// Entry point for the shared code application.
 		/// </summary>
 		/// <param name="baseDirectory">The directory for files concerning the app directly.</param>
-		public JokerApp(string baseDirectory)
+		public App(string baseDirectory)
 		{
 			AppSettings.DatabaseFilePath = Path.Combine(baseDirectory, "database.sqlite");
 		}
@@ -47,7 +47,7 @@ namespace Joker
 			if(DateTime.UtcNow < AppSettings.LimitExpiredTime)
 				Current.MainPage = new NavigationPage(new MainPage());
 			else
-				Current.MainPage = new AddLimitPage();
+				Current.MainPage = new LimitCreator();
 		}
 
 		/// <summary>

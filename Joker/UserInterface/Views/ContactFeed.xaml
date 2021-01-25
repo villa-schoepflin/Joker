@@ -2,14 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:ui="clr-namespace:Joker.UserInterface"
-			 x:Class="Joker.UserInterface.ContactPage"
+			 x:Class="Joker.UserInterface.ContactFeed"
 			 Icon="ui_support.png"
 			 BackgroundColor="{Static ui:Styles.Bgr1}">
 	<ContentPage.Title>
 		<OnPlatform x:TypeArguments="x:String">
 			<OnPlatform.Platforms>
 				<On Platform="iOS"
-					Value="{Static ui:ContactPage.Headline}" />
+					Value="{Static ui:ContactFeed.Headline}" />
 			</OnPlatform.Platforms>
 		</OnPlatform>
 	</ContentPage.Title>

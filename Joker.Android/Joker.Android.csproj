@@ -10,6 +10,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Joker.Android</RootNamespace>
     <AssemblyName>Joker.Android</AssemblyName>
+    <Deterministic>True</Deterministic>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -18,6 +19,23 @@
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
+    <AndroidSupportedAbis>armeabi-v7a;x86;x86_64;arm64-v8a</AndroidSupportedAbis>
+    <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
+    <AndroidUseAapt2>true</AndroidUseAapt2>
+    <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
+    <AndroidPackageFormat>aab</AndroidPackageFormat>
+    <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
+    <WarningLevel>4</WarningLevel>
+    <BundleAssemblies>false</BundleAssemblies>
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+    <AndroidKeyStore>true</AndroidKeyStore>
+    <AndroidSigningKeyStore>VillaSchoepflin.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>J0K3rApp</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>villaschoepflin</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>J0K3rApp</AndroidSigningKeyPass>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -28,58 +46,28 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
     <AotAssemblies>false</AotAssemblies>
     <EnableLLVM>false</EnableLLVM>
-    <BundleAssemblies>false</BundleAssemblies>
     <EnableProguard>false</EnableProguard>
-    <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
-    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
-    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
     <DocumentationFile>bin\Joker.Android.xml</DocumentationFile>
-    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
-    <AndroidSupportedAbis>armeabi-v7a;x86;x86_64;arm64-v8a</AndroidSupportedAbis>
-    <AndroidPackageFormat>aab</AndroidPackageFormat>
-    <AndroidKeyStore>true</AndroidKeyStore>
-    <AndroidSigningKeyStore>VillaSchoepflin.keystore</AndroidSigningKeyStore>
-    <AndroidSigningStorePass>J0K3rApp</AndroidSigningStorePass>
-    <AndroidSigningKeyAlias>villaschoepflin</AndroidSigningKeyAlias>
-    <AndroidSigningKeyPass>J0K3rApp</AndroidSigningKeyPass>
-    <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
-    <AndroidUseAapt2>true</AndroidUseAapt2>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
-    <DebugType>portable</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
-    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <AotAssemblies>false</AotAssemblies>
-    <EnableLLVM>false</EnableLLVM>
-    <BundleAssemblies>false</BundleAssemblies>
-    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
-    <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
-    <AndroidSupportedAbis>armeabi-v7a;x86;x86_64;arm64-v8a</AndroidSupportedAbis>
+    <EnableLLVM>true</EnableLLVM>
+    <DocumentationFile>bin\Joker.Android.xml</DocumentationFile>
+    <AndroidLinkMode>Full</AndroidLinkMode>
+    <AndroidLinkTool>r8</AndroidLinkTool>
     <AndroidLinkSkip>
     </AndroidLinkSkip>
-    <DocumentationFile>bin\Joker.Android.xml</DocumentationFile>
-    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
-    <AndroidKeyStore>true</AndroidKeyStore>
-    <AndroidSigningKeyStore>VillaSchoepflin.keystore</AndroidSigningKeyStore>
-    <AndroidSigningStorePass>J0K3rApp</AndroidSigningStorePass>
-    <AndroidSigningKeyPass>J0K3rApp</AndroidSigningKeyPass>
-    <AndroidSigningKeyAlias>villaschoepflin</AndroidSigningKeyAlias>
-    <AndroidLinkMode>Full</AndroidLinkMode>
-    <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
-    <AndroidPackageFormat>aab</AndroidPackageFormat>
-    <AndroidUseAapt2>true</AndroidUseAapt2>
     <DefineConstants>
     </DefineConstants>
-    <AndroidLinkTool>r8</AndroidLinkTool>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -89,67 +77,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microcharts">
-      <Version>0.7.1</Version>
-    </PackageReference>
-    <PackageReference Include="Microcharts.Forms">
-      <Version>0.7.1</Version>
-    </PackageReference>
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>12.0.3</Version>
-    </PackageReference>
-    <PackageReference Include="sqlite-net-pcl">
-      <Version>1.7.335</Version>
-    </PackageReference>
-    <PackageReference Include="Xamarin.Android.Support.Annotations">
-      <Version>28.0.0.3</Version>
-    </PackageReference>
-    <PackageReference Include="Xamarin.Android.Support.Compat">
-      <Version>28.0.0.3</Version>
-    </PackageReference>
-    <PackageReference Include="Xamarin.Android.Support.CustomTabs">
-      <Version>28.0.0.3</Version>
-    </PackageReference>
-    <PackageReference Include="Xamarin.AndroidX.MediaRouter">
-      <Version>1.2.0.1</Version>
-    </PackageReference>
-    <PackageReference Include="Xamarin.AndroidX.Palette">
-      <Version>1.0.0.6</Version>
-    </PackageReference>
-    <PackageReference Include="Xamarin.Essentials">
-      <Version>1.6.0</Version>
-    </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.1905" />
-    <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />
-    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
-    <PackageReference Include="Xamarin.Android.Support.v4" Version="28.0.0.3" />
-    <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="28.0.0.3" />
-    <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.3" />
+    <PackageReference Include="Microcharts" Version="0.7.1" />
+    <PackageReference Include="Microcharts.Forms" Version="0.7.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.1931" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Code\Android.FileSaver.cs" />
     <Compile Include="Code\Android.Notifier.cs" />
     <Compile Include="Code\InputCorrectedEntry.cs" />
-    <Compile Include="Code\MainActivity.cs" />
-    <Compile Include="Resources\Resource.Designer.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Code\LaunchActivity.cs" />
+    <Compile Include="Code\MainActivity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Resource.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\AndroidManifest.xml" />
     <None Include="VillaSchoepflin.keyInfo" />
     <None Include="VillaSchoepflin.keystore" />
-    <ProguardConfiguration Include="proguard.cfg" />
-    <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\Tabbar.axml" />
-    <AndroidResource Include="Resources\layout\Toolbar.axml" />
-    <AndroidResource Include="Resources\values\styles.xml" />
-    <AndroidResource Include="Resources\values\colors.xml" />
-    <AndroidResource Include="Resources\mipmap-anydpi-v26\ic_launcher.xml" />
-    <AndroidResource Include="Resources\mipmap-anydpi-v26\ic_launcher_round.xml" />
-  </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Joker\Joker.csproj">
       <Project>{FDFEB4B9-6F02-40CB-A71F-48A377ACEB93}</Project>
@@ -157,327 +105,123 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ui_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ui_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\ui_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_submit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\ui_submit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ui_submit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ui_submit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_pictures.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\ui_pictures.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ui_pictures.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ui_pictures.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ui_timeline.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ui_timeline.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\ui_timeline.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_timeline.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ui_support.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ui_support.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\ui_support.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_support.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_phone.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\ui_phone.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ui_phone.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ui_phone.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_settings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\ui_settings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ui_settings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ui_settings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\tl_casino.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\tl_limit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\tl_lottery.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\tl_other.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\tl_sportsbet.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tl_casino.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tl_limit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tl_lottery.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tl_other.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tl_sportsbet.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tl_casino.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tl_limit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tl_lottery.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tl_other.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tl_sportsbet.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\tl_casino.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\tl_limit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\tl_lottery.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\tl_other.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\tl_sportsbet.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ui_heart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ui_heartsketch.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ui_heart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ui_heartsketch.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\ui_heart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\ui_heartsketch.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_heart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_heartsketch.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_save.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\ui_save.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ui_save.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ui_save.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_remove.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\ui_remove.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ui_remove.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ui_remove.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_info.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\ui_info.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ui_info.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ui_info.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\tl_slotmachine.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tl_slotmachine.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tl_slotmachine.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\tl_slotmachine.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_contact.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\ui_contact.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ui_contact.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ui_contact.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_expert.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\ui_expert.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ui_expert.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ui_expert.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_clipboard.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\ui_clipboard.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ui_clipboard.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ui_clipboard.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_show.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\ui_show.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ui_show.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ui_show.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_menu.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\ui_menu.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ui_menu.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ui_menu.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xxxhdpi\app_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xxhdpi\app_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xhdpi\app_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-mdpi\app_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-hdpi\app_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\splash.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\app_splash.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\app_splash.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\app_splash.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\app_splash.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\app_logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\app_logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\app_logo.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\app_logo.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\app_splash.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\tl_casino.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\tl_limit.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\tl_lottery.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\tl_other.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\tl_slotmachine.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\tl_sportsbet.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ui_clipboard.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ui_contact.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ui_expert.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ui_heart.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ui_heartsketch.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ui_icon.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ui_info.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ui_menu.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ui_phone.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ui_pictures.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ui_remove.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ui_save.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ui_settings.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ui_show.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ui_submit.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ui_support.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ui_timeline.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\app_logo.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\app_splash.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\tl_casino.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\tl_limit.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\tl_lottery.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\tl_other.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\tl_slotmachine.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\tl_sportsbet.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ui_clipboard.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ui_contact.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ui_expert.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ui_heart.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ui_heartsketch.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ui_icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ui_info.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ui_menu.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ui_phone.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ui_pictures.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ui_remove.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ui_save.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ui_settings.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ui_show.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ui_submit.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ui_support.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ui_timeline.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\app_logo.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\app_splash.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\tl_casino.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\tl_limit.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\tl_lottery.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\tl_other.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\tl_slotmachine.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\tl_sportsbet.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ui_clipboard.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ui_contact.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ui_expert.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ui_heart.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ui_heartsketch.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ui_icon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ui_info.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ui_menu.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ui_phone.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ui_pictures.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ui_remove.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ui_save.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ui_settings.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ui_show.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ui_submit.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ui_support.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ui_timeline.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\app_logo.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\app_splash.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\tl_casino.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\tl_limit.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\tl_lottery.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\tl_other.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\tl_slotmachine.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\tl_sportsbet.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_clipboard.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_contact.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_expert.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_heart.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_heartsketch.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_icon.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_info.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_menu.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_phone.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_pictures.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_remove.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_save.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_settings.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_show.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_submit.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_support.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ui_timeline.png" />
+    <AndroidResource Include="Resources\drawable\splash.xml" />
+    <AndroidResource Include="Resources\layout\Tabbar.axml" />
+    <AndroidResource Include="Resources\layout\Toolbar.axml" />
+    <AndroidResource Include="Resources\mipmap-anydpi-v26\icon.xml" />
+    <AndroidResource Include="Resources\mipmap-anydpi-v26\icon_round.xml" />
+    <AndroidResource Include="Resources\mipmap-hdpi\app_icon.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\app_icon.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\app_icon.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\app_icon.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\app_icon.png" />
+    <AndroidResource Include="Resources\values\colors.xml" />
+    <AndroidResource Include="Resources\values\styles.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadWrongLinkerErrorInfoBarJokerAndroidHideInfoBar="True" TriggeredFromHotReload="False" />
+      <UserProperties TriggeredFromHotReload="False" XamarinHotReloadWrongLinkerErrorInfoBarJokerAndroidHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

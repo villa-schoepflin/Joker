@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Joker.AppInterface;
 using Joker.BusinessLogic;
 using Joker.DataAccess;
@@ -9,7 +10,7 @@ namespace Joker.UserInterface
 	/// <summary>
 	/// Unclosable view shown only when opening the app after a limit has expired, forcing the user to set a new one.
 	/// </summary>
-	public partial class AddLimitPage : ContentPage
+	public partial class LimitCreator : ContentPage
 	{
 		/// <summary>
 		/// Provides a feedback text concerning whether the previous limit was crossed.
@@ -28,7 +29,7 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// Initializes XAML elements.
 		/// </summary>
-		public AddLimitPage()
+		public LimitCreator()
 		{
 			InitializeComponent();
 			BindingContext = this;
@@ -42,10 +43,17 @@ namespace Joker.UserInterface
 		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnContinueButton(object sender, EventArgs eventArgs)
 		{
-			if(TransactionExecuting)
+			if(IsExecuting)
 				return;
-			TransactionExecuting = true;
 
+			IsExecuting = true;
+			await CreateLimit();
+			IsExecuting = false;
+		}
+		private bool IsExecuting = false;
+
+		private async Task CreateLimit()
+		{
 			try
 			{
 				Indicator.IsRunning = true;
@@ -58,16 +66,13 @@ namespace Joker.UserInterface
 				AppSettings.LimitExpiredTime = limit.Time + limit.Duration;
 				notifier.ScheduleLimitExpired(AppSettings.LimitExpiredTime);
 
-				JokerApp.RequestMainPage();
+				App.RequestMainPage();
 			}
 			catch(ArgumentException error)
 			{
 				Indicator.IsRunning = false;
 				await DisplayAlert(null, error.Message, Text.Ok);
 			}
-
-			TransactionExecuting = false;
 		}
-		private bool TransactionExecuting = false;
 	}
 }

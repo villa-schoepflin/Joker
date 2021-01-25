@@ -69,7 +69,7 @@ namespace Joker.Android
 
 			byte[] fileData;
 			string assetPath = Folders.PictureAssets + FilePath;
-			using(var stream = JokerApp.Assembly.GetManifestResourceStream(assetPath))
+			using(var stream = App.Assembly.GetManifestResourceStream(assetPath))
 			{
 				fileData = new byte[stream.Length];
 				_ = stream.Read(fileData, 0, (int)stream.Length);

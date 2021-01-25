@@ -132,10 +132,10 @@ namespace Joker.UserInterface
 		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnSubmitButton(object sender, EventArgs eventArgs)
 		{
-			if(Navigation.HasPage<AddGamblePage>())
+			if(Navigation.HasPage<GambleCreator>())
 				return;
 
-			AddGamblePage page = new(() =>
+			GambleCreator page = new(() =>
 			{
 				RefreshRecords();
 				RefreshFeedback();

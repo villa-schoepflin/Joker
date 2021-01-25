@@ -1,6 +1,7 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Joker.AppInterface;
 using Xamarin.Forms.Platform.Android;
 
 using Environment = System.Environment;
@@ -11,8 +12,8 @@ namespace Joker.Android
 	/// The entry point for the Android app after preliminary launching has finished behind the
 	/// splash screen.
 	/// </summary>
-	[Activity(Theme = "@style/MainTheme",
-			  Icon = "@mipmap/ic_launcher",
+	[Activity(Icon = "@mipmap/icon",
+			  Theme = "@style/MainTheme",
 			  ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class MainActivity : FormsAppCompatActivity
 	{
@@ -34,7 +35,7 @@ namespace Joker.Android
 			Instance = this;
 
 			string baseDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-			LoadApplication(new JokerApp(baseDirectory));
+			LoadApplication(new App(baseDirectory));
 		}
 
 		/// <summary>

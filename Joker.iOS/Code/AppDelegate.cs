@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using Foundation;
+using Joker.AppInterface;
 using Joker.UserInterface;
 using UIKit;
 using Xamarin.Forms;
@@ -29,7 +30,7 @@ namespace Joker.iOS
 
 			string baseDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 			baseDirectory = Path.Combine(baseDirectory, "..", "Library");
-			LoadApplication(new JokerApp(baseDirectory));
+			LoadApplication(new App(baseDirectory));
 			CorrectNavigationBarColors();
 
 			return base.FinishedLaunching(app, options);

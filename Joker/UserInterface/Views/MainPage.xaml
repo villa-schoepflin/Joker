@@ -14,5 +14,5 @@
 	</TabbedPage.ToolbarItems>
 	<ui:PictureFeed />
 	<ui:TimelineFeed x:Name="TimelineFeed" />
-	<ui:ContactPage />
+	<ui:ContactFeed />
 </TabbedPage>

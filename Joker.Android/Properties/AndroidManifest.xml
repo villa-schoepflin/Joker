@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.villaschoepflin.Joker" android:installLocation="preferExternal" android:versionName="1.0.16" android:versionCode="17">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.villaschoepflin.Joker" android:installLocation="preferExternal" android:versionName="1.0.17" android:versionCode="18">
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="29" />
 	<uses-permission android:name="android.permission.READ_CONTACTS" />
 	<uses-permission android:name="android.permission.CALL_PHONE" />
@@ -11,5 +11,5 @@
 	<uses-permission android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" />
 	<uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
 	<uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
-	<application android:label="Joker" android:roundIcon="@mipmap/ic_launcher_round" android:icon="@drawable/ui_show"></application>
+	<application android:label="Joker" android:roundIcon="@mipmap/icon_round"></application>
 </manifest>

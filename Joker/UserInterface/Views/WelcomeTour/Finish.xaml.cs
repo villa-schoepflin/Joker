@@ -28,33 +28,29 @@ namespace Joker.UserInterface
 			Indicator.IsRunning = true;
 			Database.Initialize();
 
-			// Inserts the optional first contact
 			if(ContactTourPage.FirstContact is object)
 				Database.Insert(ContactTourPage.FirstContact);
 
-			/* Inserts the first limit, sets the persistent time setting for when it expires and
-			 * schedules the corresponding push notification. */
+			/* Inserts the first limit, sets the persistent time setting for when it expires and schedules the
+			 * corresponding push notification. */
 			Database.Insert(LimitTourPage.FirstLimit);
 			AppSettings.LimitExpiredTime = LimitTourPage.FirstLimit.Time + LimitTourPage.FirstLimit.Duration;
 
 			var notifier = DependencyService.Get<IPlatformNotifier>();
 			notifier.ScheduleLimitExpired(AppSettings.LimitExpiredTime);
 
-			/* Inserts the first pictures into the database for the picture feed, sets the
-			 * persistent time setting for when a new picture should be inserted and alerted to the
-			 * user and schedules the corresponding push notification. */
+			/* Inserts the first pictures into the database for the picture feed, sets the time setting for when a new
+			 * picture should be inserted and alerted to the user and schedules the corresponding notification. */
 			for(int i = 0; i < PictureFeed.InitialPictureAmount; i++)
 				_ = Database.InsertPictureFromRandomAsset();
 			AppSettings.NewPictureTime = DateTime.UtcNow + UserSettings.NewPictureInterval;
 			notifier.ScheduleNewPicture(AppSettings.NewPictureTime);
 
-			// Schedules reminder notifications.
 			notifier.ScheduleGambleReminder(UserSettings.GambleReminderInterval);
 			notifier.ScheduleLimitReminder(UserSettings.LimitReminderInterval);
 
-			// Completes the welcome tour and redirects the user to the main page.
 			AppSettings.WelcomeTourCompleted = true;
-			JokerApp.RequestMainPage();
+			App.RequestMainPage();
 		}
 	}
 }

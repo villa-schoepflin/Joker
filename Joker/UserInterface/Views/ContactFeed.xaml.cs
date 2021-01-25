@@ -10,7 +10,7 @@ namespace Joker.UserInterface
 	/// <summary>
 	/// The main page's right tab. A view that lists all recorded contacts and allows the user to edit and call them.
 	/// </summary>
-	public partial class ContactPage : ContentPage
+	public partial class ContactFeed : ContentPage
 	{
 		/// <summary>
 		/// The title of this page, provided here to be accessible from anywhere.
@@ -35,7 +35,7 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// Initializes XAML elements and binds the view data.
 		/// </summary>
-		public ContactPage()
+		public ContactFeed()
 		{
 			InitializeComponent();
 			BindingContext = this;
@@ -67,10 +67,10 @@ namespace Joker.UserInterface
 		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnSubmitButton(object sender, EventArgs eventArgs)
 		{
-			if(Navigation.HasPage<AddContactPage>())
+			if(Navigation.HasPage<ContactCreator>())
 				return;
 
-			AddContactPage page = new(Refresh);
+			ContactCreator page = new(Refresh);
 			await Navigation.PushAsync(page);
 		}
 	}

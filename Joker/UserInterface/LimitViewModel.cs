@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using System.Windows.Input;
+using Joker.AppInterface;
 using Joker.BusinessLogic;
 using Joker.DataAccess;
 using Microcharts;
@@ -11,14 +13,51 @@ using Entry = Microcharts.Entry;
 namespace Joker.UserInterface
 {
 	/// <summary>
-	/// View model for a limit in the limit inspector. Uses many properties of the timeline record view model.
+	/// View model for a limit in the limit inspector.
 	/// </summary>
 	public sealed class LimitViewModel : TimelineRecordViewModel
 	{
 		/// <summary>
+		/// The icon to be displayed in the timeline for limits.
+		/// </summary>
+		public override ImageSource TypeIcon => Icons.Limit;
+
+		/// <summary>
+		/// The primary tinting color used in the timeline for limits.
+		/// </summary>
+		public override Color CellBackground => Styles.Primary1;
+
+		/// <summary>
+		/// The secondary tinting color used in the timeline for limits.
+		/// </summary>
+		public override Color IconBackground => Styles.Primary1;
+
+		/// <summary>
+		/// The primary text color used in the timeline for limits.
+		/// </summary>
+		public override Color CellTextColor => Styles.TextContrast;
+
+		/// <summary>
+		/// The remaining limit part of the cell in the timeline feed will be empty for limits.
+		/// </summary>
+		public override string RemainingLimit => null;
+
+		/// <summary>
+		/// Navigates the user to a detailed view of the selected limit.
+		/// </summary>
+		public override ICommand OpenInspector => new Command(async () =>
+		{
+			if(View.Navigation.HasPage<LimitInspector>())
+				return;
+
+			LimitInspector inspector = new(Limit);
+			await View.Navigation.PushAsync(inspector);
+		});
+
+		/// <summary>
 		/// The currently remaining balance of the limit.
 		/// </summary>
-		public string Balance => Database.CalcBalance(Limit).ToString("C", JokerApp.Locale);
+		public string Balance => Database.CalcBalance(Limit).ToString("C", App.Locale);
 
 		/// <summary>
 		/// The duration in days.
@@ -65,14 +104,7 @@ namespace Joker.UserInterface
 		/// </summary>
 		/// <param name="view">The page for this view model.</param>
 		/// <param name="model">The limit around which to construct the view model.</param>
-		public LimitViewModel(Page view, Limit model) : base(view, model)
-		{
-			TypeIcon = Icons.Limit;
-			CellBackground = Styles.Primary1;
-			IconBackground = Styles.Primary1;
-			CellTextColor = Styles.TextContrast;
-			RemainingLimit = null;
-		}
+		public LimitViewModel(Page view, Limit model) : base(view, model) { }
 
 		/* If you're getting errors after here because Entry was changed to ChartEntry, then you changed the Microcharts
 		 * version to something later than 0.7.1. Before going with the newer version, you might need to explicitly set
@@ -82,10 +114,10 @@ namespace Joker.UserInterface
 		private Entry[] CalculateChartEntries()
 		{
 			var span = GetLimitDurationOrTimeToNextLimit();
-			var entries = AllocateEntriesBasedOn(span);
+			var entries = PrepareEntriesBasedOn(span);
 
 			/* The gambles here are the data points that need to be interpolated. The indices are indices into the
-			 * entries array and represent where each actual gamble is located in it.*/
+			 * entries array and represent where each actual gamble is located in it. */
 			var gambles = Database.AllGamblesWithinLimit(Limit);
 			int[] indices = PrepareIndices(entries, gambles);
 			SetGambleIndicesAndGambleEntries(span, entries, gambles, indices);
@@ -97,8 +129,7 @@ namespace Joker.UserInterface
 					LinearlyInterpolateEntry(entries, indices, i, gamblesPassed);
 				else
 					gamblesPassed++;
-
-				SetCaptionIfEntryAlignsWithNewDay(span, entries, i);
+				SetLabelIfEntryAlignsWithDay(span, entries, i);
 			}
 			return entries;
 		}
@@ -117,7 +148,7 @@ namespace Joker.UserInterface
 				return nextLimit.Time - Limit.Time;
 		}
 
-		private Entry[] AllocateEntriesBasedOn(TimeSpan span)
+		private Entry[] PrepareEntriesBasedOn(TimeSpan span)
 		{
 			var entries = new Entry[(int)span.TotalHours];
 			entries[0] = GetColoredEntry((float)Limit.Amount);
@@ -141,7 +172,8 @@ namespace Joker.UserInterface
 			for(int i = 0; i < gambles.Length; i++)
 			{
 				float ticksFromLimitToGamble = (gambles[i].Time - Limit.Time).Ticks;
-				indices[i + 1] = (int)(ticksFromLimitToGamble / span.Ticks * (entries.Length - 1));
+				float gamblePositionInSpan = ticksFromLimitToGamble / span.Ticks;
+				indices[i + 1] = (int)(gamblePositionInSpan * (entries.Length - 1));
 				float value = (float)Database.CalcRemainingLimit(gambles[i]);
 				entries[indices[i + 1]] = GetColoredEntry(value);
 			}
@@ -157,14 +189,21 @@ namespace Joker.UserInterface
 			entries[current] = GetColoredEntry(value);
 		}
 
-		private void SetCaptionIfEntryAlignsWithNewDay(TimeSpan span, Entry[] entries, int current)
+		private void SetLabelIfEntryAlignsWithDay(TimeSpan span, Entry[] entries, int current)
 		{
 			int roundUp = Limit.Time.Minute >= 30 ? 1 : 0;
-			int hour = Limit.Time.ToLocalTime().Hour + roundUp;
-			int not12am = hour != 0 ? 1 : 0;
-			if(current % ((int)span.TotalDays / 5 * 24) == 24 * not12am - hour)
+			int limitHour = Limit.Time.ToLocalTime().Hour + roundUp;
+			int zeroIf12am = limitHour == 0 ? 0 : 1;
+
+			const int daySkippingThreshold = 5;
+			const int hoursInDay = 24;
+
+			int hoursBetweenLabels = (int)span.TotalDays / daySkippingThreshold * hoursInDay;
+			int hoursTillNewDayFromLimit = hoursInDay * zeroIf12am - limitHour;
+			if(current % hoursBetweenLabels == hoursTillNewDayFromLimit)
 			{
-				var date = Limit.Time + TimeSpan.FromDays(not12am + current / 24);
+				int offsetInDays = current / hoursInDay + zeroIf12am;
+				var date = Limit.Time + TimeSpan.FromDays(offsetInDays);
 				entries[current].ValueLabel = date.ToLocalTime().ToString("d");
 			}
 		}

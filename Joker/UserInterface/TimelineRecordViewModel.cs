@@ -1,4 +1,5 @@
 using System.Windows.Input;
+using Joker.AppInterface;
 using Joker.BusinessLogic;
 using Xamarin.Forms;
 
@@ -12,27 +13,32 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// The icon to be displayed in the timeline based on what type of record it is.
 		/// </summary>
-		public ImageSource TypeIcon { get; protected set; }
+		public abstract ImageSource TypeIcon { get; }
 
 		/// <summary>
 		/// The primary tinting color used in the timeline.
 		/// </summary>
-		public Color CellBackground { get; protected set; }
+		public abstract Color CellBackground { get; }
 
 		/// <summary>
 		/// The secondary tinting color used in the timeline.
 		/// </summary>
-		public Color IconBackground { get; protected set; }
+		public abstract Color IconBackground { get; }
 
 		/// <summary>
 		/// The primary text color used in the timeline.
 		/// </summary>
-		public Color CellTextColor { get; protected set; }
+		public abstract Color CellTextColor { get; }
 
 		/// <summary>
 		/// The text to be displayed in the remaining limit column in the timeline.
 		/// </summary>
-		public string RemainingLimit { get; protected set; }
+		public abstract string RemainingLimit { get; }
+
+		/// <summary>
+		/// Navigates the user to a detailed view of the selected limit or gamble item.
+		/// </summary>
+		public abstract ICommand OpenInspector { get; }
 
 		/// <summary>
 		/// Converts the record's time property to the system's time zone in the 24-hour format.
@@ -42,23 +48,7 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// Converts the amount to a Euro monetary value.
 		/// </summary>
-		public string AmountInEuro => Model.Amount.ToString("C", JokerApp.Locale);
-
-		/// <summary>
-		/// Navigates the user to a detailed view of the selected limit or gamble item.
-		/// </summary>
-		public ICommand OpenInspector => new Command(async () =>
-		{
-			if(View.Navigation.HasPage<GambleInspector>() || View.Navigation.HasPage<LimitInspector>())
-				return;
-
-			Page inspector;
-			if(Model is Gamble gamble)
-				inspector = new GambleInspector(gamble);
-			else
-				inspector = new LimitInspector((Limit)Model);
-			await View.Navigation.PushAsync(inspector);
-		});
+		public string AmountInEuro => Model.Amount.ToString("C", App.Locale);
 
 		/// <summary>
 		/// Constructs a timeline record view model.

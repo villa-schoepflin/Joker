@@ -1,4 +1,5 @@
 using System;
+using Joker.AppInterface;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -24,7 +25,7 @@ namespace Joker.UserInterface
 		{
 			if(Source == null)
 				return null;
-			return ImageSource.FromResource(Source, JokerApp.Assembly);
+			return ImageSource.FromResource(Source, App.Assembly);
 		}
 	}
 }

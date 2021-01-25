@@ -107,7 +107,7 @@ namespace Joker.DataAccess
 			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 
 			// All asset paths in the PictureFeed folder are put into an array.
-			string[] files = JokerApp.Assembly.GetManifestResourceNames();
+			string[] files = App.Assembly.GetManifestResourceNames();
 			files = files.Where(name => name.StartsWith(Folders.PictureAssets)).ToArray();
 
 			/* If the count of pictures in the Picture table is not less than the number of asset paths, the method

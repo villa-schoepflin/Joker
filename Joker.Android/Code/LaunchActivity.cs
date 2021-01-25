@@ -10,10 +10,10 @@ namespace Joker.Android
 	/// <summary>
 	/// Main entry point of the Android app for the main launching process.
 	/// </summary>
-	[Activity(NoHistory = true,
-			  MainLauncher = true,
+	[Activity(MainLauncher = true,
+			  NoHistory = true,
+			  Icon = "@mipmap/icon",
 			  Theme = "@style/Splash",
-			  Icon = "@mipmap/ic_launcher",
 			  ScreenOrientation = ScreenOrientation.Portrait)]
 	public class LaunchActivity : Activity
 	{

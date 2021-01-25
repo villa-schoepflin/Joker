@@ -55,7 +55,7 @@ namespace Joker.UserInterface
 		public ICommand DrawImage => new Command<SKPaintSurfaceEventArgs>(eventArgs =>
 		{
 			string assetPath = Folders.PictureAssets + Model.FilePath;
-			using var stream = JokerApp.Assembly.GetManifestResourceStream(assetPath);
+			using var stream = App.Assembly.GetManifestResourceStream(assetPath);
 			var bitmap = SKBitmap.Decode(stream);
 
 			SKRect computeRect(float scale)
@@ -67,11 +67,11 @@ namespace Joker.UserInterface
 				return new(left, top, left + width, top + height);
 			}
 
-			var canvas = eventArgs.Surface.Canvas;
 			float widthRatio = (float)eventArgs.Info.Width / bitmap.Width;
 			float heightRatio = (float)eventArgs.Info.Height / bitmap.Height;
-
 			float scale = Math.Max(widthRatio, heightRatio) * 1.2f; // Overscale to avoid background bleed when blurring
+
+			var canvas = eventArgs.Surface.Canvas;
 			canvas.DrawBitmap(bitmap, computeRect(scale), Blur);
 
 			scale = Math.Min(widthRatio, heightRatio);
@@ -96,7 +96,6 @@ namespace Joker.UserInterface
 		public ICommand SavePictureToGallery => new Command(async () =>
 		{
 			var fileSaver = DependencyService.Get<IPlatformFileSaver>();
-
 			string result;
 			if(await fileSaver.SaveToGallery(Model.FilePath))
 				result = Text.SavedToGallery;
