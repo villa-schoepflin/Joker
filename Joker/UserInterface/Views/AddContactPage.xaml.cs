@@ -33,13 +33,13 @@ namespace Joker.UserInterface
 		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnNameClipboardButton(object sender, EventArgs eventArgs)
 		{
-			string text = await Clipboard.GetTextAsync();
-			if(!string.IsNullOrEmpty(text))
+			string clipboard = await Clipboard.GetTextAsync();
+			if(!string.IsNullOrEmpty(clipboard))
 				return;
 
-			if(text.Length > Contact.MaxNameLength)
-				text = text.Substring(0, Contact.MaxNameLength);
-			NameEntry.Text = text;
+			if(clipboard.Length > Contact.MaxNameLength)
+				clipboard = clipboard.Substring(0, Contact.MaxNameLength);
+			NameEntry.Text = clipboard;
 		}
 
 		/// <summary>
@@ -49,13 +49,13 @@ namespace Joker.UserInterface
 		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnPhoneNumberClipboardButton(object sender, EventArgs eventArgs)
 		{
-			string text = await Clipboard.GetTextAsync();
-			if(!string.IsNullOrEmpty(text))
+			string clipboard = await Clipboard.GetTextAsync();
+			if(!string.IsNullOrEmpty(clipboard))
 				return;
 
-			if(text.Length > Contact.MaxPhoneNumberLength)
-				text = text.Substring(0, Contact.MaxPhoneNumberLength);
-			PhoneNumberEntry.Text = text;
+			if(clipboard.Length > Contact.MaxPhoneNumberLength)
+				clipboard = clipboard.Substring(0, Contact.MaxPhoneNumberLength);
+			PhoneNumberEntry.Text = clipboard;
 		}
 
 		/// <summary>
@@ -69,14 +69,13 @@ namespace Joker.UserInterface
 			try
 			{
 				var contact = await Contacts.PickContactAsync();
-
-				if(contact.Phones.Count != 0)
+				if(contact.Phones.Count == 0)
 				{
-					NameEntry.Text = contact.DisplayName;
-					PhoneNumberEntry.Text = contact.Phones[0].PhoneNumber;
-				}
-				else
 					await DisplayAlert(null, Text.ContactWithoutPhoneNumber, Text.Ok);
+					return;
+				}
+				NameEntry.Text = contact.DisplayName;
+				PhoneNumberEntry.Text = contact.Phones[0].PhoneNumber;
 			}
 			catch(PermissionException)
 			{

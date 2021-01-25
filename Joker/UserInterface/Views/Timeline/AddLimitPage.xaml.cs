@@ -58,7 +58,7 @@ namespace Joker.UserInterface
 				AppSettings.LimitExpiredTime = limit.Time + limit.Duration;
 				notifier.ScheduleLimitExpired(AppSettings.LimitExpiredTime);
 
-				JokerApp.SetMainPageToDefault();
+				JokerApp.RequestMainPage();
 			}
 			catch(ArgumentException error)
 			{

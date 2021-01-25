@@ -32,7 +32,7 @@ namespace Joker.UserInterface
 
 			Indicator.IsRunning = true;
 			PasswordEntry.Unfocus();
-			JokerApp.SetMainPageToDefault();
+			JokerApp.RequestMainPage();
 		}
 
 		/// <summary>
@@ -52,6 +52,9 @@ namespace Joker.UserInterface
 		/// <param name="eventArgs">Contains event data.</param>
 		private async void ShowSecurityQuestions(object sender, EventArgs eventArgs)
 		{
+			if(Navigation.HasPage<SecurityQuestionPage>())
+				return;
+
 			await Navigation.PushAsync(new SecurityQuestionPage());
 		}
 	}

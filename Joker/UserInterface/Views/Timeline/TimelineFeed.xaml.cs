@@ -1,5 +1,6 @@
 using System;
 using Joker.AppInterface;
+using Joker.BusinessLogic;
 using Joker.DataAccess;
 using Xamarin.Forms;
 
@@ -62,16 +63,17 @@ namespace Joker.UserInterface
 		public ImageSource FeedbackTogglerIcon => FeedbackText.IsVisible ? Icons.Remove : Icons.Show;
 
 		/// <summary>
-		/// The data to be displayed, wrapped in view models based on the Limit and Gamble tables of the database.
+		/// The data to be displayed, wrapped in view models based on whether they are gambles or limits.
 		/// </summary>
-		public TimelineRecordViewModel[] Records
+		public TimelineRecordViewModel[] Records => Array.ConvertAll(Database.AllGamblesAndLimits(), tr =>
 		{
-			get
-			{
-				var records = Database.AllGamblesAndLimits();
-				return Array.ConvertAll(records, tr => new TimelineRecordViewModel(this, tr));
-			}
-		}
+			TimelineRecordViewModel viewModel;
+			if(tr is Gamble gamble)
+				viewModel = new GambleViewModel(this, gamble);
+			else
+				viewModel = new LimitViewModel(this, (Limit)tr);
+			return viewModel;
+		});
 
 		/// <summary>
 		/// Initializes XAML elements.

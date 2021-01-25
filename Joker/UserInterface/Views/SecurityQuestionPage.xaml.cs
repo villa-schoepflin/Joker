@@ -38,7 +38,7 @@ namespace Joker.UserInterface
 
 			Indicator.IsRunning = true;
 			((Entry)sender).Unfocus();
-			JokerApp.SetMainPageToDefault();
+			JokerApp.RequestMainPage();
 		}
 	}
 }

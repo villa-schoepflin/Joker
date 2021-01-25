@@ -20,7 +20,7 @@ namespace Joker
 	public class JokerApp : Application
 	{
 		/// <summary>
-		/// Gets the app assembly for reflecting on embedded assets.
+		/// For reflecting on embedded assets.
 		/// </summary>
 		public static readonly Assembly Assembly = typeof(JokerApp).Assembly;
 
@@ -42,7 +42,7 @@ namespace Joker
 		/// Directs the user to the regular main page if the most recent limit hasn't expired yet, otherwise directs
 		/// them to the page where they can add a new limit.
 		/// </summary>
-		internal static void SetMainPageToDefault()
+		internal static void RequestMainPage()
 		{
 			if(DateTime.UtcNow < AppSettings.LimitExpiredTime)
 				Current.MainPage = new NavigationPage(new MainPage());
@@ -58,41 +58,63 @@ namespace Joker
 			VersionTracking.Track();
 
 			if(AppSettings.WelcomeTourCompleted)
-				DefaultStart();
+				StartOnTourCompleted();
 			else
-				MainPage = new NavigationPage(new Welcome())
-				{
-					BarBackgroundColor = Styles.Primary1,
-					BarTextColor = Styles.TextContrast
-				};
+				StartWithWelcomeTour();
 		}
 
 		/// <summary>
 		/// Entry point if the welcome tour has been completed.
 		/// </summary>
-		private void DefaultStart()
+		private void StartOnTourCompleted()
 		{
-			// Deletes a picture from the database if it was removed in an update.
-			string[] picFiles = Assembly.GetManifestResourceNames();
-			foreach(var pic in Database.AllPictures())
-				if(!picFiles.Contains(Folders.PictureAssets + pic.FilePath))
-					Database.Delete(pic);
-
-			if(DateTime.UtcNow >= AppSettings.NewPictureTime)
-			{
-				bool picsNotDepleted = Database.InsertPictureFromRandomAsset();
-				if(picsNotDepleted)
-				{
-					AppSettings.NewPictureTime = DateTime.UtcNow + UserSettings.NewPictureInterval;
-					var notifier = DependencyService.Get<IPlatformNotifier>();
-					notifier.ScheduleNewPicture(AppSettings.NewPictureTime);
-				}
-			}
+			CheckForDeletedPictures();
+			CheckForNewPicture();
 
 			if(AppSettings.UserPasswordIsSet)
 				MainPage = new NavigationPage(new PasswordPage());
 			else
-				SetMainPageToDefault();
+				RequestMainPage();
+		}
+
+		/// <summary>
+		/// Deletes a picture from the database if it was removed in an update.
+		/// </summary>
+		private void CheckForDeletedPictures()
+		{
+			string[] picFiles = Assembly.GetManifestResourceNames();
+			foreach(var pic in Database.AllPictures())
+				if(!picFiles.Contains(Folders.PictureAssets + pic.FilePath))
+					Database.Delete(pic);
+		}
+
+		/// <summary>
+		/// Inserts a new picture into the database and schedules the next notification for a new picture if necessary.
+		/// </summary>
+		private void CheckForNewPicture()
+		{
+			if(DateTime.UtcNow < AppSettings.NewPictureTime)
+				return;
+
+			bool picsNotDepleted = Database.InsertPictureFromRandomAsset();
+			if(picsNotDepleted)
+			{
+				AppSettings.NewPictureTime = DateTime.UtcNow + UserSettings.NewPictureInterval;
+				var notifier = DependencyService.Get<IPlatformNotifier>();
+				notifier.ScheduleNewPicture(AppSettings.NewPictureTime);
+			}
+		}
+
+		/// <summary>
+		/// Entry point if the app launches for the first time after installation.
+		/// </summary>
+		private void StartWithWelcomeTour()
+		{
+			MainPage = new NavigationPage(new Welcome())
+			{
+				BarBackgroundColor = Styles.Primary1,
+				BarTextColor = Styles.TextContrast
+			};
 		}
 	}
 }

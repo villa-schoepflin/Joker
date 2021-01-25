@@ -45,7 +45,7 @@ namespace Joker.UserInterface
 		/// </summary>
 		public LineChart HistoryChart => new()
 		{
-			Entries = CalculateChartEntries(SKColors.White, SKColors.Red),
+			Entries = CalculateChartEntries(),
 			PointMode = PointMode.None,
 			LineMode = LineMode.Straight,
 			BackgroundColor = SKColors.Transparent
@@ -65,68 +65,108 @@ namespace Joker.UserInterface
 		/// </summary>
 		/// <param name="view">The page for this view model.</param>
 		/// <param name="model">The limit around which to construct the view model.</param>
-		public LimitViewModel(Page view, Limit model) : base(view, model) { }
+		public LimitViewModel(Page view, Limit model) : base(view, model)
+		{
+			TypeIcon = Icons.Limit;
+			CellBackground = Styles.Primary1;
+			IconBackground = Styles.Primary1;
+			CellTextColor = Styles.TextContrast;
+			RemainingLimit = null;
+		}
 
-		/* If you're getting errors here because Entry was changed to ChartEntry, then you changed the Microcharts
+		/* If you're getting errors after here because Entry was changed to ChartEntry, then you changed the Microcharts
 		 * version to something later than 0.7.1. Before going with the newer version, you might need to explicitly set
 		 * the Label and ValueLabel properties to empty strings. That will fix a crash in SkiaSharp, but now the dates
 		 * probably won't be drawn in the chart. So unless the dates show up correctly in the chart, you need to stick
 		 * with Microcharts 0.7.1. */
-		private Entry[] CalculateChartEntries(SKColor goodColor, SKColor badColor)
+		private Entry[] CalculateChartEntries()
+		{
+			var span = GetLimitDurationOrTimeToNextLimit();
+			var entries = AllocateEntriesBasedOn(span);
+
+			/* The gambles here are the data points that need to be interpolated. The indices are indices into the
+			 * entries array and represent where each actual gamble is located in it.*/
+			var gambles = Database.AllGamblesWithinLimit(Limit);
+			int[] indices = PrepareIndices(entries, gambles);
+			SetGambleIndicesAndGambleEntries(span, entries, gambles, indices);
+			indices = indices.Distinct().ToArray();
+
+			for(int i = 0, gamblesPassed = -1; i < entries.Length; i++)
+			{
+				if(entries[i] == null)
+					LinearlyInterpolateEntry(entries, indices, i, gamblesPassed);
+				else
+					gamblesPassed++;
+
+				SetCaptionIfEntryAlignsWithNewDay(span, entries, i);
+			}
+			return entries;
+		}
+
+		private static Entry GetColoredEntry(float value)
+		{
+			return new(value) { Color = value < 0 ? SKColors.Red : SKColors.White };
+		}
+
+		private TimeSpan GetLimitDurationOrTimeToNextLimit()
 		{
 			var nextLimit = Database.NextLimitAfter(Limit);
-			var gambles = Database.AllGamblesWithinLimit(Limit);
-
-			TimeSpan span;
 			if(nextLimit == null)
-				span = Limit.Duration;
+				return Limit.Duration;
 			else
-				span = nextLimit.Time - Limit.Time;
-			var entries = new Entry[(int)span.TotalHours];
+				return nextLimit.Time - Limit.Time;
+		}
 
+		private Entry[] AllocateEntriesBasedOn(TimeSpan span)
+		{
+			var entries = new Entry[(int)span.TotalHours];
+			entries[0] = GetColoredEntry((float)Limit.Amount);
+
+			float finalValue = (float)Database.CalcBalance(Limit);
+			entries[^1] = GetColoredEntry(finalValue);
+
+			return entries;
+		}
+
+		private static int[] PrepareIndices(Entry[] entries, Gamble[] gambles)
+		{
 			int[] indices = new int[gambles.Length + 2];
 			indices[0] = 0;
 			indices[^1] = entries.Length - 1;
+			return indices;
+		}
 
-			entries[0] = new((float)Limit.Amount) { Color = goodColor };
-			float lastValue = (float)Database.CalcBalance(Limit);
-			entries[^1] = new(lastValue) { Color = lastValue < 0 ? badColor : goodColor };
-
-			// Enters the remaining limit values after each gamble at appropriate places in the graph.
+		private void SetGambleIndicesAndGambleEntries(TimeSpan span, Entry[] entries, Gamble[] gambles, int[] indices)
+		{
 			for(int i = 0; i < gambles.Length; i++)
 			{
-				long gambleTimeOffset = (gambles[i].Time - Limit.Time).Ticks;
-				indices[i + 1] = (int)(gambleTimeOffset / (float)span.Ticks * (entries.Length - 1));
+				float ticksFromLimitToGamble = (gambles[i].Time - Limit.Time).Ticks;
+				indices[i + 1] = (int)(ticksFromLimitToGamble / span.Ticks * (entries.Length - 1));
 				float value = (float)Database.CalcRemainingLimit(gambles[i]);
-				entries[indices[i + 1]] = new(value) { Color = value < 0 ? badColor : goodColor };
+				entries[indices[i + 1]] = GetColoredEntry(value);
 			}
+		}
 
-			// Enters all remaining points in the graph by linearly interpolating values.
-			indices = indices.Distinct().ToArray();
-			for(int i = 0, n = -1; i < entries.Length; i++)
+		private static void LinearlyInterpolateEntry(Entry[] entries, int[] indices, int current, int gamblesPassed)
+		{
+			int last = indices[gamblesPassed];
+			int next = indices[gamblesPassed + 1];
+			float lastEntry = entries[last].Value;
+			float entryDiff = lastEntry - entries[next].Value;
+			float value = lastEntry - entryDiff / (next - last) * (current - last);
+			entries[current] = GetColoredEntry(value);
+		}
+
+		private void SetCaptionIfEntryAlignsWithNewDay(TimeSpan span, Entry[] entries, int current)
+		{
+			int roundUp = Limit.Time.Minute >= 30 ? 1 : 0;
+			int hour = Limit.Time.ToLocalTime().Hour + roundUp;
+			int not12am = hour != 0 ? 1 : 0;
+			if(current % ((int)span.TotalDays / 5 * 24) == 24 * not12am - hour)
 			{
-				if(entries[i] == null)
-				{
-					int last = indices[n];
-					int next = indices[n + 1];
-					float lastEntry = entries[last].Value;
-					float value = lastEntry - (lastEntry - entries[next].Value) / (next - last) * (i - last);
-					entries[i] = new(value) { Color = value < 0 ? badColor : goodColor };
-				}
-				else
-					n++;
-
-				// Adds the captions for the points which correspond roughly to the beginning of new days.
-				int roundUp = Limit.Time.Minute >= 30 ? 1 : 0;
-				int hour = Limit.Time.ToLocalTime().Hour + roundUp;
-				int not12am = hour != 0 ? 1 : 0;
-				if(i % ((int)span.TotalDays / 5 * 24) == 24 * not12am - hour)
-				{
-					var date = Limit.Time + TimeSpan.FromDays(not12am + i / 24);
-					entries[i].ValueLabel = date.ToLocalTime().ToString("d");
-				}
+				var date = Limit.Time + TimeSpan.FromDays(not12am + current / 24);
+				entries[current].ValueLabel = date.ToLocalTime().ToString("d");
 			}
-			return entries;
 		}
 	}
 }

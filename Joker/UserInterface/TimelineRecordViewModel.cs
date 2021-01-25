@@ -1,6 +1,5 @@
 using System.Windows.Input;
 using Joker.BusinessLogic;
-using Joker.DataAccess;
 using Xamarin.Forms;
 
 namespace Joker.UserInterface
@@ -8,32 +7,32 @@ namespace Joker.UserInterface
 	/// <summary>
 	/// Represents a single timeline record for display in timeline-related pages.
 	/// </summary>
-	public class TimelineRecordViewModel : ViewModel<Page, TimelineRecord>
+	public abstract class TimelineRecordViewModel : ViewModel<Page, TimelineRecord>
 	{
-		/// <summary>
-		/// The text to be displayed in the remaining limit column in the timeline.
-		/// </summary>
-		public string RemainingLimit { get; private set; }
-
 		/// <summary>
 		/// The icon to be displayed in the timeline based on what type of record it is.
 		/// </summary>
-		public ImageSource TypeIcon { get; private set; }
+		public ImageSource TypeIcon { get; protected set; }
 
 		/// <summary>
 		/// The primary tinting color used in the timeline.
 		/// </summary>
-		public Color CellBgrColor { get; private set; }
+		public Color CellBackground { get; protected set; }
 
 		/// <summary>
 		/// The secondary tinting color used in the timeline.
 		/// </summary>
-		public Color IconBgrColor { get; private set; }
+		public Color IconBackground { get; protected set; }
 
 		/// <summary>
 		/// The primary text color used in the timeline.
 		/// </summary>
-		public Color CellTextColor { get; private set; }
+		public Color CellTextColor { get; protected set; }
+
+		/// <summary>
+		/// The text to be displayed in the remaining limit column in the timeline.
+		/// </summary>
+		public string RemainingLimit { get; protected set; }
 
 		/// <summary>
 		/// Converts the record's time property to the system's time zone in the 24-hour format.
@@ -58,43 +57,14 @@ namespace Joker.UserInterface
 				inspector = new GambleInspector(gamble);
 			else
 				inspector = new LimitInspector((Limit)Model);
-
 			await View.Navigation.PushAsync(inspector);
 		});
 
 		/// <summary>
-		/// Constructs a view model for a row based on whether the corresponding timeline record is a gamble or a limit.
+		/// Constructs a timeline record view model.
 		/// </summary>
 		/// <param name="view">The view for this view model.</param>
 		/// <param name="model">The model for this view model.</param>
-		public TimelineRecordViewModel(Page view, TimelineRecord model) : base(view, model)
-		{
-			if(Model is Gamble gamble)
-			{
-				RemainingLimit = Database.CalcRemainingLimit(gamble).ToString("C", JokerApp.Locale);
-
-				TypeIcon = gamble.Type switch
-				{
-					GambleType.Other => Icons.GambleOther,
-					GambleType.Lottery => Icons.GambleLottery,
-					GambleType.SportsBet => Icons.GambleSportsBet,
-					GambleType.Casino => Icons.GambleCasino,
-					GambleType.SlotMachine => Icons.GambleSlotMachine,
-					_ => null
-				};
-
-				CellBgrColor = Styles.Bgr3;
-				IconBgrColor = Styles.Bgr4;
-				CellTextColor = Styles.Text1;
-			}
-			else
-			{
-				RemainingLimit = null;
-				TypeIcon = Icons.Limit;
-				CellBgrColor = Styles.Primary1;
-				IconBgrColor = Styles.Primary1;
-				CellTextColor = Styles.TextContrast;
-			}
-		}
+		protected TimelineRecordViewModel(Page view, TimelineRecord model) : base(view, model) { }
 	}
 }

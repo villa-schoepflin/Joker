@@ -98,13 +98,13 @@ namespace Joker.UserInterface
 		/// </summary>
 		public ICommand InsertNameFromClipboard => new Command(async () =>
 		{
-			string text = await Clipboard.GetTextAsync();
-			if(string.IsNullOrEmpty(text))
+			string clipboard = await Clipboard.GetTextAsync();
+			if(string.IsNullOrEmpty(clipboard))
 				return;
 
-			if(text.Length > Contact.MaxNameLength)
-				text = text.Substring(0, Contact.MaxNameLength);
-			ContactName = text;
+			if(clipboard.Length > Contact.MaxNameLength)
+				clipboard = clipboard.Substring(0, Contact.MaxNameLength);
+			ContactName = clipboard;
 		});
 
 		/// <summary>
@@ -112,13 +112,13 @@ namespace Joker.UserInterface
 		/// </summary>
 		public ICommand InsertPhoneNumberFromClipboard => new Command(async () =>
 		{
-			string text = await Clipboard.GetTextAsync();
-			if(string.IsNullOrEmpty(text))
+			string clipboard = await Clipboard.GetTextAsync();
+			if(string.IsNullOrEmpty(clipboard))
 				return;
 
-			if(text.Length > Contact.MaxPhoneNumberLength)
-				text = text.Substring(0, Contact.MaxPhoneNumberLength);
-			PhoneNumber = text;
+			if(clipboard.Length > Contact.MaxPhoneNumberLength)
+				clipboard = clipboard.Substring(0, Contact.MaxPhoneNumberLength);
+			PhoneNumber = clipboard;
 		});
 
 		/// <summary>

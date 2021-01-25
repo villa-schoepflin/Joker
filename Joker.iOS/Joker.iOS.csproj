@@ -64,12 +64,12 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ColorCorrectedTabbedPage.cs" />
-    <Compile Include="ColorCorrectedViewCell.cs" />
-    <Compile Include="iOS.FileSaver.cs" />
-    <Compile Include="iOS.Notifier.cs" />
-    <Compile Include="AppMain.cs" />
-    <Compile Include="AppDelegate.cs" />
+    <Compile Include="Code\ColorCorrectedTabbedPage.cs" />
+    <Compile Include="Code\ColorCorrectedViewCell.cs" />
+    <Compile Include="Code\iOS.FileSaver.cs" />
+    <Compile Include="Code\iOS.Notifier.cs" />
+    <Compile Include="Code\AppMain.cs" />
+    <Compile Include="Code\AppDelegate.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -502,9 +502,7 @@
       <Name>Joker</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties XamarinHotReloadWrongLinkerErrorInfoBarJokeriOSHideInfoBar="True" />

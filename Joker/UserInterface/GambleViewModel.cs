@@ -44,7 +44,7 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// The type of this gamble as the proper translation.
 		/// </summary>
-		public string GambleType => GambleTypes.GetName(Gamble.Type);
+		public string GambleTypeText => GambleTypes.GetName(Gamble.Type);
 
 		/// <summary>
 		/// Determines the text of the button that toggles the editing status.
@@ -81,6 +81,21 @@ namespace Joker.UserInterface
 		/// <param name="model">The gamble around which to construct the view model.</param>
 		public GambleViewModel(Page view, Gamble model) : base(view, model)
 		{
+			TypeIcon = model.Type switch
+			{
+				GambleType.Other => Icons.GambleOther,
+				GambleType.Lottery => Icons.GambleLottery,
+				GambleType.SportsBet => Icons.GambleSportsBet,
+				GambleType.Casino => Icons.GambleCasino,
+				GambleType.SlotMachine => Icons.GambleSlotMachine,
+				_ => null
+			};
+
+			CellBackground = Styles.Bgr3;
+			IconBackground = Styles.Bgr4;
+			CellTextColor = Styles.Text1;
+			RemainingLimit = Database.CalcRemainingLimit(model).ToString("C", JokerApp.Locale);
+
 			Description = model.Description;
 		}
 	}

@@ -54,7 +54,7 @@ namespace Joker.UserInterface
 
 			// Completes the welcome tour and redirects the user to the main page.
 			AppSettings.WelcomeTourCompleted = true;
-			JokerApp.SetMainPageToDefault();
+			JokerApp.RequestMainPage();
 		}
 	}
 }

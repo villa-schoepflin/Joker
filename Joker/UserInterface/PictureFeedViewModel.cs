@@ -102,7 +102,6 @@ namespace Joker.UserInterface
 				result = Text.SavedToGallery;
 			else
 				result = Text.StoragePermissionDenied;
-
 			await View.DisplayAlert(result, null, Text.Ok);
 		});
 

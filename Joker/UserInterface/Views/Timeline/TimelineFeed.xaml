@@ -66,11 +66,11 @@
 							<StackLayout.GestureRecognizers>
 								<TapGestureRecognizer Command="{Binding OpenInspector}" />
 							</StackLayout.GestureRecognizers>
-							<Frame BackgroundColor="{Binding CellBgrColor}"
+							<Frame BackgroundColor="{Binding CellBackground}"
 								   Padding="5"
 								   CornerRadius="5">
 								<StackLayout Orientation="Horizontal">
-									<Frame BackgroundColor="{Binding IconBgrColor}"
+									<Frame BackgroundColor="{Binding IconBackground}"
 										   Padding="3"
 										   CornerRadius="5">
 										<Image Source="{Binding TypeIcon}"
