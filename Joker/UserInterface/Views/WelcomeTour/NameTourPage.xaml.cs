@@ -10,19 +10,11 @@ namespace Joker.UserInterface
 	/// </summary>
 	public partial class NameTourPage : ContentPage
 	{
-		/// <summary>
-		/// Initializes XAML elements.
-		/// </summary>
-		public NameTourPage()
+		internal NameTourPage()
 		{
 			InitializeComponent();
 		}
 
-		/// <summary>
-		/// Button event handler that relays user input validation and navigates the user to the next tour page.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnContinueButton(object sender, EventArgs eventArgs)
 		{
 			try

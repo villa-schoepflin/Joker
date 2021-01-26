@@ -8,11 +8,7 @@ namespace Joker.UserInterface
 	/// </summary>
 	public partial class GambleInspector : ContentPage
 	{
-		/// <summary>
-		/// Initializes XAML elements and provides the data to be bound in the view.
-		/// </summary>
-		/// <param name="gamble">Gamble whose details should be exposed.</param>
-		public GambleInspector(Gamble gamble)
+		internal GambleInspector(Gamble gamble)
 		{
 			InitializeComponent();
 			BindingContext = new GambleViewModel(this, gamble);

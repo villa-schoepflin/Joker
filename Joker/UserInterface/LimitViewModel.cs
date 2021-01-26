@@ -12,39 +12,14 @@ using Entry = Microcharts.Entry;
 
 namespace Joker.UserInterface
 {
-	/// <summary>
-	/// View model for a limit in the limit inspector.
-	/// </summary>
-	public sealed class LimitViewModel : TimelineRecordViewModel
+	internal sealed class LimitViewModel : TimelineRecordViewModel
 	{
-		/// <summary>
-		/// The icon to be displayed in the timeline for limits.
-		/// </summary>
 		public override ImageSource TypeIcon => Icons.Limit;
-
-		/// <summary>
-		/// The primary tinting color used in the timeline for limits.
-		/// </summary>
 		public override Color CellBackground => Styles.Primary1;
-
-		/// <summary>
-		/// The secondary tinting color used in the timeline for limits.
-		/// </summary>
 		public override Color IconBackground => Styles.Primary1;
-
-		/// <summary>
-		/// The primary text color used in the timeline for limits.
-		/// </summary>
 		public override Color CellTextColor => Styles.TextContrast;
-
-		/// <summary>
-		/// The remaining limit part of the cell in the timeline feed will be empty for limits.
-		/// </summary>
 		public override string RemainingLimit => null;
 
-		/// <summary>
-		/// Navigates the user to a detailed view of the selected limit.
-		/// </summary>
 		public override ICommand OpenInspector => new Command(async () =>
 		{
 			if(View.Navigation.HasPage<LimitInspector>())
@@ -54,34 +29,12 @@ namespace Joker.UserInterface
 			await View.Navigation.PushAsync(inspector);
 		});
 
-		/// <summary>
-		/// The currently remaining balance of the limit.
-		/// </summary>
 		public string Balance => Database.CalcBalance(Limit).ToString("C", App.Locale);
-
-		/// <summary>
-		/// The duration in days.
-		/// </summary>
 		public string DurationInDays => string.Format(Text.TimeInDays, Limit.Duration.TotalDays);
-
-		/// <summary>
-		/// A text indicating the state of the limit.
-		/// </summary>
 		public string LimitState => Database.CalcBalance(Limit) < 0 ? Text.LimitCrossed : Text.LimitKept;
-
-		/// <summary>
-		/// The background color marking the state of the limit.
-		/// </summary>
 		public Color StateBackground => Database.CalcBalance(Limit) < 0 ? Styles.LimitCrossedBgr : Styles.LimitKeptBgr;
-
-		/// <summary>
-		/// The color for the text that indicates the limit state.
-		/// </summary>
 		public Color StateTextColor => Database.CalcBalance(Limit) < 0 ? Styles.LimitCrossedText : Styles.LimitKeptText;
 
-		/// <summary>
-		/// Returns the chart associated with how the limit was depleted over time.
-		/// </summary>
 		public LineChart HistoryChart => new()
 		{
 			Entries = CalculateChartEntries(),
@@ -90,21 +43,13 @@ namespace Joker.UserInterface
 			BackgroundColor = SKColors.Transparent
 		};
 
-		/// <summary>
-		/// Wrapper in order to treat the model as a limit because of inheritance from TimelineRecordViewModel.
-		/// </summary>
 		private Limit Limit
 		{
 			get => (Limit)Model;
 			set => Model = value;
 		}
 
-		/// <summary>
-		/// Constructs the view model for a limit.
-		/// </summary>
-		/// <param name="view">The page for this view model.</param>
-		/// <param name="model">The limit around which to construct the view model.</param>
-		public LimitViewModel(Page view, Limit model) : base(view, model) { }
+		internal LimitViewModel(Page view, Limit model) : base(view, model) { }
 
 		/* If you're getting errors after here because Entry was changed to ChartEntry, then you changed the Microcharts
 		 * version to something later than 0.7.1. Before going with the newer version, you might need to explicitly set

@@ -11,17 +11,17 @@ namespace Joker.UserInterface
 	public partial class Impressum : ContentPage
 	{
 		/// <summary>
-		/// Contains the information of the app version.
+		/// Loads information about the app version.
 		/// </summary>
 		public string Version => TextAssetReader.Get("Impressum_Version.txt");
 
 		/// <summary>
-		/// Contains contact information about the publisher.
+		/// Loads contact information about the publisher.
 		/// </summary>
 		public string ContactInfo => TextAssetReader.Get("Impressum_ContactInfo.txt");
 
 		/// <summary>
-		/// Contains the privacy policy.
+		/// Loads the privacy policy.
 		/// </summary>
 		public string PrivacyPolicy => TextAssetReader.Get("Impressum_PrivacyPolicy.txt");
 
@@ -40,10 +40,7 @@ namespace Joker.UserInterface
 		public ICommand OpenWebsite
 			=> new Command<string>(async url => await Browser.OpenAsync(url, BrowserLaunchMode.SystemPreferred));
 
-		/// <summary>
-		/// Initializes XAML elements.
-		/// </summary>
-		public Impressum()
+		internal Impressum()
 		{
 			InitializeComponent();
 			BindingContext = this;

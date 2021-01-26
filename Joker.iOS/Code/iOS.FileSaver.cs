@@ -7,16 +7,8 @@ using UIKit;
 [assembly: Xamarin.Forms.Dependency(typeof(Joker.iOS.FileSaver))]
 namespace Joker.iOS
 {
-	/// <summary>
-	/// Contains iOS-specific file IO functionality.
-	/// </summary>
-	public class FileSaver : IPlatformFileSaver
+	internal class FileSaver : IPlatformFileSaver
 	{
-		/// <summary>
-		/// Saves the image file contained by the parameter to the iOS photos app,
-		/// after requesting permission to do so.
-		/// </summary>
-		/// <param name="filePath">File path to the image asset.</param>
 		public Task<bool> SaveToGallery(string filePath)
 		{
 			TaskCompletionSource<bool> callback = new();

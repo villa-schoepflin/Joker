@@ -24,9 +24,6 @@ namespace Joker.AppInterface
 		/// </summary>
 		public static readonly Assembly Assembly = typeof(App).Assembly;
 
-		/// <summary>
-		/// The locale or culture setting to use for this app.
-		/// </summary>
 		internal static readonly CultureInfo Locale = new("de-DE");
 
 		/// <summary>

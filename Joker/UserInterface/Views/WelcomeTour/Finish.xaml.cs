@@ -10,23 +10,15 @@ namespace Joker.UserInterface
 	/// </summary>
 	public partial class Finish : ContentPage
 	{
-		/// <summary>
-		/// Initializes XAML elements and receives the first limit for further processing.
-		/// </summary>
-		public Finish()
+		internal Finish()
 		{
 			InitializeComponent();
 		}
 
-		/// <summary>
-		/// Button event handler that finalizes the setup for the app and navigates the user to the main page.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private void OnContinueButton(object sender, EventArgs eventArgs)
 		{
 			Indicator.IsRunning = true;
-			Database.Initialize();
+			Database.CreateTables();
 
 			if(ContactTourPage.FirstContact is object)
 				Database.Insert(ContactTourPage.FirstContact);

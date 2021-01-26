@@ -8,11 +8,8 @@ namespace Joker.iOS
 	/// <summary>
 	/// Custom renderer to correct the false colors otherwise shown in the tab bar.
 	/// </summary>
-	public class ColorCorrectedTabbedPage : TabbedRenderer
+	internal class ColorCorrectedTabbedPage : TabbedRenderer
 	{
-		/// <summary>
-		/// Sets the correct color scheme for any tabbed page created in the shared code.
-		/// </summary>
 		public ColorCorrectedTabbedPage()
 		{
 			TabBar.UnselectedItemTintColor = Styles.Primary2.ToUIColor();

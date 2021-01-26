@@ -16,21 +16,12 @@ namespace Joker.UserInterface
 	{
 		private readonly Action Refresh;
 
-		/// <summary>
-		/// Initializes XAML elements.
-		/// </summary>
-		/// <param name="refresh">Callback for refreshing the contact feed.</param>
-		public ContactCreator(Action refresh)
+		internal ContactCreator(Action refresh)
 		{
 			InitializeComponent();
 			Refresh = refresh;
 		}
 
-		/// <summary>
-		/// Button event handler that copies clipboard content to the name entry.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnNameClipboardButton(object sender, EventArgs eventArgs)
 		{
 			string clipboard = await Clipboard.GetTextAsync();
@@ -42,11 +33,6 @@ namespace Joker.UserInterface
 			NameEntry.Text = clipboard;
 		}
 
-		/// <summary>
-		/// Button event handler that copies clipboard content to the phone number entry.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnPhoneNumberClipboardButton(object sender, EventArgs eventArgs)
 		{
 			string clipboard = await Clipboard.GetTextAsync();
@@ -58,12 +44,6 @@ namespace Joker.UserInterface
 			PhoneNumberEntry.Text = clipboard;
 		}
 
-		/// <summary>
-		/// Button event handler that opens the contact-picking dialog to the user and enters the results into the
-		/// entries in the view.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnSearchDeviceContactsButton(object sender, EventArgs eventArgs)
 		{
 			try
@@ -87,12 +67,6 @@ namespace Joker.UserInterface
 			}
 		}
 
-		/// <summary>
-		/// Button event handler that inserts the contact into the database, performs necessary refresh actions and
-		/// navigates the user back to the main page.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnSubmitButton(object sender, EventArgs eventArgs)
 		{
 			if(IsExecuting)

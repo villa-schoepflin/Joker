@@ -14,7 +14,7 @@ namespace Joker.iOS
 	/// listening and responding to application events from iOS.
 	/// </summary>
 	[Register(nameof(AppDelegate))]
-	public partial class AppDelegate : FormsApplicationDelegate
+	internal partial class AppDelegate : FormsApplicationDelegate
 	{
 		/// <summary>
 		/// Invoked when the application has loaded and is ready to run. Instantiates the window,

@@ -12,10 +12,7 @@ namespace Joker.UserInterface
 	/// </summary>
 	public partial class ContactFeed : ContentPage
 	{
-		/// <summary>
-		/// The title of this page, provided here to be accessible from anywhere.
-		/// </summary>
-		public const string Headline = "Kontakte";
+		internal const string Headline = "Kontakte";
 
 		/// <summary>
 		/// An array of contacts in a view model that can be immediately called by the user.
@@ -32,39 +29,23 @@ namespace Joker.UserInterface
 			}
 		}
 
-		/// <summary>
-		/// Initializes XAML elements and binds the view data.
-		/// </summary>
-		public ContactFeed()
+		internal ContactFeed()
 		{
 			InitializeComponent();
 			BindingContext = this;
 		}
 
-		/// <summary>
-		/// Refreshes the contacts data binding in this view.
-		/// </summary>
 		private void Refresh()
 		{
 			OnPropertyChanged(nameof(Contacts));
 		}
 
-		/// <summary>
-		/// Label event handler that opens a link where the user can search for counseling centers.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnSearchCounselingCentersOnline(object sender, EventArgs eventArgs)
 		{
 			const string url = "https://www.check-dein-spiel.de/hilfe/hilfe-vor-ort";
 			await Browser.OpenAsync(url, BrowserLaunchMode.SystemPreferred);
 		}
 
-		/// <summary>
-		/// Button event handler that navigates the user to a view where they can add a new contact to the database.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnSubmitButton(object sender, EventArgs eventArgs)
 		{
 			if(Navigation.HasPage<ContactCreator>())

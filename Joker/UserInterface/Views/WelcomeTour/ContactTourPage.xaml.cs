@@ -13,24 +13,13 @@ namespace Joker.UserInterface
 	/// </summary>
 	public partial class ContactTourPage : ContentPage
 	{
-		/// <summary>
-		/// The contact that can be selected here and will be inserted upon completing the welcome tour.
-		/// </summary>
-		public static Contact FirstContact;
+		internal static Contact FirstContact;
 
-		/// <summary>
-		/// Initializes XAML elements.
-		/// </summary>
-		public ContactTourPage()
+		internal ContactTourPage()
 		{
 			InitializeComponent();
 		}
 
-		/// <summary>
-		/// Entry event handler that opens the contact-picking dialog to the user and saves the selected contact.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private async void PickContact(object sender, EventArgs eventArgs)
 		{
 			ContactEntry.Unfocus();
@@ -56,11 +45,6 @@ namespace Joker.UserInterface
 			}
 		}
 
-		/// <summary>
-		/// Button event handler that navigates the user to the next tour page.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnContinueButton(object sender, EventArgs eventArgs)
 		{
 			if(FirstContact is object && FirstContact == Contact.Bzga)

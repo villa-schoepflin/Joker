@@ -11,10 +11,7 @@ namespace Joker.UserInterface
 	/// </summary>
 	public partial class TimelineFeed : ContentPage
 	{
-		/// <summary>
-		/// The title of this page, provided here to be accessible from anywhere.
-		/// </summary>
-		public const string Headline = "Chronik";
+		internal const string Headline = "Chronik";
 
 		/// <summary>
 		/// Generates the feedback concerning the user's current limit.
@@ -75,10 +72,7 @@ namespace Joker.UserInterface
 			return viewModel;
 		});
 
-		/// <summary>
-		/// Initializes XAML elements.
-		/// </summary>
-		public TimelineFeed()
+		internal TimelineFeed()
 		{
 			InitializeComponent();
 			BindingContext = this;
@@ -92,9 +86,6 @@ namespace Joker.UserInterface
 			OnPropertyChanged(nameof(CurrentLimitFeedback));
 		}
 
-		/// <summary>
-		/// Refreshes the list view's data bindings and blinks the limit feedback box if the limit has been crossed.
-		/// </summary>
 		private void RefreshRecords()
 		{
 			OnPropertyChanged(nameof(Records));
@@ -114,22 +105,12 @@ namespace Joker.UserInterface
 			});
 		}
 
-		/// <summary>
-		/// Button event handler that toggles the visibility of the limit feedback text.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private void OnToggleFeedbackButton(object sender, EventArgs eventArgs)
 		{
 			FeedbackText.IsVisible ^= true;
 			OnPropertyChanged(nameof(FeedbackTogglerIcon));
 		}
 
-		/// <summary>
-		/// Button event handler that navigates the user to a view where they can add a new gamble to the database.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnSubmitButton(object sender, EventArgs eventArgs)
 		{
 			if(Navigation.HasPage<GambleCreator>())

@@ -8,24 +8,22 @@ using Environment = System.Environment;
 
 namespace Joker.Android
 {
-	/// <summary>
-	/// The entry point for the Android app after preliminary launching has finished behind the
-	/// splash screen.
-	/// </summary>
 	[Activity(Icon = "@mipmap/icon",
 			  Theme = "@style/MainTheme",
 			  ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-	public class MainActivity : FormsAppCompatActivity
+	internal class MainActivity : FormsAppCompatActivity
 	{
-		/// <summary>
-		/// Provides a reference to the main application context for result-based activities.
-		/// </summary>
 		internal static MainActivity Instance;
 
-		/// <summary>
-		/// Creates the main activity and provides the entry point for the shared code.
-		/// </summary>
-		/// <param name="bundle">Parameters supplied for this activity.</param>
+		public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+		{
+			Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+			base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+			if(requestCode == FileSaver.PermissionRequestCode)
+				FileSaver.Finish(grantResults[0]);
+		}
+
 		protected override void OnCreate(Bundle bundle)
 		{
 			TabLayoutResource = Resource.Layout.Tabbar;
@@ -36,21 +34,6 @@ namespace Joker.Android
 
 			string baseDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 			LoadApplication(new App(baseDirectory));
-		}
-
-		/// <summary>
-		/// Handles the return of permission requests to the user during runtime.
-		/// </summary>
-		/// <param name="requestCode">Request code of the permission request.</param>
-		/// <param name="permissions">Requested permissions.</param>
-		/// <param name="grantResults">Results of the request as determined by the user.</param>
-		public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
-		{
-			Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-			base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-
-			if(requestCode == FileSaver.RequestCode)
-				FileSaver.Finish(grantResults[0]);
 		}
 	}
 }

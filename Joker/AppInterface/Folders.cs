@@ -15,9 +15,6 @@ namespace Joker.AppInterface
 		/// </summary>
 		public const string PictureAssets = "Joker.Assets.PictureFeed.";
 
-		/// <summary>
-		/// Path root of embedded text assets.
-		/// </summary>
-		public const string TextAssets = "Joker.Assets.Text.";
+		internal const string TextAssets = "Joker.Assets.Text.";
 	}
 }

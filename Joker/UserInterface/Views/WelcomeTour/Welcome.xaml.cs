@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Xamarin.Forms;
 
 namespace Joker.UserInterface
@@ -8,19 +8,11 @@ namespace Joker.UserInterface
 	/// </summary>
 	public partial class Welcome : ContentPage
 	{
-		/// <summary>
-		/// Initializes XAML elements.
-		/// </summary>
-		public Welcome()
+		internal Welcome()
 		{
 			InitializeComponent();
 		}
 
-		/// <summary>
-		/// Button event handler that navigates the user to the next tour page.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnContinueButton(object sender, EventArgs eventArgs)
 		{
 			await Navigation.PushAsync(new NameTourPage());

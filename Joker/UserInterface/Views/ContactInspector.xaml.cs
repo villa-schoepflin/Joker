@@ -7,11 +7,7 @@ namespace Joker.UserInterface
 	/// </summary>
 	public partial class ContactInspector : ContentPage
 	{
-		/// <summary>
-		/// Initializes XAML elements and provides the data to be bound in the view.
-		/// </summary>
-		/// <param name="contactViewModel">View model through which the contact details will be exposed.</param>
-		public ContactInspector(ContactViewModel contactViewModel)
+		internal ContactInspector(ContactViewModel contactViewModel)
 		{
 			InitializeComponent();
 			BindingContext = contactViewModel;

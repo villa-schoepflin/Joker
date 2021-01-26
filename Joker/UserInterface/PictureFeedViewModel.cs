@@ -9,30 +9,12 @@ using Xamarin.Forms;
 
 namespace Joker.UserInterface
 {
-	/// <summary>
-	/// View model containing properties derived from a picture for the purpose of presentation.
-	/// </summary>
-	public sealed class PictureFeedViewModel : ViewModel<PictureFeed, Picture>
+	internal sealed class PictureFeedViewModel : ViewModel<PictureFeed, Picture>
 	{
-		/// <summary>
-		/// Determines the image to display on the Like button based on the current Liked status.
-		/// </summary>
 		public ImageSource LikeButtonImage => Model.Liked ? Icons.Heart : Icons.HeartSketch;
-
-		/// <summary>
-		/// Determines the background color of the Like button based on the current Liked status.
-		/// </summary>
 		public Color LikeButtonBackgroundColor => Model.Liked ? Styles.Bgr5 : Styles.Bgr3;
-
-		/// <summary>
-		/// Determines the text of the Like button based on the current Liked status.
-		/// </summary>
 		public string LikeButtonText => Model.Liked ? Text.Unlike : Text.Like;
 
-		/// <summary>
-		/// Re-binds the view to a randomly selected picture from the database, preferring the liked pictures with a
-		/// ratio of 3:1.
-		/// </summary>
 		public ICommand SetNextPicture => new Command(() =>
 		{
 			var pics = Database.AllPictures();
@@ -49,9 +31,6 @@ namespace Joker.UserInterface
 			View.RefreshPresentedPicture();
 		});
 
-		/// <summary>
-		/// Loads and draws the bitmap corresponding to the picture that should be presented and draws a blur around it.
-		/// </summary>
 		public ICommand DrawImage => new Command<SKPaintSurfaceEventArgs>(eventArgs =>
 		{
 			string assetPath = Folders.PictureAssets + Model.FilePath;
@@ -79,9 +58,6 @@ namespace Joker.UserInterface
 		});
 		private static readonly SKPaint Blur = new() { ImageFilter = SKImageFilter.CreateBlur(50, 50) };
 
-		/// <summary>
-		/// Updates the picture with the changed Liked status in the database and notifies the change of property.
-		/// </summary>
 		public ICommand ToggleLikedStatus => new Command(() =>
 		{
 			Database.ToggleLikedStatus(Model);
@@ -90,9 +66,6 @@ namespace Joker.UserInterface
 			OnPropertyChanged(nameof(LikeButtonText));
 		});
 
-		/// <summary>
-		/// Copies the current picture's image file to the user's personal phone storage.
-		/// </summary>
 		public ICommand SavePictureToGallery => new Command(async () =>
 		{
 			var fileSaver = DependencyService.Get<IPlatformFileSaver>();
@@ -104,9 +77,6 @@ namespace Joker.UserInterface
 			await View.DisplayAlert(result, null, Text.Ok);
 		});
 
-		/// <summary>
-		/// The picture from which the values of bindable properties are derived.
-		/// </summary>
 		protected override Picture Model
 		{
 			get => _model;
@@ -120,11 +90,6 @@ namespace Joker.UserInterface
 		}
 		private Picture _model;
 
-		/// <summary>
-		/// Constructs a picture feed view model for the given view.
-		/// </summary>
-		/// <param name="view">The view for this view model.</param>
-		/// <param name="model">The model for this view model.</param>
-		public PictureFeedViewModel(PictureFeed view, Picture model) : base(view, model) { }
+		internal PictureFeedViewModel(PictureFeed view, Picture model) : base(view, model) { }
 	}
 }

@@ -6,25 +6,14 @@ using UserNotifications;
 [assembly: Xamarin.Forms.Dependency(typeof(Joker.iOS.Notifier))]
 namespace Joker.iOS
 {
-	/// <summary>
-	/// Contains iOS-specific notification functionality.
-	/// </summary>
-	public class Notifier : IPlatformNotifier
+	internal class Notifier : IPlatformNotifier
 	{
-		/// <summary>
-		/// Requests permission from the user to send notifications.
-		/// </summary>
 		public Notifier()
 		{
 			var notifier = UNUserNotificationCenter.Current;
 			notifier.RequestAuthorization(UNAuthorizationOptions.Alert, (granted, error) => { });
 		}
 
-		/// <summary>
-		/// iOS-specific implementation of an API method that schedules a notification indicating the current limit has
-		/// expired and a new one should be set.
-		/// </summary>
-		/// <param name="timeSetting">The time at which the notification should appear.</param>
 		public void ScheduleLimitExpired(DateTime timeSetting)
 		{
 			string id = NotificationType.LimitExpired.ToString();
@@ -52,21 +41,12 @@ namespace Joker.iOS
 			UNUserNotificationCenter.Current.AddNotificationRequest(req, null);
 		}
 
-		/// <summary>
-		/// iOS-specific implementation of an API method that removes the notification that indicates that the current
-		/// limit has expired.
-		/// </summary>
 		public void CancelLimitExpired()
 		{
 			string[] id = new[] { NotificationType.LimitExpired.ToString() };
 			UNUserNotificationCenter.Current.RemoveDeliveredNotifications(id);
 		}
 
-		/// <summary>
-		/// iOS-specific implementation of an API method that schedules a notification indicating that a new picture is
-		/// available to see.
-		/// </summary>
-		/// <param name="timeSetting">The time at which the notification should appear.</param>
 		public void ScheduleNewPicture(DateTime timeSetting)
 		{
 			string id = NotificationType.NewPicture.ToString();
@@ -94,11 +74,6 @@ namespace Joker.iOS
 			UNUserNotificationCenter.Current.AddNotificationRequest(req, null);
 		}
 
-		/// <summary>
-		/// iOS-specific implementation of an API method that schedules a notification reminding the user to always
-		/// record acts of gambling within the app.
-		/// </summary>
-		/// <param name="interval">The interval for the time the notification should appear.</param>
 		public void ScheduleGambleReminder(TimeSpan interval)
 		{
 			string id = NotificationType.GambleReminder.ToString();
@@ -114,11 +89,6 @@ namespace Joker.iOS
 			UNUserNotificationCenter.Current.AddNotificationRequest(req, null);
 		}
 
-		/// <summary>
-		/// iOS-specific implementation of an API method that schedules a notification
-		/// reminding the user about the state of their current limit.
-		/// </summary> 
-		/// <param name="interval">The interval for the time the notification should appear.</param>
 		public void ScheduleLimitReminder(TimeSpan interval)
 		{
 			string id = NotificationType.LimitReminder.ToString();

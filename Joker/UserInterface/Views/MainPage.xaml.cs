@@ -10,19 +10,11 @@ namespace Joker.UserInterface
 	/// </summary>
 	public partial class MainPage : TabbedPage
 	{
-		/// <summary>
-		/// Initializes XAML elements.
-		/// </summary>
-		public MainPage()
+		internal MainPage()
 		{
 			InitializeComponent();
 		}
 
-		/// <summary>
-		/// Changes the navigation page's title based on which tab is currently displayed.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private void OnTabChanged(object sender, EventArgs eventArgs)
 		{
 			if(CurrentPage is PictureFeed)
@@ -33,11 +25,6 @@ namespace Joker.UserInterface
 				Title = ContactFeed.Headline;
 		}
 
-		/// <summary>
-		/// Toolbar item event handler that shows the user a message concerning the current tab's functionality.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnInfoButton(object sender, EventArgs eventArgs)
 		{
 			if(CurrentPage is PictureFeed)
@@ -48,11 +35,6 @@ namespace Joker.UserInterface
 				await DisplayAlert(ContactFeed.Headline, TextAssetReader.Get("Info_ContactPage.txt"), Text.Ok);
 		}
 
-		/// <summary>
-		/// Toolbar item event handler that navigates the user to the settings page.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnSettingsButton(object sender, EventArgs eventArgs)
 		{
 			if(Navigation.HasPage<SettingsPage>())

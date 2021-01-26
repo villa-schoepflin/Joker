@@ -10,18 +10,10 @@ namespace Joker.Android
 	/// <summary>
 	/// Custom renderer to enable use of dots in numeric entries on Samsung devices.
 	/// </summary>
-	public class InputCorrectedEntry : EntryRenderer
+	internal class InputCorrectedEntry : EntryRenderer
 	{
-		/// <summary>
-		/// Renders the custom entry.
-		/// </summary>
-		/// <param name="context">Context in which to render the entry.</param>
 		public InputCorrectedEntry(Context context) : base(context) { }
 
-		/// <summary>
-		/// Changes the entry's keyboard so dots can be used as decimal separators when keyboard is supposed to appear.
-		/// </summary>
-		/// <param name="eventArgs">Event arguments for when a property of the entry has changed.</param>
 		protected override void OnElementChanged(ElementChangedEventArgs<Entry> eventArgs)
 		{
 			base.OnElementChanged(eventArgs);

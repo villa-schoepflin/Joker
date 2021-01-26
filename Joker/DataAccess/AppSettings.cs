@@ -9,48 +9,12 @@ namespace Joker.DataAccess
 	public static class AppSettings
 	{
 		/// <summary>
-		/// Gets or sets the path of the database file.
-		/// </summary>
-		internal static string DatabaseFilePath
-		{
-			get => Preferences.Get(DatabaseFilePathKey, null);
-			set => Preferences.Set(DatabaseFilePathKey, value);
-		}
-
-		/// <summary>
 		/// Gets or sets whether the user welcome tour was completed.
 		/// </summary>
 		public static bool WelcomeTourCompleted
 		{
 			get => Preferences.Get(WelcomeTourCompletedKey, false);
 			set => Preferences.Set(WelcomeTourCompletedKey, value);
-		}
-
-		/// <summary>
-		/// Gets or sets the condition whether the user has protected the app with a password.
-		/// </summary>
-		public static bool UserPasswordIsSet
-		{
-			get => Preferences.Get(UserPasswordIsSetKey, false);
-			set => Preferences.Set(UserPasswordIsSetKey, value);
-		}
-
-		/// <summary>
-		/// Gets or sets the condition whether the user has set their first security question.
-		/// </summary>
-		public static bool FirstSecurityQuestionIsSet
-		{
-			get => Preferences.Get(FirstSecurityQuestionIsSetKey, false);
-			set => Preferences.Set(FirstSecurityQuestionIsSetKey, value);
-		}
-
-		/// <summary>
-		/// Gets or sets the condition whether the user has set their second security question.
-		/// </summary>
-		public static bool SecondSecurityQuestionIsSet
-		{
-			get => Preferences.Get(SecondSecurityQuestionIsSetKey, false);
-			set => Preferences.Set(SecondSecurityQuestionIsSetKey, value);
 		}
 
 		/// <summary>
@@ -69,6 +33,30 @@ namespace Joker.DataAccess
 		{
 			get => Preferences.Get(NewPictureTimeKey, DateTime.MinValue);
 			set => Preferences.Set(NewPictureTimeKey, value);
+		}
+
+		internal static string DatabaseFilePath
+		{
+			get => Preferences.Get(DatabaseFilePathKey, null);
+			set => Preferences.Set(DatabaseFilePathKey, value);
+		}
+
+		internal static bool UserPasswordIsSet
+		{
+			get => Preferences.Get(UserPasswordIsSetKey, false);
+			set => Preferences.Set(UserPasswordIsSetKey, value);
+		}
+
+		internal static bool FirstSecurityQuestionIsSet
+		{
+			get => Preferences.Get(FirstSecurityQuestionIsSetKey, false);
+			set => Preferences.Set(FirstSecurityQuestionIsSetKey, value);
+		}
+
+		internal static bool SecondSecurityQuestionIsSet
+		{
+			get => Preferences.Get(SecondSecurityQuestionIsSetKey, false);
+			set => Preferences.Set(SecondSecurityQuestionIsSetKey, value);
 		}
 
 		#region Identifier keys for the settings (DO NOT CHANGE!)

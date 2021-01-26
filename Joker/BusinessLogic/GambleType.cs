@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Joker.BusinessLogic
@@ -33,12 +33,12 @@ namespace Joker.BusinessLogic
 	/// <summary>
 	/// Encapsulates logic concerning the GambleType enumeration.
 	/// </summary>
-	internal static class GambleTypes
+	public static class GambleTypes
 	{
 		/// <summary>
 		/// Holds the translated German terms for each type of gamble.
 		/// </summary>
-		private static readonly Dictionary<GambleType, string> names = new()
+		private static readonly Dictionary<GambleType, string> TypeNames = new()
 		{
 			[GambleType.Other] = "Sonstige",
 			[GambleType.Lottery] = "Lotterie",
@@ -50,16 +50,16 @@ namespace Joker.BusinessLogic
 		/// <summary>
 		/// Returns the translated German terms of the gamble types in order.
 		/// </summary>
-		internal static string[] Names => names.Values.ToArray();
+		public static string[] Names => TypeNames.Values.ToArray();
 
 		/// <summary>
 		/// Gets the translated German term for the supplied gamble type.
 		/// </summary>
 		/// <param name="type">The gamble type constant whose translation should be given.</param>
 		/// <returns>The translated term as a string.</returns>
-		internal static string GetName(GambleType type)
+		public static string GetName(GambleType type)
 		{
-			return names[type];
+			return TypeNames[type];
 		}
 
 		/// <summary>
@@ -67,9 +67,9 @@ namespace Joker.BusinessLogic
 		/// </summary>
 		/// <param name="name">Translated name of the gamble type for which the type should be returned.</param>
 		/// <returns>The gamble type belonging to the supplied translated name.</returns>
-		internal static GambleType GetGambleType(string name)
+		public static GambleType GetGambleType(string name)
 		{
-			return names.First(pair => pair.Value == name).Key;
+			return TypeNames.First(pair => pair.Value == name).Key;
 		}
 	}
 }

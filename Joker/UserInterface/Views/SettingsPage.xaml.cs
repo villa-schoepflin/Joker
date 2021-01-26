@@ -11,18 +11,11 @@ namespace Joker.UserInterface
 	/// </summary>
 	public partial class SettingsPage : ContentPage
 	{
-		/// <summary>
-		/// The title of this page, provided here to be accessible from anywhere.
-		/// </summary>
-		public const string Headline = "Einstellungen";
+		internal const string Headline = "Einstellungen";
 
 		private readonly Action RefreshFeedback;
 
-		/// <summary>
-		/// Initializes XAML elements.
-		/// </summary>
-		/// <param name="refreshFeedback">Callback for refreshing the timeline feedback text.</param>
-		public SettingsPage(Action refreshFeedback)
+		internal SettingsPage(Action refreshFeedback)
 		{
 			InitializeComponent();
 			RefreshFeedback = refreshFeedback;
@@ -37,21 +30,11 @@ namespace Joker.UserInterface
 			LimitReminderEntry.Text = UserSettings.LimitReminderInterval.TotalHours.ToString();
 		}
 
-		/// <summary>
-		/// Toolbar item event handler that shows the user a message concerning this page.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnInfoButton(object sender, EventArgs eventArgs)
 		{
 			await DisplayAlert(Headline, TextAssetReader.Get("Info_SettingsPage.txt"), Text.Ok);
 		}
 
-		/// <summary>
-		/// Button event handler that relays input validation for the user name setting and saves it if possible.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private async void SaveUserName(object sender, EventArgs eventArgs)
 		{
 			try
@@ -69,11 +52,6 @@ namespace Joker.UserInterface
 			}
 		}
 
-		/// <summary>
-		/// Button event handler that toggles whether the password and security answers should be hidden.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private void ToggleObfuscation(object sender, EventArgs eventArgs)
 		{
 			if(sender == FirstAnswerObfuscator)
@@ -84,41 +62,31 @@ namespace Joker.UserInterface
 				UserPasswordEntry.IsPassword ^= true;
 		}
 
-		/// <summary>
-		/// Button event handler that removes the password and its text.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private async void RemovePassword(object sender, EventArgs eventArgs)
 		{
 			if(!AppSettings.UserPasswordIsSet)
 				return;
 
-			if(await DisplayAlert(null, Text.PasswordAboutToBeDeleted, Text.Yes, Text.No))
-			{
-				UserSettings.UserPassword = "";
-				AppSettings.UserPasswordIsSet = false;
+			if(!await DisplayAlert(null, Text.PasswordAboutToBeDeleted, Text.Yes, Text.No))
+				return;
 
-				UserSettings.FirstSecurityAttribute = ("", "");
-				UserSettings.SecondSecurityAttribute = ("", "");
-				AppSettings.FirstSecurityQuestionIsSet = false;
-				AppSettings.SecondSecurityQuestionIsSet = false;
+			UserSettings.UserPassword = "";
+			AppSettings.UserPasswordIsSet = false;
 
-				UserPasswordEntry.Text = "";
-				SecurityQuestion1.Text = UserSettings.FirstSecurityAttribute.Item1;
-				SecurityAnswer1.Text = UserSettings.FirstSecurityAttribute.Item2;
-				SecurityQuestion2.Text = UserSettings.SecondSecurityAttribute.Item1;
-				SecurityAnswer2.Text = UserSettings.SecondSecurityAttribute.Item2;
+			UserSettings.FirstSecurityAttribute = ("", "");
+			UserSettings.SecondSecurityAttribute = ("", "");
+			AppSettings.FirstSecurityQuestionIsSet = false;
+			AppSettings.SecondSecurityQuestionIsSet = false;
 
-				await DisplayAlert(Text.TitleOnPasswordDeleted, Text.PasswordDeleted, Text.Ok);
-			}
+			UserPasswordEntry.Text = "";
+			SecurityQuestion1.Text = UserSettings.FirstSecurityAttribute.Item1;
+			SecurityAnswer1.Text = UserSettings.FirstSecurityAttribute.Item2;
+			SecurityQuestion2.Text = UserSettings.SecondSecurityAttribute.Item1;
+			SecurityAnswer2.Text = UserSettings.SecondSecurityAttribute.Item2;
+
+			await DisplayAlert(Text.TitleOnPasswordDeleted, Text.PasswordDeleted, Text.Ok);
 		}
 
-		/// <summary>
-		/// Button event handler that saves the text in the password entry as password if valid.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private async void SavePassword(object sender, EventArgs eventArgs)
 		{
 			try
@@ -139,11 +107,6 @@ namespace Joker.UserInterface
 			}
 		}
 
-		/// <summary>
-		/// Button event handler that opens an input dialog for selecting one of several security question proposals.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private async void ShowSecurityQuestionProposals(object sender, EventArgs eventArgs)
 		{
 			string proposalsAsset = TextAssetReader.Get("SecurityQuestions.txt");
@@ -159,12 +122,6 @@ namespace Joker.UserInterface
 				SecurityQuestion2.Text = question;
 		}
 
-		/// <summary>
-		/// Saves the text of the security question and its answer based on which button was pressed and relays possible
-		/// input errors to the user.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private async void SaveSecurityAttribute(object sender, EventArgs eventArgs)
 		{
 			try
@@ -191,12 +148,6 @@ namespace Joker.UserInterface
 			}
 		}
 
-		/// <summary>
-		/// Button event handler that relays input validation for saving the interval between the insertion of new
-		/// pictures into the database and saves the setting if possible.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private async void SaveNewPictureInterval(object sender, EventArgs eventArgs)
 		{
 			try
@@ -211,12 +162,6 @@ namespace Joker.UserInterface
 			}
 		}
 
-		/// <summary>
-		/// Button event handler that relays input validation for saving the interval between gambling reminders and
-		/// saves the setting if possible.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private async void SaveGambleReminderInterval(object sender, EventArgs eventArgs)
 		{
 			try
@@ -236,12 +181,6 @@ namespace Joker.UserInterface
 			}
 		}
 
-		/// <summary>
-		/// Button event handler that relays input validation for saving the interval between limit reminders and saves
-		/// the setting if possible.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private async void SaveLimitReminderInterval(object sender, EventArgs eventArgs)
 		{
 			try
@@ -261,11 +200,6 @@ namespace Joker.UserInterface
 			}
 		}
 
-		/// <summary>
-		/// Button event handler that navigates the user to the impressum.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnImpressumButton(object sender, EventArgs eventArgs)
 		{
 			if(Navigation.HasPage<Impressum>())

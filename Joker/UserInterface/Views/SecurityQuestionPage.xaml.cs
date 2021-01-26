@@ -9,10 +9,7 @@ namespace Joker.UserInterface
 	/// </summary>
 	public partial class SecurityQuestionPage : ContentPage
 	{
-		/// <summary>
-		/// Initializes XAML elements.
-		/// </summary>
-		public SecurityQuestionPage()
+		internal SecurityQuestionPage()
 		{
 			InitializeComponent();
 
@@ -20,12 +17,6 @@ namespace Joker.UserInterface
 			SecurityQuestion2.Text = UserSettings.SecondSecurityAttribute.Item1;
 		}
 
-		/// <summary>
-		/// Text change event handler that checks whether the answer to the first security question is correct. If it's
-		/// correct, the user gets navigated to the main page.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private void CheckSecurityAnswer(object sender, TextChangedEventArgs eventArgs)
 		{
 			string correctAnswer;

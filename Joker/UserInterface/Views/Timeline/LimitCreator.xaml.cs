@@ -26,21 +26,12 @@ namespace Joker.UserInterface
 			}
 		}
 
-		/// <summary>
-		/// Initializes XAML elements.
-		/// </summary>
-		public LimitCreator()
+		internal LimitCreator()
 		{
 			InitializeComponent();
 			BindingContext = this;
 		}
 
-		/// <summary>
-		/// Button event handler that relays input validation, inserts the new limit into the database, schedules the
-		/// corresponding notifications and gets the user to the main page.
-		/// </summary>
-		/// <param name="sender">Reference to the event's source object.</param>
-		/// <param name="eventArgs">Contains event data.</param>
 		private async void OnContinueButton(object sender, EventArgs eventArgs)
 		{
 			if(IsExecuting)

@@ -166,13 +166,7 @@ namespace Joker.UserInterface
 		});
 		private bool IsExecuting = false;
 
-		/// <summary>
-		/// Constructs a contact view model for the given view.
-		/// </summary>
-		/// <param name="view">The view for this view model.</param>
-		/// <param name="model">The model for this view model.</param>
-		/// <param name="refresh">Callback for refreshing the contact feed.</param>
-		public ContactViewModel(Page view, Contact model, Action refresh) : base(view, model)
+		internal ContactViewModel(Page view, Contact model, Action refresh) : base(view, model)
 		{
 			Refresh = refresh;
 		}

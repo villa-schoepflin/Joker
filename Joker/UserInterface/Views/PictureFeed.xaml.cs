@@ -9,29 +9,16 @@ namespace Joker.UserInterface
 	/// </summary>
 	public partial class PictureFeed : ContentPage
 	{
-		/// <summary>
-		/// The title of this page, provided here to be accessible from anywhere.
-		/// </summary>
-		public const string Headline = "Bilder";
+		internal const string Headline = "Bilder";
+		internal const int InitialPictureAmount = 10;
 
-		/// <summary>
-		/// The number of pictures initially available after the app was installed.
-		/// </summary>
-		public const int InitialPictureAmount = 10;
-
-		/// <summary>
-		/// Initializes XAML elements and sets the binding context.
-		/// </summary>
-		public PictureFeed()
+		internal PictureFeed()
 		{
 			InitializeComponent();
 			BindingContext = new PictureFeedViewModel(this, Database.MostRecentPicture());
 		}
 
-		/// <summary>
-		/// Draws the next image to be presented in the picture feed.
-		/// </summary>
-		public void RefreshPresentedPicture()
+		internal void RefreshPresentedPicture()
 		{
 			CanvasView.InvalidateSurface();
 		}
