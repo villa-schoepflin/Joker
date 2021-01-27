@@ -1,60 +1,46 @@
 using System.IO;
 using System.Threading.Tasks;
-using Android;
 using Android.App;
-using Android.Content.PM;
 using Android.Media;
 using Joker.AppInterface;
+using Xamarin.Essentials;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Joker.Android.FileSaver))]
 namespace Joker.Android
 {
 	internal class FileSaver : IPlatformFileSaver
 	{
-		internal const int PermissionRequestCode = 1;
-
-		private static TaskCompletionSource<bool> Callback;
-		private static string FilePath;
-
-		internal static void Finish(Permission grantResult)
+		public async Task<bool> RequestSaveToGallery(string filePath)
 		{
-			Callback.SetResult(grantResult == Permission.Granted);
-			if(grantResult != Permission.Granted)
-				return;
+			var result = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
+			if(result == PermissionStatus.Granted)
+				return SaveToGallery(filePath);
 
-			string mediaDir = Application.Context.GetExternalMediaDirs()[0].AbsolutePath;
-			string targetDir = Path.Combine(mediaDir, Folders.GalleryFolderName);
-			using(Java.IO.File folder = new(targetDir))
-			{
-				if(!folder.Exists())
-					_ = folder.Mkdir();
-			}
+			result = await Permissions.RequestAsync<Permissions.StorageWrite>();
+			if(result == PermissionStatus.Granted)
+				return SaveToGallery(filePath);
 
-			byte[] fileData;
-			string assetPath = Folders.PictureAssets + FilePath;
-			using(var stream = App.Assembly.GetManifestResourceStream(assetPath))
-			{
-				fileData = new byte[stream.Length];
-				_ = stream.Read(fileData, 0, (int)stream.Length);
-			}
-
-			string file = Path.Combine(targetDir, FilePath);
-			File.WriteAllBytes(file, fileData);
-			MediaScannerConnection.ScanFile(Application.Context, new[] { file }, null, null);
+			return false;
 		}
 
-		public Task<bool> SaveToGallery(string filePath)
+		private bool SaveToGallery(string filePath)
 		{
-			FilePath = filePath;
-			Callback = new();
+			var mediaDirs = Application.Context.GetExternalMediaDirs();
+			string mediaDir = mediaDirs[0].AbsolutePath;
+			string targetDir = Path.Combine(mediaDir, AppInfo.Name);
 
-			string storagePermission = Manifest.Permission.WriteExternalStorage;
-			if(Application.Context.CheckSelfPermission(storagePermission) == Permission.Granted)
-				Finish(Permission.Granted);
-			else
-				MainActivity.Instance.RequestPermissions(new[] { storagePermission }, PermissionRequestCode);
+			if(!Directory.Exists(targetDir))
+				_ = Directory.CreateDirectory(targetDir);
 
-			return Callback.Task;
+			string assetPath = Folders.PictureAssets + filePath;
+			using var stream = App.Assembly.GetManifestResourceStream(assetPath);
+			byte[] fileData = new byte[stream.Length];
+			_ = stream.Read(fileData, 0, (int)stream.Length);
+
+			string file = Path.Combine(targetDir, filePath);
+			File.WriteAllBytes(file, fileData);
+			MediaScannerConnection.ScanFile(Application.Context, new[] { file }, null, null);
+			return true;
 		}
 	}
 }

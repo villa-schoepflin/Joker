@@ -1,31 +1,36 @@
 using System.Threading.Tasks;
 using Foundation;
 using Joker.AppInterface;
-using Photos;
 using UIKit;
+using Xamarin.Essentials;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Joker.iOS.FileSaver))]
 namespace Joker.iOS
 {
 	internal class FileSaver : IPlatformFileSaver
 	{
-		public Task<bool> SaveToGallery(string filePath)
+		public async Task<bool> RequestSaveToGallery(string filePath)
 		{
-			TaskCompletionSource<bool> callback = new();
+			var result = await Permissions.CheckStatusAsync<Permissions.Photos>();
+			if(result == PermissionStatus.Granted)
+				return SaveToGallery(filePath);
 
-			void handler(PHAuthorizationStatus status)
-			{
-				callback.SetResult(status == PHAuthorizationStatus.Authorized);
-			}
-			PHPhotoLibrary.RequestAuthorization(handler);
+			result = await Permissions.RequestAsync<Permissions.Photos>();
+			if(result == PermissionStatus.Granted)
+				return SaveToGallery(filePath);
 
-			if(PHPhotoLibrary.AuthorizationStatus == PHAuthorizationStatus.Authorized)
-			{
-				string assetPath = Folders.PictureAssets + filePath;
-				var stream = App.Assembly.GetManifestResourceStream(assetPath);
-				new UIImage(NSData.FromStream(stream)).SaveToPhotosAlbum(null);
-			}
-			return callback.Task;
+			return false;
+		}
+
+		private bool SaveToGallery(string filePath)
+		{
+			string assetPath = Folders.PictureAssets + filePath;
+			var stream = App.Assembly.GetManifestResourceStream(assetPath);
+			var data = NSData.FromStream(stream);
+
+			UIImage image = new(data);
+			image.SaveToPhotosAlbum(null);
+			return true;
 		}
 	}
 }

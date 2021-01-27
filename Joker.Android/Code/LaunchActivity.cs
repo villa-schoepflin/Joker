@@ -10,7 +10,7 @@ namespace Joker.Android
 	[Activity(MainLauncher = true,
 			  NoHistory = true,
 			  Icon = "@mipmap/icon",
-			  Theme = "@style/Splash",
+			  Theme = "@style/splash",
 			  ScreenOrientation = ScreenOrientation.Portrait)]
 	internal class LaunchActivity : Activity
 	{

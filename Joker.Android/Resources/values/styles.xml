@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
-	<style name="Splash"
+	<style name="splash"
 		   parent="Theme.AppCompat.Light.DarkActionBar">
 		<item name="android:windowBackground">
 			@drawable/splash
@@ -16,7 +16,7 @@
 		<item name="colorAccent">@color/colorPrimaryDark</item>
 	</style>
 	<!-- Base theme applied no matter what API -->
-	<style name="MainTheme"
+	<style name="mainTheme"
 		   parent="Theme.AppCompat.Light.DarkActionBar">
 		<!--If you are using revision 22.1 please use just windowNoTitle. Without android:-->
 		<item name="windowNoTitle">true</item>
@@ -34,7 +34,7 @@
          colorControlHighlight and colorSwitchThumbNormal. -->
 		<item name="windowActionModeOverlay">true</item>
 		<item name="android:navigationBarColor">@color/colorPrimary</item>
-		<item name="android:timePickerStyle">@style/SpinnerTimePicker</item>
+		<item name="android:timePickerStyle">@style/spinnerTimePicker</item>
 		<item name="android:colorPressedHighlight">@color/listView</item>
 		<item name="android:colorLongPressedHighlight">@color/listView</item>
 		<item name="android:colorFocusedHighlight">@color/listView</item>
@@ -42,7 +42,7 @@
 		<item name="android:activatedBackgroundIndicator">@color/listView</item>
 	</style>
 
-	<style name="SpinnerTimePicker"
+	<style name="spinnerTimePicker"
 		   parent="android:Widget.Material.Light.TimePicker">
 		<item name="android:timePickerMode">spinner</item>
 	</style>

@@ -70,7 +70,7 @@ namespace Joker.UserInterface
 		{
 			var fileSaver = DependencyService.Get<IPlatformFileSaver>();
 			string result;
-			if(await fileSaver.SaveToGallery(Model.FilePath))
+			if(await fileSaver.RequestSaveToGallery(Model.FilePath))
 				result = Text.SavedToGallery;
 			else
 				result = Text.StoragePermissionDenied;

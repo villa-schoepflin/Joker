@@ -8,10 +8,10 @@ namespace Joker.AppInterface
 	public interface IPlatformFileSaver
 	{
 		/// <summary>
-		/// Saves a picture's file to the user's personal storage and indicates whether the process was successful.
+		/// Requests permission to access device storage and then saves the file to the user's gallery storage.
 		/// </summary>
-		/// <param name="filePath">File path to the image resource.</param>
-		/// <returns>True if the file could be saved, otherwise false.</returns>
-		Task<bool> SaveToGallery(string filePath);
+		/// <param name="filePath">Path to the file that should be saved.</param>
+		/// <returns>True if the permission was granted, otherwise false.</returns>
+		Task<bool> RequestSaveToGallery(string filePath);
 	}
 }
