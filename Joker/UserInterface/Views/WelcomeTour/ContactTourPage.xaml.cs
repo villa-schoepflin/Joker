@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Joker.BusinessLogic;
 using Xamarin.Essentials;
@@ -47,7 +48,7 @@ namespace Joker.UserInterface
 
 		private async void OnContinueButton(object sender, EventArgs eventArgs)
 		{
-			if(FirstContact is object && FirstContact == Contact.Bzga)
+			if(FirstContact is object && Contact.Prefixed.Contains(FirstContact))
 				await DisplayAlert(null, Text.ContactAlreadyExists, Text.Ok);
 			else
 				await Navigation.PushAsync(new LimitTourPage());

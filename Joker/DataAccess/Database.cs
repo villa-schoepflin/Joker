@@ -43,61 +43,55 @@ namespace Joker.DataAccess
 			_ = db.CreateTable<Picture>();
 		}
 
-		internal static void Insert(Limit limit)
+		internal static void Insert(Limit newLimit)
 		{
 			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
-			_ = db.Insert(limit);
+			_ = db.Insert(newLimit);
 		}
 
-		internal static void Insert(Gamble gamble)
+		internal static void Insert(Gamble newGamble)
 		{
 			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 
-			/* Prevents the insertion of Gamble objects when there is no limit set before the gamble's time property as
-			 * this wouldn't make sense for the app's use cases. */
-			if(!db.Table<Limit>().Any(l => l.Time < gamble.Time))
+			if(!db.Table<Limit>().Any(limit => limit.Time < newGamble.Time))
 				throw new ArgumentException(Text.GambleMustBeAfterFirstLimit);
 
-			/* If there already exists an entry in the database with the same time as the argument, the milliseconds of
-			 * the timestamp will continually be incremented. This is to keep the Time property (primary key) unique
-			 * without raising exceptions. */
-			while(db.Table<Gamble>().Any(g => g.Time == gamble.Time))
-				gamble.Time = gamble.Time.AddMilliseconds(1);
+			// Ensures any new gamble is unique, given their time is the primary key.
+			var gambles = db.Table<Gamble>();
+			while(gambles.Any(gamble => gamble.Time == newGamble.Time))
+				newGamble.Time = newGamble.Time.AddMilliseconds(1);
 
-			_ = db.Insert(gamble);
+			_ = db.Insert(newGamble);
 		}
 
-		internal static void Insert(Contact contact)
+		internal static void Insert(Contact newContact)
 		{
 			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 
-			if(db.Table<Contact>().Any(c => c == contact) || contact == Contact.Bzga)
+			if(db.Table<Contact>().Contains(newContact) || Contact.Prefixed.Contains(newContact))
 				throw new ArgumentException(Text.ContactAlreadyExists);
-			_ = db.Insert(contact);
+			_ = db.Insert(newContact);
 		}
 
 		internal static bool InsertPictureFromRandomAsset()
 		{
 			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 
-			// All asset paths in the PictureFeed folder are put into an array.
-			string[] files = App.Assembly.GetManifestResourceNames();
-			files = files.Where(name => name.StartsWith(Folders.PictureAssets)).ToArray();
+			string[] assets = App.Assembly.GetManifestResourceNames();
+			assets = assets.Where(name => name.StartsWith(Folders.PictureAssets)).ToArray();
 
-			/* If the count of pictures in the Picture table is not less than the number of asset paths, the method
-			 * returns false because there would be no more new pictures to add. */
-			if(db.Table<Picture>().Count() >= files.Length)
+			// Return false if there are no more new pictures available.
+			var pics = db.Table<Picture>();
+			if(pics.Count() >= assets.Length)
 				return false;
 
-			/* If there are still image resources available, select a random asset path that isn't in the database yet,
-			 * wrap it in a Picture instance, insert it and return true if a row was added. */
 			Random random = new();
-			Picture pic;
+			Picture newPic;
 			do
-				pic = new(files[random.Next(0, files.Length)]);
-			while(db.Table<Picture>().Any(p => p.FilePath == pic.FilePath));
+				newPic = new(assets[random.Next(0, assets.Length)]);
+			while(pics.Any(pic => pic.FilePath == newPic.FilePath));
 
-			return db.Insert(pic) > 0;
+			return db.Insert(newPic) > 0;
 		}
 
 		internal static int CountLimits()
@@ -112,7 +106,7 @@ namespace Joker.DataAccess
 			List<TimelineRecord> list = new();
 			list.AddRange(db.Table<Gamble>());
 			list.AddRange(db.Table<Limit>());
-			return list.OrderByDescending(tr => tr.Time).ToArray();
+			return list.OrderByDescending(record => record.Time).ToArray();
 		}
 
 		internal static Contact[] AllContacts()
@@ -130,79 +124,79 @@ namespace Joker.DataAccess
 		internal static Picture[] LikedPictures()
 		{
 			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
-			return db.Table<Picture>().Where(p => p.Liked).ToArray();
+			return db.Table<Picture>().Where(pic => pic.Liked).ToArray();
 		}
 
 		internal static Limit MostRecentLimit()
 		{
 			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
-			return db.Table<Limit>().OrderByDescending(l => l.Time).First();
+			return db.Table<Limit>().OrderByDescending(limit => limit.Time).First();
 		}
 
 		internal static Picture MostRecentPicture()
 		{
 			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
-			return db.Table<Picture>().OrderByDescending(p => p.TimeAdded).First();
+			return db.Table<Picture>().OrderByDescending(pic => pic.TimeAdded).First();
 		}
 
-		internal static bool NoGambleAfterMostRecentLimit()
+		internal static bool HasGambleAfterMostRecentLimit()
 		{
 			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
-			return !db.Table<Gamble>().Any(g => g.Time > MostRecentLimit().Time);
+			var mostRecentLimitTime = MostRecentLimit().Time;
+			return db.Table<Gamble>().Any(gamble => gamble.Time > mostRecentLimitTime);
 		}
 
-		internal static Limit NextLimitAfter(Limit limit)
+		internal static Limit NextLimitAfter(Limit thisLimit)
 		{
 			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
-			return db.Table<Limit>().Where(l => l.Time > limit.Time).FirstOrDefault();
+			return db.Table<Limit>().Where(limit => limit.Time > thisLimit.Time).FirstOrDefault();
 		}
 
-		internal static Gamble[] AllGamblesWithinLimit(Limit limit)
+		internal static Gamble[] AllGamblesWithin(Limit thisLimit)
 		{
 			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
-			TableQuery<Gamble> query;
 
-			// Finds the next limits after this one, chronologically.
-			var nextLimits = db.Table<Limit>().Where(l => l.Time > limit.Time);
+			var nextLimits = db.Table<Limit>().Where(limit => limit.Time > thisLimit.Time);
+			var gambles = db.Table<Gamble>();
+			TableQuery<Gamble> gamblesWithin;
 
-			// Finds all gambles that lie chronologically between the parameter limit and the limit after it.
 			if(nextLimits.Any())
 			{
-				var nextLimit = nextLimits.First();
-				query = db.Table<Gamble>().Where(g => g.Time > limit.Time && g.Time < nextLimit.Time);
+				var nextLimitTime = nextLimits.First().Time;
+				gamblesWithin = gambles.Where(gamble => gamble.Time > thisLimit.Time && gamble.Time < nextLimitTime);
 			}
-			/* If the next limit after the argument can't be found (because it doesn't exist yet), only the gambles
-			 * directly after the argument are queried, without an upper bound. */
 			else
-				query = db.Table<Gamble>().Where(g => g.Time > limit.Time);
-			return query.ToArray();
+				gamblesWithin = gambles.Where(gamble => gamble.Time > thisLimit.Time);
+
+			return gamblesWithin.ToArray();
 		}
 
 		internal static decimal CalcBalance(Limit limit)
 		{
-			// Subtracts the amounts of all gambles captured by the query from the given limit.
-			return AllGamblesWithinLimit(limit).Aggregate(limit.Amount, (limitAmount, g) => limitAmount - g.Amount);
+			Func<decimal, Gamble, decimal> subtract = (limitAmount, gamble) => limitAmount - gamble.Amount;
+			return AllGamblesWithin(limit).Aggregate(limit.Amount, subtract);
 		}
 
 		internal static decimal CalcPreviousLimitBalance()
 		{
 			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
-			return CalcBalance(db.Table<Limit>().OrderByDescending(l => l.Time).ElementAt(1));
+
+			var prevLimit = db.Table<Limit>().OrderByDescending(limit => limit.Time).ElementAt(1);
+			return CalcBalance(prevLimit);
 		}
 
-		internal static decimal CalcRemainingLimit(Gamble gamble)
+		internal static decimal CalcRemainingLimit(Gamble thisGamble)
 		{
 			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 
-			/* First, the most recent limit before the argument is selected by querying all limits whose times are
-			 * earlier than the argument's time, then ordering them descending by time and selecting the first element.
-			 */
-			var prevLimit = db.Table<Limit>().Where(l => l.Time < gamble.Time).OrderByDescending(l => l.Time).First();
+			var limitsBeforeGamble = db.Table<Limit>().Where(limit => limit.Time < thisGamble.Time);
+			var priorLimit = limitsBeforeGamble.OrderByDescending(limit => limit.Time).First();
 
-			/* Then, all gambles whose times are later than the last limit's time up to the argument are selected from
-			 * the Gamble table and their amounts are sequentially subtracted from the last limit's amount. */
-			return db.Table<Gamble>().Where(g => g.Time > prevLimit.Time && g.Time <= gamble.Time)
-				.Aggregate(prevLimit.Amount, (prevLimAmount, g) => prevLimAmount - g.Amount);
+			Func<Gamble, bool> inRange = gamble => gamble.Time > priorLimit.Time && gamble.Time <= thisGamble.Time;
+			var gamblesInRange = db.Table<Gamble>().Where(inRange);
+
+			Func<decimal, Gamble, decimal> subtract = (priorLimitAmount, gamble) => priorLimitAmount - gamble.Amount;
+			return gamblesInRange.Aggregate(priorLimit.Amount, subtract);
 		}
 
 		internal static void ToggleLikedStatus(Picture pic)
@@ -219,16 +213,18 @@ namespace Joker.DataAccess
 			_ = db.Update(gamble);
 		}
 
-		internal static void Update(Contact contact)
+		internal static void Update(Contact thisContact)
 		{
 			using SQLiteConnection db = new(AppSettings.DatabaseFilePath);
 
-			if(db.Table<Contact>().Where(c => c.Id == contact.Id).Single() == contact)
-				_ = db.Update(contact);
-			else if(db.Table<Contact>().Any(c => c == contact) || contact == Contact.Bzga)
+			var dbContacts = db.Table<Contact>();
+			var contactById = dbContacts.Where(contact => contact.Id == thisContact.Id).First();
+			if(contactById.Equals(thisContact))
+				_ = db.Update(thisContact);
+			else if(dbContacts.Contains(thisContact) || Contact.Prefixed.Contains(thisContact))
 				throw new ArgumentException(Text.ContactAlreadyExists);
 			else
-				_ = db.Update(contact);
+				_ = db.Update(thisContact);
 		}
 
 		internal static void Delete(Contact contact)

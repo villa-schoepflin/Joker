@@ -36,7 +36,7 @@
 						   VerticalOptions="Center"
 						   Placeholder="0,00 €"
 						   TextColor="{Static ui:Styles.Text1}"
-						   FontSize="{Static ui:Styles.CustomMedium}"
+						   FontSize="{Static ui:Styles.MediumSize}"
 						   Keyboard="Numeric"
 						   Text="">
 					</Entry>
@@ -44,11 +44,11 @@
 						   Grid.Column="0"
 						   VerticalOptions="Center"
 						   TextColor="{Static ui:Styles.Text1}">Art der Ausgabe:</Label>
-					<Picker x:Name="GambleTypePicker"
+					<Picker x:Name="TypePicker"
 							Grid.Row="1"
 							Grid.Column="1"
 							VerticalOptions="Center"
-							FontSize="{Static ui:Styles.CustomMedium}"
+							FontSize="{Static ui:Styles.MediumSize}"
 							TextColor="{Static ui:Styles.Text1}"
 							ItemsSource="{Static bl:GambleTypes.Names}"
 							SelectedIndex="0"
@@ -71,7 +71,7 @@
 							HeightRequest="100"
 							MaxLength="{Static bl:Gamble.MaxDescriptionLength}"
 							Placeholder="Beschreibung (optional)"
-							FontSize="{Static ui:Styles.CustomMedium}" />
+							FontSize="{Static ui:Styles.MediumSize}" />
 				</StackLayout>
 			</Frame>
 			<Frame Margin="{Static ui:Styles.StripMargin}"
@@ -101,7 +101,7 @@
 								Grid.Row="0"
 								Grid.Column="1"
 								VerticalOptions="Center"
-								FontSize="{Static ui:Styles.CustomMedium}"
+								FontSize="{Static ui:Styles.MediumSize}"
 								TextColor="{Static ui:Styles.Text1}" />
 					<Label Grid.Row="1"
 						   Grid.Column="0"
@@ -112,7 +112,7 @@
 								Grid.Row="1"
 								Grid.Column="1"
 								VerticalOptions="Center"
-								FontSize="{Static ui:Styles.CustomMedium}"
+								FontSize="{Static ui:Styles.MediumSize}"
 								TextColor="{Static ui:Styles.Text1}" />
 				</Grid>
 			</Frame>

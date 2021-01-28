@@ -215,7 +215,7 @@
 							   Keyboard="Numeric" />
 						<Label Grid.Column="1"
 							   Margin="0,9.5,0,0"
-							   FontSize="{Static ui:Styles.CustomMedium}"
+							   FontSize="{Static ui:Styles.MediumSize}"
 							   TextColor="{Static ui:Styles.Text1}">Tage</Label>
 						<Button Grid.Column="2"
 								Clicked="SaveNewPictureInterval"
@@ -254,7 +254,7 @@
 							   Keyboard="Numeric" />
 						<Label Grid.Column="1"
 							   Margin="0,9.5,0,0"
-							   FontSize="{Static ui:Styles.CustomMedium}"
+							   FontSize="{Static ui:Styles.MediumSize}"
 							   TextColor="{Static ui:Styles.Text1}">Stunden</Label>
 						<Button Grid.Column="2"
 								Clicked="SaveGambleReminderInterval"
@@ -293,7 +293,7 @@
 							   Keyboard="Numeric" />
 						<Label Grid.Column="1"
 							   Margin="0,9.5,0,0"
-							   FontSize="{Static ui:Styles.CustomMedium}"
+							   FontSize="{Static ui:Styles.MediumSize}"
 							   TextColor="{Static ui:Styles.Text1}">Stunden</Label>
 						<Button Grid.Column="2"
 								Clicked="SaveLimitReminderInterval"

@@ -42,7 +42,8 @@ namespace Joker.BusinessLogic
 		/// <summary>
 		/// This constructor is necessary for the subclasses to be instantiated by SQLite in database queries.
 		/// </summary>
-		protected TimelineRecord() { }
+		protected TimelineRecord()
+		{ }
 
 		/// <summary>
 		/// A parsing function to get a decimal monetary value from user input.
@@ -54,14 +55,15 @@ namespace Joker.BusinessLogic
 		private static decimal Parse(string amount)
 		{
 			amount = amount.Replace('.', ',');
+			bool parseSuccessful = decimal.TryParse(amount, out decimal result);
 
-			// Checks if the parsed result has more than two digits after the comma
-			if(!decimal.TryParse(amount, out decimal result) || result * 100 != Math.Floor(result * 100))
+			decimal cents = result * 100;
+			bool hasCentFractions = cents != Math.Floor(cents);
+			if(!parseSuccessful || hasCentFractions)
 				throw new ArgumentException(Text.MonetaryValueInvalid);
 
 			if(result is >= MinAmount and <= MaxAmount)
 				return result;
-
 			throw new ArgumentException(string.Format(Text.MonetaryValueBounds, MinAmount, MaxAmount));
 		}
 

@@ -79,19 +79,19 @@
 									<Label HorizontalOptions="FillAndExpand"
 										   Margin="5,0,0,0"
 										   Text="{Binding AmountInEuro}"
-										   FontSize="{Static ui:Styles.CustomMedium}"
+										   FontSize="{Static ui:Styles.MediumSize}"
 										   TextColor="{Binding CellTextColor}"
 										   VerticalTextAlignment="Center" />
 									<Label HorizontalOptions="Center"
 										   Text="{Binding RemainingLimit}"
-										   FontSize="{Static ui:Styles.CustomMedium}"
+										   FontSize="{Static ui:Styles.MediumSize}"
 										   TextColor="{Static ui:Styles.Text2}"
 										   HorizontalTextAlignment="End"
 										   VerticalTextAlignment="Center" />
 									<Label HorizontalOptions="End"
 										   Margin="10,0,10,0"
 										   Text="{Binding LocalizedTime}"
-										   FontSize="{Static ui:Styles.CustomSmall}"
+										   FontSize="{Static ui:Styles.SmallSize}"
 										   TextColor="{Binding CellTextColor}"
 										   VerticalTextAlignment="Center" />
 								</StackLayout>

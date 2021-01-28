@@ -42,7 +42,8 @@ namespace Joker.BusinessLogic
 		/// This constructor only exists for SQLite to be able to return collections of pictures from the database. It
 		/// should never be used to instantiate a picture directly within the app.
 		/// </summary>
-		public Picture() { }
+		public Picture()
+		{ }
 
 		#region Identifiers for the database schema (DO NOT CHANGE!)
 		private const string PictureTableName = "Picture";

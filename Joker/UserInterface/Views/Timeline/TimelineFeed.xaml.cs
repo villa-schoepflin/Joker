@@ -22,10 +22,10 @@ namespace Joker.UserInterface
 			{
 				if(Database.CalcBalance(Database.MostRecentLimit()) >= 0)
 				{
-					if(Database.NoGambleAfterMostRecentLimit())
-						return TextAssetReader.Get("Feedback_Current_New.txt");
-					else
+					if(Database.HasGambleAfterMostRecentLimit())
 						return TextAssetReader.Get("Feedback_Current_Success.txt");
+					else
+						return TextAssetReader.Get("Feedback_Current_New.txt");
 				}
 				else
 					return TextAssetReader.Get("Feedback_Current_Failure.txt");
@@ -62,13 +62,13 @@ namespace Joker.UserInterface
 		/// <summary>
 		/// The data to be displayed, wrapped in view models based on whether they are gambles or limits.
 		/// </summary>
-		public TimelineRecordViewModel[] Records => Array.ConvertAll(Database.AllGamblesAndLimits(), tr =>
+		public TimelineRecordViewModel[] Records => Array.ConvertAll(Database.AllGamblesAndLimits(), record =>
 		{
 			TimelineRecordViewModel viewModel;
-			if(tr is Gamble gamble)
+			if(record is Gamble gamble)
 				viewModel = new GambleViewModel(this, gamble);
 			else
-				viewModel = new LimitViewModel(this, (Limit)tr);
+				viewModel = new LimitViewModel(this, (Limit)record);
 			return viewModel;
 		});
 
@@ -116,12 +116,12 @@ namespace Joker.UserInterface
 			if(Navigation.HasPage<GambleCreator>())
 				return;
 
-			GambleCreator page = new(() =>
+			GambleCreator creator = new(() =>
 			{
 				RefreshRecords();
 				RefreshFeedback();
 			});
-			await Navigation.PushAsync(page);
+			await Navigation.PushAsync(creator);
 		}
 	}
 }

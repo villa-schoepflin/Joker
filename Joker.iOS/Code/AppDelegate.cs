@@ -40,7 +40,7 @@ namespace Joker.iOS
 		/// Workaround to fix the bug that makes Xamarin.iOS sometimes ignore the colors set in the
 		/// shared code.
 		/// </summary>
-		internal static void CorrectNavigationBarColors()
+		private void CorrectNavigationBarColors()
 		{
 			UINavigationBar.Appearance.BarTintColor = Styles.Primary1.ToUIColor();
 			UINavigationBar.Appearance.TintColor = Styles.TextContrast.ToUIColor();

@@ -14,7 +14,7 @@ namespace Joker.UserInterface
 	{
 		private readonly Action Refresh;
 
-		private bool userChangedDateOrTime = false;
+		private bool UserChangedDateOrTime = false;
 
 		internal GambleCreator(Action refresh)
 		{
@@ -31,13 +31,13 @@ namespace Joker.UserInterface
 
 		private void OnDateSelected(object sender, DateChangedEventArgs eventArgs)
 		{
-			userChangedDateOrTime = true;
+			UserChangedDateOrTime = true;
 		}
 
 		private void OnTimeSelected(object sender, PropertyChangedEventArgs eventArgs)
 		{
 			if(eventArgs.PropertyName == TimePicker.TimeProperty.PropertyName)
-				userChangedDateOrTime = true;
+				UserChangedDateOrTime = true;
 		}
 
 		private void OnTimeResetButton(object sender, EventArgs eventArgs)
@@ -45,7 +45,7 @@ namespace Joker.UserInterface
 			var now = DateTime.Now;
 			DatePicker.Date = now.Date;
 			TimePicker.Time = now.TimeOfDay;
-			userChangedDateOrTime = false;
+			UserChangedDateOrTime = false;
 		}
 
 		private async void OnSubmitButton(object sender, EventArgs eventArgs)
@@ -64,8 +64,8 @@ namespace Joker.UserInterface
 			try
 			{
 				Gamble gamble;
-				var type = GambleTypes.GetGambleType(GambleTypePicker.SelectedItem.ToString());
-				if(userChangedDateOrTime)
+				var type = GambleTypes.GetGambleType(TypePicker.SelectedItem.ToString());
+				if(UserChangedDateOrTime)
 				{
 					var time = DatePicker.Date + TimePicker.Time;
 					gamble = new(time, Amount.Text, type, Description.Text);

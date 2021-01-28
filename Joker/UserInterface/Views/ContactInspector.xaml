@@ -39,7 +39,7 @@
 								Grid.Row="0"
 								Grid.Column="0"
 								BackgroundColor="{Static ui:Styles.Bgr3}"
-								FontSize="{Static ui:Styles.CustomMedium}"
+								FontSize="{Static ui:Styles.MediumSize}"
 								TextColor="{Static ui:Styles.Text1}"
 								MaxLength="{Static bl:Contact.MaxNameLength}" />
 						<Button Command="{Binding InsertNameFromClipboard}"
@@ -71,7 +71,7 @@
 								Grid.Row="0"
 								Grid.Column="0"
 								BackgroundColor="{Static ui:Styles.Bgr3}"
-								FontSize="{Static ui:Styles.CustomMedium}"
+								FontSize="{Static ui:Styles.MediumSize}"
 								TextColor="{Static ui:Styles.Text1}"
 								MaxLength="{Static bl:Contact.MaxPhoneNumberLength}"
 								Keyboard="Telephone" />

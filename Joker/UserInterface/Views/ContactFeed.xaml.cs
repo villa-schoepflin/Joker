@@ -22,9 +22,9 @@ namespace Joker.UserInterface
 			get
 			{
 				var dbContacts = Database.AllContacts();
-				var allContacts = new Contact[dbContacts.Length + 1];
-				Array.ConstrainedCopy(dbContacts, 0, allContacts, 1, dbContacts.Length);
-				allContacts[0] = Contact.Bzga;
+				var allContacts = new Contact[dbContacts.Length + Contact.Prefixed.Length];
+				Array.Copy(dbContacts, 0, allContacts, Contact.Prefixed.Length, dbContacts.Length);
+				Array.Copy(Contact.Prefixed, 0, allContacts, 0, Contact.Prefixed.Length);
 				return Array.ConvertAll(allContacts, contact => new ContactViewModel(this, contact, Refresh));
 			}
 		}
@@ -51,8 +51,8 @@ namespace Joker.UserInterface
 			if(Navigation.HasPage<ContactCreator>())
 				return;
 
-			ContactCreator page = new(Refresh);
-			await Navigation.PushAsync(page);
+			ContactCreator creator = new(Refresh);
+			await Navigation.PushAsync(creator);
 		}
 	}
 }

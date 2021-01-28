@@ -54,7 +54,8 @@ namespace Joker.BusinessLogic
 		/// This constructor only exists for SQLite to be able to return collections of limits from the database. It
 		/// should never be used to instantiate a limit directly within the app.
 		/// </summary>
-		public Limit() : base() { }
+		public Limit() : base()
+		{ }
 
 		#region Identifiers for the database schema (DO NOT CHANGE!)
 		private const string LimitTableName = "Limit";

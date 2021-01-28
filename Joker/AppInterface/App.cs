@@ -12,6 +12,7 @@ using Xamarin.Forms.Xaml;
 
 [assembly: Preserve]
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
+
 namespace Joker.AppInterface
 {
 	/// <summary>

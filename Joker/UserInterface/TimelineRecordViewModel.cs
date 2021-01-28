@@ -55,6 +55,7 @@ namespace Joker.UserInterface
 		/// </summary>
 		/// <param name="view">The view for this view model.</param>
 		/// <param name="model">The model for this view model.</param>
-		protected TimelineRecordViewModel(Page view, TimelineRecord model) : base(view, model) { }
+		protected TimelineRecordViewModel(Page view, TimelineRecord model) : base(view, model)
+		{ }
 	}
 }

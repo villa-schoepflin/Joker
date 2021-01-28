@@ -7,8 +7,8 @@ namespace Joker.UserInterface
 	/// </summary>
 	public static class Styles
 	{
-		internal const double CustomSmall = 11;
-		internal const double CustomMedium = 18;
+		internal const double SmallSize = 11;
+		internal const double MediumSize = 18;
 
 		/// <summary>
 		/// The primary blue for the Joker design.

@@ -19,14 +19,14 @@ namespace Joker.BusinessLogic
 		/// </summary>
 		public const int MaxPhoneNumberLength = 25;
 
-		/// <summary>
-		/// Contact information for the Bundeszentrale für gesundheitliche Aufklärung.
-		/// </summary>
-		internal static readonly Contact Bzga = new Contact
+		internal static readonly Contact[] Prefixed = new[]
 		{
-			Name = "Hotline der Bundeszentrale für gesundheitliche Aufklärung",
-			PhoneNumber = "+49 800 1372700",
-			MarkedAsExpert = true
+			new Contact
+			{
+				Name = "Hotline der Bundeszentrale für gesundheitliche Aufklärung",
+				PhoneNumber = "+49 800 1372700",
+				MarkedAsExpert = true
+			}
 		};
 
 		/// <summary>
@@ -73,38 +73,19 @@ namespace Joker.BusinessLogic
 		/// <summary>
 		/// The constructor to be used by SQLite database interactions and direct data manipulation.
 		/// </summary>
-		public Contact() { }
+		public Contact()
+		{ }
 
 		/// <summary>
-		/// Compares two contacts on whether their phone numbers are the same, eliminating whitespace for comparison.
-		/// </summary>
-		/// <param name="left">The left operand on comparing equality.</param>
-		/// <param name="right">The right operand on comparing equality.</param>
-		/// <returns>Whether the contacts are equal by their phone number.</returns>
-		public static bool operator ==(Contact left, Contact right)
-		{
-			return left.PhoneNumber.Replace(" ", "") == right.PhoneNumber.Replace(" ", "");
-		}
-
-		/// <summary>
-		/// Compares two contacts on whether their phone numbers are different, eliminating whitespace for comparison.
-		/// </summary>
-		/// <param name="left">The left operand on comparing inequality.</param>
-		/// <param name="right">The right operand on comparing inequality.</param>
-		/// <returns>Whether the contacts are different by their phone number.</returns>
-		public static bool operator !=(Contact left, Contact right)
-		{
-			return !(left == right);
-		}
-
-		/// <summary>
-		/// Determines whether the specified object is equal to the current object.
+		/// Determines whether the specified object is equal to the current contact.
 		/// </summary>
 		/// <param name="obj">The object to compare with the current object.</param>
 		/// <returns>True if the given object equals the current one, otherwise false.</returns>
+		/// <exception cref="InvalidCastException">Thrown if the argument isn't a contact.</exception>
 		public override bool Equals(object obj)
 		{
-			return base.Equals(obj);
+			var other = (Contact)obj;
+			return PhoneNumber.Replace(" ", "") == other.PhoneNumber.Replace(" ", "");
 		}
 
 		/// <summary>

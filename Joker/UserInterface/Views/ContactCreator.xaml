@@ -28,7 +28,7 @@
 						<Entry x:Name="NameEntry"
 							   HorizontalOptions="FillAndExpand"
 							   TextColor="{Static ui:Styles.Text1}"
-							   FontSize="{Static ui:Styles.CustomMedium}"
+							   FontSize="{Static ui:Styles.MediumSize}"
 							   MaxLength="{Static bl:Contact.MaxNameLength}"
 							   Text="" />
 						<Button Clicked="OnNameClipboardButton"
@@ -60,7 +60,7 @@
 						<Entry x:Name="PhoneNumberEntry"
 							   HorizontalOptions="FillAndExpand"
 							   TextColor="{Static ui:Styles.Text1}"
-							   FontSize="{Static ui:Styles.CustomMedium}"
+							   FontSize="{Static ui:Styles.MediumSize}"
 							   MaxLength="{Static bl:Contact.MaxPhoneNumberLength}"
 							   Keyboard="Telephone"
 							   Text="" />

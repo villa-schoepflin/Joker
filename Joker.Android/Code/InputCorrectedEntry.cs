@@ -12,7 +12,8 @@ namespace Joker.Android
 	/// </summary>
 	internal class InputCorrectedEntry : EntryRenderer
 	{
-		public InputCorrectedEntry(Context context) : base(context) { }
+		public InputCorrectedEntry(Context context) : base(context)
+		{ }
 
 		protected override void OnElementChanged(ElementChangedEventArgs<Entry> eventArgs)
 		{

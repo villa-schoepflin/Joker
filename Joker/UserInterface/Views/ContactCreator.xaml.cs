@@ -25,7 +25,7 @@ namespace Joker.UserInterface
 		private async void OnNameClipboardButton(object sender, EventArgs eventArgs)
 		{
 			string clipboard = await Clipboard.GetTextAsync();
-			if(!string.IsNullOrEmpty(clipboard))
+			if(string.IsNullOrEmpty(clipboard))
 				return;
 
 			if(clipboard.Length > Contact.MaxNameLength)
@@ -36,7 +36,7 @@ namespace Joker.UserInterface
 		private async void OnPhoneNumberClipboardButton(object sender, EventArgs eventArgs)
 		{
 			string clipboard = await Clipboard.GetTextAsync();
-			if(!string.IsNullOrEmpty(clipboard))
+			if(string.IsNullOrEmpty(clipboard))
 				return;
 
 			if(clipboard.Length > Contact.MaxPhoneNumberLength)

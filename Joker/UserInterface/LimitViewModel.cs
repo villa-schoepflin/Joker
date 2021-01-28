@@ -49,7 +49,8 @@ namespace Joker.UserInterface
 			set => Model = value;
 		}
 
-		internal LimitViewModel(Page view, Limit model) : base(view, model) { }
+		internal LimitViewModel(Page view, Limit model) : base(view, model)
+		{ }
 
 		/* If you're getting errors after here because Entry was changed to ChartEntry, then you changed the Microcharts
 		 * version to something later than 0.7.1. Before going with the newer version, you might need to explicitly set
@@ -63,7 +64,7 @@ namespace Joker.UserInterface
 
 			/* The gambles here are the data points that need to be interpolated. The indices are indices into the
 			 * entries array and represent where each actual gamble is located in it. */
-			var gambles = Database.AllGamblesWithinLimit(Limit);
+			var gambles = Database.AllGamblesWithin(Limit);
 			int[] indices = PrepareIndices(entries, gambles);
 			SetGambleIndicesAndGambleEntries(span, entries, gambles, indices);
 			indices = indices.Distinct().ToArray();

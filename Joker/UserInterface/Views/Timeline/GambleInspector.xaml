@@ -30,7 +30,7 @@
 					   VerticalOptions="Center"
 					   Padding="10,5,5,5">
 					<Label Text="{Binding AmountInEuro}"
-						   FontSize="{Static ui:Styles.CustomMedium}"
+						   FontSize="{Static ui:Styles.MediumSize}"
 						   TextColor="{Binding CellTextColor}" />
 				</Frame>
 				<Label Grid.Row="1"
@@ -51,7 +51,7 @@
 						<Label Text="{Binding GambleTypeText}"
 							   HorizontalOptions="FillAndExpand"
 							   Margin="5,0,0,0"
-							   FontSize="{Static ui:Styles.CustomMedium}"
+							   FontSize="{Static ui:Styles.MediumSize}"
 							   TextColor="{Binding CellTextColor}"
 							   VerticalTextAlignment="Center" />
 					</StackLayout>
@@ -78,7 +78,7 @@
 									IsEnabled="{Binding DescriptionEditable}"
 									MaxLength="{Static bl:Gamble.MaxDescriptionLength}"
 									BackgroundColor="{Binding CellBackground}"
-									FontSize="{Static ui:Styles.CustomMedium}"
+									FontSize="{Static ui:Styles.MediumSize}"
 									TextColor="{Static ui:Styles.Text1}"
 									Placeholder="Keine Beschreibung vorhanden." />
 						</ScrollView>
@@ -93,7 +93,7 @@
 					   VerticalOptions="Center"
 					   Padding="10,5,5,5">
 					<Label Text="{Binding RemainingLimit}"
-						   FontSize="{Static ui:Styles.CustomMedium}"
+						   FontSize="{Static ui:Styles.MediumSize}"
 						   TextColor="{Binding CellTextColor}" />
 				</Frame>
 				<Label Grid.Row="4"
@@ -105,7 +105,7 @@
 					   VerticalOptions="Center"
 					   Padding="10,5,5,5">
 					<Label Text="{Binding LocalizedTime}"
-						   FontSize="{Static ui:Styles.CustomMedium}"
+						   FontSize="{Static ui:Styles.MediumSize}"
 						   TextColor="{Binding CellTextColor}" />
 				</Frame>
 			</Grid>

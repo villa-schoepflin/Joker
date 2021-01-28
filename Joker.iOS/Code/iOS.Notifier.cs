@@ -11,7 +11,8 @@ namespace Joker.iOS
 		public Notifier()
 		{
 			var notifier = UNUserNotificationCenter.Current;
-			notifier.RequestAuthorization(UNAuthorizationOptions.Alert, (granted, error) => { });
+			Action<bool, NSError> callback = (granted, error) => { };
+			notifier.RequestAuthorization(UNAuthorizationOptions.Alert, callback);
 		}
 
 		public void ScheduleLimitExpired(DateTime timeSetting)

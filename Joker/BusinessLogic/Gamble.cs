@@ -55,7 +55,8 @@ namespace Joker.BusinessLogic
 		/// This constructor only exists for cloning and for SQLite to be able to return collections of gambles from the
 		/// database. It should never be used to instantiate a gamble directly within the app.
 		/// </summary>
-		public Gamble() : base() { }
+		public Gamble() : base()
+		{ }
 
 		#region Identifiers for the database schema (DO NOT CHANGE!)
 		private const string GambleTableName = "Gamble";

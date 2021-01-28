@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Windows.Input;
 using Joker.AppInterface;
 using Joker.BusinessLogic;
@@ -90,6 +90,7 @@ namespace Joker.UserInterface
 		}
 		private Picture _model;
 
-		internal PictureFeedViewModel(PictureFeed view, Picture model) : base(view, model) { }
+		internal PictureFeedViewModel(PictureFeed view, Picture model) : base(view, model)
+		{ }
 	}
 }

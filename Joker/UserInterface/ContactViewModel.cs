@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Joker.BusinessLogic;
@@ -134,7 +135,7 @@ namespace Joker.UserInterface
 		{
 			try
 			{
-				if(Model == Contact.Bzga)
+				if(Contact.Prefixed.Contains(Model))
 				{
 					await View.DisplayAlert(null, Text.ContactNotDeletable, Text.Ok);
 					return;
@@ -173,7 +174,7 @@ namespace Joker.UserInterface
 
 		private async Task DeleteContact()
 		{
-			if(Model == Contact.Bzga)
+			if(Contact.Prefixed.Contains(Model))
 			{
 				await View.DisplayAlert(null, Text.ContactNotDeletable, Text.Ok);
 				return;

@@ -31,7 +31,7 @@
 					   VerticalOptions="Center"
 					   Padding="10,5,5,5">
 					<Label Text="{Binding AmountInEuro}"
-						   FontSize="{Static ui:Styles.CustomMedium}"
+						   FontSize="{Static ui:Styles.MediumSize}"
 						   TextColor="{Binding CellTextColor}" />
 				</Frame>
 				<Label Grid.Row="1"
@@ -43,7 +43,7 @@
 					   VerticalOptions="Center"
 					   Padding="10,5,5,5">
 					<Label Text="{Binding DurationInDays}"
-						   FontSize="{Static ui:Styles.CustomMedium}"
+						   FontSize="{Static ui:Styles.MediumSize}"
 						   TextColor="{Binding CellTextColor}" />
 				</Frame>
 				<Label Grid.Row="2"
@@ -62,11 +62,11 @@
 							   Padding="10,5,5,5"
 							   HasShadow="False">
 							<Label Text="{Binding Balance}"
-								   FontSize="{Static ui:Styles.CustomMedium}"
+								   FontSize="{Static ui:Styles.MediumSize}"
 								   TextColor="{Binding CellTextColor}" />
 						</Frame>
 						<Label Text="{Binding LimitState}"
-							   FontSize="{Static ui:Styles.CustomMedium}"
+							   FontSize="{Static ui:Styles.MediumSize}"
 							   TextColor="{Binding StateTextColor}"
 							   Margin="10,5,5,5" />
 					</StackLayout>
@@ -80,7 +80,7 @@
 					   VerticalOptions="Center"
 					   Padding="10,5,5,5">
 					<Label Text="{Binding LocalizedTime}"
-						   FontSize="{Static ui:Styles.CustomMedium}"
+						   FontSize="{Static ui:Styles.MediumSize}"
 						   TextColor="{Binding CellTextColor}" />
 				</Frame>
 				<Label Grid.Row="5"
