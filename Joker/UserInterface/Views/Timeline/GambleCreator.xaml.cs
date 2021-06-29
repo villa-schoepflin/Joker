@@ -65,13 +65,14 @@ namespace Joker.UserInterface
 			{
 				Gamble gamble;
 				var type = GambleTypes.GetGambleType(TypePicker.SelectedItem.ToString());
+				bool isOnlineGamble = OnlineMarker.IsToggled;
 				if(UserChangedDateOrTime)
 				{
 					var time = DatePicker.Date + TimePicker.Time;
-					gamble = new(time, Amount.Text, type, Description.Text);
+					gamble = new(time, Amount.Text, type, Description.Text, isOnlineGamble);
 				}
 				else
-					gamble = new(Amount.Text, type, Description.Text);
+					gamble = new(Amount.Text, type, Description.Text, isOnlineGamble);
 
 				Database.Insert(gamble);
 				_ = await Navigation.PopAsync();

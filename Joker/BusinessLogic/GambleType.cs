@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Joker.BusinessLogic
@@ -35,16 +35,13 @@ namespace Joker.BusinessLogic
 	/// </summary>
 	public static class GambleTypes
 	{
-		/// <summary>
-		/// Holds the translated German terms for each type of gamble.
-		/// </summary>
 		private static readonly Dictionary<GambleType, string> TypeNames = new()
 		{
-			[GambleType.Other] = "Sonstige",
-			[GambleType.Lottery] = "Lotterie",
-			[GambleType.SportsBet] = "Sportwette",
-			[GambleType.Casino] = "Casino",
-			[GambleType.SlotMachine] = "Geldspielautomat"
+			[GambleType.Other] = Text.GambleTypeOther,
+			[GambleType.Lottery] = Text.GambleTypeLottery,
+			[GambleType.SportsBet] = Text.GambleTypeSportsBet,
+			[GambleType.Casino] = Text.GambleTypeCasino,
+			[GambleType.SlotMachine] = Text.GambleTypeSlotMachine
 		};
 
 		/// <summary>

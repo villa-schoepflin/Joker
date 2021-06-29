@@ -1,102 +1,103 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:bl="clr-namespace:Joker.BusinessLogic"
-			 xmlns:ui="clr-namespace:Joker.UserInterface"
-			 x:Class="Joker.UserInterface.ContactCreator"
-			 Title="Neuer Kontakt">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:bl="clr-namespace:Joker.BusinessLogic"
+             xmlns:ui="clr-namespace:Joker.UserInterface"
+             x:Class="Joker.UserInterface.ContactCreator"
+             Title="Neuer Kontakt">
 	<ScrollView>
 		<StackLayout>
 			<Frame Margin="{Static ui:Styles.StripMargin}"
-				   Padding="{Static ui:Styles.PagePadding}"
-				   BackgroundColor="{Static ui:Styles.Bgr2}"
-				   HasShadow="False"
-				   CornerRadius="0">
+                   Padding="{Static ui:Styles.PagePadding}"
+                   BackgroundColor="{Static ui:Styles.Bgr2}"
+                   HasShadow="False"
+                   CornerRadius="0">
 				<StackLayout>
 					<StackLayout Orientation="Horizontal"
-								 Spacing="5">
+                                 Spacing="5">
 						<Label VerticalTextAlignment="Center"
-							   TextColor="{Static ui:Styles.Text2}"
-							   FontSize="Small">Name/Bezeichnung:</Label>
+                               TextColor="{Static ui:Styles.Text2}"
+                               FontSize="Small">Name/Bezeichnung:</Label>
 						<BoxView HeightRequest="1"
-								 HorizontalOptions="FillAndExpand"
-								 VerticalOptions="Center"
-								 Color="{Static ui:Styles.Text2}" />
+                                 HorizontalOptions="FillAndExpand"
+                                 VerticalOptions="Center"
+                                 Color="{Static ui:Styles.Text2}" />
 					</StackLayout>
 					<StackLayout Orientation="Horizontal"
-								 Spacing="5">
+                                 Spacing="5">
 						<Entry x:Name="NameEntry"
-							   HorizontalOptions="FillAndExpand"
-							   TextColor="{Static ui:Styles.Text1}"
-							   FontSize="{Static ui:Styles.MediumSize}"
-							   MaxLength="{Static bl:Contact.MaxNameLength}"
-							   Text="" />
+                               HorizontalOptions="FillAndExpand"
+                               TextColor="{Static ui:Styles.Text1}"
+                               FontSize="{Static ui:Styles.MediumSize}"
+                               MaxLength="{Static bl:Contact.MaxNameLength}"
+                               Text="" />
 						<Button Clicked="OnNameClipboardButton"
-								BackgroundColor="{Static ui:Styles.Bgr3}"
-								WidthRequest="40"
-								HeightRequest="40"
-								Image="ui_clipboard.png" />
+                                BackgroundColor="{Static ui:Styles.Bgr3}"
+                                WidthRequest="40"
+                                HeightRequest="40"
+                                Image="ui_clipboard.png" />
 					</StackLayout>
 				</StackLayout>
 			</Frame>
 			<Frame Margin="{Static ui:Styles.StripMargin}"
-				   Padding="{Static ui:Styles.PagePadding}"
-				   BackgroundColor="{Static ui:Styles.Bgr2}"
-				   HasShadow="False"
-				   CornerRadius="0">
+                   Padding="{Static ui:Styles.PagePadding}"
+                   BackgroundColor="{Static ui:Styles.Bgr2}"
+                   HasShadow="False"
+                   CornerRadius="0">
 				<StackLayout>
 					<StackLayout Orientation="Horizontal"
-								 Spacing="5">
+                                 Spacing="5">
 						<Label VerticalTextAlignment="Center"
-							   TextColor="{Static ui:Styles.Text2}"
-							   FontSize="Small">Telefonnummer:</Label>
+                               TextColor="{Static ui:Styles.Text2}"
+                               FontSize="Small">Telefonnummer:</Label>
 						<BoxView HeightRequest="1"
-								 HorizontalOptions="FillAndExpand"
-								 VerticalOptions="Center"
-								 Color="{Static ui:Styles.Text2}" />
+                                 HorizontalOptions="FillAndExpand"
+                                 VerticalOptions="Center"
+                                 Color="{Static ui:Styles.Text2}" />
 					</StackLayout>
 					<StackLayout Orientation="Horizontal"
-								 Spacing="5">
+                                 Spacing="5">
 						<Entry x:Name="PhoneNumberEntry"
-							   HorizontalOptions="FillAndExpand"
-							   TextColor="{Static ui:Styles.Text1}"
-							   FontSize="{Static ui:Styles.MediumSize}"
-							   MaxLength="{Static bl:Contact.MaxPhoneNumberLength}"
-							   Keyboard="Telephone"
-							   Text="" />
+                               HorizontalOptions="FillAndExpand"
+                               TextColor="{Static ui:Styles.Text1}"
+                               FontSize="{Static ui:Styles.MediumSize}"
+                               MaxLength="{Static bl:Contact.MaxPhoneNumberLength}"
+                               Keyboard="Telephone"
+                               Text="" />
 						<Button Clicked="OnPhoneNumberClipboardButton"
-								BackgroundColor="{Static ui:Styles.Bgr3}"
-								WidthRequest="40"
-								HeightRequest="40"
-								Image="ui_clipboard.png" />
+                                BackgroundColor="{Static ui:Styles.Bgr3}"
+                                WidthRequest="40"
+                                HeightRequest="40"
+                                Image="ui_clipboard.png" />
 					</StackLayout>
 				</StackLayout>
 			</Frame>
 			<Button Clicked="OnSearchDeviceContactsButton"
-					Text="Kontakt auf dem Gerät suchen"
-					Margin="15,0,15,0"
-					Padding="{Static ui:Styles.PagePadding}"
-					BackgroundColor="{Static ui:Styles.Bgr3}"
-					TextColor="{Static ui:Styles.Text1}" />
+                    Text="Kontakt auf dem Gerät suchen"
+                    Margin="15,0,15,0"
+                    Padding="{Static ui:Styles.PagePadding}"
+                    BackgroundColor="{Static ui:Styles.Bgr3}"
+                    TextColor="{Static ui:Styles.Text1}" />
 			<Frame Margin="{Static ui:Styles.StripMargin}"
-				   Padding="{Static ui:Styles.PagePadding}"
-				   BackgroundColor="{Static ui:Styles.Bgr2}"
-				   HasShadow="False"
-				   CornerRadius="0">
+                   Padding="{Static ui:Styles.PagePadding}"
+                   BackgroundColor="{Static ui:Styles.Bgr2}"
+                   HasShadow="False"
+                   CornerRadius="0">
 				<StackLayout Orientation="Horizontal">
 					<Label HorizontalOptions="StartAndExpand"
-						   TextColor="{Static ui:Styles.Text1}"
-						   FontSize="Small">Als Beratungsstelle oder Expertenkontakt markieren</Label>
+                           VerticalOptions="CenterAndExpand"
+                           TextColor="{Static ui:Styles.Text1}"
+                           FontSize="Small">Als Beratungsstelle oder Expertenkontakt markieren</Label>
 					<Switch x:Name="ExpertMarker" />
 				</StackLayout>
 			</Frame>
 			<Button Clicked="OnSubmitButton"
-					HorizontalOptions="End"
-					Margin="15,0,15,0"
-					Padding="{Static ui:Styles.PagePadding}"
-					BackgroundColor="{Static ui:Styles.Bgr5}"
-					TextColor="{Static ui:Styles.Text1}"
-					Text="Hinzufügen" />
+                    HorizontalOptions="End"
+                    Margin="15,0,15,0"
+                    Padding="{Static ui:Styles.PagePadding}"
+                    BackgroundColor="{Static ui:Styles.Bgr5}"
+                    TextColor="{Static ui:Styles.Text1}"
+                    Text="Hinzufügen" />
 		</StackLayout>
 	</ScrollView>
 </ContentPage>

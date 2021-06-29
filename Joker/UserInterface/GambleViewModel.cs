@@ -34,33 +34,39 @@ namespace Joker.UserInterface
 
 		public string Description { get; set; }
 
-		public bool DescriptionEditable
+		public bool Editable
 		{
-			get => _descriptionEditable;
+			get => _editable;
 			set
 			{
-				_descriptionEditable = value;
-				OnPropertyChanged(nameof(DescriptionEditable));
+				_editable = value;
+				OnPropertyChanged(nameof(Editable));
 				OnPropertyChanged(nameof(EditButtonText));
 				OnPropertyChanged(nameof(EditButtonBgrColor));
 				OnPropertyChanged(nameof(EditButtonTextColor));
 			}
 		}
-		private bool _descriptionEditable;
+		private bool _editable;
+
+		public bool IsOnlineGamble
+		{
+			get => Gamble.IsOnlineGamble;
+			set => Gamble.IsOnlineGamble = value;
+		}
 
 		public string GambleTypeText => GambleTypes.GetName(Gamble.Type);
-		public string EditButtonText => DescriptionEditable ? Text.Save : Text.Edit;
-		public Color EditButtonBgrColor => DescriptionEditable ? Styles.Primary1 : Styles.Bgr4;
-		public Color EditButtonTextColor => DescriptionEditable ? Styles.TextContrast : Styles.Text1;
+		public string EditButtonText => Editable ? Text.Save : Text.Edit;
+		public Color EditButtonBgrColor => Editable ? Styles.Primary1 : Styles.Bgr4;
+		public Color EditButtonTextColor => Editable ? Styles.TextContrast : Styles.Text1;
 
 		public ICommand ToggleDescriptionEditing => new Command(() =>
 		{
-			if(DescriptionEditable)
+			if(Editable)
 			{
 				Gamble.Description = Description;
 				Database.Update(Gamble);
 			}
-			DescriptionEditable ^= true;
+			Editable ^= true;
 		});
 
 		private Gamble Gamble

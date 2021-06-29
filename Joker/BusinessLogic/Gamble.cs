@@ -25,15 +25,22 @@ namespace Joker.BusinessLogic
 		[Column(DescriptionColumnName)] public string Description { get; set; }
 
 		/// <summary>
+		/// Indicates whether the gamble happened online.
+		/// </summary>
+		[Column(IsOnlineGambleColumnName)] public bool IsOnlineGamble { get; set; }
+
+		/// <summary>
 		/// Constructor used when the user doesn't specify a time.
 		/// </summary>
 		/// <param name="amount">The amount as put in by the user.</param>
 		/// <param name="type">The type as selected by the user.</param>
 		/// <param name="description">The description as given by the user.</param>
-		public Gamble(string amount, GambleType type, string description) : base(amount)
+		/// <param name="isOnlineGamble">Whether the gambled happened online, as given by the user.</param>
+		public Gamble(string amount, GambleType type, string description, bool isOnlineGamble) : base(amount)
 		{
 			Type = type;
 			Description = description;
+			IsOnlineGamble = isOnlineGamble;
 		}
 
 		/// <summary>
@@ -43,8 +50,9 @@ namespace Joker.BusinessLogic
 		/// <param name="amount">The amount as given by the user.</param>
 		/// <param name="type">The type as selected by the user.</param>
 		/// <param name="description">The description as given by the user.</param>
-		public Gamble(DateTime time, string amount, GambleType type, string description)
-			: this(amount, type, description)
+		/// <param name="isOnlineGamble">Whether the gambled happened online, as given by the user.</param>
+		public Gamble(DateTime time, string amount, GambleType type, string description, bool isOnlineGamble)
+			: this(amount, type, description, isOnlineGamble)
 		{
 			if(time > DateTime.Now)
 				throw new ArgumentException(Text.GambleTimeInFuture);
@@ -62,6 +70,7 @@ namespace Joker.BusinessLogic
 		private const string GambleTableName = "Gamble";
 		private const string TypeColumnName = "Type";
 		private const string DescriptionColumnName = "Description";
+		private const string IsOnlineGambleColumnName = "IsOnlineGamble";
 		#endregion
 	}
 }

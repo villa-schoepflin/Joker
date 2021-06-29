@@ -38,6 +38,21 @@ namespace Joker.BusinessLogic
 		public const string GambleTimeInFuture
 			= "Der Zeitpunkt der Ausgabe sollte nicht in der Zukunft liegen.";
 
+		public const string GambleTypeOther
+			= "Sonstige";
+
+		public const string GambleTypeLottery
+			= "Lotterie";
+
+		public const string GambleTypeSportsBet
+			= "Sportwette";
+
+		public const string GambleTypeCasino
+			= "Spielbank";
+
+		public const string GambleTypeSlotMachine
+			= "Geldspielautomat";
+
 		public const string InputEmpty
 			= "Deine Angabe darf hier nicht leer sein.";
 
